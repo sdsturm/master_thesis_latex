@@ -279,6 +279,100 @@ is given by
 
 
 
+
+\subsection{Helmholtz Equation and Green's Functions}
+
+Let the following definitions prefix the present section.
+\begin{definition}[Domain]
+	An open, simply connected subset of a finite dimensional vector space is
+	called a \emph{domain}.
+\end{definition}
+\begin{definition}[Closure]
+	Let $\Omega$ be a domain.
+	The set $\overline{\Omega}$ consisting of $\Omega$ and all its limit points
+	is called \emph{closure} of $\Omega$.
+\end{definition}
+\begin{definition}[Boundary]
+	Let $\Omega \subset \R^3$ with closure $\overline{\Omega}$.
+	Then the set $\partial\Omega \coloneqq \overline{\Omega}\setminus\Omega$
+	is called \emph{boundary} of $\Omega$.
+\end{definition}
+
+The scalar wave equation \eqref{eq:scalar_wave_equation_physical_domain}
+is a \ac{PDE} equation both in space and in time.
+By application of \eqref{eq:fourier_transfrom_temporal_forward} to
+\eqref{eq:scalar_wave_equation_physical_domain} the scalar Helmholtz equation
+\begin{equation}\label{eq:scalar_helmholtz_equation}
+	\left( \laplace + k^2 \right) \phi \left( \robs, \omega \right) = 0
+	\qquad \omega = \mathrm{const.}
+\end{equation}
+is obtained, where $\omega$ is now only a parameter.
+Hence, \eqref{eq:scalar_helmholtz_equation} has become a \ac{PDE} in space only.
+
+% \begin{definition}[Delta function]
+% 	Let $\robs,\rsrc\in\R^3$ and
+% 	$f\left(\robs\right):\C^n\rightarrow\C$ be a differentiable function in
+% 	Dann ist die \emph{Delta-Funktion} $\diracDelta:\R^3 \rightarrow \C$ durch die Eigenschaften
+% 	\begin{equation}
+% 		\diracDelta\left(\robs\right) = \begin{cases*}
+% 			1 & $\robs = 0$ \\
+% 			0 & $\robs \neq 0$
+% 		\end{cases*} \, ,
+% 	\end{equation}
+% 	\begin{equation}
+% 		\int\limits_{\C^n} \diracDelta\left(\robs\right) \dd \robs = 1
+% 	\end{equation}
+% 	und
+% 	\begin{equation}\label{eq:delta_filter_property}
+% 		\int\limits_{\C^n} f\left(\robs\right) \diracDelta\left(\robs-\rsrc\right) \dd \robs = f\left(\rsrc\right)
+% 	\end{equation}
+% 	definiert. Eigenschaft \eqref{eq:delta_filter_property} heißt \emph{Filtereigenschaft} der $\diracDelta$-Funktion.
+% \end{definition}
+
+% \begin{definition}[Green'sfunction]
+% 	Sei $\mathcal{L}$ ein linearer Differentialoperator.
+% 	\begin{equation}
+% 		\mathcal{L} G\left(\robs, \rsrc \right) = -\diracDelta\left(\robs - \rsrc\right)
+% 	\end{equation}
+% \end{definition}
+
+
+
+
+
+
+
+
+
+% \begin{remark}[Types of solutions]
+% 	In the following no distinction is made between functions solving \eqref{eq:scalar_helmholtz_equation} point-wise and such only being weak solutions \cite[S.~22ff]{Strichartz2003}.
+% \end{remark}
+
+\begin{theorem}[Sommerfeld radiation condition {\cite[S.~189]{Sommerfeld1964}}]
+	\label{sommerfeld_radiation_condition}
+	Consider the scalar Helmholtz equation \eqref{eq:scalar_helmholtz_equation}
+	with a right-hand side of whose support is limited to a finite domain
+	$\Omega \subset \R^3$ such that $\forall \pvec{r} \in \Omega: r < \infty$.
+	Let $f \left( \pvec{r} \right)$ be a solution to this problem for open 
+	boundary conditions.
+	Then $f$ is the unique solution to \eqref{eq:scalar_helmholtz_equation}
+	if it fulfills the Sommerfeld radiation condition 
+	\begin{equation}
+		\lim_{r \to \infty}
+		r \left( \frac{\partial}{\partial r} + \im k \right) f \left( r \right) = 0 \, .
+	\end{equation}
+\end{theorem}
+
+\fxnote{Uraltes Paper vom Sommerfeld zur Ausstrahlungsbedingung raussuchen}
+
+
+
+
+
+
+
+
+
 \subsection{Complex Euclidean Space and Complex Source Beams}
 
 If the \ac{DCIM} is interpreted in terms of actual image sources the notions
@@ -502,65 +596,6 @@ The differing property of vertical and lateral, however, is that the properties 
 \fxnote{Beweis, dass Sommerfeld-Identität auch mit komplexen Längen gilt!?}
 %Die räumlichen Größen $r$ und $z$ in \eqref{eq:sommerfeld_identity} waren in Sommerfelds ursprüngliche Analyse reell. Wie früh erkannt wurde \cite{Deschamps1971,Keller1971} behält \cref{lemma:sommerfeld_identity} jedoch auch für $r, z\in\C$ seine Gültigkeit. Die Kugelwelle verändert dabei jedoch ihre für $r, z\in\R$ isotrope Charakteristik hin zu einem gerichteten gaußschen Strahl.
 
-\subsection{Differential Equation and Green's Function}
-
-\begin{definition}[Domain]
-	An open, simply connected subset of a finite dimensional vector space is called a \emph{domain}.
-\end{definition}
-
-\begin{definition}[Closure]
-	Let $\Omega$ be a domain. The set $\overline{\Omega}$ consisting of $\Omega$ and all its limit points is called \emph{closure} of $\Omega$.
-\end{definition}
-
-\begin{definition}[Boundary]
-	Let $\Omega \subset \R^3$ with closure $\overline{\Omega}$. Then the set $\partial\Omega \coloneqq \overline{\Omega}\setminus\Omega$  is called \emph{boundary} of $\Omega$.
-\end{definition}
-
-\begin{definition}[Scalar Helmholtz equation]
-	\label{def:helmholtz_equation}
-	Let $\Omega \subset \R^3$ be a domain, $\robs \in \Omega$, $k \in \C$ and $f, g: \Omega \rightarrow \C$ functions on $\Omega$. Then the \emph{scalar Helmholtz equation} in $\Omega$ is defined as \cite[p. 282]{Jackson2013}
-	\begin{equation}\label{eq:scalar_helmholtz_equation}
-		\left(\laplace + k^2\right)g\left(\robs\right) = -4\pi g\left(\robs\right) \, .
-	\end{equation}
-\end{definition}
-
-\begin{remark}[Types of solutions]
-	In the following no distinction is made between functions solving \eqref{eq:scalar_helmholtz_equation} point-wise and such only being weak solutions \cite[S.~22ff]{Strichartz2003}.
-\end{remark}
-
-\begin{remark}[Sommerfeld condition of radiation]\label{sommerfeld_radiation_condition}
-	The Helmholtz equation as given by \cref{def:helmholtz_equation} is necessary but not sufficient to guarantee unique solution. In order to be physically meaningful a solution is also required to fulfill the \emph{Sommerfeld condition of radiation} \cite[S.~189]{Sommerfeld1964}
-	\begin{equation}
-		\lim\limits_{r\rightarrow\infty} r \left(\pd[f]{r} + \im k f \right) = 0 \, .
-	\end{equation}
-\end{remark}
-
-\subsection{Green's function}
-
-\begin{definition}[Delta function]
-	Seien $n\in\N$, $\robs,\rsrc\in\C^n$ und $f\left(\robs\right):\C^n\rightarrow\C$ stetig in $\robs = \rsrc$. Dann ist die \emph{Delta-Funktion} $\diracDelta:\C^n \rightarrow \C$ durch die Eigenschaften
-	\begin{equation}
-		\diracDelta\left(\robs\right) = \begin{cases*}
-			1 & $\robs = 0$ \\
-			0 & $\robs \neq 0$
-		\end{cases*} \, ,
-	\end{equation}
-	\begin{equation}
-		\int\limits_{\C^n} \diracDelta\left(\robs\right) \dd \robs = 1
-	\end{equation}
-	und
-	\begin{equation}\label{eq:delta_filter_property}
-		\int\limits_{\C^n} f\left(\robs\right) \diracDelta\left(\robs-\rsrc\right) \dd \robs = f\left(\rsrc\right)
-	\end{equation}
-	definiert. Eigenschaft \eqref{eq:delta_filter_property} heißt \emph{Filtereigenschaft} der $\diracDelta$-Funktion.
-\end{definition}
-
-\begin{definition}[Green'sfunction]
-	Sei $\mathcal{L}$ ein linearer Differentialoperator.
-	\begin{equation}
-		\mathcal{L} G\left(\robs, \rsrc \right) = -\diracDelta\left(\robs - \rsrc\right)
-	\end{equation}
-\end{definition}
 
 
 \section{Electromagnetic Waves in Planar Multilayered Media}
