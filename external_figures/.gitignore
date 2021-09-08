@@ -1,0 +1,7 @@
+*.log
+*.md5
+*.acr
+*.dpth
+*.pdf
+*.run.xml
+*.dep
