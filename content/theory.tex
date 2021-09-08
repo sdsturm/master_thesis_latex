@@ -48,7 +48,7 @@ With the forward transform as given by
 \begin{lemma}[Inverse Fourier tansform with respect to time]
 	Let $f \in L^1 \left(\R\right)$ such that
 	$\tilde{f} \in L^1 \left(\R\right)$ and $t \in \R$. Then the
-	\emph{inverse Fourier transform with respect to time} is given by
+	inverse Fourier transform with respect to time is given by
 	\begin{equation}\label{eq:fourier_transform_temporal_backward}
 		f \left( t \right) =
 		\frac{1}{2\pi}
@@ -528,7 +528,7 @@ The differing property of vertical and lateral, however, is that the properties 
 	In the following no distinction is made between functions solving \eqref{eq:scalar_helmholtz_equation} point-wise and such only being weak solutions \cite[S.~22ff]{Strichartz2003}.
 \end{remark}
 
-\begin{remark}[Sommerfeld condition of radiation]\label{rem:sommerfeld_radiation_condition}
+\begin{remark}[Sommerfeld condition of radiation]\label{sommerfeld_radiation_condition}
 	The Helmholtz equation as given by \cref{def:helmholtz_equation} is necessary but not sufficient to guarantee unique solution. In order to be physically meaningful a solution is also required to fulfill the \emph{Sommerfeld condition of radiation} \cite[S.~189]{Sommerfeld1964}
 	\begin{equation}
 		\lim\limits_{r\rightarrow\infty} r \left(\pd[f]{r} + \im k f \right) = 0 \, .
@@ -565,112 +565,164 @@ The differing property of vertical and lateral, however, is that the properties 
 
 \section{Electromagnetic Waves in Planar Multilayered Media}
 
-\subsection{Assumptions}
-\label{subsec:em_assumptions}
-
-The theory of classical electrodynamics, expressed axiomatically by Maxwell's
-equations, constitute an accepted and well-proven framework for thy analysis of any \emph{macroscopic} electromagnetic phenomena. In order to state a version of Maxwell's equations suitable to the problem at hand the following assumptions are made.
-\begin{itemize}
-	\item All electromagnetic fields and related quantities are assumed to obey
-	\cref{rem:time_convention}, where $\omega = 2\pi f$ with frequency $f > 0$.
-	\item All media are assumed linear and isotropic. Their electromagnetic
-	properties are therefore fully described by two scalar fields
-	$\epsr, \mur \in \C$.
-	\item All media are assumed non-magnetic, \ie, $\mur \equiv 1$.
-	\item Hypothetic magnetic (equivalent) sources $\pvec{M}$ and
-	$\rho_\mathrm{m}$ are assumed to mathematically symmetrize Maxwell's
-	equations and to enable the use of duality reltations.
-\end{itemize}
-
 \subsection{Fundamental equations}
 \label{subsec:em_fundamental_equations}
 
-Under the assumptions stated in \cref{subsec:em_assumptions} Maxwell's equations
-read \cite{Chew1999}
+The theory of classical electrodynamics, expressed axiomatically by Maxwell's
+equations, constitute an accepted and well-proven framework for thy analysis of
+\emph{macroscopic} electromagnetic phenomena.
+Macroscopic means that it can be justly assumed that the electromagnetic
+sources --- charges and currents --- are described by \emph{continous}
+functions of space. 
+In order to state a version of Maxwell's equations suitable to the problem at
+hand the following assumptions are made.
+\begin{itemize}
+	\item All time dependent quantities are assumed to vary sinusoidally with
+	a single frequency $f > 0$ (in $\SI{}{\hertz}$) under time convention
+	as determined by \cref{def:fourier_transfrom_temporal_forward},
+	where $\omega = 2\pi f$.
+	\item All media are assumed to possess linear and isotropic behavior.
+	Their electromagnetic properties are therefore fully described by two scalar
+	fields $\epsr, \mur \in \C$.
+	\item Hypothetical magnetic (equivalent) sources $\pvec{M}$ and
+	$\varrho_\mathrm{m}$ are assumed to mathematically complement the physical
+	sources $\pvec{J}$ and $\varrho$.
+\end{itemize}
+Under these assumptions Maxwell's equations read \cite{Chew1999}
 \begin{subequations}\label{eq:mwe_fd}
 	\begin{align}
-		\curl \pvec{E}
-		&= -\im\omega\mu\pvec{H} -\pvec{M} \label{eq:mwe_fd_faraday} \\
-		\curl \pvec{H}
-		&= \im\omega\varepsilon\pvec{E} + \pvec{J} \label{eq:mwe_fd_ampere} \\
-		\divergence \varepsilon\pvec{E}
-		&= \rho \label{eq:mwe_fd_gauss} \\
-		\divergence \mu\pvec{H}
-		&= \rho_\mathrm{m} \,, \label{eq:mwe_fd_gauss_magnetic}
+		&\curl \pvec{E}
+		= -\im\omega\mu\pvec{H} -\pvec{M} \label{eq:mwe_fd_faraday} \\
+		&\curl \pvec{H}
+		= \im\omega\varepsilon\pvec{E} + \pvec{J} \label{eq:mwe_fd_ampere} \\
+		&\divergence \varepsilon\pvec{E}
+		= \varrho \label{eq:mwe_fd_gauss} \\
+		&\divergence \mu\pvec{H}
+		= \varrho_\mathrm{m} \,, \label{eq:mwe_fd_gauss_magnetic}
 	\end{align}
 \end{subequations}
-where $\varepsilon = \epsr \varepsilon_0$ and $\mu = \mur \mu_0$. The well-known
-physical constants $\varepsilon_0$ and $\mu_0$ on their own specify the
+where $\varepsilon = \epsr \varepsilon_0$ and $\mu = \mur \mu_0$.
+The physical constants $\varepsilon_0$ and $\mu_0$ specify the
 electromagnetic properties of vacuum.
-All fields are functions of $\robs \in \R^3$ where the scalars and vectors map
-to $\C$ and $\C^3$, respectively.
+The vector fields are functions $\R^3 \mapsto \C^3$ and the scalars map
+$\R^3 \mapsto \C$.
 
-Since the medium is assumed non-magnetic, its electromagnetic behavior is fully
-described by a real relative permittivity $\epsr^\prime$ which is constituted
-by its real part $\epsr^\prime$ and the conductivity
-$\sigma / \SI{}{\siemens} > 0$ via
+The dimensionless quantity $\epsr \in \C$ is called relative permittivity 
+and can be composed of a real part describing the dielectric properties of a
+lossless medium and the conductivity of the medium which determines its losses
+\cite[p.~43]{Jin2015}:
 \begin{equation}
 	\epsr = \epsr^\prime - \im \frac{\sigma}{\omega \varepsilon_0} \,.
 \end{equation}
 
-In order to uniquely define an electromagnetic field problem and its solution
-\eqref{eq:mwe_fd} have to be supplemented by appropriate boundary conditions.
+In order to uniquely define an electromagnetic field problem and its solution,
+Maxwell's equations \eqref{eq:mwe_fd} have to be supplemented by appropriate
+boundary conditions.
+In a homogeneous domain these follow from
+\cref{sommerfeld_radiation_condition}.
 
-Arguably the most prominent feature of Maxwell's equations is the possibility
+At an interface separating two spatial domains $\Omega_1$ and $\Omega_2$ with
+different, but domain-wise constant material parameters the well-known
+continuity conditions \cite[pp.~20]{Jackson2013}
+\begin{subequations}\label{eq:mwe_continuity_at_interface}
+	\begin{align}
+		&\uv{n} \times \pvec{E}_1 - \uv{n} \times \pvec{E}_2 =
+		- \pvec{M}_\mathrm{s} \\
+		&\uv{n} \times \pvec{H}_1 - \uv{n} \times \pvec{H}_2 =
+		\pvec{J}_\mathrm{s} \\
+		&\uv{n} \cdot \left(\varepsilon_1 \pvec{E}_1\right) -
+		\uv{n} \cdot \left(\varepsilon_2 \pvec{E}_2\right) = 
+		\varrho_\mathrm{s} \\
+		&\uv{n} \cdot \left(\mu_1 \pvec{H}_1\right) -
+		\uv{n} \cdot \left(\mu_2 \pvec{H}_2\right) = 
+		\varrho_\mathrm{m,s} \\
+	\end{align}
+\end{subequations}
+must be fulfilled, where $\uv{n}$ is the normal unit vector on the interface
+between $\Omega_1$ and $\Omega_2$ and the subscript \enquote{s} denotes
+possible surface currents and charge densities at this interface.
+The right-hand sides $\pvec{M}_\mathrm{s}$ and $\varrho_\mathrm{m,s}$
+in \eqref{eq:mwe_continuity_at_interface} follow from the introduction of
+the corresponding hypothetical sources in \eqref{eq:mwe_fd}.
+
+The arguably most prominent feature of Maxwell's equations is the possibility
 of wave solutions. Equations more suitable to deal with wave phenomena can
-readily obtained from \eqref{eq:mwe_fd}, \eg,
+readily obtained from \eqref{eq:mwe_fd}.
+For example
 \begin{equation}\label{eq:curlcurl_E}
-	\mu\curl\frac{1}{\mu}\curl\pvec{E} - k^2\pvec{E} = 0 \,.
+	\mu\curl\frac{1}{\mu}\curl\pvec{E} - k^2\pvec{E} = 0 
 \end{equation}
-which is derived for a region free of sources by taking the curl of the product
-of $\mu^{-1}$ and \eqref{eq:mwe_fd_faraday} and subsequent use of
-\eqref{eq:mwe_fd_ampere}. The quantity
-\begin{equation}\label{eq:wavenumber}
-	k \equiv \omega \sqrt{\varepsilon\mu}
-\end{equation}
-is called wavenumber. In vacuum the wavelength is given by $\lambda_0 = c / f$
-with the speed of light in vacuum $c$.
-
+is readily derived from \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}.
 The corresponding equation
 \begin{equation}\label{eq:curlcurl_H}
 	\varepsilon\curl\frac{1}{\varepsilon}\curl\pvec{H} - k^2\pvec{H} = 0
 \end{equation}
 for the magnetic field is obtained analogously.
+For constant material parameters \eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H}
+reduce to the vector Helmholtz equation
+\begin{equation}\label{eq:vector_helmholtz_equation}
+	\laplace \pvec{F} + k^2 \pvec{F} = 0 \qquad
+	\pvec{F} \in \left\{\pvec{E}, \pvec{H}\right\}
+\end{equation}
+The quantity
+\begin{equation}\label{eq:wavenumber}
+	k = \omega^2 \sqrt{\varepsilon \mu}
+\end{equation}
+is called \emph{wavenumber}.
+To make a solution to \eqref{eq:curlcurl_E}, \eqref{eq:curlcurl_H} and
+\eqref{eq:vector_helmholtz_equation} uniquely defined $k$ has to be chosen
+according to
+\begin{definition}[Computation of the wavenumber $k$]\label{def:branch_of_k}
+	Assume $\epsr, \mur \in \C$ with $\imag{\epsr} \le 0$ and
+	$\imag{\mur} \le 0$. 
+	The square root in \eqref{eq:wavenumber} is defined with
+	$\imag{\sqrt{\epsr \mur}} \le 0$ and its branch cut along the negative real
+	axis.
+\end{definition}
+\begin{remark}
+	With the choice of $k$ according to \cref{def:branch_of_k} the radiation
+	condition as given by \cref{sommerfeld_radiation_condition} is fulfilled.
+\end{remark}
+For $k \in \R$ it makes sense also to define the wavelength as
+$\lambda = 2\pi / k$.
+If the vacuum values of the quantities $\lambda_0 = 2\pi / k_0 = c / f$,
+where $c$ is the vacuum speed of light, are considered, this is indicated by
+the subscript zero.
 
 \subsection{Duality principle}
 \label{subsec:duality_principle}
 
-Instead of a derivation analogous to the one of \eqref{eq:curlcurl_E}
-\eqref{eq:curlcurl_H} could also be directly obtained by using the duality
-principle.
+Instead of by a derivation analogous to the one of \eqref{eq:curlcurl_E},
+\eqref{eq:curlcurl_H} could also be directly obtained by by a principle
+which \textcite[\S12-1]{Feynman2011} summarized by stating that
+\enquote{the same equations have the same solutions}.
 
-By assuming magnetic sources \eqref{eq:mwe_fd} for a set of equations whose
-mathematical symmetry is only broken by a difference in sign. Taking into
-account that \enquote{the same equations have the same solutions}
-\cite[12-1]{Feynman2011} a set of duality replacement rules can be established.
-Though not unique, a valid choice is given by \cref{tab:duality}. 
-\begin{table}[hbt]
-	\centering
-	\begin{tabular}{cc}
-		\toprule%
-		\textbf{original} & \textbf{dual}\\ \midrule
-		$\pvec{E}$ & $\pvec{H}$ \\
-		$\pvec{H}$ & $\pvec{E}$ \\
-		$\pvec{J}$ & $-\pvec{M}$ \\
-		$\pvec{M}$ & $-\pvec{J}$ \\
-		$\rho$ & $-\rho_\mathrm{m}$ \\
-		$\rho_\mathrm{m}$ & $-\rho$ \\
-		$\varepsilon$ & $-\mu$ \\
-		$\mu$ & $-\varepsilon$ \\
-		\bottomrule
-	\end{tabular}
-	\caption[Duality substitution rules for electromagnetic fields]
-	{Duality substitution rules for electromagnetic fields \cite[p.~9]{Chew1999}.}
-	\label{tab:duality}
-\end{table}
-\fxnote{Check \cref{tab:duality}.}
+This so-called duality principle makes use of the fact that the symmetry of the
+complemented Maxwell's equations \eqref{eq:mwe_fd} in only broken by
+opposing signs in \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}.
+Taking this into account, a set of duality replacement rules can be established.
+Note that these rules are not unique as there are different possibilities how
+to define the set of substitutions \cite{Jin2015,Harrington2001,Chew1999}.
+The only criterion is, that the set of rules leaves \eqref{eq:mwe_fd} invariant.
+The present thesis uses the particular choice of 
+\begin{definition}[Duality substitution rules for electrodynamic quantities]
+	The \emph{duality substitution rules for electrodynamic quantities} in
+	\eqref{eq:mwe_fd} are defined as \cite[p.~9]{Chew1999}
+	\begin{subequations}
+		\begin{align}
+		\pvec{E} &\to \pvec{H} \\
+		\pvec{H} &\to \pvec{E} \\
+		\pvec{J} &\to -\pvec{M} \\
+		\pvec{M} &\to -\pvec{J} \\
+		\varrho &\to -\varrho_\mathrm{m} \\
+		\varrho_\mathrm{m} &\to -\varrho \\
+		\varepsilon &\to -\mu \\
+		\mu &\to -\varepsilon 
+		\end{align}
+	\end{subequations}
+\end{definition}
 
-\subsection{Solution domain: Sommerfeld half-space}
+\subsection{Sommerfeld Half-Space Problem and Multilayered Media}
 
 % \begin{figure}[htb]
 % 	\centering
@@ -712,8 +764,8 @@ Though not unique, a valid choice is given by \cref{tab:duality}.
 % 	\label{fig:half_space}
 % \end{figure}
 
-\subsection{Reduction to \aclp{ODE}}
-\label{subsec:5_comp_filds}
+\subsection{Planarly Inhomogeneous Media and Five-Component Fields}
+\label{subsec:five_component_filds}
 
 Assume a medium described by parameters $\epsr\left(z\right), \mur\left(z\right)$ which depend only on the $z$-coordinate. In this case the study of wave fields governed by \eqref{eq:curlcurl_E} an \eqref{eq:curlcurl_H} can be reduced to the solution of two \acsp{ODE}. These \acsp{ODE} describe the so-called \emph{characteristic component} of an electromagnetic filed with only five non-vanishing components. Since the vanishing sixth component is the $z$-component of either the electric or magnetic field these fields are called \ac{TE} and \ac{TM}, respectively. Once the characteristic component is known, the remaining field components can be obtained by mere differentiation \cite[pp.~75]{Chew1999}. Linear superposition of \ac{TE} and \ac{TM} solutions eventually allows for the representation of arbitrary solutions to \eqref{eq:mwe_fd}.
 
@@ -962,11 +1014,6 @@ sowie
 für $z \neq z^\prime$ sind also \eqref{eq:H_z_tilde_second_continuity_condition} und \eqref{eq:E_z_tilde_second_continuity_condition} ebenfalls befriedigt.
 
 Damit sind die Greenschen Funktionen der charakteristischen Komponenten $\tilde{H}_z$ und $\tilde{E}_z$ von TE bzw. TM-Feldern im $k_\rho$-Spektralbereich auf die in \cref{app:tl_greens_functions} zusammengefassten bekannten Greenschen Funktionen für Spannung und Stromstärke Übertragungsleitungen zurückgeführt.
-
-\subsection{Physikalisch sinnvolle Lösung für die vertikale Wellenzahlkomponente}
-\begin{remark}[Vorzeichen der vertikalen Wellenzahlkomponente]
-	Die Quadratwurzel in \eqref{eq:k_z} im Allgemeinen zwei Lösungen hat, ist es nötig die physikalisch sinnvolle zu wählen. Interpretiert man die zweiwertige Funktion $k_z \left(k_\rho\right)$ als Riemann-Fläche mit zwei Zweigen, so ist derjenige Zweig der physikalisch sinnvolle, auf dem eine zu $\e^{-\im k_z z}$ proportionale Welle für $z \rightarrow \pm\infty$ abklingt. Dies ist vor dem Hintergrund von \cref{def:fourier_transform_real_1d} der Zweig mit $\Im{k_z} \leq 0$. Mit der entsprechenden Wahl der Vorzeichens der rechten Seite von \eqref{eq:k_z} ist die Sommerfeldsche Ausstrahlungsbedingung siehe stets erfüllt, siehe \cref{rem:sommerfeld_radiation_condition}. Details bezüglich möglicher und für die Behandlung von Sommerfeld-Integralen besonderes günstiger Wahlen der von den Verzweigungspunkten bei $k_z = \pm k$ ausgehenden Verzeigungsschnitte werden intensiv in einschlägigen Veröffentlichungen behandelt \cite{Sommerfeld1964,Chew1999,Michalski2016b}.
-\end{remark}
 
 \subsection{Image principle}
 
