@@ -1151,32 +1151,6 @@ Substituting \eqref{eq:fmm_jP_expansion_plane_waves} into
 
 
 
-\begin{figure}
-    \centering
-    \begin{tikzpicture}
-        \begin{axis}[
-            width=\textwidth,
-            colormap/jet,
-            % colorbar,
-            % unbounded coords = jump,
-            xlabel = {$x / \lambda_0$},
-            ylabel = {$z / \lambda_0$},
-            zlabel = {$G_0$},
-            % view = {0}{90},
-            % view = {0}{0},
-            grid = both,
-            ]
-            \addplot3 [
-                surf,
-                shader = interp,
-                mesh/ordering=y varies,
-                ] table [
-                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_re,
-                ]{thesis_csb.dat};
-        \end{axis}
-    \end{tikzpicture}
-    \caption{A Gaussian Beam with small shift}
-\end{figure}
 
 
 \begin{figure}
