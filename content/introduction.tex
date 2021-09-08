@@ -1,0 +1,312 @@
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Background}
+
+The references at the end of this document thematically are all part of an area
+which could be enveloped as \emph{electromagnetic theory and practical field
+computation.}
+The overall contribution of some of these publications to the area might be
+marginal.
+Some might be beneficial in solving certain problems at hand.
+Some might be seminal \cite{Sommerfeld1909}.
+One --- without any doubt --- \emph{is} epochal
+\cite{maxwell1865}.
+\newline
+
+Although it is very unlikely these days that anybody will actually consider the
+original set of twenty equations published by the great man himself in 1865
+\cite{maxwell1865} when using the term \enquote{Maxwell's equations} ---
+it was to the Scottish mathematician and physicist to first bring together the
+pieces of insight gained by other major names during the early 19th century and
+to supplement the fragments to a theory of utmost elegance and predictive power.
+
+In defiance of the elegance and relative simplicity of electromagnetic theory
+the field problem can only be solved analytically for a finite set of the most
+simple and highly symmetrical problems.
+Even some of those problems have forced past generations to apply and in some
+cases even develop sophisticated mathematical formalisms \cite{Felsen1994}.
+In modern times, however, the advances in powerful computers enables the use of  
+numerical methods to solve the field problem for more real-world scenarios in
+principle up to the accuracy of machine precision.
+Some of these methods were even known for a long time, but had to await
+practical applicability until major computational power was available.
+
+A particularly pleasant circumstance, however, is that many of the ancestral
+analytical efforts have by no means become obsolete --- they rather can be used
+beneficially in powerful numerical methods.
+The example which is subject to this thesis is the use of fundamental solutions
+\textemdash so-called Green's functions \textemdash within the framework
+provided by the \ac{MoM} \cite{Harrington1993}.
+
+The particular problem motivating this thesis is to find a combination of
+different numerical methods which all employ analytical results in a very
+distinguished way. Namely, the Green's function of the so-called half-space
+problem shall be used in conjunction with the \ac{FMM} in order to accelerate
+the numerical solution of field problems formulated in terms of integral
+equations.
+
+\section{Sommerfeld Half-Space Problem and Multilayered Media}
+
+An outstanding both for the prosperous use of analytical techniques and for the
+gainful use of so obtained results in numerical techniques is the Green's 
+function of the half-space problem and closely related multilayered media.
+
+The first goes back to the seminal publications of Arnold Sommerfeld in the
+early days of radio and antennas \cite{Sommerfeld1909}.
+He first considered a vertically oriented \ac{HD}, residing at the interface
+formed by semi-unbounded free-space and the surface of the earth.
+The latter is assumed to be flat and to possess lossy dielectric material
+properties.
+With his work Sommerfeld mathematically verified the assumed existence of
+a special kind of surface wave \cite{Zenneck1907} and examined how the separate
+constituents of the total wave field correspond to purely mathematical
+attributes of the underlying formalism.
+This, in conjunction to the first-place development of this very formalism is
+the cause why Sommerfeld's 1909 paper is rewarded as pioneering down to the
+present day \cite{Michalski2015, Michalski2016b, Mosig2021}.
+Sommerfeld later elaborated more on the topic
+\cite{Sommerfeld1926,Sommerfeld1964}, \eg, generalizing it to the \ac{HED}
+case and to a situation where the dipole is located above the interface
+At least in the 1926 paper \cite{Sommerfeld1926} a small but controversially
+discussed sign error from the original paper \cite{Wait1998} was fixed.
+
+Sommerfeld's formalism was later generalized to arbitrary solution domains
+compound by several plane layers \cite{Felsen1994, Michalski1990},
+possibly even ones with anisotropic material parameters and \ac{PEC}, \ac{PMC}
+as well as impedance boundary conditions \cite{Hsu1993, Michalski2005}.
+
+\fxnote{Sommerfeld originally \cite{Sommerfeld1909} solved for the vector
+potential of the \ac{VED} (\enquote{Hertz potential})}
+
+\section{Numerical Evaluation of Sommerfeld Integrals}
+
+General (no PDF):
+\cite{mosig1982}
+
+Path deformation
+\cite{Michalski1985a}
+
+Tails, \ac{PE}
+\cite{Michalski1998}
+\cite{Mosig2012}
+\cite{mosig2013}
+\cite{Michalski2016a}
+\cite{Golubovic2012}
+
+Head DE rules
+\cite{golubovicniciforovic2011}
+
+Head detour semi-elliptical
+\cite{GayBalmaz1997}
+
+Head detour roof-top
+\cite{Michalski2015a}
+
+MPM
+\cite{MengtaoYuan2006a}
+
+\ac{SIP}, \ac{EIP} only for $\rho$ up to a few hundred wavelenghts \cite[p.~14]{Michalski2016b}
+Reason: not the tail \ac{PE} but rapid oscillations in head
+
+\section{Closed Form Approximations}
+
+\section{Integral Equation Techniques and the Method of Moments}
+
+\cite{Harrington1993}
+
+Integral equations arising from boundary value problems in \ac{CE} can be
+discretized by subdomain basis functions, \eg, the popular \ac{RWG} functions
+\cite{Rao1982}.
+
+Direct solver: $N^3$
+Iterative solver: $N^2$
+
+\section{Fast Multipole Method}
+
+\subsection{Motivation}
+
+Due to the global nature of the involved Green's functions the discretization
+of \ac{MoM}-based discretization of integral equations lead to a dense \ac{LSE}.
+These systems are most commonly solved using iterative solvers in which the
+system matrix is applied to a several, recursively generated, excitation
+vectors until the solution has converged to the desired accuracy.
+Popular examples for iterative solvers are multiple versions of the \ac{CG}
+or the \ac{GMRES} \cite{Strang2010}.
+
+If now, in a Galerkin-type \ac{MoM} scheme, $N$ denotes the number of expansion
+and testing functions, each single matrix-vector multiplication exhibits a
+complexity of $\landau{N^2}$ in terms of operations as well as in terms of
+memory. Since this becomes prohibitive for large $N$ as occurring in
+field computations of many real-world problems, an extensive set of fast
+algorithms has been developed which all aim to accelerate matrix-vector
+multiplication \cite[chapter 11]{Jin2015}.
+
+One such fast method is the \ac{FMM} and, as an extension of the latter, the
+\ac{MLFMA}. In principle these algorithms are capable to reduce the complexity
+to $\landau{N^{3/2}}$ and even $\landau{N \log N}$, respectively.
+As opposed to some other fast algorithms, the \ac{FMM} is problem
+specific. 
+Nevertheless, 2D \cite{Rokhlin1990} and 3D \cite{Rokhlin1993, Coifman1993}
+versions of the \ac{FMM} have been developed for the major equation in
+full-wave \ac{CE}, the Helmholtz equation.
+Today the use of the \ac{MLFMA} is state of the art in the treatment of
+large-scale problems with integral equation techniques\footnote{Interestingly,
+in the early days of the \ac{FMM} even its creators assumed that it would not be
+beneficial to improve the method to a $\landau{N \log N}$ algorithm by
+applying the scheme recursively several times. The reason is they assumed
+\enquote{problems of practicable size} to be not larger than
+$N \le \num{1000000}$ \cite{Rokhlin1993}.}
+The involved algorithms, data structures and the choice of important
+parameters have been extensively studied and  are well-documented
+\cite{Chew2001}.
+
+\subsection{Principle}
+
+The starting point in the development of the \ac{FMM} is the Green's function
+of free space.
+The core idea, interpreted in terms of electrodynamics, is as follows.
+In order to solve the field problem for a general distribution of $N$ sources
+of radiation --- we may assume $N$ \acp{HD} radiating into free space ---
+one has to evaluate the corresponding Green's function $N^2$ times.
+This is due to the interaction of every \ac{HD} with every other one.
+If now the \acp{HD} are not distributed equally in space but somewhat are
+\emph{clustered} the idea of a multipole expansion 
+\cite[9.7]{Jackson2013} \cite[7.10]{vanBladel2007} comes into place.
+The claim is that in a cluster of \acp{HD} each individual \ac{HD} will not
+\enquote{see} every single \ac{HD} in a cluster of \acp{HD} which is far away.
+Instead, it will be sufficient to consider only bigger entities, namely the
+whole clusters, in terms of far interaction while the near interactions
+between individual \acp{HD} need to be considered only within the clusters.
+Concisely formulated the \ac{FMM} consists of the following three steps. 
+\begin{enumerate}
+	\item The effects of all individual \acp{HD} within a cluster of sources
+	are \emph{aggregated} to a common center within the respective group. 
+	\item The aggregated effect is \emph{translated} to the common reference
+	point of a far-away group of, likewise clustered, observing \acp{HD}.
+	\item Within the group of observing \acp{HD} the translated quantity is
+	redistributed or \emph{disaggregated} to all individual receiving \acp{HD}.
+\end{enumerate}
+
+These steps somewhat correspond to a factorization of the Green's function
+into a product of three factors.
+
+The same principle sketched here for point-like sources can easily be extended
+to arbitrary basis and testing functions within the \ac{MoM} by invoking
+the linearity of Maxwell's equations and the superposition principle.
+
+Since the described approach only works for far-interactions of properly
+clustered groups of \acp{HD} or --- more general --- subdomain basis functions 
+of local support, all the possible near-interactions need to be treated
+separately.
+This can be done applying the conventional \ac{MoM} approach to compute all
+nearby interactions.
+The effect here is, that the \ac{FMM} removes all entries in the system matrix
+which would not be centered around its diagonal within the standard \ac{MoM}.
+The result is a sparse and banded matrix, similar to those resulting from
+techniques based on differential equations, such as the \ac{FEM} or certain
+forms of \acp{FDM}.
+This resulting sparse matrix is then much easier to treat than the corresponding
+full \ac{MoM} matrix. At the same time the obtained algorithm benefits from the
+reduced number of unknowns as compared to differential equation techniques.
+
+\subsection{Extension to Source Points in Complex Space}
+
+The use of complex vectors \cite[Chapter 1]{Lindell2000} is omnipresent within
+the study of time-harmonic electromagnetic fields.
+However, vectors in $\C^3$ are usually \emph{electromagnetic} quantities like
+vector potentials and the fields themselves.
+In contrast, (arbitrary) complex spatial coordinates are rather uncommon so
+far\footnote{Counterexamples are found, \eg, within the context of Lorentz
+transforms between moving frames of reference, where angles of rotation may be
+imaginary \cite[Chapter~11]{Jackson2013}.}.
+An example use case in which the concept of complex space plays a prominent role
+is given in a paper by \textcite{Hansen2009}, where a new perspective on the
+classical Huygens principle based on complex source locations is presented. 
+
+It is well-known that if the Green's function of the scalar Helmholtz equation
+for the free-space case describes a spherical wave for the usual case where
+the distance between source and observation point is a real number.
+This pattern changes if this distance is complex.
+In this case the magnitude of the wave field becomes dependent on direction.
+This kind of wave field is commonly called Gaussian beam or \ac{CSB}.
+Albeit the concept of \emph{complex space} is somewhat abstract
+\cite[Chapter~1]{Lindell2000}, an intuitive and commonly employed definition of
+\emph{complex length} is, that such a quantity should have a positive real part
+\cite{Hansen2009, Hansen2013}.
+
+Concerning the combination of the \ac{FMM} with sources situated in complex
+space, it appears obvious that this kind of application was not what the
+creators originally had in mind.
+The popular review paper by \textcite{Coifman1993}, for example, does not make
+any indications towards this direction.
+Interestingly enough, in the mathematically rigorous treatment of the 3D
+\ac{FMM} for the Helmholtz equation \cite{Rokhlin1993}, the essential
+Theorem~2.2 is formulated in terms of complex spatial coordinates and even
+complex angles.
+However, these assumptions are dropped as early in the following as in
+Theorem~2.3, whose requirements assume real spatial quantities and leave only
+the wavenumber in the complex domain.
+The same assumptions underlie the mathematically oriented publication Concerning
+the 2D \ac{FMM} \cite{Rokhlin1990}.
+
+From these observations it appears obvious, that the \ac{FMM} development
+made no efforts towards an applicability to sources (or observation points)
+situated in whatever form of complex space.
+Actually in most cases of application even the wavenumber is simply the one of
+free space and is therefore real quantity.
+
+Nevertheless, a combination of the concept of \acp{CSB} with the \ac{FMM} can
+provide benefits.
+Employing some earlier results \cite{Hansen2009}, it was shown by
+\textcite{Hansen2013}, that the introduction of a well-defined
+\emph{imaginary shift} applied to the basis functions in a \ac{FMM} setup
+results in a modified \ac{FMM} translation operator which shows a significantly
+directive pattern.
+This so-called Gaussian translation operator allows to neglect some plane wave
+directions involved in the expansion throughout the translation step
+and therefore renders the resulting algorithm computationally more effective
+than a \ac{FMM} using the standard translation operator.
+
+It should be noted that the requirements in the derivation of the Gaussian
+translation operator and also the corresponding proof 
+\cite[Appendix]{Hansen2013} do not assume general source points located in
+complex space defined in a sense that all three spatial coordinates might
+be arbitrary complex numbers.
+The imaginary part of the source position vector is instead selected by a given
+intention regarding the sharpness of the resulting \ac{CSB}.
+Consequently, the parameter controlling the imaginary shift of source points
+is labeled \emph{beam parameter} by the author.
+
+\fxnote{\cite{Borries2014}}
+
+In the course of the literature research for this thesis no thoroughly and 
+mathematically rigorous treatment was found concerning the combination
+of the \ac{FMM} principle with actual complex source points located at
+\emph{arbitrary} \enquote{positions} in a complex version of Euclidean space.
+
+However, there are records of some attempts to do so using a standard \ac{FMM}
+implementation and without the aim of extending the underlying theorems and
+proofs \cite{Rokhlin1993}.
+A rather heuristic discussion of this topic is given in a paper by
+\textcite{Geng2001}.
+It is empirically shown that the use of complex source points drastically
+deteriorates the convergence of the central addition theorem on which the
+\ac{FMM} is based.
+The number of terms in the corresponding series expansion is closely
+related to the number of quadrature points required to numerically integrate
+the plane-wave expansion --- the second main identity within the
+\ac{FMM}.
+For this reason the authors did not pursue the approach of using complex images
+further and instead directed their attention to approximate forms of the
+Green's function using a single real image source for all far interaction
+computed using the \ac{FMM} \cite{Geng1999, Geng2000}.
+
+\subsection{Adaption to Half-Space Green's Functions}
+
+\cite{Geng2000}
+\cite{Liu2002}
+\cite{Eibert2018}
+\cite{Eibert2018a}
+\cite{Eibert2019}
+\cite[Chapter~8.13.2]{parini2020}

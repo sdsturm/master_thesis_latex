@@ -1,0 +1,1235 @@
+\chapter{Theory}
+\label{ch:theory}
+
+\section{Mathematical Preliminaries}
+
+\subsection{Notation}
+
+If not otherwise identified the notation in this thesis follows the textbook
+by \textcite{vanBladel2007}.
+In particular, vectors in $\R^3$ having a physical meaning are denoted by bold
+and italic symbols.
+Source points are marked by a prime, observation points are unprimed.
+
+The notation of special functions and related symbols is in accordance to the
+NIST handbook of mathematical functions \cite{Olver2010}.
+
+
+
+
+
+\subsection{Fourier transform}
+
+Although large portions of the study of electromagnetism heavily rely on the
+decomposition of functions into --- as well as on the composition of functions
+from --- spectra of frequencies, no specific definition of the Fourier transform
+prevails throughout the field.
+
+For this reason, as well as to be clear in the following, the Fourier transform
+with respect to time is defined by
+\begin{definition}[Fourier transform with respect to time]
+	\label{def:fourier_transfrom_temporal_forward}
+	Let $f \in L^1\left( \R \right)$ and $\omega \in \R$.
+	The \emph{Fourier transform with respect to time} is defined as 
+	\begin{equation}\label{eq:fourier_transfrom_temporal_forward}
+		\tilde{f} \left( \omega \right) =
+		\int\limits_{-\infty}^{\infty} \dd t \,
+		\exp{-\im \omega t} 
+		f\left( t \right) \, .
+	\end{equation}
+	The variables $t$ and $\omega$ are called \emph{time} and \emph{angular
+	frequency}, respectively.
+\end{definition}
+Provided the transformed functions exhibit certain properties
+\cite{heuser2006, strichartz2003}, it is well-known that an inverse
+transform to \eqref{eq:fourier_transfrom_temporal_forward} exists.
+With the forward transform as given by
+\cref{def:fourier_transfrom_temporal_forward} the inverse operation is given by
+\begin{lemma}[Inverse Fourier tansform with respect to time]
+	Let $f \in L^1 \left(\R\right)$ such that
+	$\tilde{f} \in L^1 \left(\R\right)$ and $t \in \R$. Then the
+	\emph{inverse Fourier transform with respect to time} is given by
+	\begin{equation}\label{eq:fourier_transform_temporal_backward}
+		f \left( t \right) =
+		\frac{1}{2\pi}
+		\int\limits_{-\infty}^{\infty} \dd \omega \,
+		\exp{\im \omega t} 
+		\tilde{f} \left( \omega \right) \, .
+	\end{equation}
+\end{lemma}
+
+\begin{remark}[Time convention]\label{rem:time_convention}
+	If the pair of transforms formed by
+	\eqref{eq:fourier_transfrom_temporal_forward} and
+	\eqref{eq:fourier_transform_temporal_backward} is used to simplify
+	differential equations with respect to time, then
+	\cref{def:fourier_transfrom_temporal_forward} is equivalent to the
+	assumption of the $\exp{\im \omega t}$ time convention for all
+	time-dependent quantities in $\omega$-spectral domain.
+	Within the course of the present thesis expressions taken from the
+	literature are adapted to the $\exp{\im \omega t}$ convention\footnote{
+		Some major references to this thesis, \eg, the ones by Sommerfeld, 
+		use the $\exp{-\mathrm{i} \omega t}$ time convention popular among
+		physicists. The conversion to $\exp{\im \omega t}$ is done by the
+		formal replaced $\mathrm{i} \to \im$. In addition, the kinds of
+		Hankel functions, \ie, of propagating cylindrical or spherical waves,
+		must be changed from first to second kind.
+	}.
+\end{remark}
+
+Formally, the extension of the concept of Fourier transforms to higher
+dimensions is straightforward.
+However, one has to take into account some physical reasoning in order to
+combine the Fourier transform in with respect to time with a spatial transform.
+Accordingly, the spatial counterpart to
+\cref{def:fourier_transfrom_temporal_forward} is given by
+\begin{definition}[Fourier transform with respect to space]
+	\label{def:fourier_transfrom_spatial_forward}
+	Let $f: \R^3 \mapsto \C$ be a function, $\pvec{r} \in \R^3$ and $\pvec{k}$
+	in $\C^3$.
+	The \emph{Fourier transform with respect to space} is defined as
+	\begin{equation}\label{eq:fourier_transform_3space_forward}
+		\tilde{f} \left( \pvec{k} \right) = 
+		\iiint\limits_{\R^3} \dd \pvec{r} \,
+		\exp{\im \pvec{k} \cdot \pvec{r}}
+		f \left( \pvec{r} \right) \, ,
+	\end{equation}
+	where $\pvec{k}$ is called \emph{wavevector} and
+	$k = \euclideanNorm{\pvec{k}}$ is called \emph{wavenumber}.
+\end{definition}
+The inverse transform to \eqref{eq:fourier_transform_3space_forward} then is
+\begin{equation}\label{eq:fourier_transform_3space_backward}
+	f \left( \pvec{r} \right) = 
+	\frac{1}{\left( 2\pi \right)^3}
+	\iiint\limits_{\R^3} \dd \pvec{k} \,
+	\exp{-\im \pvec{k} \cdot \pvec{r}}
+	\tilde{f} \left( \pvec{k} \right) \, .
+\end{equation}
+Based on \cref{def:fourier_transfrom_temporal_forward} and
+\cref{def:fourier_transfrom_spatial_forward} a combined four-dimensional pair
+of transforms is obtained by
+\begin{equation}\label{eq:fourier_transform_4d_forward}
+	\tilde{f} \left( \pvec{k}, \omega \right) = 
+	\iiint\limits_{\R^3} \dd \robs
+	\int\limits_{-\infty}^{\infty} \dd t \,
+	\exp{\im \left( \pvec{k} \cdot \robs - \omega t \right)}
+	f \left( \robs, t \right)
+\end{equation}
+and
+\begin{equation}\label{eq:fourier_transform_4d_inverse}
+	f \left( \robs, t \right) = 
+	\frac{1}{\left(4\pi\right)^4}
+	\iiint\limits_{\R^3} \dd \pvec{k}
+	\int\limits_{-\infty}^{\infty} \dd \omega \,
+	\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}
+	\tilde{f} \left( \pvec{k}, \omega \right) \, .
+\end{equation}
+Note that the sense of rotation of the kernel phasors is just opposite in the
+pair of spatial transform than it is in the temporal pair.
+
+A physical interpretation of \eqref{eq:fourier_transform_4d_inverse} is,
+that an arbitrary field $f \left( \robs, t \right)$ can be decomposed 
+into an infinite number of \emph{plane waves}
+--- $\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}$ ---
+with the expansion
+coefficients given by \eqref{eq:fourier_transform_4d_forward}.
+Clearly, the kernel of \eqref{eq:fourier_transform_4d_inverse} fulfills
+the scalar wave equation \cite[\S18-6]{Feynman2011}
+\begin{equation}\label{eq:scalar_wave_equation_physical_domain}
+	\left( \laplace - \frac{1}{c^2} \frac{\partial^2}{\partial t^2} \right)	
+	\phi \left( \pvec{r}, t \right) = 0
+\end{equation}
+in the \enquote{physical} domain $\left(\pvec{r}, t\right)$.
+However, if the same phasor convention of
+\cref{def:fourier_transfrom_temporal_forward} would also be used in
+\cref{def:fourier_transfrom_spatial_forward}, the kernel
+$\exp{-\im \left( \pvec{k} \cdot \robs + \omega t \right)}$
+of the resulting 4D inverse transform satisfies
+\eqref{eq:scalar_wave_equation_physical_domain} as well.
+The reason why nonetheless the phasor convention chosen in
+\cref{def:fourier_transfrom_spatial_forward} is the physically reasonable choice
+under the $\exp{\im \omega t}$ time convention
+can be seen if we assume $\pvec{r} = \uv{x} x$ and $\pvec{k} = \uv{x} k_x$
+with $k_x \in \R$ and $k_x > 0$, \ie, a lossless right-handed medium.
+Then $\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}$ describes
+a plane wave whose wave fronts propagate \emph{forward}, \ie, in positive
+$x$-direction, as time evolves, while
+$\exp{-\im \left( \pvec{k} \cdot \robs + \omega t \right)}$
+propagates in \emph{backwards}.
+Even though a plane wave is not a physical entity in the sense that it carries
+an infinite amount of energy, it is physically reasonable that it should
+travel forwards as time marches on, \ie,
+\cref{def:fourier_transfrom_temporal_forward} and
+\cref{def:fourier_transfrom_spatial_forward} match.
+
+A deeper motivation for the interaction of
+\cref{def:fourier_transfrom_temporal_forward} and 
+\cref{def:fourier_transfrom_spatial_forward} can be drawn from special
+relativity.
+It turns out that opposing choices of phasor conventions in
+\cref{def:fourier_transfrom_temporal_forward} and
+\cref{def:fourier_transfrom_spatial_forward}, respectively, lead to the two
+meaningful sign conventions of the metric tensor\footnote{
+	$\left( + + + - \right)$ for $\exp{-\mathrm{i} \omega t}$
+	and $\left( - - - + \right)$ for $\exp{\im \omega t}$}
+describing the structure of the four-dimensional (Minkowski) space-time
+continuum \cite[pp.~624]{Jackson2013}\cite{Kaiser2016}.
+
+
+
+
+
+\subsection{Hankel transform and Sommerfeld integrals}
+
+A prominent role in the study of fields and waves in planar layered media play
+planer Fourier expansion integrals with respect to the $xy$ plane of a
+Cartesian coordinate system.
+In this case \eqref{eq:fourier_transform_3space_forward} and
+\eqref{eq:fourier_transform_3space_backward} reduce to
+\begin{equation}\label{eq:fourier_transform_2space_forward}
+	\tilde{f} \left( \pvec{k} \right) = 
+	\iint\limits_{\R^2} \dd \pvec{r} \,
+	\exp{\im \pvec{k} \cdot \pvec{r}}
+	f \left( \pvec{r} \right)
+\end{equation}
+and
+\begin{equation}\label{eq:fourier_transform_2space_backward}
+	f \left( \pvec{r} \right) = 
+	\frac{1}{\left( 2\pi \right)^2}
+	\iiint\limits_{\R^2} \dd \pvec{k} \,
+	\exp{-\im \pvec{k} \cdot \pvec{r}}
+	\tilde{f} \left( \pvec{k} \right) \, .
+\end{equation}
+This pair of transforms may be further simplified if applied to a function
+$f: \R^2 \mapsto \C$ which is \emph{radially symmetric} around the $z$-axis,
+where centering around the $z$-axis can be easily achieved for any function
+of cylindrical symmetry by a coordinate transform.
+Such a function $f \left(x, y\right) = f \left(\rho\right)$, where
+$x = \rho \cos \phi$ and $y = \rho \sin \phi$, 
+\eqref{eq:fourier_transform_2space_forward}
+and \eqref{eq:fourier_transform_2space_backward} lead to another integral
+transform, commonly referred to as Hankel transform or Fourier-Bessel
+transform in the mathematical literature \cite{Davies2002}.
+
+\begin{corollary}[Hankel transform pair]\label{coll:hankel_transform}
+	Let $f: \R^2 \mapsto \C$ be a function such that $f = f\left(\rho\right)$,
+	where $\rho = \abs{r}$ for $\pvec{r} \in \R^2$.
+	Assume further that the integral \eqref{eq:fourier_transform_2space_forward}
+	exists for $f$.
+	Then the Hankel transform $\tilde{f}_\nu$ of order $\nu \geq -1/2$
+	is given by
+	\begin{equation}\label{eq:hankel_transform_forward}
+		\tilde{f}_\nu\left(k_\rho\right) =
+		2\pi
+		\int\limits_{0}^{\infty} \dd \rho \,
+		\besselj{\nu}\left(k_\rho \rho\right) \rho
+		f\left(\rho\right) \, .
+	\end{equation}
+	The inverse Hankel transform is given by
+	\begin{equation}\label{eq:hankel_transform_inverse}
+		f\left(\rho\right) =
+		\frac{1}{2\pi}
+		\int\limits_{0}^{\infty} \dd k_\rho \,
+		\besselj{\nu}\left(k_\rho \rho\right) k_\rho
+		\tilde{f}_\nu\left(k_\rho\right) \, .
+	\end{equation}
+\end{corollary}
+\begin{proof}
+	
+\end{proof}
+
+In the electromagnetic context --- in Arnold Sommerfeld's honor --- integrals of
+the form of \eqref{eq:hankel_transform_inverse} are predominantly referred to
+as \emph{Sommerfeld integrals}\footnote{In this context only inverse Hankel
+transforms of orders $\nu \in \left\{0, 1, 2\right\}$ play a role.}
+\cite{Sommerfeld1909, Mosig2021}.
+It therefore is adequate to introduce a special symbol for Sommerfeld integrals
+according to
+\begin{definition}[Sommerfeld integrals]	
+	The inverse Hankel transforms
+	\begin{equation}\label{eq:si_sommerfeld_integration_path}
+		\sommerfeldIntegral{\nu}{\tilde{f} \left( k_\rho \right)} =
+		\frac{1}{2\pi}
+		\int\limits_{0}^{\infty} \dd k_\rho \,
+		\besselj{\nu}\left(k_\rho \rho\right) k_\rho
+		\tilde{f} \left(k_\rho\right) 
+	\end{equation}
+	for orders $\nu \in \left\{0, 1, 2\right\}$ are called \emph{Sommerfeld
+	integrals} and are denoted by $\sommerfeldIntegral{\nu}{.}$.
+\end{definition}
+
+Much of Sommerfeld's original considerations \cite{Sommerfeld1909} are not
+directly based on the integral \eqref{eq:hankel_transform_inverse}, but
+on an alternative representation which uses an integration path extended to
+the whole real axis. This representation sometimes referred to as the \ac{EIP}
+is given by
+\begin{corollary}[Extended integration path]
+	An alternative representation of \eqref{eq:si_sommerfeld_integration_path}
+	is given by
+	\begin{equation}\label{eq:si_extended_integration_path}
+		\sommerfeldIntegral{\nu}{\tilde{f} \left( k_\rho \right)} =
+		\frac{1}{4\pi}
+		\int\limits_{\infty \exp{-\im \pi}}^{\infty} \dd k_\rho 
+		\besselh{2}{\nu} \left(k_\rho \rho\right) k_\rho 
+		\tilde{f} \left(k_\rho\right) \, .
+	\end{equation}
+\end{corollary}
+
+
+
+
+
+\subsection{Complex Euclidean Space and Complex Source Beams}
+
+If the \ac{DCIM} is interpreted in terms of actual image sources the notions
+of complex \emph{length} and \emph{distance} play a role.
+Be precise about these terms a couple of common definitions
+\cite{pohl2020, heuser2006}
+needs to be stated at first.
+
+A distance is mathematically specified by
+\begin{definition}[Metric and metric space]\label{def:metric}
+	Let $\mathcal{X}$ be a set. A non-negative function
+	$d: \mathcal{X} \times \mathcal{X} \mapsto \R$ is called a \emph{metric}
+	on $\mathcal{X}$ if it fulfills the following four properties.
+	\begin{enumerate}[label=(\alph*)]
+		\item $0 \le d\left(x_1, x_2\right) < 0$ for all
+		$x_1, x_2 \in \mathcal{X}$
+		\item $d\left(x_1, x_2\right) = 0$ if and only if $x_1 = x_2$
+		\item $d\left(x_1, x_2\right) = d\left(x_2, x_1\right)$ for all
+		$x_1, x_2 \in \mathcal{X}$
+		\item $d\left(x_1, x_3\right) \le d\left(x_1, x_2\right) + d\left(x_2, x_3\right)$
+		for all $x_1, x_2, x_3 \in \mathcal{X}$
+	\end{enumerate}
+	A set $\mathcal{X}$ together with a metric $d$ defined on $\mathcal{X}$ is
+	called a \emph{metric space} and denoted by $\left(\mathcal{X}, d\right)$.
+\end{definition}
+In order to generalize the familiar Euclidean space to a complex-valued spatial
+domain we need also
+\begin{definition}[Vector space]
+	Let $\F$ be a field (in particular $\F = \R,\C$). A \emph{vector space
+	over} $\F$ (or $\F$-vector space) is a nonempty set $\mathcal{V}$, whose
+	elements are called \emph{vectors} and in which the following two operations
+	are defined:
+	\begin{enumerate}
+		\item Addition: To every pair of vectors $x, y \in \mathcal{V}$ there
+		corresponds a vector $x + y$, in a way such that
+		\begin{enumerate}[label=(\alph*)]
+			\item $x + y = y + x$
+			\item $x + \left(y + z\right) = \left(x + y\right) + z$
+			\item $\mathcal{V}$ contains a unique \emph{zero vector} $0$ such
+			that $x + 0 = x \forall x \in \mathcal{V}$
+			\item To each $x \in \mathcal{V}$ there exists a unique
+			$-x \in \mathcal{V}$ such that $x + \left(-x\right) = 0$
+		\end{enumerate}
+		\item Scalar multiplication: To every pair $(a, x)$ of a scalar
+		$\alpha \in \F$ and a vector $x \in \mathcal{V}$ there corresponds a
+		vector $\alpha x \in \mathcal{V}$, in such a way that
+		\begin{enumerate}[label=(\alph*), start = 5]
+			\item $\alpha \left(\beta\right) = \left(\alpha \beta\right) x$ for
+			all $\beta \in \F$ 
+			\item $1 x = x$
+		\end{enumerate}
+		Both addition and scalar multiplication satisfy the distributive laws
+		\begin{enumerate}[label=(\alph*), start = 7]
+			\item $\alpha \left(x + y\right) = \alpha x + \alpha y$
+			\item $\left(\alpha + \beta\right) x = \alpha x + \beta x$.
+		\end{enumerate}
+	\end{enumerate}
+\end{definition}
+Another important concept in this context is the length of a vector.
+This quantity is typically requested to obey
+\begin{definition}[Norm and normed space]\label{def:norm}
+	Let $\mathcal{V}$ be a $\F$-vector space.
+	A non-negative real-valued functional $x \mapsto \left\Vert x \right\Vert$
+	from $\mathcal{V}$ into $\R$ is called a \emph{norm} if
+	\begin{enumerate}[label=(\alph*)]
+		\item $\norm{x} = 0 \Leftrightarrow x = 0$ 
+		\item $\norm{\alpha x} = \abs{\alpha} \norm{x}$ for every
+		$x \in \mathcal{V}$ and $\alpha \in \F$
+		\item $\norm{x_1 + x_2} \le \norm{x_1} + \norm{x_2}$ for every
+		$x_1, x_2 \in \mathcal{V}$.
+	\end{enumerate}
+	A $\F$-vector space $\mathcal{V}$ together with a norm
+	$\left\Vert . \right\Vert$ is called a \emph{normed space} and denoted by
+	$\left( \mathcal{V}, \left\Vert . \right\Vert \right)$.
+\end{definition}
+
+It is easily shown that $\R^3 \subset \C^3$, as well as $\C^3$ itself are
+vector spaces.
+Additionally, an inner product can be defined on $\C^3$.
+\begin{definition}[Dot product]\label{def:dot_product}
+	Let $\C^N$ be a finite-dimensional vector space with $N \in \N$
+	and $\pvec{a}, \pvec{b} \in \C^3$. Then the \emph{dot product}
+	is defined as 
+	\begin{equation}
+		\pvec{a} \cdot \pvec{b} = \sum\limits_{1}^{N} a_i \bar{b}_i \, .
+	\end{equation}
+\end{definition}
+Equipped with the inner product given by \cref{def:dot_product} $\C^3$
+becomes a Hilbert space.
+Note that the dot product as given by \cref{def:dot_product} of an arbitrary
+vector in $\C^3$ with itself is a non-negative real number. 
+
+The definition of the dot product induces the familiar Euclidean norm and
+metric on $\C^3$.
+\begin{definition}[Euclidean norm]\label{def:euclidean_norm}
+	Let $\pvec{r} \in \C^3$ arbitrary. Then the \emph{Euclidean norm} of
+	$\pvec{r}$ is defined as
+	\begin{equation}
+		r = \euclideanNorm{\pvec{r}} = \sqrt{\pvec{r} \cdot \pvec{r}} \, .
+	\end{equation}
+\end{definition}\label{def:euclidean_metric}
+\begin{definition}[Euclidean metric]
+	Let $\pvec{r}_1, \pvec{r}_2 \in \C^3$ arbitrary. Then the \emph{Euclidean
+	metric} is defined as
+	\begin{equation}
+		d_E\left(\pvec{r}_1 , \pvec{r}_2\right) = 
+		\sqrt{
+			\left(\pvec{r}_1 - \pvec{r}_2\right)
+			\cdot
+			\left(\pvec{r}_1 - \pvec{r}_2\right)
+		} \, .
+	\end{equation}
+\end{definition}
+
+Geometrically, \cref{def:euclidean_norm} can be interpreted as the \emph{length}
+of a vector $\pvec{r} \in \R^3$ while \cref{def:euclidean_metric} is the
+\emph{distance} between two points $\pvec{r}_1, \pvec{r}_2 \in \R^3$.
+The notions of length and distance somewhat lose their geometrical
+interpretation in $\C^3$, however, according to the above definitions they
+are still real non-negative numbers.
+
+With regard to complex image sources within the electromagnetic context, it is
+observed that the output data of the \ac{DCIM} provides complex scalars
+which can be interpreted length-like.
+This fact does not cause problems if the \ac{DCIM} is applied as originally
+intended, as these complex images are summated internally. Within the 
+conventional algorithm they are never actually \enquote{placed} in a 
+$\C^3$ solution domain of the electromagnetic field problem.
+However, towards a possible integration of complex images into the \ac{FMM} the
+aim is to do exactly this.
+
+As it can easily be seen from \cref{def:metric} and \cref{def:norm}
+the operation mapping a vector $\rsrc \in \C^3$ to a complex distance in the
+\acs{DCIM}-sense can neither be a metric nor a norm.
+Nevertheless, as it is demonstrated in a paper by \textcite{Hansen2009}, such a
+complex distance can have a physical meaning.
+One property of a complex distance which can be axiomatically postulated
+is that a complex distance $r \in \C$ should have non-negative real part.
+Within the context of \ac{DCIM} a reasonable definition of complex length
+is \cite{Hansen2009, Hansen2013}
+\begin{definition}[Complex length]
+	Let $x, y \in \R$, $z \in \C$ and the square root $\sqrt{c}$ of
+	an arbitrary complex number $c$ be defined with its branch cut along the
+	negative real axis.
+	Then the \emph{complex length} of a vector
+	$\pvec{r} = \uv{x}x + \uv{y}y +\uv{z}z$ is defined as
+	\begin{equation}
+		r_c =
+		\complexLength{\pvec{r}} =
+		\sqrt{\pvec{r} \cdot \overline{\pvec{r}}} =
+		\sqrt{x^2 + y^2 + z^2} \, ,
+	\end{equation}
+	where the square root is evaluated on the Riemann sheet on which 
+	$\real{r_c} \ge 0$.
+\end{definition}
+
+
+
+
+
+\subsection{Sommerfeld identity}
+
+
+
+\begin{equation}\label{eq:sommerfeld_id_pos_real_axis}
+	\frac{\exp{-\im k r}}{r} = 
+	-\im
+	\int\limits_{0}^{\infty} \dd k_\rho \,
+	\besselj{0} \left(k_\rho \rho\right) k_\rho 
+	\frac{\exp{-\im k_z \abs{z}}}{k_z}
+\end{equation}
+
+\begin{theorem}[Sommerfeld identity with complex vertical distance]
+	Let $\rho \in \R$ with $\rho > 0$ and $k \in C$ be defined with
+	$\imag{k} < 0$ where $\imag{k} \to 0$. Then \eqref{eq:sommerfeld_id_pos_real_axis} 
+	remains valid if $\abs{z}$ with $z \in \R$ is replaced by a complex distance
+	as defined in  
+
+	
+\end{theorem}
+
+\begin{equation}\label{eq:sommerfeld_identity_bessel}
+	\frac{\exp{\im k r}}{r} = \im \int\limits_{0}^{\infty} \frac{k_\rho}{k_z} \besselj{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, ,
+\end{equation}
+where
+\begin{equation}\label{eq:k_z}
+	k_z = \sqrt{k^2 - k_\rho^2} \, ,
+\end{equation}
+is chosen such that $\imag{k_z} > 0$.
+
+\begin{lemma}[Sommerfeld identity {\cite[p.~684]{Sommerfeld1909}, \cite{Chew1999}}]\label{lemma:sommerfeld_identity}
+	Let $r,\,k\in\C \setminus \left\{0\right\}$, $z \in \C$, $\rho \in \R$, $\real{r} > 0$, $\imag{k} > 0$ and $r^2 = \rho^2 + z^2$. Then the Sommerfeld identity reads
+\end{lemma}
+
+\begin{proof}
+	\fxnote{Beweis für komplexe Ortskoordinaten}
+\end{proof}
+
+With Cauchy's integral theorem in mind, Sommerfeld recognized a certain drawback in the integration path along the positive real $k_\rho$-axis when it comes to getting enlightening physical insights out of integrals like the one in \eqref{eq:sommerfeld_identity_bessel}. For a closed integration path would much better suit the theorem Sommerfeld derived an alternative representation of \eqref{eq:sommerfeld_identity_bessel} invoking a well-known identity \cite[eq.~10.4.4]{Olver2010} and the so-called \enquote{circuit relations} of Hankel functions \cite[p.~314]{Sommerfeld1964}. It is given by
+\begin{corollary}[Sommerfeld identity in terms of Hankel functions]
+	The Sommerfeld identity in terms of Hankel functions reads
+	\begin{equation}\label{eq:sommerfeld_identity_hankel}
+		\frac{\exp{\im k r}}{r} = \frac{\im}{2} \int\limits_{-\infty}^{\infty} \frac{k_\rho}{k_z} \besselh{1}{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, .
+	\end{equation}
+\end{corollary}
+The third well-known formulation of the very same mathematical statement expands the Hankel transform in \eqref{eq:sommerfeld_identity_bessel} or \eqref{eq:sommerfeld_identity_hankel}, respectively, in a two-dimensional Fourier integral
+\begin{corollary}[Weyl identity {\cite{Weyl1919}, \cite{Chew1999}}]\label{coll:wely_identity}
+	The Weyl identity reads
+	\begin{equation}\label{eq:weyl_identity}
+		\frac{\exp{\im k r}}{r} = \frac{\im}{2\pi} \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty} \frac{-\exp{-\im k_z \abs{z}}}{\im k_z} \exp{\im k_x x} \exp{-\im k_y y} \dd k_x \, \dd k_y \, .
+	\end{equation}
+\end{corollary}
+
+For the mathematical equivalence of \eqref{eq:sommerfeld_identity_bessel}, \eqref{eq:sommerfeld_identity_hankel} and \eqref{eq:weyl_identity} all three forms can be employed in the description of the same physics, namely the description of a scalar spherical wave. While all three of the forms involve the plane wave term $\exp{i k_z \abs{z}}$ to represent the vertically directed wave constituents, the lateral part of the field can be represented either by standing or propagating cylindrical waves as well as by a superposition of plane waves.
+
+The differing property of vertical and lateral, however, is that the properties of the lateral wave constituents solely depend on the integration variable while the set of vertical plane waves is in any case composed of propagating and evanescent portions, corresponding to the cases $k_\rho \lessgtr k$ in \eqref{eq:k_z}.
+
+\fxnote{Hier noch schreiben wie sich das auswirkt.}
+
+
+\fxnote{Beweis, dass Sommerfeld-Identität auch mit komplexen Längen gilt!?}
+%Die räumlichen Größen $r$ und $z$ in \eqref{eq:sommerfeld_identity} waren in Sommerfelds ursprüngliche Analyse reell. Wie früh erkannt wurde \cite{Deschamps1971,Keller1971} behält \cref{lemma:sommerfeld_identity} jedoch auch für $r, z\in\C$ seine Gültigkeit. Die Kugelwelle verändert dabei jedoch ihre für $r, z\in\R$ isotrope Charakteristik hin zu einem gerichteten gaußschen Strahl.
+
+\subsection{Differential Equation and Green's Function}
+
+\begin{definition}[Domain]
+	An open, simply connected subset of a finite dimensional vector space is called a \emph{domain}.
+\end{definition}
+
+\begin{definition}[Closure]
+	Let $\Omega$ be a domain. The set $\overline{\Omega}$ consisting of $\Omega$ and all its limit points is called \emph{closure} of $\Omega$.
+\end{definition}
+
+\begin{definition}[Boundary]
+	Let $\Omega \subset \R^3$ with closure $\overline{\Omega}$. Then the set $\partial\Omega \coloneqq \overline{\Omega}\setminus\Omega$  is called \emph{boundary} of $\Omega$.
+\end{definition}
+
+\begin{definition}[Scalar Helmholtz equation]
+	\label{def:helmholtz_equation}
+	Let $\Omega \subset \R^3$ be a domain, $\robs \in \Omega$, $k \in \C$ and $f, g: \Omega \rightarrow \C$ functions on $\Omega$. Then the \emph{scalar Helmholtz equation} in $\Omega$ is defined as \cite[p. 282]{Jackson2013}
+	\begin{equation}\label{eq:scalar_helmholtz_equation}
+		\left(\laplace + k^2\right)g\left(\robs\right) = -4\pi g\left(\robs\right) \, .
+	\end{equation}
+\end{definition}
+
+\begin{remark}[Types of solutions]
+	In the following no distinction is made between functions solving \eqref{eq:scalar_helmholtz_equation} point-wise and such only being weak solutions \cite[S.~22ff]{Strichartz2003}.
+\end{remark}
+
+\begin{remark}[Sommerfeld condition of radiation]\label{rem:sommerfeld_radiation_condition}
+	The Helmholtz equation as given by \cref{def:helmholtz_equation} is necessary but not sufficient to guarantee unique solution. In order to be physically meaningful a solution is also required to fulfill the \emph{Sommerfeld condition of radiation} \cite[S.~189]{Sommerfeld1964}
+	\begin{equation}
+		\lim\limits_{r\rightarrow\infty} r \left(\pd[f]{r} + \im k f \right) = 0 \, .
+	\end{equation}
+\end{remark}
+
+\subsection{Green's function}
+
+\begin{definition}[Delta function]
+	Seien $n\in\N$, $\robs,\rsrc\in\C^n$ und $f\left(\robs\right):\C^n\rightarrow\C$ stetig in $\robs = \rsrc$. Dann ist die \emph{Delta-Funktion} $\diracDelta:\C^n \rightarrow \C$ durch die Eigenschaften
+	\begin{equation}
+		\diracDelta\left(\robs\right) = \begin{cases*}
+			1 & $\robs = 0$ \\
+			0 & $\robs \neq 0$
+		\end{cases*} \, ,
+	\end{equation}
+	\begin{equation}
+		\int\limits_{\C^n} \diracDelta\left(\robs\right) \dd \robs = 1
+	\end{equation}
+	und
+	\begin{equation}\label{eq:delta_filter_property}
+		\int\limits_{\C^n} f\left(\robs\right) \diracDelta\left(\robs-\rsrc\right) \dd \robs = f\left(\rsrc\right)
+	\end{equation}
+	definiert. Eigenschaft \eqref{eq:delta_filter_property} heißt \emph{Filtereigenschaft} der $\diracDelta$-Funktion.
+\end{definition}
+
+\begin{definition}[Green'sfunction]
+	Sei $\mathcal{L}$ ein linearer Differentialoperator.
+	\begin{equation}
+		\mathcal{L} G\left(\robs, \rsrc \right) = -\diracDelta\left(\robs - \rsrc\right)
+	\end{equation}
+\end{definition}
+
+
+\section{Electromagnetic Waves in Planar Multilayered Media}
+
+\subsection{Assumptions}
+\label{subsec:em_assumptions}
+
+The theory of classical electrodynamics, expressed axiomatically by Maxwell's
+equations, constitute an accepted and well-proven framework for thy analysis of any \emph{macroscopic} electromagnetic phenomena. In order to state a version of Maxwell's equations suitable to the problem at hand the following assumptions are made.
+\begin{itemize}
+	\item All electromagnetic fields and related quantities are assumed to obey
+	\cref{rem:time_convention}, where $\omega = 2\pi f$ with frequency $f > 0$.
+	\item All media are assumed linear and isotropic. Their electromagnetic
+	properties are therefore fully described by two scalar fields
+	$\epsr, \mur \in \C$.
+	\item All media are assumed non-magnetic, \ie, $\mur \equiv 1$.
+	\item Hypothetic magnetic (equivalent) sources $\pvec{M}$ and
+	$\rho_\mathrm{m}$ are assumed to mathematically symmetrize Maxwell's
+	equations and to enable the use of duality reltations.
+\end{itemize}
+
+\subsection{Fundamental equations}
+\label{subsec:em_fundamental_equations}
+
+Under the assumptions stated in \cref{subsec:em_assumptions} Maxwell's equations
+read \cite{Chew1999}
+\begin{subequations}\label{eq:mwe_fd}
+	\begin{align}
+		\curl \pvec{E}
+		&= -\im\omega\mu\pvec{H} -\pvec{M} \label{eq:mwe_fd_faraday} \\
+		\curl \pvec{H}
+		&= \im\omega\varepsilon\pvec{E} + \pvec{J} \label{eq:mwe_fd_ampere} \\
+		\divergence \varepsilon\pvec{E}
+		&= \rho \label{eq:mwe_fd_gauss} \\
+		\divergence \mu\pvec{H}
+		&= \rho_\mathrm{m} \,, \label{eq:mwe_fd_gauss_magnetic}
+	\end{align}
+\end{subequations}
+where $\varepsilon = \epsr \varepsilon_0$ and $\mu = \mur \mu_0$. The well-known
+physical constants $\varepsilon_0$ and $\mu_0$ on their own specify the
+electromagnetic properties of vacuum.
+All fields are functions of $\robs \in \R^3$ where the scalars and vectors map
+to $\C$ and $\C^3$, respectively.
+
+Since the medium is assumed non-magnetic, its electromagnetic behavior is fully
+described by a real relative permittivity $\epsr^\prime$ which is constituted
+by its real part $\epsr^\prime$ and the conductivity
+$\sigma / \SI{}{\siemens} > 0$ via
+\begin{equation}
+	\epsr = \epsr^\prime - \im \frac{\sigma}{\omega \varepsilon_0} \,.
+\end{equation}
+
+In order to uniquely define an electromagnetic field problem and its solution
+\eqref{eq:mwe_fd} have to be supplemented by appropriate boundary conditions.
+
+Arguably the most prominent feature of Maxwell's equations is the possibility
+of wave solutions. Equations more suitable to deal with wave phenomena can
+readily obtained from \eqref{eq:mwe_fd}, \eg,
+\begin{equation}\label{eq:curlcurl_E}
+	\mu\curl\frac{1}{\mu}\curl\pvec{E} - k^2\pvec{E} = 0 \,.
+\end{equation}
+which is derived for a region free of sources by taking the curl of the product
+of $\mu^{-1}$ and \eqref{eq:mwe_fd_faraday} and subsequent use of
+\eqref{eq:mwe_fd_ampere}. The quantity
+\begin{equation}\label{eq:wavenumber}
+	k \equiv \omega \sqrt{\varepsilon\mu}
+\end{equation}
+is called wavenumber. In vacuum the wavelength is given by $\lambda_0 = c / f$
+with the speed of light in vacuum $c$.
+
+The corresponding equation
+\begin{equation}\label{eq:curlcurl_H}
+	\varepsilon\curl\frac{1}{\varepsilon}\curl\pvec{H} - k^2\pvec{H} = 0
+\end{equation}
+for the magnetic field is obtained analogously.
+
+\subsection{Duality principle}
+\label{subsec:duality_principle}
+
+Instead of a derivation analogous to the one of \eqref{eq:curlcurl_E}
+\eqref{eq:curlcurl_H} could also be directly obtained by using the duality
+principle.
+
+By assuming magnetic sources \eqref{eq:mwe_fd} for a set of equations whose
+mathematical symmetry is only broken by a difference in sign. Taking into
+account that \enquote{the same equations have the same solutions}
+\cite[12-1]{Feynman2011} a set of duality replacement rules can be established.
+Though not unique, a valid choice is given by \cref{tab:duality}. 
+\begin{table}[hbt]
+	\centering
+	\begin{tabular}{cc}
+		\toprule%
+		\textbf{original} & \textbf{dual}\\ \midrule
+		$\pvec{E}$ & $\pvec{H}$ \\
+		$\pvec{H}$ & $\pvec{E}$ \\
+		$\pvec{J}$ & $-\pvec{M}$ \\
+		$\pvec{M}$ & $-\pvec{J}$ \\
+		$\rho$ & $-\rho_\mathrm{m}$ \\
+		$\rho_\mathrm{m}$ & $-\rho$ \\
+		$\varepsilon$ & $-\mu$ \\
+		$\mu$ & $-\varepsilon$ \\
+		\bottomrule
+	\end{tabular}
+	\caption[Duality substitution rules for electromagnetic fields]
+	{Duality substitution rules for electromagnetic fields \cite[p.~9]{Chew1999}.}
+	\label{tab:duality}
+\end{table}
+\fxnote{Check \cref{tab:duality}.}
+
+\subsection{Solution domain: Sommerfeld half-space}
+
+% \begin{figure}[htb]
+% 	\centering
+	
+% 	% Define view angle
+% 	\tdplotsetmaincoords{75}{120}
+% 	\begin{tikzpicture}[tdplot_main_coords,scale=0.8]
+		
+% 		\begin{scope}[canvas is xy plane at z=0]
+% 			\filldraw[fill=blue!30!white] (-5,-5) rectangle (5,5);
+% 		\end{scope}
+% 		\begin{scope}[canvas is yz plane at x=5]
+% 			\filldraw[fill=blue!30!white] (5,0) rectangle (-5,-4);
+% 		\end{scope}
+% 		\begin{scope}[canvas is xz plane at y=5]
+% 			\filldraw[fill=blue!30!white] (5,0) rectangle (-5,-4);
+% 		\end{scope}
+		
+% 		% Draw cartesian coordinate system.
+% 		\draw[thick,-latex] (0,0,0) -- (3.5,0,0) node[anchor=east]{$x$};
+% 		\draw[thick,-latex] (0,0,0) -- (0,3.5,0) node[anchor=west]{$y$};
+% 		\draw[thick,-latex] (0,0,0) -- (0,0,3.5) node[anchor=south]{$z$};
+		
+% 		% Draw observation point
+% 		\pgfmathsetmacro{\rvec}{5}
+% 		\pgfmathsetmacro{\thetavec}{40}
+% 		\pgfmathsetmacro{\phivec}{150}
+% 		\coordinate (O) at (0,0,0);
+% 		\tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+% 		\draw[-latex] (O) --node[anchor=east]{$r$} (P) node[anchor=west]{$\robs$};
+% 		\draw[dashed] (O) --node[anchor=south]{$\rho$} (Pxy);
+% 		\draw[dashed] (P) --node[anchor=west]{$z$} (Pxy);
+% 		\tdplotdrawarc[-latex]{(O)}{1.2}{0}{\phivec}{anchor=north}{$\varphi$}
+% 		\tdplotsetthetaplanecoords{\phivec}
+% 		\tdplotdrawarc[tdplot_rotated_coords,-latex]{(0,0,0)}{1.2}{0}{\thetavec}{anchor=south}{$\vartheta$}
+		
+% 	\end{tikzpicture}
+% 	\caption[Sommerfeld half-space]{Sommerfeld half-space problem with coordinate systems.}
+% 	\label{fig:half_space}
+% \end{figure}
+
+\subsection{Reduction to \aclp{ODE}}
+\label{subsec:5_comp_filds}
+
+Assume a medium described by parameters $\epsr\left(z\right), \mur\left(z\right)$ which depend only on the $z$-coordinate. In this case the study of wave fields governed by \eqref{eq:curlcurl_E} an \eqref{eq:curlcurl_H} can be reduced to the solution of two \acsp{ODE}. These \acsp{ODE} describe the so-called \emph{characteristic component} of an electromagnetic filed with only five non-vanishing components. Since the vanishing sixth component is the $z$-component of either the electric or magnetic field these fields are called \ac{TE} and \ac{TM}, respectively. Once the characteristic component is known, the remaining field components can be obtained by mere differentiation \cite[pp.~75]{Chew1999}. Linear superposition of \ac{TE} and \ac{TM} solutions eventually allows for the representation of arbitrary solutions to \eqref{eq:mwe_fd}.
+
+As an example consider a generic \ac{TE} field
+\begin{equation}\label{eq:TE_E_field_components}
+	\pvec{E} = \pvec{E}^\te = \uv{x}E_x + \uv{y}E_y \,.
+\end{equation}
+The choice of a characteristic component for this \ac{TE} field is not unique. Either the transverse component of $\pvec{E}$ as well as the vertical component of $\pvec{H}$ will do. In this example $H_z$ shall considered as characteristic component.
+
+Apparently $H_z$ is contained in the solution to \eqref{eq:curlcurl_H}. Substituting \eqref{eq:mwe_fd_faraday} into \eqref{eq:curlcurl_H} yields
+\begin{equation}\label{eq:triple_curl_TE}
+	- \frac{\varepsilon}{\im \omega}\curl\frac{1}{\varepsilon}\curl\frac{1}{\mu} \curl \pvec{E} - k^2\pvec{H} = 0 \,.
+\end{equation}
+Expanding the $H_z$ component in \eqref{eq:triple_curl_TE} and using the precondition $\varepsilon = \varepsilon\left(z\right)$ and $\mu = \mu\left(z\right)$ we obtain
+\begin{equation}\label{eq:H_z_complicated}
+	\begin{split}
+		\frac{1}{\mu} \left(-\pdsec{x} \pd[E_y]{x} + \pdsec{y} \pd[E_x]{y} + \pdsec{x} \pd[E_x]{y} - \pdsec{y} \pd[E_y]{x}\right) \\ -\pd{z}\frac{1}{\mu}\pd{z}\pd[E_y]{x} + \pd{z}\frac{1}{\mu}\pd{z}\pd[E_x]{y} + \im \omega k^2 H_z = 0 \,.
+	\end{split}
+\end{equation}
+In \eqref{eq:H_z_complicated} the expression
+\begin{equation}
+	\pd[E_y]{x} = \pd[E_x]{y} - \im \omega \mu H_z \,,
+\end{equation}
+attained from \eqref{eq:mwe_fd_faraday}, as well as the shortcut
+\begin{equation}\label{eq:laplace_transversal}
+	\laplaceTrans \equiv \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} = \frac{1}{\rho}\frac{\partial}{\partial \rho} \rho \frac{\partial}{\partial \rho}
+\end{equation}
+for the transversal part of the Laplacian operator \cite[p.~731]{Bronstein2016} are conveniently used to write
+\begin{equation}\label{eq:H_z_pde}
+	\laplaceTrans H_z + \frac{\partial}{\partial z}\frac{1}{\mu}\frac{\partial}{\partial z} \mu H_z + k^2 H_z = 0 \,.
+\end{equation}
+If the Hankel transform \eqref{eq:hankel_transform_forward} for $\nu = 0$ is applied to \eqref{eq:H_z_pde} this corresponds to the formal substitution\footnote{Fourier transform \wrt $x$ and $y$ would correspond to $\laplaceTrans \rightarrow - k_x^2 - k_y^2$.} \cite{Michalski2016b}
+\begin{equation}
+	\laplaceTrans \rightarrow -k_\rho^2 \equiv - k_x^2 - k_y^2 \,.
+\end{equation}
+Using the vertical component
+\begin{equation}\label{eq:k_z_square}
+	k_z^2 = k^2 - k_\rho^2
+\end{equation}
+of the wavenumber in the transformed version \eqref{eq:H_z_pde} the \ac{ODE}
+\begin{equation}\label{eq:TE_ODE}
+	\frac{\dd}{\dd z}\frac{1}{\mu}\frac{\dd}{\dd z}\mu  \tilde{H}_z + k_z^2 \tilde{H}_z = 0
+\end{equation}
+is obtained for the characteristic component of the \ac{TE} field. The solution $\tilde{H}_z$ of \eqref{eq:TE_ODE} can be interpreted as the $k_\rho$-spectral domain version of the spatial domain solution $H_z$.
+
+The dual of a \ac{TE} field is a \ac{TM} field. This circumstance can be employed to readily obtain the spectral domain \ac{ODE} for the characteristic component of the \ac{TM} field by the duality principle. The spatial domain equation for $E_z$ reads
+\begin{equation}\label{eq:E_z_pde}
+	\laplaceTrans E_z + \frac{\partial}{\partial z}\frac{1}{\varepsilon}\frac{\partial}{\partial z} \varepsilon E_z + k^2 E_z = 0 \,,
+\end{equation}
+its spectral domain counterpart becomes
+\begin{equation}\label{eq:TM_ODE}
+	\frac{\dd}{\dd z}\frac{1}{\varepsilon}\frac{\dd}{\dd z}\varepsilon \tilde{E}_z + k_z^2 \tilde{E}_z = 0 \,.
+\end{equation}
+
+Now \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} still assume the source-free case. In contrast to that, the Green's functions for $\tilde{H}_z$ and $\tilde{E}_z$ are of particular interest in the study of dipole radiation over planar ground. It is convenient to define the defining equations of these Green's functions in terms of $\tilde{G}^\te \equiv \mu \tilde{H}_z$ and $\tilde{G}^\tm \equiv \varepsilon \tilde{E}_z$ instead of $\tilde{H}_z$ and $\tilde{E}_z$ directly. Given these definitions the Green's functions of \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} are defined by
+\begin{equation}\label{eq:TE_ODE_GF}
+	\left(\frac{\dd}{\dd z}\frac{1}{\mu}\frac{\dd}{\dd z} + \frac{k_z^2}{\mu}\right) \tilde{G}^\te = -\diracDelta\left(z-z^\prime\right)
+\end{equation}
+and
+\begin{equation}\label{eq:TM_ODE_GF}
+	\left(\frac{\dd}{\dd z}\frac{1}{\varepsilon}\frac{\dd}{\dd z} + \frac{k_z^2}{\varepsilon}\right) \tilde{G}^\tm = -\diracDelta\left(z-z^\prime\right) \,,
+\end{equation}
+respectively.
+
+\subsection{Continuity conditions at material changes}
+\label{subsec:continuity_at_interfaces}
+
+The derivation of the characteristic components of \ac{TE} and \ac{TM} fields in \cref{subsec:5_comp_filds} still assumes a generic dependence of $\epsr$ and $\mur$ on $z$. Solely the existence of the derivatives in \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} is required. In the following $\epsr$ and $\mur$ are assumed to be piece-wise constant in $z$. With that assumption the continuity condition for $\tilde{H}_z$ and $\tilde{E}_z$ at a discontinuity of the material parameters need to be known.
+
+In fact these continuity conditions can readily be deduced from \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} using heuristic reasoning \cite[p.~47]{Chew1999}. Another approach to obtain the continuity conditions could follow a similar idea like the well-known derivation of the general continuity conditions for the electromagnetic field which is based on the integral form representation of Maxwell's equations \cite[pp.~20]{Jackson2013}.
+
+In any case the continuity conditions for $\tilde{H}_z$ at a discontinuity of the material parameters read
+\begin{subequations}
+	\begin{equation}\label{eq:B_continuity}
+		\mu_i \tilde{H}_{z,i} = \mu_{i+1} \tilde{H}_{z,i+1}
+	\end{equation}
+	and
+	\begin{equation}\label{eq:H_z_tilde_second_continuity_condition}
+		\frac{1}{\mu_i}\frac{\dd}{\dd z} \mu_i \tilde{H}_{z,i} = \frac{1}{\mu_{i+1}}\frac{\dd}{\dd z} \mu_{i+1} \tilde{H}_{z,i+1} \,.
+	\end{equation}
+\end{subequations}
+Once more the duality principle can be employed to obtain the corresponding conditions for $\tilde{E}_z$ as
+\begin{subequations}
+	\begin{equation}\label{eq:D_continuity}
+		\varepsilon_i \tilde{E}_{z,i} = \varepsilon_{i+1} \tilde{E}_{z,i+1}
+	\end{equation}
+	and
+	\begin{equation}\label{eq:E_z_tilde_second_continuity_condition}
+		\frac{1}{\varepsilon_i}\frac{\dd}{\dd z} \varepsilon_i \tilde{E}_{z,i} = \frac{1}{\varepsilon_{i+1}}\frac{\dd}{\dd z} \varepsilon_{i+1} \tilde{E}_{z,i+1} \,.
+	\end{equation}
+\end{subequations}
+
+\fxnote{Allgemeinere Schreibweise für die Stetigkeit einführen. Darauf hinweisen, dass die Größen außerhalb von Quellen (!) immer stetig sind. Siehe \cite[S.~7]{Michalski2016b}}
+
+\subsection{Equivalent transmission line networks and spectral Green's functions}
+\label{subsec:tl_greens_functions}
+
+If or if not inspired by Feynman's famous quote (see \cref{subsec:duality_principle}), inspection of \eqref{eq:TE_ODE_GF} and \eqref{eq:TM_ODE_GF} reveals distinctive similarities of these equations with the equations governing voltage and current on transmission lines \cite[Section 2.4]{Felsen1994}. These similarities have been widely employed in the solution of spectral Green's functions of half-space and multilayered media problems. Despite the known solution this method -- hereinafter called the \emph{network-method} -- offers yet another advantage -- it allows for the transfer of a certain \emph{feeling} about the quantities on transmission lines to those in the $k_\rho$ spectral domain.
+
+The equations describing voltage and current on a $z$-directed transmission line with propagation constant $k_\rho$ read \cite{Felsen1994} \cite{Michalski2016b}
+\begin{subequations}\label{eq:tl_ode_system}
+	\begin{align}
+		\frac{\dd}{\dd z} V\left(z\right) &= \im k_z Z^\tx I\left(z\right) \label{eq:tl_ode_system_dV} \\
+		\frac{\dd}{\dd z} I\left(z\right) &= \im k_z Y^\tx V\left(z\right) \label{eq:tl_ode_system_dI} \, ,
+	\end{align}
+\end{subequations}
+with $Z^\tx = 1/Y^\tx$ and $\tx$ stands either for \ac{TE} or \ac{TM}. Obviously \eqref{eq:tl_ode_system_dV} and \eqref{eq:tl_ode_system_dI} are dual equations with the relations given by \cref{tab:tl_duality}.
+\fxnote{check time convention in \eqref{eq:tl_ode_system}}
+
+\begin{table}[hbt]
+	\centering
+	\begin{tabular}{cc}
+		\toprule%
+		\textbf{original} & \textbf{dual}\\ \midrule
+		$V$ & $I$ \\
+		$I$ & $V$ \\
+		$Z$ & $Y$ \\
+		$Y$ & $Z$ \\
+		\bottomrule
+	\end{tabular}
+	\caption[Duality substitution rules for transmission line quantities]{Duality substitution rules for transmission line quantities.}
+	\label{tab:tl_duality}
+\end{table}
+
+
+
+% \begin{figure}
+%    \begin{tikzpicture}
+%     \pgfplotsset{small}
+%     \matrix {
+%         \begin{axis}[
+%             width = \textwidth,
+%             height = 0.25\textwidth,
+%             grid = major,
+%             xlabel = {$z / \lambda_0$},
+%             ylabel = {$V$ in Volt},
+%             xmin = -2,
+%             xmax = 4,
+%         ]
+%             \addplot [color = blue] table [x = z_by_lambda_0, y = V_re]
+% 			{thesis_tlgf.dat};
+%             \addplot [color = red] table [x = z_by_lambda_0, y = V_im]
+% 			{thesis_tlgf.dat};
+%         \end{axis}
+%         \\
+%         \begin{axis}[
+%             width = \textwidth,
+%             height = 0.25\textwidth,
+%             grid = major,
+%             xlabel = {$z / \lambda_0$},
+%             ylabel = {$I$ in Amp\`ere},
+%             xmin = -2,
+%             xmax = 4,
+%         ]
+%             \addplot [color = blue] table [x = z_by_lambda_0, y = I_re]
+% 			{thesis_tlgf.dat};
+%             \addplot [color = red] table [x = z_by_lambda_0, y = I_im]
+% 			{thesis_tlgf.dat};
+%         \end{axis}
+%         \\
+%         \begin{axis}[
+%             width = \textwidth,
+%             height = 0.25\textwidth,
+%             grid = major,
+%             xlabel = {$z / \lambda_0$},
+%             ylabel = {$Z / Z_0$},
+%             ytick = {-2, -1, 0, 1},
+%             xmin = -2,
+%             xmax = 4,
+%         ]
+%             \addplot [color = blue] table [x = z_by_lambda_0, y = Z_rel_re]
+% 			{thesis_tlgf.dat};
+%             \addplot [color = red] table [x = z_by_lambda_0, y = Z_rel_im]
+% 			{thesis_tlgf.dat};
+%         \end{axis}
+%         \\
+%         };
+%     \end{tikzpicture}
+% 	\label{fig:tlgf_example}
+% 	\caption[{Example for a typical \acs{TLGF}]
+% 	{Example for the \ac{TLGF} $V_{i}^{\mathrm{TM}}$ with $z^\prime = \lambda_0$.
+% 	The ground parameters are $\epsr = 9 - \im$ and $\mur = 1$.}
+% \end{figure}
+
+
+
+
+
+
+Auch im Fall der Leitungen lassen sich in Modelle der Führung von TM-Wellen von entsprechenden Wellenleitern für TE-Wellen unterscheiden. Die ausschlaggebende Größe ist die charakteristische Leitungsimpedanz $Z^\tx$ bzw. -admittanz $Y^\tx$, die sich sich im TM-Fall durch
+\begin{equation}
+	Z^\tm\left(z\right) = \frac{k_z\left(z\right)}{\omega \varepsilon\left(z\right)}
+\end{equation}
+und im TE-Fall durch
+\begin{equation}
+	Y^\te\left(z\right) = \frac{k_{z}\left(z\right)}{\omega \mu\left(z\right)}
+\end{equation}
+bestimmt. Die Ausbreitungskonstante $k_z$ ist in beiden Fällen gleich.
+
+Für die Definition der Greenschen Funktionen von \eqref{eq:tl_ode_system} gibt es nun
+\begin{itemize}
+	\item die Möglichkeit
+	\begin{subequations}\label{eq:tl_first_order_odes_i_source}
+		\begin{align}
+			\frac{\dd}{\dd z} V^{\isrc,\tx}\left(z\right) &= -\im k_z Z^\tx I^{\isrc,\tx}\left(z\right) \label{eq:tl_first_order_odes_i_source_homo}\\
+			\frac{\dd}{\dd z} I^{\isrc,\tx}\left(z\right) &=-\im k_z Y^\tx V^{\isrc,\tx}\left(z\right) + \diracDelta\left(z-z^\prime\right)
+		\end{align}
+	\end{subequations}
+	der Anregung mit einer impulsförmigen Einheitsstromquelle (oberer Index $\isrc$) bei $z^\prime$, sowie 
+	\item den analogen Fall
+	\begin{subequations}\label{eq:tl_first_order_odes_v_source}
+		\begin{align}
+			\frac{\dd}{\dd z} V^{\vsrc,\tx}\left(z\right) &= -\im k_z Z^\tx I^{\vsrc,\tx}\left(z\right) + \diracDelta\left(z-z^\prime\right) \\
+			\frac{\dd}{\dd z} I^{\vsrc,\tx}\left(z\right) &=-\im k_z Y^\tx V^{\vsrc,\tx}\left(z\right) \label{eq:tl_first_order_odes_v_source_homo}
+		\end{align}
+	\end{subequations}
+	 mit einer Spannungsquelle (oberer Index $\vsrc$) bei $z^\prime$ als treibender Größe \cite{Michalski2016b}.
+\end{itemize}
+Aus den Systemen erster Ordnung \eqref{eq:tl_first_order_odes_i_source} und \eqref{eq:tl_first_order_odes_v_source} lassen sich durch Differenziation der einen und Einsetzen der jeweils anderen Gleichung die Gleichungen zweiter Ordnung
+\begin{equation}\label{eq:tl_2nd_order_ode_isrc}
+	\left(\frac{\dd}{\dd z} \frac{1}{\im k_z Z^\tx} \frac{\dd}{\dd z} + \frac{k_z^2}{\im k_z Z^\tx}\right)  V^{\isrc,\tx} = -\diracDelta\left(z-z^\prime\right)
+\end{equation}
+und
+\begin{equation}\label{eq:tl_2nd_order_ode_vsrc}
+	\left(\frac{\dd}{\dd z} \frac{1}{\im k_z Y^\tx} \frac{\dd}{\dd z} + \frac{k_z^2}{\im k_z Y^\tx}\right)  I^{\vsrc,\tx} = -\diracDelta\left(z-z^\prime\right)
+\end{equation}
+gewinnen. Durch Vergleich erkennt man die Dualität zwischen \eqref{eq:TE_ODE_GF} und \eqref{eq:tl_2nd_order_ode_isrc} sowie \eqref{eq:TM_ODE_GF} und \eqref{eq:tl_2nd_order_ode_isrc}. Damit lassen sich die Lösungen von \eqref{eq:TE_ODE_GF} und \eqref{eq:TM_ODE_GF} durch die wohlbekannten Greenschen Funktionen der Leitungsgleichungen ausdrücken.
+
+So ergibt der Vergleich von \eqref{eq:TE_ODE_GF} mit \eqref{eq:tl_2nd_order_ode_isrc} im TE-Fall
+\begin{equation}\label{eq:G_tilde_TE_tl_quantities}
+	\tilde{G}^\te \equiv \frac{1}{\im \omega} V^{\isrc,\te} \,
+\end{equation}
+der Vergleich von \eqref{eq:TM_ODE_GF} mit \eqref{eq:tl_2nd_order_ode_vsrc} im TM-Fall liefert
+\begin{equation}\label{eq:G_tilde_TM_tl_quantities}
+	\tilde{G}^\tm \equiv \frac{1}{\im \omega} I^{\vsrc,\tm} \, .
+\end{equation}
+
+Aus der Leitungstheorie \cite{Pozar2011} sind wesentliche Aspekte der Wellenausbreitung von Spannung und Stromstärke auf Leitungen, die durch \eqref{eq:tl_ode_system_dI} und \eqref{eq:tl_ode_system_dV} beschrieben werden, bekannt. So sind beispielsweise Spannung und Strom außerhalb von Quellregionen -- im vorliegenden Kontext also für $z \neq z^\prime$ -- stetig. Ein Vergleich von \eqref{eq:G_tilde_TE_tl_quantities} und \eqref{eq:G_tilde_TM_tl_quantities} mit \eqref{eq:B_continuity} und \eqref{eq:D_continuity} legt daher offen, dass die Lösung über die Netzwerk-Methode bereits eine der an die Stetigkeit der charakteristischen Feldkomponenten erfüllt. Dass auch die Bedingungen \eqref{eq:H_z_tilde_second_continuity_condition} und \eqref{eq:E_z_tilde_second_continuity_condition} automatisch erfüllt ist, lässt sich durch Einsetzten der Lösung für $V^{\isrc,\te}$ in \eqref{eq:tl_first_order_odes_i_source_homo} und jener für $I^{\vsrc,\tm}$ in \eqref{eq:tl_first_order_odes_v_source_homo} erkennen. Man erhält dadurch
+\begin{equation}
+	\frac{1}{\mu} \frac{\dd}{\dd z} \tilde{G}^\te \equiv - I^{\isrc,\te}
+\end{equation}
+sowie
+\begin{equation}
+	\frac{1}{\varepsilon} \frac{\dd}{\dd z} \tilde{G}^\tm \equiv - V^{\vsrc,\tm} \,,
+\end{equation}
+für $z \neq z^\prime$ sind also \eqref{eq:H_z_tilde_second_continuity_condition} und \eqref{eq:E_z_tilde_second_continuity_condition} ebenfalls befriedigt.
+
+Damit sind die Greenschen Funktionen der charakteristischen Komponenten $\tilde{H}_z$ und $\tilde{E}_z$ von TE bzw. TM-Feldern im $k_\rho$-Spektralbereich auf die in \cref{app:tl_greens_functions} zusammengefassten bekannten Greenschen Funktionen für Spannung und Stromstärke Übertragungsleitungen zurückgeführt.
+
+\subsection{Physikalisch sinnvolle Lösung für die vertikale Wellenzahlkomponente}
+\begin{remark}[Vorzeichen der vertikalen Wellenzahlkomponente]
+	Die Quadratwurzel in \eqref{eq:k_z} im Allgemeinen zwei Lösungen hat, ist es nötig die physikalisch sinnvolle zu wählen. Interpretiert man die zweiwertige Funktion $k_z \left(k_\rho\right)$ als Riemann-Fläche mit zwei Zweigen, so ist derjenige Zweig der physikalisch sinnvolle, auf dem eine zu $\e^{-\im k_z z}$ proportionale Welle für $z \rightarrow \pm\infty$ abklingt. Dies ist vor dem Hintergrund von \cref{def:fourier_transform_real_1d} der Zweig mit $\Im{k_z} \leq 0$. Mit der entsprechenden Wahl der Vorzeichens der rechten Seite von \eqref{eq:k_z} ist die Sommerfeldsche Ausstrahlungsbedingung siehe stets erfüllt, siehe \cref{rem:sommerfeld_radiation_condition}. Details bezüglich möglicher und für die Behandlung von Sommerfeld-Integralen besonderes günstiger Wahlen der von den Verzweigungspunkten bei $k_z = \pm k$ ausgehenden Verzeigungsschnitte werden intensiv in einschlägigen Veröffentlichungen behandelt \cite{Sommerfeld1964,Chew1999,Michalski2016b}.
+\end{remark}
+
+\subsection{Image principle}
+
+Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
+
+
+\section{Numerical Computation of Sommerfeld Integrals}
+
+\subsection{Asymptotic Methods}
+
+\subsection{Numerical Integration}
+
+\subsection{Discrete Complex Image Method}
+
+
+\section{Fast Multipole Method for the Helmholtz Equation}
+
+\subsection{Definitions}
+
+The following considerations concerning the \ac{FMM} use the geometrical
+assumptions elucidated by \cref{fig:fmm_geometry}. The solution domain is
+subdivided into cubical group boxes of side length $w$.
+Note that $\rdiff$ can be written as the sum of three vectors. These, as well
+as the possible ground are aligned with the global Cartesian coordinate system.
+
+Based on this grouping scheme $\rdiff$ can be written as
+\begin{equation}
+	\rdiff =
+	\left( \robs - \fmmObsGroupCenter              \right) +
+	\left( \fmmObsGroupCenter - \fmmSrcGroupCenter \right) -
+	\left( \rsrc - \fmmSrcGroupCenter              \right) \, ,
+\end{equation}
+where $\fmmSrcGroupCenter$ and $\fmmObsGroupCenter$ denote the centers of
+source and observation boxes, respectively.
+Based on this notation the shorthand notations 
+$\fmmDiffGroupCenters \coloneqq \fmmObsGroupCenter - \fmmSrcGroupCenter$
+and 
+$\pvec{d} \coloneqq \left( \robs - \fmmObsGroupCenter \right) - \left( \rsrc - \fmmSrcGroupCenter \right)$
+are introduced.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		[scale = 0.7]
+		
+		\newcommand{\w}{3}
+		\newcommand{\dotsize}{1.5pt}
+		
+		\coordinate(r_s) at (1.5*\w,0.5*\w);
+		\coordinate(r_o) at ($(r_s) + (2*\w,\w)$);
+		\coordinate(r_prime) at ($(r_s) + (0.2*\w,0.45*\w)$);
+		\coordinate(r) at ($(r_o) + (-0.3*\w,0.3*\w)$);
+		
+		% Ground
+		\fill[color = blue!30!white] (-0.5*\w,0) rectangle (4.5*\w,-1.5*\w);
+		
+		% Coordinate system
+		\draw [color=gray!20]  [step=\w] (-0.5*\w,-1.5*\w) grid (4.5*\w,2.5*\w);
+		\draw[->,>=stealth] (-0.75*\w,0) -- (4.75*\w,0) node[right] {$x$, $y$};
+		\draw[->,>=stealth] (0,-1.75*\w) -- (0,2.75*\w) node[above] {$z$};
+		\foreach \c in {1,2,3,4}{\draw (\c*\w,-.1) -- (\c*\w,.1) node[below=4pt] {$\c w$};}
+		\foreach \c in {1,2}{\draw (-0.1,\c*\w) -- (0.1,\c*\w) node[left=4pt] {$\c w$};}
+		\draw (-0.1,-0.1) node[below left] {$0$};
+		
+		% Vectors
+		\draw[->, >=stealth] (r_s) -- node[below]{$\fmmDiffGroupCenters$} (r_o);
+		\draw[->, >=stealth, line width=1.0pt, red] (r_prime) -- node[above]{$\rdiff$} (r);
+		\draw[->, >=stealth] (r_prime) -- node[left]{$\fmmSrcGroupCenter - \rsrc$} (r_s);
+		\draw[->, >=stealth] (r_o) -- node[right]{$\robs - \fmmObsGroupCenter$} (r);
+		
+		% Points
+		\fill (r) circle (\dotsize) node[above]{$\robs$};
+		\fill (r_prime) circle (\dotsize) node[above]{$\rsrc$};
+		\fill (r_s) circle (\dotsize) node[below]{$\fmmSrcGroupCenter$};
+		\fill (r_o) circle (\dotsize) node[below]{$\fmmObsGroupCenter$};
+		
+		% Group boxes
+		\draw($(r_s) - (\w/2,\w/2)$) rectangle ($(r_s) + (\w/2,\w/2)$);
+		\draw($(r_o) - (\w/2,\w/2)$) rectangle ($(r_o) + (\w/2,\w/2)$);
+		
+	\end{tikzpicture}
+
+	\caption[\acs{FMM} geometry]
+	{Geometric definition of the \ac{FMM} implementation.}
+	\label{fig:fmm_geometry}
+\end{figure}
+
+\subsection{Conventional Free-Space Approach}
+
+The classical derivation of the \ac{FMM} for the free-space Green's function
+of the Helmholtz equation is based on two elementary identities.
+
+The first identity is, in a more general form, referred to as Gegenbauer's
+addition theorem by handbooks on mathematical functions
+\cite[eq. 10.23.8]{Olver2010} \cite[9.1.80]{Abramowitz2014}.
+A more specialized version also plays a role in analytical field theory where
+\cite[p.~414]{Stratton2007}
+\begin{equation}\label{eq:addition_thrm_spherical_waves_stratton}
+	\frac{\exp{-\im k \abs{\rdiff}}}{\abs{\rdiff}} =
+	-\im k \sum\limits_{l=0}^{\infty}
+	\left(2l + 1\right)
+	\legendrepl{l} \left( \uv{r} \cdot \uv{r^\prime} \right)
+	\begin{cases}
+		\sphbesselj{l}    \left( k r        \right)
+		\sphbesselh{2}{l} \left( k r^\prime \right)
+		& r < r^\prime \\
+		\sphbesselj{l}    \left( k r^\prime \right)
+		\sphbesselh{2}{l} \left( k r        \right)
+		& r > r^\prime
+	\end{cases}
+\end{equation}
+is known as the \emph{addition theorem for spherical wave functions}
+\cite[p.~362]{Jin2015}.
+The expression on the right-hand side expands an offset spherical wave
+($\rsrc \neq 0$) by a series of spherical waves centered at the origin.
+
+The identity desired towards the \ac{FMM} is obtained from
+\eqref{eq:addition_thrm_spherical_waves_stratton} by flipping the sign of 
+$\rsrc$ for $r > r^\prime$.
+Using the notation of \cref{fig:fmm_geometry}, it is given by
+\begin{corollary}[Gegenbauer's addition theorem]
+	Let $\pvec{t}, \pvec{d} \in \R^3$, $d < t$, $k \in \C$ and
+	\eqref{eq:addition_thrm_spherical_waves_stratton} be given.
+	Then Gegenbauer's addition reads
+	\begin{equation}\label{eq:fmm_std_gegenbauer}
+		\frac{\exp{-\im k \abs{\pvec{t} + \pvec{d}}}}{\abs{\pvec{t} + \pvec{d}}} = 
+		-\im k \sum\limits_{l=0}^{\infty}
+		\left( -1 \right)^l
+		\left( 2l + 1 \right) \,
+		\sphbesselj{l} \left( k d  \right) \,
+		\sphbesselh{2}{l} \left( k t \right) \, 
+		\legendrepl{l} \left( \uv{d} \cdot \uv{t} \right) \, .
+	\end{equation}
+\end{corollary} 
+
+\begin{proof}
+	\fxnote{TODO}
+\end{proof}
+
+The second major identity towards \ac{FMM} expands the product 
+$\sphbesselj{l} \left( k b \right) \legendrepl{l} \left( \uv{b} \cdot \uv{a} \right)$
+into an integral of weighted propagating plane waves. For compact notation, it
+is useful to introduce
+\begin{definition}[Ewald sphere of propagating plane waves]\label{def:ewald_sphere}
+	Let $S^2$ denote the unit sphere in $\R^3$. Then
+	integrals of the form
+	\begin{equation}\label{eq:ewald_sphere_integral}
+		\ewaldintegral \left(\uv{k}\right) 
+		\coloneqq
+		\int\limits_{\phi = 0}^{2\pi} \int\limits_{\theta = 0}^{\pi}
+		\sin\left(\theta \right) \dd \theta \dd \phi \, ,
+	\end{equation}
+	where
+	\begin{equation}
+		\uv{k} =
+		\uv{x} \sin \left(\theta\right) \cos \phi +
+		\uv{y} \sin \left(\theta\right) \sin \phi +
+		\uv{z} \cos \theta \, ,
+	\end{equation}
+	are called \emph{integrals over the Ewald sphere of propagating plane waves}.
+\end{definition}
+With this notation the desired identity reads
+\begin{equation}\label{eq:fmm_jP_expansion_plane_waves}
+		\sphbesselj{l} \left( k b    \right) \,
+		\legendrepl{l} \left( \uv{b} \cdot \uv{a} \right) = 
+		\frac{\im^l}{4\pi}	
+		\ewaldintegral
+		\exp{-\im \pvec{k} \cdot \pvec{b}}
+		\legendrepl{l} \left( \uv{k} \cdot \uv{a} \right)
+\end{equation}
+Note that is a special case of another wave expansion well-established in
+electromagnetic theory \cite[p.~410]{Stratton2007}.
+
+Substituting \eqref{eq:fmm_jP_expansion_plane_waves} into
+\eqref{eq:fmm_std_gegenbauer}
+
+
+
+
+
+
+
+
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\textwidth,
+            colormap/jet,
+            % colorbar,
+            % unbounded coords = jump,
+            xlabel = {$x / \lambda_0$},
+            ylabel = {$z / \lambda_0$},
+            zlabel = {$G_0$},
+            % view = {0}{90},
+            % view = {0}{0},
+            grid = both,
+            ]
+            \addplot3 [
+                surf,
+                shader = interp,
+                mesh/ordering=y varies,
+                ] table [
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_re,
+                ]{thesis_csb.dat};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{A Gaussian Beam with small shift}
+\end{figure}
+
+
+\begin{figure}
+   \begin{tikzpicture}
+    \pgfplotsset{small}
+    \matrix {
+        \begin{axis}[
+            width = \textwidth,
+            height = 0.25\textwidth,
+            grid = major,
+            xlabel = {$z / \lambda_0$},
+            ylabel = {$V$ in Volt},
+            xmin = -2,
+            xmax = 4,
+        ]
+            \addplot [color = blue] table [x = z_by_lambda_0, y = V_re]
+			{thesis_tlgf.dat};
+            \addplot [color = red] table [x = z_by_lambda_0, y = V_im]
+			{thesis_tlgf.dat};
+        \end{axis}
+        \\
+        \begin{axis}[
+            width = \textwidth,
+            height = 0.25\textwidth,
+            grid = major,
+            xlabel = {$z / \lambda_0$},
+            ylabel = {$I$ in Amp\`ere},
+            xmin = -2,
+            xmax = 4,
+        ]
+            \addplot [color = blue] table [x = z_by_lambda_0, y = I_re]
+			{thesis_tlgf.dat};
+            \addplot [color = red] table [x = z_by_lambda_0, y = I_im]
+			{thesis_tlgf.dat};
+        \end{axis}
+        \\
+        \begin{axis}[
+            width = \textwidth,
+            height = 0.25\textwidth,
+            grid = major,
+            xlabel = {$z / \lambda_0$},
+            ylabel = {$Z / Z_0$},
+            ytick = {-2, -1, 0, 1},
+            xmin = -2,
+            xmax = 4,
+        ]
+            \addplot [color = blue] table [x = z_by_lambda_0, y = Z_rel_re]
+			{thesis_tlgf.dat};
+            \addplot [color = red] table [x = z_by_lambda_0, y = Z_rel_im]
+			{thesis_tlgf.dat};
+        \end{axis}
+        \\
+        };
+    \end{tikzpicture}
+    \caption[]{A TLGF}
+\end{figure}

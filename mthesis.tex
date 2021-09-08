@@ -1,0 +1,93 @@
+\documentclass[
+    fontsize=11pt, %font size
+    paper=a4, %paper format
+    headsepline, %separating line for header
+    chapterprefix, % produce "Chapter ..."
+    numbers=noenddot, % no full-stop after last number
+    listof=totoc, %Entry in table of contents for list of figures/tables
+    bibliography=totoc, %Entry in table of contents for bibliography
+    BCOR=5mm %Binding correction, ensures sufficient space for binding
+]
+{scrbook}
+
+\usepackage{scrbase} %Hilfsfunktionen
+\usepackage{ellipsis, fixltx2e, mparhack, ragged2e} %bugfixing
+\usepackage[l2tabu, orthodox]{nag} %avoid typical LaTeX errors
+\usepackage[english]{babel} %use German and English languages
+\usepackage[T1]{fontenc} %fonts
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc} % Unicode input
+\usepackage[final]{microtype} %microtypography
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{xspace}
+\usepackage[marginclue,langtrack]{fixme} % Fixme und todo-notes
+\usepackage{acro}
+\usepackage{enumitem}
+
+\usepackage{amsmath, amssymb}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{amsfonts}
+\usepackage{isomath}	% for \mathbfit
+\usepackage{esint}		% suface integrals
+\usepackage{mathtools}	% for definition symbol \coloneqq
+\usepackage{upgreek}
+\usepackage{siunitx}
+
+\usepackage{tikz}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\pgfplotsset{table/search path = {./../../numerical_results/}}
+\usepgfplotslibrary{external} 
+% \tikzexternalize[prefix=./figures_externalized/]
+\tikzexternalize[prefix=./external_figures/]
+
+\usepackage[autostyle=true]{csquotes}
+
+\usepackage[]{biblatex}
+\addbibresource{./../My Library.bib}
+
+\usepackage[%
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    breaklinks=true, %% allow links to break across lines
+    % hyperfootnotes=false% incompatible with package footmisc
+]%
+{hyperref}%
+
+% References (must be loaded last, but before theorem defintions, as we need
+% some cleveref commands there!)
+\usepackage[english,capitalise]{cleveref} % After loading hyperref
+
+
+\include{content/macros.tex}
+
+\fxsetup{draft}
+%\fxsetup{final}
+
+\begin{document}
+
+\tableofcontents
+
+\include{content/introduction.tex}
+\include{content/theory.tex}
+\include{content/implementation.tex}
+\include{content/results.tex}
+\include{content/conclusion.tex}
+
+\listoffigures
+\listoftables
+
+\printbibliography[heading=bibintoc]
+
+\listoffixmes
+    
+\end{document}

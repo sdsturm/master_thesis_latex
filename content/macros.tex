@@ -1,0 +1,255 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abbreviations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ie}{i.\,e.\xspace}%
+\newcommand{\eg}{e.\,g.\xspace}%
+\newcommand{\wrt}{w.\,r.\,t.\xspace}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acronyms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareAcronym{CE}{
+    short = CE,
+    long = computational electromagnetics
+    }
+\DeclareAcronym{ODE}{
+    short = ODE,
+    long = ordinary differential equation,
+    short-plural = s,
+    long-plural = s
+    }
+\DeclareAcronym{LSE}{
+    short = LSE,
+    long = linear system of equations,
+    }
+\DeclareAcronym{PDE}{
+    short = PDE,
+    long = partial differential equation
+    }
+\DeclareAcronym{PEC}{
+    short = PEC,
+    long = perfect electric conductor
+    }
+\DeclareAcronym{PMC}{
+    short = PMC,
+    long = perfect magnetic conductor
+    }
+\DeclareAcronym{FMM}{
+    short = FMM,
+    long = fast multipole method
+    }
+\DeclareAcronym{MLFMA}{
+    short = MLFMA,
+    long = multilevel fast multipole algorithm
+    }
+\DeclareAcronym{DCIM}{
+    short = DCIM,
+    long = discrete complex image method
+    }
+\DeclareAcronym{GPOF}{
+    short = GPOF,
+    long = generalized penicl-of-function method
+    }
+\DeclareAcronym{CSB}{
+    short = CSB,
+    long = complex-source beam,
+    short-plural = s,
+    long-plural = s
+    }
+\DeclareAcronym{EIT}{
+    short = EIT,
+    long = exact image theory
+    }
+\DeclareAcronym{MoM}{
+    short = MoM,
+    long = method of moments
+    }
+\DeclareAcronym{FDM}{
+    short = FDM,
+    long = finite difference method,
+    short-plural = s,
+    long-plural = s,
+    }
+\DeclareAcronym{FEM}{
+    short = FEM,
+    long = finite element method,
+    }
+\DeclareAcronym{HD}{
+    short = HD,
+    long = Hertzian dipole,
+    short-plural = s,
+    long-plural = s,
+    }
+\DeclareAcronym{VED}{
+    short = VED,
+    long = vertical electric dipole,
+    short-plural = s,
+    long-plural = s,
+    }
+\DeclareAcronym{HED}{
+    short = HED,
+    long = horizontal electric dipole,
+    short-plural = s,
+    long-plural = s,
+    }
+\DeclareAcronym{VMD}{
+    short = VMD,
+    long = vertical magnetic dipole,
+    short-plural = s,
+    long-plural = s,
+    }
+\DeclareAcronym{HMD}{
+    short = HMD,
+    long = horizontal magnetic dipole,
+    short-plural = s,
+    long-plural = s,
+    }
+\DeclareAcronym{TL}{
+    short = TL,
+    long = transmission line,
+    short-plural = s,
+    long-plural = s,
+    }
+\DeclareAcronym{TLGF}{
+    short = TLGF,
+    long = transmission line Green's function,
+    short-plural = s,
+    long-plural = s,
+    }
+\DeclareAcronym{TM}{
+    short = TM,
+    long = transversally magnetic
+    }
+\DeclareAcronym{TE}{
+    short = TE,
+    long = transversally electric
+    }
+\DeclareAcronym{CG}{
+    short = CG,
+    long = conjugate gradient method
+    }
+\DeclareAcronym{GMRES}{
+    short = GMRES,
+    long = generalized minimal residual algorithm
+    }
+\DeclareAcronym{RWG}{
+    short = RWG,
+    long = Rao Wilton Glisson
+    }
+\DeclareAcronym{SIP}{
+    short = SIP,
+    long = Sommerfeld integration path
+    }
+\DeclareAcronym{EIP}{
+    short = EIP,
+    long = extended integration path
+    }
+\DeclareAcronym{PE}{
+    short = PE,
+    long = partition-extrapolation
+    }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theorem environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+
+\theoremstyle{corollary}
+\newtheorem{corollary}{Corollary}[theorem]
+
+\theoremstyle{lemma}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Own mathematical commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Physical and geometrical vectors
+\newcommand{\pvec}[1]{\mathbfit{#1}}     	% general "physical" vector and vector in frequency domain
+\newcommand{\tdvec}[1]{\bm{\mathfrak{#1}}}	% time domain
+\newcommand{\uv}[1]{\hat{\pvec{#1}}} 		% unit vector
+\newcommand{\dyad}[1]{\overline{\pvec{#1}}}
+\renewcommand{\vec}[1]{\mathsfbfit{#1}} 	% n-dimensional vector
+\newcommand{\mat}[1]{\mathsfbfit{#1}} 		% <n x n> matrix
+
+% Operators
+\newcommand{\op}[1]{\mathcal{#1}} 			% operator that takes a scalar-valued function
+\newcommand{\vecop}[1]{\bm{\mathcal{#1}}} 	% operator that takes a vector-valued function
+\DeclareMathOperator{\laplace}{\Delta}		% scalar Laplacian operator
+\DeclareMathOperator{\laplaceTrans}{\laplace_\mathrm{t}}	% transversal Laplacian operator
+\DeclareMathOperator{\gradient}{\nabla}		% gradient operator
+\DeclareMathOperator{\divergence}{\nabla\cdot}		% divergence operator
+\DeclareMathOperator{\curl}{\nabla\times}			% curl operator
+\newcommand{\abs}[1]{\left\vert#1\right\vert}	% absolute value
+\newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
+\newcommand{\euclideanNorm}[1]{\norm{#1}_2} % Euclidean norm
+\newcommand{\complexLength}[1]{\norm{#1}_\mathrm{c}} % Euclidean norm
+\newcommand{\pd}[2][]{\frac{\partial#1}{\partial#2}} 	% partial derivative (function as an optional argument)
+\newcommand{\nd}[2][]{\frac{\dd#1}{\dd#2}} 	% normal derivative (function as an optional argument)
+\newcommand{\pdsec}[1]{\frac{\partial^2}{\partial {#1}^2}}	% 2nd partial derivative
+\newcommand{\pdsecmixed}[2]{\frac{\partial^2}{\partial {#1} \partial {#2}}}	% 2nd mixed partial derivative
+\newcommand{\landau}[1]{\mathcal{O} \left( #1 \right)}
+\newcommand{\cmplxlength}[1]{\abs{#1}_\mathrm{c}}
+\newcommand{\sommerfeldIntegral}[2]{\mathcal{S}_{#1} \left\{#2\right\}}
+
+% Misc
+\newcommand{\e}{\mathrm{e}}					% Euler's number
+\renewcommand{\exp}[1]{\e^{#1}\,}			% exponential function
+\renewcommand{\pi}{\uppi}
+\newcommand{\dd}{\mathrm{d}}  				% the differential symbol is actually an operator
+\DeclareMathOperator{\const}{const.}
+
+% Complex numbers
+\newcommand{\im}{\mathrm{j}}
+%\renewcommand{\Re}{\mathrm{Re}\;}
+%\renewcommand{\Im}{\mathrm{Im}\;}
+\newcommand{\real}[1]{\Re\mathrm{e}\left(#1\right)}
+\newcommand{\imag}[1]{\Im\mathrm{m}\left(#1\right)}
+
+% Blackboard font: for special sets of numbers
+\newcommand{\C}{\mathbb{C}}	% complex numbers
+\newcommand{\R}{\mathbb{R}}	% real numbers
+\newcommand{\N}{\mathbb{N}}	% natural numbers
+\newcommand{\Z}{\mathbb{Z}}	% integers
+\newcommand{\F}{\mathbb{F}}	% a general field
+
+% Special functions
+\DeclareMathOperator{\diracDelta}{\updelta}
+\newcommand{\besselj}[1]{\operatorname{J}_{#1}}
+\newcommand{\sphbesselj}[1]{\operatorname{j}_{#1}}
+\newcommand{\besselh}[2]{\operatorname{H}_{#2}^{\left( #1 \right)}}
+\newcommand{\sphbesselh}[2]{\operatorname{h}_{#2}^{\left( #1 \right)}}
+\newcommand{\legendrepl}[1]{\operatorname{P}_{#1}}
+
+% Custom commands for this thesis
+\newcommand{\robs}{\pvec{r}}
+\newcommand{\rsrc}{\pvec{r}^\prime}
+\newcommand{\rdiff}{\robs-\rsrc}
+\newcommand{\rdiffabs}{\abs{\rdiff}}
+\newcommand{\ewaldintegral}{\oiint\limits_{S^2} \dd^2 \uv{k} \, }
+\newcommand{\te}{\mathrm{TE}}
+\newcommand{\tm}{\mathrm{TM}}
+\newcommand{\tx}{\mathrm{TX}}
+\newcommand{\isrc}{\mathrm{i}}
+\newcommand{\vsrc}{\mathrm{v}}
+
+\newcommand{\epsr}[1][]{\varepsilon_{\mathrm{r}#1}} 	% relative permittivity (layer index as an optional argument)
+\newcommand{\mur}[1][]{\mu_{\mathrm{r}#1}} 	% relative permeability (layer index as an optional argument)
+
+% FMM definitions
+\newcommand{\fmmDiffGroupCenters}{\pvec{t}_{m,m^\prime}}
+\newcommand{\fmmGroupCenter}[1]{\pvec{c}_{#1}}
+\newcommand{\fmmSrcGroupCenter}{\pvec{c}_{m^\prime}}
+\newcommand{\fmmObsGroupCenter}{\pvec{c}_{m}}
+\newcommand{\fmmMultiIndex}{\vec{m}}
+

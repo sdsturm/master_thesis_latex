@@ -1,0 +1,106 @@
+\chapter{Implementation and Numerical Results}
+
+All results are computed using \texttt{double} precision floating point numbers.
+
+Throughout this chapter relative errors are computed according to
+\begin{definition}[Relative error]
+    Let $x_\mathrm{r} \neq 0$ be a reference value.
+    Then the \emph{relative error} of a result $x_\mathrm{n}$ with respect to
+    $x_\mathrm{r}$ is defined by 
+    \begin{equation}
+        \epsilon \left( x_\mathrm{n} \right) \coloneqq
+        20 \log_{10} \abs{\frac{x_\mathrm{n} - x_\mathrm{r}}{x_\mathrm{r}}}
+        \SI{}{\decibel}\, .
+    \end{equation}
+\end{definition}
+
+\section{Numerical Integration of Sommerfeld Integrals}
+
+\cite{Michalski2016a}
+
+Asymptotic behavior \cite{Michalski1998}
+\begin{equation}
+    \tilde{g}\left(\xi\right)
+    \propto \frac{\exp{-\zeta \xi}}{\xi^\alpha}
+    \left(C + \mathcal{O}\left(\xi^{-1}\right)\right)
+\end{equation}
+
+For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
+
+\begin{figure}
+    \centering
+
+    \begin{subfigure}[t]{0.47\textwidth}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\textwidth,% subfigure textwidth
+            colormap/jet,
+            colorbar horizontal,
+            colorbar style = {xlabel = {Relative error in $\SI{}{\decibel}$}},
+            unbounded coords = jump,
+            xlabel = {$\rho / \lambda_0$},
+            ylabel = {$z / \lambda_0$},
+            xmode = log,
+            ymode = log,
+            view = {0}{90},
+            xtick align=outside,
+            ytick align=outside,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = rel_err_db,
+                ]
+                {thesis_numerical_integration_sommerfeld_identity.dat};
+        \end{axis}
+    \end{tikzpicture}
+    \label{fig:production_num_int_sommerfeld_identity:sub1}
+    \caption{Relative error. The maximum error is $\SI{-134.42}{\decibel}$.
+    At the missing points numerical integration is exact down to machine
+    precision.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.47\textwidth}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\textwidth,% subfigure textwidth
+            colormap/jet,
+            unbounded coords = jump,
+            colorbar horizontal,
+            colorbar style = {
+                xlabel = {Relative execution time},
+                xticklabel = {$10^{\pgfmathprintnumber{\tick}}$},
+                },
+            xlabel = {$\rho / \lambda_0$},
+            ylabel = {$z / \lambda_0$},
+            xmode = log,
+            ymode = log,
+            view = {0}{90},
+            xtick align=outside,
+            ytick align=outside,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table [
+                    x = x_by_lambda_0, y = z_by_lambda_0, z expr=log10(\thisrow{rel_time}),
+                ]
+                {thesis_numerical_integration_sommerfeld_identity.dat};
+        \end{axis}
+    \end{tikzpicture}
+    \label{fig:production_num_int_sommerfeld_identity:sub2}
+    \caption{Execution time relative to the point with the fastest execution.
+    A total of $\num[]{50}$ evaluations of the Sommerfeld integral are timed
+    at each point $\left(\rho,z\right)$.}
+    \end{subfigure}
+
+    \caption[Numerical evaluation of the Sommerfeld identity integral]
+    {Numerical evaluation of the Sommerfeld identity integral for a source at
+    the origin for $10^{-1} \leq a / \lambda_0 \leq 10^{3}$ where
+    $a \in \left\{ \rho, z \right\}$.}
+\end{figure}
+
+\section{Discrete Complex Image Method}
+
+\section{Fast Multipole Method With Complex Image Sources}
