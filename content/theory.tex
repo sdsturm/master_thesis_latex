@@ -18,9 +18,72 @@ textbook by \textcite{vanBladel2007}.
 In particular, vectors in $\R^3$ which possess a physical meaning are denoted in
 bold and italic serif font, \eg, the position vector $\pvec{r}$.
 Source points are marked by a prime, observation points are unprimed.
-The representation $\uv{x}x + \uv{y}y + \uv{z}z$ of a vector $\pvec{r} \in \R^3$
-in Cartesian coordinates relates to the common curvilinear systems according to
-the following two definition.
+
+Entities with reference to linear algebra, \ie, matrices and vectors are denoted
+in bold, italic and sans-serif font. Matrices, \eg, $\mat{A}$, are distinguished
+from column vectors, \eg, $\vec{v}$, by the use of upper and lower case symbols,
+respectively.
+
+The notation of special functions and related symbols is in accordance to the
+NIST Handbook of Mathematical Functions \cite{Olver2010}.
+
+
+
+
+
+\subsection{Basic Definitions and Terms}
+
+The following discussions will deal with vectors in various forms therefore
+it is adequate to be precise about
+\begin{definition}[Vector space {\cite[p.~73]{heuser2006}}]
+	Let $\F$ be a field (in particular $\F = \R,\C$). A \emph{vector space
+	over} $\F$ (or $\F$-vector space) is a nonempty set $\mathcal{V}$, whose
+	elements are called \emph{vectors} and in which the following two operations
+	are defined:
+	\begin{enumerate}
+		\item Addition: To every pair of vectors $x, y \in \mathcal{V}$ there
+		corresponds a vector $x + y$, in a way such that
+		\begin{enumerate}[label=(\alph*)]
+			\item $x + y = y + x$
+			\item $x + \left(y + z\right) = \left(x + y\right) + z$
+			\item $\mathcal{V}$ contains a unique \emph{zero vector} $0$ such
+			that $x + 0 = x \forall x \in \mathcal{V}$
+			\item To each $x \in \mathcal{V}$ there exists a unique
+			$-x \in \mathcal{V}$ such that $x + \left(-x\right) = 0$
+		\end{enumerate}
+		\item Scalar multiplication: To every pair $(a, x)$ of a scalar
+		$\alpha \in \F$ and a vector $x \in \mathcal{V}$ there corresponds a
+		vector $\alpha x \in \mathcal{V}$, in such a way that
+		\begin{enumerate}[label=(\alph*), start = 5]
+			\item $\alpha \left(\beta\right) = \left(\alpha \beta\right) x$ for
+			all $\beta \in \F$ 
+			\item $1 x = x$
+		\end{enumerate}
+		These operations satisfy the distributive laws
+		\begin{enumerate}[label=(\alph*), start = 7]
+			\item $\alpha \left(x + y\right) = \alpha x + \alpha y$
+			\item $\left(\alpha + \beta\right) x = \alpha x + \beta x$.
+		\end{enumerate}
+	\end{enumerate}
+\end{definition}
+
+In the geometrical context we have to express vectors by means of coordinates
+and basis vectors in order to perform actual computations.
+The definition of the three major orthonormal coordinate systems in which a
+vector $\pvec{r} \in \R^3$ can be represented shall be based on 
+\begin{definition}[Cartesian coordinate system]
+	Let $\pvec{r}$ be an arbitrary vector in $\R$ and let that the
+	basis vectors $\left\{\uv{x}, \uv{y}, \uv{z}\right\}$ be orthonormal and
+	constant for all $\pvec{r} \in \R^3$.
+	Then the representation of $\pvec{r}$ in the \emph{Cartesian coordinate
+	system} is given by
+	\begin{equation}
+		\pvec{r} = \uv{x}x + \uv{y}y + \uv{z},
+	\end{equation}
+\end{definition}
+The representation of a vector $\pvec{r} \in \R^3$ in Cartesian coordinates
+relates to the common curvilinear systems according to the following two
+definition.
 \begin{definition}[Cylindrical coordinate system]
 	\label{def:cyl_coords}
 	Let a vector in $\R^3$ be given in Cartesian coordinates and unit vectors
@@ -101,26 +164,99 @@ the following two definition.
 	\end{subequations}
 \end{definition}
 
-Entities with reference to linear algebra, \ie, matrices and vectors are denoted
-in bold, italic and sans-serif font. Matrices, \eg, $\mat{A}$, are distinguished
-from vectors, \eg, $\vec{v}$, by the use of upper and lower case symbols,
-respectively.
+The notion of a \emph{distance} is familiar in Euclidean geometry,
+\ie, in $\R2$ and
+$\R3$.
+As the term must be extended to complex space in the following, it shall be
+pointed out that the usual concept of distance relies on
+\begin{definition}[Metric and metric space]\label{def:metric}
+	Let $\mathcal{X}$ be a set. A non-negative function
+	$d: \mathcal{X} \times \mathcal{X} \mapsto \R$ is called a \emph{metric}
+	on $\mathcal{X}$ if it fulfills the following four properties.
+	\begin{enumerate}[label=(\alph*)]
+		\item $0 \le d\left(x_1, x_2\right) < 0$ for all
+		$x_1, x_2 \in \mathcal{X}$
+		\item $d\left(x_1, x_2\right) = 0$ if and only if $x_1 = x_2$
+		\item $d\left(x_1, x_2\right) = d\left(x_2, x_1\right)$ for all
+		$x_1, x_2 \in \mathcal{X}$
+		\item $d\left(x_1, x_3\right) \le d\left(x_1, x_2\right) + d\left(x_2, x_3\right)$
+		for all $x_1, x_2, x_3 \in \mathcal{X}$
+	\end{enumerate}
+	A set $\mathcal{X}$ together with a metric $d$ defined on $\mathcal{X}$ is
+	called a \emph{metric space} and denoted by $\left(\mathcal{X}, d\right)$.
+\end{definition}
 
-The notation of special functions and related symbols is in accordance to the
-NIST Handbook of Mathematical Functions \cite{Olver2010}.
+From a geometrical point of view the term distance is closely related to
+\emph{length}.
+Usual axioms regarding length are that a length should be real and non-negative.
+These perceptions are predicated on
+\begin{definition}[Norm and normed space]\label{def:norm}
+	Let $\mathcal{V}$ be a $\F$-vector space.
+	A non-negative real-valued functional $x \mapsto \left\Vert x \right\Vert$
+	from $\mathcal{V}$ into $\R$ is called a \emph{norm} if
+	\begin{enumerate}[label=(\alph*)]
+		\item $\norm{x} = 0 \Leftrightarrow x = 0$ 
+		\item $\norm{\alpha x} = \abs{\alpha} \norm{x}$ for every
+		$x \in \mathcal{V}$ and $\alpha \in \F$
+		\item $\norm{x_1 + x_2} \le \norm{x_1} + \norm{x_2}$ for every
+		$x_1, x_2 \in \mathcal{V}$.
+	\end{enumerate}
+	A $\F$-vector space $\mathcal{V}$ together with a norm
+	$\left\Vert . \right\Vert$ is called a \emph{normed space} and denoted by
+	$\left( \mathcal{V}, \left\Vert . \right\Vert \right)$.
+\end{definition}
+
+As it is well known \cite{heuser2006}, vector spaces obtain a set of
+mathematically advantageous properties if a metric and a norm can be defined on
+them.
+The essentially beneficial properties of a Hilbert space become available if,
+in addition, an inner product can be defined.
+A valid inner product for the Euclidean space is given by
+\begin{definition}[Dot product]\label{def:dot_product}
+	Let $\C^N$ be a finite-dimensional vector space and
+	$\pvec{a}, \pvec{b} \in \C^N$.
+	Assume that the coordinates of $\pvec{a}$ and $\pvec{b}$ are given in
+	the Cartesian representation.
+	Then the \emph{dot product}
+	is defined as 
+	\begin{equation}
+		\pvec{a} \cdot \pvec{b} = \sum\limits_{n = 1}^{N} a_n \bar{b}_n \, ,
+	\end{equation}
+	where $\bar{b}_n$ denotes the complex conjugate of $b$.
+\end{definition}
+
+With \cref{def:dot_product} we also obtain a way to actually compute length
+and distance according to the following two definitions.
+\begin{definition}[Euclidean norm]\label{def:euclidean_norm}
+	Let $\pvec{r} \in \C^3$ arbitrary. Then the \emph{Euclidean norm} of
+	$\pvec{r}$ is defined as
+	\begin{equation}
+		r = \euclideanNorm{\pvec{r}} = \sqrt{\pvec{r} \cdot \pvec{r}} \, .
+	\end{equation}
+\end{definition}
+\begin{definition}[Euclidean metric]\label{def:euclidean_metric}
+	Let $\pvec{r}_1, \pvec{r}_2 \in \C^3$ arbitrary. Then the \emph{Euclidean
+	metric} is defined as
+	\begin{equation}
+		d_E\left(\pvec{r}_1 , \pvec{r}_2\right) = 
+		\sqrt{
+			\left(\pvec{r}_1 - \pvec{r}_2\right)
+			\cdot
+			\left(\pvec{r}_1 - \pvec{r}_2\right)
+		} \, .
+	\end{equation}
+\end{definition}
 
 
 
 
 
-
-
-\subsection{Fourier transform}
+\subsection{Fourier Transforms}
 
 Although large portions of the study of electromagnetism heavily rely on the
 decomposition of functions into---as well as on the composition of functions
-from---spectra of frequencies, no specific definition of the Fourier transform
-prevails throughout the field.
+from---spectra of different frequencies, no specific definition of the Fourier
+transform prevails throughout the field.
 For the ubiquitous Fourier transform with respect to time the present thesis
 uses
 \begin{definition}[Fourier transform with respect to time]
@@ -137,7 +273,7 @@ uses
 		\qquad \omega \in \R
 		\, ,
 	\end{equation}
-	where $\omega$ is called \emph{angular frequency}.
+	where $\omega$ is a parameter called \emph{angular frequency}.
 \end{definition}
 Provided a transformed function possesses certain well-known properties
 \cite{heuser2006, strichartz2003}, an inverse transform to
@@ -164,31 +300,32 @@ given by
 	If the pair of transforms formed by
 	\eqref{eq:fourier_transfrom_temporal_forward} and
 	\eqref{eq:fourier_transform_temporal_backward} is applied to \acp{ODE}
-	or \acp{PDE} with respect to time, then
+	or \acp{PDE} containing a differentiation with respect to time, then
 	\cref{def:fourier_transfrom_temporal_forward} is equivalent to the
-	assumption of the $\exp{\im \omega t}$ time convention for all
-	time-dependent quantities in $\omega$-spectral domain.
-	Within the course of the present thesis expressions taken from the
-	literature are adapted to the $\exp{\im \omega t}$ convention\footnote{
-		Some major references to the present thesis, \eg, the ones by
-		Sommerfeld, use the $\exp{-\mathrm{i} \omega t}$ time convention.
-		The conversion to $\exp{\im \omega t}$ is done by the formal replaced
-		$\mathrm{i} \to -\im$. In addition, the kinds of Hankel functions, \ie,
-		of propagating cylindrical or spherical waves, must be changed.
-	}.
+	assumption a time dependency $\propto\exp{\im \omega t}$ for all
+	functions of time in $\omega$-spectral domain\footnote{Within the course of
+	the present thesis expressions taken from the literature are adapted to the
+	$\exp{\im \omega t}$ convention. Some of these, \eg, the work of
+	Sommerfeld, originally use the alternative $\exp{-\mathrm{i} \omega t}$
+	time convention.
+	The conversion to $\exp{\im \omega t}$ is done by the formal substitution
+	$\mathrm{i} \to -\im$. In addition, the kinds of Hankel functions, \ie,
+	of propagating cylindrical or spherical waves, must be changed.}.
 \end{remark}
 
 Formally, the extension of the concept of Fourier transforms to higher
-dimensions is straightforward.
+dimensions is straightforward, as the scalars $t$ and $\omega$ simply become
+vectors and their product is replaced by the dot product.
 However, one has to take into account some physical reasoning in order to
-combine the Fourier transform in with respect to time with a spatial transform.
-According tho this, the spatial counterpart to
+combine the Fourier transform in with respect to time with corresponding spatial
+transforms.
+Namely, the spatial counterpart to
 \cref{def:fourier_transfrom_temporal_forward} must be defined in the particular
 way of
 \begin{definition}[Fourier transform with respect to space]
 	\label{def:fourier_transfrom_spatial_forward}
 	Let $f: \R^3 \mapsto \C$ be a function of a variable $\pvec{r} \in \R^3$
-	which shall be called \emph{position} and $\pvec{k} \in \C^3$.
+	which shall be called \emph{position} and assume $\pvec{k} \in \C^3$.
 	The \emph{Fourier transform with respect to space} is defined as
 	\begin{equation}\label{eq:fourier_transform_3space_forward}
 		\fourierTransformForward{f \left( \pvec{r} \right)} = 
@@ -211,7 +348,7 @@ The inverse transform to \eqref{eq:fourier_transform_3space_forward} becomes
 \end{equation}
 Based on \cref{def:fourier_transfrom_temporal_forward} and
 \cref{def:fourier_transfrom_spatial_forward} the combined four-dimensional pair
-of transforms, consisting of
+of transforms
 \begin{equation}\label{eq:fourier_transform_4d_forward}
 	\tilde{f} \left( \pvec{k}, \omega \right) = 
 	\fourierTransformForward{ f \left(\pvec{r}, t\right) } =
@@ -224,23 +361,22 @@ and
 \begin{equation}\label{eq:fourier_transform_4d_inverse}
 	\fourierTransformBackward{ \tilde{f} \left(\pvec{k}, \omega\right) } = 
 	f \left( \robs, t \right) = 
-	\frac{1}{\left(4\pi\right)^4}
+	\frac{1}{\left(2\pi\right)^4}
 	\iiint\limits_{\R^3} \dd \pvec{k}
 	\int\limits_{-\infty}^{\infty} \dd \omega \,
 	\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}
 	\tilde{f} \left( \pvec{k}, \omega \right)
-	\, ,
 \end{equation}
-is obtained.
-Note that the sense of rotation of the kernel phasors is just opposite in the
-pair of spatial transforms than it is in the temporal pair.
+can be constructed.
+Note that the sense of rotation of the kernel phasors is opposing in the
+temporal and the spatial parts.
 
 A physical interpretation of \eqref{eq:fourier_transform_4d_inverse} is,
 that an arbitrary field $f \left( \robs, t \right)$ can be decomposed 
 into an infinite number of \emph{plane waves}---expressed by the
 $\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}$ terms---where
 the expansion coefficients are given by \eqref{eq:fourier_transform_4d_forward}.
-Clearly, the kernel of \eqref{eq:fourier_transform_4d_inverse} fulfills
+Each one of these individual plane waves solves
 the homogeneous scalar wave equation \cite[p.~480]{Griffiths2011}
 \begin{equation}\label{eq:scalar_wave_equation_physical_domain}
 	\left( \laplace - \frac{1}{c^2} \frac{\partial^2}{\partial t^2} \right)	
@@ -257,7 +393,7 @@ The reason why the phasor convention of
 \cref{def:fourier_transfrom_spatial_forward} is the physically reasonable choice
 under the $\exp{\im \omega t}$ time convention
 can be seen if we assume $\pvec{r} = \uv{x} x$ and $\pvec{k} = \uv{x} k_x$
-with $k_x \in \R$ and $k_x > 0$, \ie, a lossless right-handed medium.
+with $x, k_x \in \R$ and $k_x > 0$, \ie, a lossless right-handed medium.
 Then $\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}$ describes
 a plane wave whose wave fronts propagate \emph{forward}, \ie, in positive
 $x$-direction, as time evolves.
@@ -288,234 +424,255 @@ continuum \cite[pp.~624]{Jackson2013}\cite{Kaiser2016}.
 
 
 
-\subsection{Hankel transform and Sommerfeld integrals}
+\subsection{Hankel Transform}
 
 Planar Fourier-type expansion integrals play a predominant role in the study
 of wave fields in solution domains with are inhomogeneous only in one
 Cartesian direction.
-We shall assume this direction to be the one of $\uv{z}$.
-Doing so, the expansion plane becomes the $xy$ plane of the
+Assume this direction to be the one of $\uv{z}$.
+By this choice the expansion plane becomes the plane $z \equiv 0$ of the
 Cartesian coordinate system.
 Under these assumptions \eqref{eq:fourier_transform_3space_forward}
 and \eqref{eq:fourier_transform_3space_backward} reduce to the pair
 \begin{equation}\label{eq:fourier_transform_2space_forward}
-	\tilde{f} \left( \pvec{k}_\rho, z\right) = 
-	\iint\limits_{\R^2} \dd \pvec{\rho} \,
-	\exp{\im \pvec{k}_\rho \cdot \pvec{\rho}}
-	f \left( \pvec{r} \right)
+	\tilde{f} \left(k_\rho, k_\varphi, z\right) = 
+	\int\limits_{0}^{\infty} \dd \rho \, \rho
+	\int\limits_{0}^{2\pi} \dd \varphi \, 
+	\exp{\im k_\rho \rho \cos \left(k_\varphi - \varphi\right)}
+	f \left(\rho, \varphi, z\right)
 \end{equation}
 and
 \begin{equation}\label{eq:fourier_transform_2space_backward}
-	f \left( \pvec{r} \right)  =
-	\frac{1}{\left( 2\pi \right)^2}
-	\iint\limits_{\R^2} \dd \pvec{k}_\rho \,
-	\exp{-\im \pvec{k}_\rho \cdot \pvec{\rho}}
-	\tilde{f} \left( \pvec{k}_\rho, z \right)
+	f \left(\rho, \varphi, z\right) = 
+	\frac{1}{\left(2\pi\right)^2}
+	\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+	\int\limits_{0}^{2\pi} \dd k_\varphi \, 
+	\exp{-\im k_\rho \rho \cos \left(k_\varphi - \varphi\right)}
+	\tilde{f} \left(k_\rho, k_\varphi, z\right)
 	\, ,
 \end{equation}
-where $\pvec{\rho} = \uv{x}x + \uv{y}y$ and
-$\pvec{k}_\rho = \uv{x}k_x + \uv{y}k_y$ are the respective components of
-$\pvec{r}$ and $\pvec{k}$ transverse to $\uv{z}$.
-Note that $z = \uv{z} \cdot \pvec{r}$ is unaffected by
-\eqref{eq:fourier_transform_2space_forward} so it is sufficient to consider only
-$f = f\left(\pvec{\rho}\right)$.
+where the geometrical meaning of the dot product is incorporated.
+Note that $z = \uv{z} \cdot \pvec{r}$ is unaffected by the integral in
+\eqref{eq:fourier_transform_2space_forward}.
+It is therefore sufficient to consider only $f = f\left(\rho, \varphi\right)$
+and $\tilde{f} \left(k_\rho, k_\varphi\right)$, \ie, to use planar polar
+coordinates.
 
-We shall further assume that both functions $f$ and $\tilde{f}$ possess---or
+Assume further that both functions $f$ and $\tilde{f}$ possess---or
 can be coordinate-transformed to obtain---azimuthal symmetry, \ie, the
 functions do not depend on the coordinate $\varphi$ in \cref{def:cyl_coords}.
-
 For such functions of azimuthal symmetry the 2D integrals in 
+
+Under certain conditions the two-dimensional integrals in
 \eqref{eq:fourier_transform_2space_forward} and 
-\eqref{eq:fourier_transform_2space_backward} can be reduced to
-integrals over the radial coordinate only.
-The resulting integral transforms are referred to as Hankel
-transforms or, synonymously, Fourier-Bessel transforms in mathematical
-context \cite[pp.~227]{Davies2002} \cite[p.~1086]{vanBladel2007}.
-Since the Hankel transform is essentially a special case of a two-dimensional
+\eqref{eq:fourier_transform_2space_backward} can be reduced to integral
+transforms with cylinder function kernels and integration only over one
+variable.
+Such transforms are referred to as Hankel transforms or, synonymously,
+Fourier-Bessel transforms in mathematical context.
+As the Hankel transform is essentially a special case of a two-dimensional
 Fourier transform, the specific shape of the former depends on the choice of
-definition of the latter.
+definition of the latter, \ie, on \cref{def:fourier_transfrom_temporal_forward}.
+
+The following result gives the Hankel transform as it is obtained on the
+basis of \cref{def:fourier_transfrom_temporal_forward} and
+\cref{def:fourier_transfrom_spatial_forward} as well as a proof for this
+connection\footnote{The proof treats the derivation of the inverse Hankel
+transform. A corresponding approach for the forward transform can be found
+in the book by \textcite[pp.~229]{Davies2002}}.
+Details regarding the function spaces on which the Hankel transform pair is
+defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 
 \begin{corollary}[Hankel transform and inverse Hankel transform]
 	\label{coll:hankel_transform}
-	Let $f: \R^3 \mapsto \C$ be a function of azimuthal symmetry
-	$f = f\left(\rho\right)$ and assume the integral 
-	\eqref{eq:fourier_transform_2space_forward} exists for $f$.
-	Then the Hankel transform $\tilde{f}_\nu$ of order $\nu \geq -1/2$
-	is given by
+	The Hankel transform of order $\nu$ of a function $f\left(\rho\right)$ is
+	given by
 	\begin{equation}\label{eq:hankel_transform_forward}
 		\tilde{f}_\nu\left(k_\rho\right) =
 		2\pi
-		\int\limits_{0}^{\infty} \dd \rho \,
-		\besselj{\nu}\left(k_\rho \rho\right) \rho
-		f\left(\rho\right) \, .
+		\int\limits_{0}^{\infty} \dd \rho \, \rho
+		\besselj{\nu}\left(k_\rho \rho\right)
+		f\left(\rho\right) \, ,
 	\end{equation}
+	where $\besselj{\nu}$ is the cylindrical Bessel function of first kind and
+	of order $\nu$.
 	The inverse Hankel transform is given by
 	\begin{equation}\label{eq:hankel_transform_inverse}
 		f\left(\rho\right) =
 		\frac{1}{2\pi}
-		\int\limits_{0}^{\infty} \dd k_\rho \,
-		\besselj{\nu}\left(k_\rho \rho\right) k_\rho
+		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+		\besselj{\nu}\left(k_\rho \rho\right)
 		\tilde{f}_\nu\left(k_\rho\right) \, .
 	\end{equation}
 \end{corollary}
 \begin{proof}
-	Express both $f$ and $\tilde{f}$ in planer polar coordinates, \ie,
-	\begin{equation}
-		f \left(\pvec{\rho}\right) = f \left(\rho, \varphi\right)
-		\, ,
-	\end{equation}
-	\begin{equation}
-		\tilde{f} \left(\pvec{k}_\rho\right)  =
-		\tilde{f} \left(k_\rho, k_\varphi\right)
-		\, .
-	\end{equation}
-	Employing their $2\pi$-periodicity in $\varphi$ and $k_\varphi$, both
-	functions can be expanded into Fourier series representations
-	\begin{equation}\label{eq:hankel_proof_00}
+	Consider both $f = \left(\rho, \varphi\right)$ and
+	$\tilde{f} \left(k_\rho, k_\varphi\right)$ in planer polar coordinates.
+	With this, both functions are periodic with $2\pi$ in $\varphi$ and
+	$k_\varphi$, respectively.
+	Therefore, they can be expressed by Fourier series expansions
+	\begin{equation}\label{eq:ht_proof_f_fourier_series}
 		f \left(\rho,\varphi\right) =
-		\sum_{m \in \Z} f_m \left(\rho\right) \exp{\im m \varphi}
+		\sum_{\forall m \in \Z}
+		f_m \left(\rho\right)
+		\exp{\im m \varphi}
 	\end{equation}
 	and
-	\begin{equation}
+	\begin{equation}\label{eq:ht_proof_f_tilde_fourier_series}
 		\tilde{f} \left(k_\rho, k_\varphi\right) = 
-		\sum_{n \in \Z} \tilde{f}_n \left(k_\rho\right) \exp{\im n k_\varphi}
+		\sum_{\forall n \in \Z}
+		\tilde{f}_n \left(k_\rho\right)
+		\exp{\im n k_\varphi}
 		\, ,
 	\end{equation}
-	respectively, where the expansion coefficients are determined by
-	\begin{equation}
+	in these arguments, where the expansion coefficients are determined by
+	\begin{equation}\label{eq:ht_proof_f_fourier_coeffs}
 		f_m\left(\rho\right) = \frac{1}{2\pi}
 		\int\limits_{0}^{2\pi} \dd \varphi \,
-		f \left(\rho, \varphi\right) \exp{-\im m \varphi}
+		\exp{-\im m \varphi}
+		f \left(\rho, \varphi\right)
 	\end{equation}
 	and
-	\begin{equation}\label{eq:proof_hankel_01}
+	\begin{equation}\label{eq:ht_proof_f_tilde_fourier_coeffs}
 		\tilde{f}_n \left(k_\rho\right) = \frac{1}{2\pi}
 		\int\limits_{0}^{2\pi} \dd k_\varphi \,
-		\tilde{f} \left(k_\rho, k_\varphi\right) \exp{-\im n k_\varphi}
-		\, .
-	\end{equation}
-	The 2D planar integral in \eqref{eq:fourier_transform_2space_forward}
-	can be written as
-	\eqref{eq:fourier_transform_2space_forward}
-	\begin{equation}\label{eq:hankel_proof_02}
-	\tilde{f} \left( k_\rho, k_\varphi \right) = 
-	\int\limits_{0}^{\infty} \dd \rho \, \rho
-	\int\limits_{0}^{2\pi} \dd \varphi \,
-	\exp{\im k_\rho \rho \cos \left(\varphi - k_\varphi\right)}
-	f \left( \rho, \varphi \right)
-	\, .
-	\end{equation}
-	Upon substituting \eqref{eq:hankel_proof_02} into \eqref{eq:proof_hankel_01}
-	and using \eqref{eq:hankel_proof_00} to represent
-	$f \left(\rho,\varphi\right)$ we obtain
-	\begin{equation}\label{eq:hankel_proof_03}
-		\tilde{f}_n \left(k_\rho\right)  = \frac{1}{2\pi}
-		\int\limits_{0}^{2\pi} \dd k_\varphi
 		\exp{-\im n k_\varphi}
-		\int\limits_{0}^{\infty} \dd \rho \, \rho
-		\int\limits_{0}^{2\pi} \dd \varphi
-		\exp{\im k_\rho \rho \cos \left(\varphi - k_\varphi\right)}
-		\sum_{m \in \Z} f_m \left(\rho\right) \exp{\im m \varphi}
-		\, .
-	\end{equation}
-	Due to the orthogonality of the exponential functions all terms ob the sum
-	but the $n$-th vanish and \eqref{eq:hankel_proof_02} is reduced to
-	\begin{equation}
-		\tilde{f}_n \left(k_\rho\right)  = 
-		\int\limits_{0}^{\infty} \dd \rho \,
-		\rho f_m \left(\rho\right)
-		\int\limits_{0}^{2\pi} \dd \alpha \,
-		\exp{\im \left(n \alpha + k_\rho \rho \cos \alpha\right)}
+		\tilde{f} \left(k_\rho, k_\varphi\right)
 		\, ,
 	\end{equation}
-	where $\alpha \coloneqq \varphi - k_\varphi$ is used. Finally, the
-	integral representation of the Bessel function $\besselj{n}$
-	\cite[(10.9.2)]{Olver2010} can be used to obtain
-	\eqref{eq:hankel_transform_forward}. The inverse transform
-	\eqref{eq:hankel_transform_inverse} can be derived analogously.
-\end{proof}
-
-\fxnote{Explain what the procedure of the proof means}
-
-In the electromagnetic context---in Arnold Sommerfeld's honor---integrals of
-the form of \eqref{eq:hankel_transform_inverse} are predominantly referred to
-as \emph{Sommerfeld integrals} \cite{Sommerfeld1909, Mosig2021}.
-However, in this context only inverse Hankel transforms of orders
-$\nu \in \left\{0, 1, 2\right\}$ occur\footnote{Transforms of order $\nu = 2$
-can, in fact, be expressed by ones of orders $\nu = 0$ and $\nu = 1$ in
-electromagnetic problems \cite{Michalski2005}.}
-
-It therefore is adequate to introduce a special symbol for Sommerfeld integrals.
-\begin{definition}[Sommerfeld integrals]	
-	Inverse Hankel transforms for orders $\nu \in \left\{0, 1, 2\right\}$
-	are called \emph{Sommerfeld integrals} and are denoted by
-	\begin{equation}\label{eq:si_sommerfeld_integration_path}
-		\sommerfeldIntegral{\nu}{\tilde{f} \left( k_\rho \right)} \coloneqq 
-		\frac{1}{2\pi}
+	respectively.
+	The inverse transform \eqref{eq:hankel_transform_inverse} shall be derived
+	first.
+	To do so, \eqref{eq:fourier_transform_2space_backward} is substituted into
+	\eqref{eq:ht_proof_f_fourier_coeffs} to obtain
+	\begin{equation}\label{eq:ht_proof_triple_integral}
+		f_m \left(\rho\right)  =
+		\frac{1}{\left(2\pi\right)^3}
+		\int\limits_{0}^{2\pi} \dd \varphi
+		\exp{-\im m \varphi}
 		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
-		\besselj{\nu}\left(k_\rho \rho\right) 
-		\tilde{f} \left(k_\rho\right) 
+		\int\limits_{0}^{2\pi} \dd k_\varphi \, 
+		\exp{-\im k_\rho \rho \cos \left(k_\varphi - \varphi\right)}
+		\sum_{\forall n \in \Z}
+		\tilde{f}_n \left(k_\rho\right) \exp{\im n k_\varphi}
+		\, ,
+	\end{equation}
+	where $\tilde{f}$ is expressed by its Fourier series representation
+	\eqref{eq:ht_proof_f_tilde_fourier_series}.
+	Defining $\alpha \coloneqq k_\varphi - \varphi$ allows to express the
+	two exponentials of $-\im m \varphi$ and $\im n k_\varphi$ as functions
+	of the same variable.
+	The orthogonality relations for trigonometric functions reveal that
+	all terms but the one for $m = n$ in the sum in
+	\eqref{eq:ht_proof_triple_integral} vanish.
+	Hence, \eqref{eq:ht_proof_triple_integral} is essentially
+	\begin{equation}\label{eq:ht_proof_after_orthogonality}
+		f_m \left(\rho\right) = 
+		\frac{1}{\left(2\pi\right)^2}
+		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+		\int\limits_{0}^{2\pi} \dd \alpha \,
+		\exp{-\im k_\rho \rho \cos \alpha}
+		\exp{\im m \alpha}
+		\tilde{f}_m \left(k_\rho\right)
 		\, .
 	\end{equation}
-	The particular path of integration along the positive real axis is called
-	\emph{\acf{SIP}}.
-\end{definition}
-
-Much of Sommerfeld's original considerations \cite{Sommerfeld1909} are not
-directly based on the integral \eqref{eq:hankel_transform_inverse}, but
-on an alternative representation which uses an integration path extended to
-the whole real axis. This representation sometimes referred to as the \ac{EIP}
-is given by
-\begin{corollary}[Extended integration path]
-	An alternative representation of \eqref{eq:si_sommerfeld_integration_path}
-	is given by
-	\begin{equation}\label{eq:si_extended_integration_path}
-		\sommerfeldIntegral{\nu}{\tilde{f} \left( k_\rho \right)} =
-		\frac{1}{4\pi}
-		\int\limits_{\infty \exp{-\im \pi}}^{\infty} \dd k_\rho 
-		\besselh{2}{\nu} \left(k_\rho \rho\right) k_\rho 
-		\tilde{f} \left(k_\rho\right) \, .
+	The inner integral in \eqref{eq:ht_proof_after_orthogonality} is identified
+	as a form of Bessel's integral \cite[(10.19.2)]{Olver2010} for integer
+	Bessel functions of integer order \cite[p.~314]{Davies2002}.
+	With this \eqref{eq:ht_proof_after_orthogonality} can be written as
+	\begin{equation}
+		f_m \left(\rho\right) =
+		\frac{1}{2\pi}
+		\int\limits_{0}^{\infty} \dd k_\rho \,
+		\besselj{m}\left(k_\rho \rho\right) k_\rho
+		\tilde{f}m \left(k_\rho\right)
+		\, ,
 	\end{equation}
-	The path of integration over the whole real axis is called \acf{EIP}.
-\end{corollary}
-The proof of the equivalence of \eqref{eq:si_sommerfeld_integration_path} and
-\eqref{eq:si_extended_integration_path}, which has proven so fruitful in the
-early days of the study of wave propagation, is nowadays a classic textbook
-example \cite[p.~203]{Sommerfeld1964}.
+	which is the inverse Hankel transform \eqref{eq:hankel_transform_inverse}.
+	The connection of the forward transform \eqref{eq:hankel_transform_forward}
+	to \eqref{eq:fourier_transform_2space_forward} can be shown in the same
+	manner.
+\end{proof}
+
+By inspection of \eqref{eq:ht_proof_after_orthogonality} and 
+\eqref{eq:ht_proof_f_tilde_fourier_coeffs} some vivid insight can be gained
+regarding the role of the order $\nu$ in Hankel transform integrals. 
+Consider the inverse transform \eqref{eq:hankel_transform_inverse} which
+is of particular importance in the context of electromagnetic wave propagation
+in media of planar inhomogeneity.
+The expansion \eqref{eq:ht_proof_f_tilde_fourier_series} represents a
+spectral domain function $\tilde{f}$ with a \emph{general} dependency on both
+$k_\rho$ and $k_\varphi$, where the expansion coefficients are given by
+\eqref{eq:ht_proof_f_tilde_fourier_coeffs}.
+By contrast to the infinite number of non-vanishing expansion coefficients
+$\tilde{f}_n$ in $k_\vartheta$ in this general function, the Hankel transform
+of order $\nu = 0$ considers only the zeroth coefficient,
+see \eqref{eq:ht_proof_after_orthogonality}.
+Therefore, the zeroth-order inverse Hankel transform is especially suited for
+functions spectral domain function $\tilde{f}$ of
+\emph{azimuthal symmetry} around the cylindrical
+$z$-axis\footnote{Off-centered functions of azimuthal
+symmetry can be considered by straightforward transformation of variables.}.
+For all spectral domain functions $\tilde{f}$ which vary in $k_\varphi$, the
+inverse Hankel transform with $\nu = 0$ would perform angular averaging, which
+is readily observed from \eqref{eq:ht_proof_f_tilde_fourier_coeffs}.
+However, the inverse Hankel transform of order $\nu = 1$ is able to represent
+first-order harmonic variation of $\tilde{f}$ in $k_\varphi$.
+The second order transform is amenable to second order harmonic variation in
+$k_\varphi$ and so on.
+
+This observation of a central mathematical property of the integral transforms
+given by \cref{coll:hankel_transform} directly leads the use case in
+electromagnetic theory.
+In the study of wave fields in media of planar inhomogeneity the spatial domain
+fields are represented by inverse Hankel transforms whose counterparts in the 
+$k_\rho$-spectral-domain are known in analytical form.
+As it turns out, these functions are either azimuthally symmetric, \ie,
+independent of $k_\varphi$, or depend on $k_\varphi$ via trigonometric
+functions. 
+Here, a prominent feature of the representation of spatial domain fields in
+terms of Hankel transforms becomes clear: the trigonometric variation of the
+spectral function $\tilde{f}$
+can be moved outside the Hankel transform integral, while this is not
+possible in \eqref{eq:fourier_transform_2space_backward}.
+Thus, the two-dimensional integral over $\R^2$ is reduced to a single
+semi-infinite integral.
+This makes the form of \eqref{eq:hankel_transform_inverse} especially appealing
+for the straightforward evaluation by numerical integration.
 
 
 
 
 
 
-\subsection{Helmholtz Equation and Green's Functions}
+\subsection{Helmholtz Equation and Green's Function of Free Space}
 
-Let the following definitions prefix the present section.
-\begin{definition}[Domain]
-	An open, simply connected subset of a finite dimensional vector space is
-	called a \emph{domain}.
-\end{definition}
-\begin{definition}[Closure]
-	Let $\Omega$ be a domain.
-	The set $\overline{\Omega}$ consisting of $\Omega$ and all its limit points
-	is called \emph{closure} of $\Omega$.
-\end{definition}
-\begin{definition}[Boundary]
-	Let $\Omega \subset \R^3$ with closure $\overline{\Omega}$.
-	Then the set $\partial\Omega \coloneqq \overline{\Omega}\setminus\Omega$
-	is called \emph{boundary} of $\Omega$.
-\end{definition}
+% Let the following definitions prefix the present section.
+% \begin{definition}[Domain]
+% 	An open, simply connected subset of a finite dimensional vector space is
+% 	called a \emph{domain}.
+% \end{definition}
+% \begin{definition}[Closure]
+% 	Let $\Omega$ be a domain.
+% 	The set $\overline{\Omega}$ consisting of $\Omega$ and all its limit points
+% 	is called \emph{closure} of $\Omega$.
+% \end{definition}
+% \begin{definition}[Boundary]
+% 	Let $\Omega \subset \R^3$ with closure $\overline{\Omega}$.
+% 	Then the set $\partial\Omega \coloneqq \overline{\Omega}\setminus\Omega$
+% 	is called \emph{boundary} of $\Omega$.
+% \end{definition}
 
-The scalar wave equation \eqref{eq:scalar_wave_equation_physical_domain}
-is a \ac{PDE} equation both in space and in time.
-By application of \eqref{eq:fourier_transfrom_temporal_forward} to
-\eqref{eq:scalar_wave_equation_physical_domain} the scalar Helmholtz equation
-\begin{equation}\label{eq:scalar_helmholtz_equation}
-	\left( \laplace + k^2 \right) \phi \left( \robs, \omega \right) = 0
-	\qquad \omega = \mathrm{const.}
-\end{equation}
-is obtained, where $\omega$ is now only a parameter.
-Hence, \eqref{eq:scalar_helmholtz_equation} has become a \ac{PDE} in space only.
+% The scalar wave equation \eqref{eq:scalar_wave_equation_physical_domain}
+% is a \ac{PDE} equation both in space and in time.
+% By application of \eqref{eq:fourier_transfrom_temporal_forward} to
+% \eqref{eq:scalar_wave_equation_physical_domain} the scalar Helmholtz equation
+% \begin{equation}\label{eq:scalar_helmholtz_equation}
+% 	\left( \laplace + k^2 \right) \phi \left( \robs, \omega \right) = 0
+% 	\qquad \omega = \mathrm{const.}
+% \end{equation}
+% is obtained, where $\omega$ is now only a parameter.
+% Hence, \eqref{eq:scalar_helmholtz_equation} has become a \ac{PDE} in space only.
 
 % \begin{definition}[Delta function]
 % 	Let $\robs,\rsrc\in\R^3$ and
@@ -580,162 +737,153 @@ Hence, \eqref{eq:scalar_helmholtz_equation} has become a \ac{PDE} in space only.
 
 
 
-
 \subsection{Complex Euclidean Space and Complex Source Beams}
 
-If the \ac{DCIM} is interpreted in terms of actual image sources the notions
-of complex \emph{length} and \emph{distance} play a role.
-Be precise about these terms a couple of common definitions
-\cite{pohl2020, heuser2006}
-needs to be stated at first.
+% If the \ac{DCIM} is interpreted in terms of actual image sources the notions
+% of complex \emph{length} and \emph{distance} play a role.
+% Be precise about these terms a couple of common definitions
+% \cite{pohl2020, heuser2006}
+% needs to be stated at first.
 
-A distance is mathematically specified by
-\begin{definition}[Metric and metric space]\label{def:metric}
-	Let $\mathcal{X}$ be a set. A non-negative function
-	$d: \mathcal{X} \times \mathcal{X} \mapsto \R$ is called a \emph{metric}
-	on $\mathcal{X}$ if it fulfills the following four properties.
-	\begin{enumerate}[label=(\alph*)]
-		\item $0 \le d\left(x_1, x_2\right) < 0$ for all
-		$x_1, x_2 \in \mathcal{X}$
-		\item $d\left(x_1, x_2\right) = 0$ if and only if $x_1 = x_2$
-		\item $d\left(x_1, x_2\right) = d\left(x_2, x_1\right)$ for all
-		$x_1, x_2 \in \mathcal{X}$
-		\item $d\left(x_1, x_3\right) \le d\left(x_1, x_2\right) + d\left(x_2, x_3\right)$
-		for all $x_1, x_2, x_3 \in \mathcal{X}$
-	\end{enumerate}
-	A set $\mathcal{X}$ together with a metric $d$ defined on $\mathcal{X}$ is
-	called a \emph{metric space} and denoted by $\left(\mathcal{X}, d\right)$.
-\end{definition}
-In order to generalize the familiar Euclidean space to a complex-valued spatial
-domain we need also
-\begin{definition}[Vector space]
-	Let $\F$ be a field (in particular $\F = \R,\C$). A \emph{vector space
-	over} $\F$ (or $\F$-vector space) is a nonempty set $\mathcal{V}$, whose
-	elements are called \emph{vectors} and in which the following two operations
-	are defined:
-	\begin{enumerate}
-		\item Addition: To every pair of vectors $x, y \in \mathcal{V}$ there
-		corresponds a vector $x + y$, in a way such that
-		\begin{enumerate}[label=(\alph*)]
-			\item $x + y = y + x$
-			\item $x + \left(y + z\right) = \left(x + y\right) + z$
-			\item $\mathcal{V}$ contains a unique \emph{zero vector} $0$ such
-			that $x + 0 = x \forall x \in \mathcal{V}$
-			\item To each $x \in \mathcal{V}$ there exists a unique
-			$-x \in \mathcal{V}$ such that $x + \left(-x\right) = 0$
-		\end{enumerate}
-		\item Scalar multiplication: To every pair $(a, x)$ of a scalar
-		$\alpha \in \F$ and a vector $x \in \mathcal{V}$ there corresponds a
-		vector $\alpha x \in \mathcal{V}$, in such a way that
-		\begin{enumerate}[label=(\alph*), start = 5]
-			\item $\alpha \left(\beta\right) = \left(\alpha \beta\right) x$ for
-			all $\beta \in \F$ 
-			\item $1 x = x$
-		\end{enumerate}
-		Both addition and scalar multiplication satisfy the distributive laws
-		\begin{enumerate}[label=(\alph*), start = 7]
-			\item $\alpha \left(x + y\right) = \alpha x + \alpha y$
-			\item $\left(\alpha + \beta\right) x = \alpha x + \beta x$.
-		\end{enumerate}
-	\end{enumerate}
-\end{definition}
-Another important concept in this context is the length of a vector.
-This quantity is typically requested to obey
-\begin{definition}[Norm and normed space]\label{def:norm}
-	Let $\mathcal{V}$ be a $\F$-vector space.
-	A non-negative real-valued functional $x \mapsto \left\Vert x \right\Vert$
-	from $\mathcal{V}$ into $\R$ is called a \emph{norm} if
-	\begin{enumerate}[label=(\alph*)]
-		\item $\norm{x} = 0 \Leftrightarrow x = 0$ 
-		\item $\norm{\alpha x} = \abs{\alpha} \norm{x}$ for every
-		$x \in \mathcal{V}$ and $\alpha \in \F$
-		\item $\norm{x_1 + x_2} \le \norm{x_1} + \norm{x_2}$ for every
-		$x_1, x_2 \in \mathcal{V}$.
-	\end{enumerate}
-	A $\F$-vector space $\mathcal{V}$ together with a norm
-	$\left\Vert . \right\Vert$ is called a \emph{normed space} and denoted by
-	$\left( \mathcal{V}, \left\Vert . \right\Vert \right)$.
-\end{definition}
+% A distance is mathematically specified by
 
-It is easily shown that $\R^3 \subset \C^3$, as well as $\C^3$ itself are
-vector spaces.
-Additionally, an inner product can be defined on $\C^3$.
-\begin{definition}[Dot product]\label{def:dot_product}
-	Let $\C^N$ be a finite-dimensional vector space with $N \in \N$
-	and $\pvec{a}, \pvec{b} \in \C^3$. Then the \emph{dot product}
-	is defined as 
-	\begin{equation}
-		\pvec{a} \cdot \pvec{b} = \sum\limits_{1}^{N} a_i \bar{b}_i \, .
-	\end{equation}
-\end{definition}
-Equipped with the inner product given by \cref{def:dot_product} $\C^3$
-becomes a Hilbert space.
-Note that the dot product as given by \cref{def:dot_product} of an arbitrary
-vector in $\C^3$ with itself is a non-negative real number. 
+% It is easily shown that $\R^3 \subset \C^3$, as well as $\C^3$ itself are
+% vector spaces.
+% Additionally, an inner product can be defined on $\C^3$.
+% % NOTE: Dot product defined at the beginning
+% Equipped with the inner product given by \cref{def:dot_product} $\C^3$
+% becomes a Hilbert space.
+% Note that the dot product as given by \cref{def:dot_product} of an arbitrary
+% vector in $\C^3$ with itself is a non-negative real number. 
 
-The definition of the dot product induces the familiar Euclidean norm and
-metric on $\C^3$.
-\begin{definition}[Euclidean norm]\label{def:euclidean_norm}
-	Let $\pvec{r} \in \C^3$ arbitrary. Then the \emph{Euclidean norm} of
-	$\pvec{r}$ is defined as
-	\begin{equation}
-		r = \euclideanNorm{\pvec{r}} = \sqrt{\pvec{r} \cdot \pvec{r}} \, .
-	\end{equation}
-\end{definition}\label{def:euclidean_metric}
-\begin{definition}[Euclidean metric]
-	Let $\pvec{r}_1, \pvec{r}_2 \in \C^3$ arbitrary. Then the \emph{Euclidean
-	metric} is defined as
-	\begin{equation}
-		d_E\left(\pvec{r}_1 , \pvec{r}_2\right) = 
-		\sqrt{
-			\left(\pvec{r}_1 - \pvec{r}_2\right)
-			\cdot
-			\left(\pvec{r}_1 - \pvec{r}_2\right)
-		} \, .
+% The definition of the dot product induces the familiar Euclidean norm and
+% metric on $\C^3$.
+
+% Geometrically, \cref{def:euclidean_norm} can be interpreted as the \emph{length}
+% of a vector $\pvec{r} \in \R^3$ while \cref{def:euclidean_metric} is the
+% \emph{distance} between two points $\pvec{r}_1, \pvec{r}_2 \in \R^3$.
+% The notions of length and distance somewhat lose their geometrical
+% interpretation in $\C^3$, however, according to the above definitions they
+% are still real non-negative numbers.
+
+% With regard to complex image sources within the electromagnetic context, it is
+% observed that the output data of the \ac{DCIM} provides complex scalars
+% which can be interpreted length-like.
+% This fact does not cause problems if the \ac{DCIM} is applied as originally
+% intended, as these complex images are summated internally. Within the 
+% conventional algorithm they are never actually \enquote{placed} in a 
+% $\C^3$ solution domain of the electromagnetic field problem.
+% However, towards a possible integration of complex images into the \ac{FMM} the
+% aim is to do exactly this.
+
+% As it can easily be seen from \cref{def:metric} and \cref{def:norm}
+% the operation mapping a vector $\rsrc \in \C^3$ to a complex distance in the
+% \acs{DCIM}-sense can neither be a metric nor a norm.
+% Nevertheless, as it is demonstrated in a paper by \textcite{Hansen2009}, such a
+% complex distance can have a physical meaning.
+% One property of a complex distance which can be axiomatically postulated
+% is that a complex distance $r \in \C$ should have non-negative real part.
+% Within the context of \ac{DCIM} a reasonable definition of complex length
+% is \cite{Hansen2009, Hansen2013}
+% \begin{definition}[Complex length]
+% 	Let $x, y \in \R$, $z \in \C$ and the square root $\sqrt{c}$ of
+% 	an arbitrary complex number $c$ be defined with its branch cut along the
+% 	negative real axis.
+% 	Then the \emph{complex length} of a vector
+% 	$\pvec{r} = \uv{x}x + \uv{y}y +\uv{z}z$ is defined as
+% 	\begin{equation}
+% 		r_c =
+% 		\complexLength{\pvec{r}} =
+% 		\sqrt{\pvec{r} \cdot \overline{\pvec{r}}} =
+% 		\sqrt{x^2 + y^2 + z^2} \, ,
+% 	\end{equation}
+% 	where the square root is evaluated on the Riemann sheet on which 
+% 	$\real{r_c} \ge 0$.
+% \end{definition}
+
+
+
+
+
+
+\subsection{Sommerfeld Integrals}
+
+In the electromagnetic context inverse Hankel transform integrals
+are---in Arnold Sommerfeld's honor---predominantly referred to
+as \emph{Sommerfeld integrals} \cite{Sommerfeld1909, Mosig2021}.
+However, in this field only transforms of orders
+$\nu \in \left\{0, 1, 2\right\}$ occur\footnote{Transforms of order $\nu = 2$
+can, in fact, be expressed by ones of orders $\nu = 0$ and $\nu = 1$ in
+electromagnetic problems \cite{Michalski2005}.}
+
+Taking the significance of these integrals into account, it is adequate to
+introduce a special symbol for Sommerfeld integrals.
+\begin{definition}[Sommerfeld integrals]	
+	Inverse Hankel transforms of orders $\nu \in \left\{0, 1, 2\right\}$
+	are called \emph{Sommerfeld integrals}.
+	They are denoted by
+	\begin{equation}\label{eq:si_pos_real_axis_path}
+		\sommerfeldIntegral{\nu}{\tilde{f} \left( k_\rho \right)} \coloneqq 
+		\frac{1}{2\pi}
+		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+		\besselj{\nu}\left(k_\rho \rho\right) 
+		\tilde{f} \left(k_\rho\right) 
+		\, .
 	\end{equation}
 \end{definition}
 
-Geometrically, \cref{def:euclidean_norm} can be interpreted as the \emph{length}
-of a vector $\pvec{r} \in \R^3$ while \cref{def:euclidean_metric} is the
-\emph{distance} between two points $\pvec{r}_1, \pvec{r}_2 \in \R^3$.
-The notions of length and distance somewhat lose their geometrical
-interpretation in $\C^3$, however, according to the above definitions they
-are still real non-negative numbers.
-
-With regard to complex image sources within the electromagnetic context, it is
-observed that the output data of the \ac{DCIM} provides complex scalars
-which can be interpreted length-like.
-This fact does not cause problems if the \ac{DCIM} is applied as originally
-intended, as these complex images are summated internally. Within the 
-conventional algorithm they are never actually \enquote{placed} in a 
-$\C^3$ solution domain of the electromagnetic field problem.
-However, towards a possible integration of complex images into the \ac{FMM} the
-aim is to do exactly this.
-
-As it can easily be seen from \cref{def:metric} and \cref{def:norm}
-the operation mapping a vector $\rsrc \in \C^3$ to a complex distance in the
-\acs{DCIM}-sense can neither be a metric nor a norm.
-Nevertheless, as it is demonstrated in a paper by \textcite{Hansen2009}, such a
-complex distance can have a physical meaning.
-One property of a complex distance which can be axiomatically postulated
-is that a complex distance $r \in \C$ should have non-negative real part.
-Within the context of \ac{DCIM} a reasonable definition of complex length
-is \cite{Hansen2009, Hansen2013}
-\begin{definition}[Complex length]
-	Let $x, y \in \R$, $z \in \C$ and the square root $\sqrt{c}$ of
-	an arbitrary complex number $c$ be defined with its branch cut along the
-	negative real axis.
-	Then the \emph{complex length} of a vector
-	$\pvec{r} = \uv{x}x + \uv{y}y +\uv{z}z$ is defined as
-	\begin{equation}
-		r_c =
-		\complexLength{\pvec{r}} =
-		\sqrt{\pvec{r} \cdot \overline{\pvec{r}}} =
-		\sqrt{x^2 + y^2 + z^2} \, ,
+Much of Sommerfeld's original considerations \cite{Sommerfeld1909} regarding
+dipole radiation above a plane lossy ground are not directly based on the
+\ac{SIP} but on an alternative integration path given by
+\begin{corollary}[Extended integration path]
+	Let $\tilde{f} \left\{k_\rho\right\}$ be an even (odd) function of $k_\rho$
+	for even (odd) $\nu \in \N$.
+	Then the Sommerfeld integral \eqref{eq:si_pos_real_axis_path}
+	along the positive real axis path is equivalent to
+	\begin{equation}\label{eq:si_sommerfeld_intgration_path}
+		\sommerfeldIntegral{\nu}{\tilde{f} \left( k_\rho \right)} =
+		\frac{1}{4\pi}
+		\int\limits_{-\infty}^{\infty} \dd k_\rho \, k_\rho
+		\besselh{2}{\nu} \left(k_\rho \rho\right)
+		\tilde{f} \left(k_\rho\right) \, .
 	\end{equation}
-	where the square root is evaluated on the Riemann sheet on which 
-	$\real{r_c} \ge 0$.
-\end{definition}
+	The path over $\R \cup \left\{-\infty, \infty\right\}$
+	is called \acf{SIP}\cite[p.~66]{Chew1999}.
+\end{corollary}
+
+\begin{remark}[\acf{SIP}]
+	To render the integral \eqref{eq:si_sommerfeld_intgration_path} defined
+	the \ac{SIP} must avoid the logarithmic branch point introduced by
+	$\besselh{2}{\nu}$ at $k_\rho = 0$.
+	Formally this can be achieved by slight deformation of the path into
+	$\C$ around this point.
+\end{remark}
+
+The \ac{SIP} has a variety of advantages over the positive real axis path in
+\eqref{eq:si_pos_real_axis_path}.
+Much of the power of Sommerfeld's approach originates in the fact that the
+involved spectral domain functions are holomorphic on $\C$ with the possible
+exceptions of distinct poles, branch point and the corresponding branch cuts.
+This makes it possible to deform the path of integration, either to render
+the integrals defined in first place or---totally leaving the real axis
+path---to apply elaborated analytical and numerical techniques.
+In this context the positive real axis path in \eqref{eq:si_pos_real_axis_path}
+has the disadvantage of not being closed.
+In fact, also this path can be deformed by virtue of Cauchy's theorem, but
+the full power of this result combined with the residue theorem is only
+available with the \ac{SIP}.
+As the real $-\infty$ and $\infty$ can be interpreted as the same point in
+$\C \cup \left\{\infty\right\}$ in the picture of Riemann's sphere
+\cite[p.~180]{Meyberg2006}, the \ac{SIP} is a closed path in the complex plane
+and the integral along the \ac{SIP} is, as stated by Cauchy's theorem
+and Jordan's lemma, equal to the sum of residues of the captured singularities.
+
+The proof of equivalence for \eqref{eq:si_pos_real_axis_path} and
+\eqref{eq:si_sommerfeld_intgration_path}---which has turned out so fruitful in
+the early days of the study of wave propagation---is nowadays a classic textbook
+example \cite[p.~203]{Sommerfeld1964}.
+
+
 
 
 
@@ -743,66 +891,78 @@ is \cite{Hansen2009, Hansen2013}
 
 \subsection{Sommerfeld identity}
 
+% \begin{equation}\label{eq:sommerfeld_id_pos_real_axis}
+% 	\frac{\exp{-\im k r}}{r} = 
+% 	-\im
+% 	\int\limits_{0}^{\infty} \dd k_\rho \,
+% 	\besselj{0} \left(k_\rho \rho\right) k_\rho 
+% 	\frac{\exp{-\im k_z \abs{z}}}{k_z}
+% \end{equation}
 
-
-\begin{equation}\label{eq:sommerfeld_id_pos_real_axis}
-	\frac{\exp{-\im k r}}{r} = 
-	-\im
-	\int\limits_{0}^{\infty} \dd k_\rho \,
-	\besselj{0} \left(k_\rho \rho\right) k_\rho 
-	\frac{\exp{-\im k_z \abs{z}}}{k_z}
-\end{equation}
-
-\begin{theorem}[Sommerfeld identity with complex vertical distance]
-	Let $\rho \in \R$ with $\rho > 0$ and $k \in C$ be defined with
-	$\imag{k} < 0$ where $\imag{k} \to 0$. Then \eqref{eq:sommerfeld_id_pos_real_axis} 
-	remains valid if $\abs{z}$ with $z \in \R$ is replaced by a complex distance
-	as defined in  
+% \begin{theorem}[Sommerfeld identity with complex vertical distance]
+% 	Let $\rho \in \R$ with $\rho > 0$ and $k \in C$ be defined with
+% 	$\imag{k} < 0$ where $\imag{k} \to 0$. Then \eqref{eq:sommerfeld_id_pos_real_axis} 
+% 	remains valid if $\abs{z}$ with $z \in \R$ is replaced by a complex distance
+% 	as defined in  
 
 	
-\end{theorem}
+% \end{theorem}
 
-\begin{equation}\label{eq:sommerfeld_identity_bessel}
-	\frac{\exp{\im k r}}{r} = \im \int\limits_{0}^{\infty} \frac{k_\rho}{k_z} \besselj{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, ,
-\end{equation}
-where
-\begin{equation}\label{eq:k_z}
-	k_z = \sqrt{k^2 - k_\rho^2} \, ,
-\end{equation}
-is chosen such that $\imag{k_z} > 0$.
+% \begin{equation}\label{eq:sommerfeld_identity_bessel}
+% 	\frac{\exp{\im k r}}{r} = \im \int\limits_{0}^{\infty} \frac{k_\rho}{k_z} \besselj{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, ,
+% \end{equation}
+% where
+% \begin{equation}\label{eq:k_z}
+% 	k_z = \sqrt{k^2 - k_\rho^2} \, ,
+% \end{equation}
+% is chosen such that $\imag{k_z} > 0$.
 
-\begin{lemma}[Sommerfeld identity {\cite[p.~684]{Sommerfeld1909}, \cite{Chew1999}}]\label{lemma:sommerfeld_identity}
-	Let $r,\,k\in\C \setminus \left\{0\right\}$, $z \in \C$, $\rho \in \R$, $\real{r} > 0$, $\imag{k} > 0$ and $r^2 = \rho^2 + z^2$. Then the Sommerfeld identity reads
-\end{lemma}
+% \begin{lemma}[Sommerfeld identity {\cite[p.~684]{Sommerfeld1909}, \cite{Chew1999}}]\label{lemma:sommerfeld_identity}
+% 	Let $r,\,k\in\C \setminus \left\{0\right\}$, $z \in \C$, $\rho \in \R$, $\real{r} > 0$, $\imag{k} > 0$ and $r^2 = \rho^2 + z^2$. Then the Sommerfeld identity reads
+% \end{lemma}
 
-\begin{proof}
-	\fxnote{Beweis für komplexe Ortskoordinaten}
-\end{proof}
+% \begin{proof}
+% 	\fxnote{Beweis für komplexe Ortskoordinaten}
+% \end{proof}
 
-With Cauchy's integral theorem in mind, Sommerfeld recognized a certain drawback in the integration path along the positive real $k_\rho$-axis when it comes to getting enlightening physical insights out of integrals like the one in \eqref{eq:sommerfeld_identity_bessel}. For a closed integration path would much better suit the theorem Sommerfeld derived an alternative representation of \eqref{eq:sommerfeld_identity_bessel} invoking a well-known identity \cite[eq.~10.4.4]{Olver2010} and the so-called \enquote{circuit relations} of Hankel functions \cite[p.~314]{Sommerfeld1964}. It is given by
-\begin{corollary}[Sommerfeld identity in terms of Hankel functions]
-	The Sommerfeld identity in terms of Hankel functions reads
-	\begin{equation}\label{eq:sommerfeld_identity_hankel}
-		\frac{\exp{\im k r}}{r} = \frac{\im}{2} \int\limits_{-\infty}^{\infty} \frac{k_\rho}{k_z} \besselh{1}{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, .
-	\end{equation}
-\end{corollary}
-The third well-known formulation of the very same mathematical statement expands the Hankel transform in \eqref{eq:sommerfeld_identity_bessel} or \eqref{eq:sommerfeld_identity_hankel}, respectively, in a two-dimensional Fourier integral
-\begin{corollary}[Weyl identity {\cite{Weyl1919}, \cite{Chew1999}}]\label{coll:wely_identity}
-	The Weyl identity reads
-	\begin{equation}\label{eq:weyl_identity}
-		\frac{\exp{\im k r}}{r} = \frac{\im}{2\pi} \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty} \frac{-\exp{-\im k_z \abs{z}}}{\im k_z} \exp{\im k_x x} \exp{-\im k_y y} \dd k_x \, \dd k_y \, .
-	\end{equation}
-\end{corollary}
+% With Cauchy's integral theorem in mind, Sommerfeld recognized a certain drawback in the integration path along the positive real $k_\rho$-axis when it comes to getting enlightening physical insights out of integrals like the one in \eqref{eq:sommerfeld_identity_bessel}. For a closed integration path would much better suit the theorem Sommerfeld derived an alternative representation of \eqref{eq:sommerfeld_identity_bessel} invoking a well-known identity \cite[eq.~10.4.4]{Olver2010} and the so-called \enquote{circuit relations} of Hankel functions \cite[p.~314]{Sommerfeld1964}. It is given by
+% \begin{corollary}[Sommerfeld identity in terms of Hankel functions]
+% 	The Sommerfeld identity in terms of Hankel functions reads
+% 	\begin{equation}\label{eq:sommerfeld_identity_hankel}
+% 		\frac{\exp{\im k r}}{r} = \frac{\im}{2} \int\limits_{-\infty}^{\infty} \frac{k_\rho}{k_z} \besselh{1}{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, .
+% 	\end{equation}
+% \end{corollary}
+% The third well-known formulation of the very same mathematical statement expands the Hankel transform in \eqref{eq:sommerfeld_identity_bessel} or \eqref{eq:sommerfeld_identity_hankel}, respectively, in a two-dimensional Fourier integral
+% \begin{corollary}[Weyl identity {\cite{Weyl1919}, \cite{Chew1999}}]\label{coll:wely_identity}
+% 	The Weyl identity reads
+% 	\begin{equation}\label{eq:weyl_identity}
+% 		\frac{\exp{\im k r}}{r} = \frac{\im}{2\pi} \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty} \frac{-\exp{-\im k_z \abs{z}}}{\im k_z} \exp{\im k_x x} \exp{-\im k_y y} \dd k_x \, \dd k_y \, .
+% 	\end{equation}
+% \end{corollary}
 
-For the mathematical equivalence of \eqref{eq:sommerfeld_identity_bessel}, \eqref{eq:sommerfeld_identity_hankel} and \eqref{eq:weyl_identity} all three forms can be employed in the description of the same physics, namely the description of a scalar spherical wave. While all three of the forms involve the plane wave term $\exp{i k_z \abs{z}}$ to represent the vertically directed wave constituents, the lateral part of the field can be represented either by standing or propagating cylindrical waves as well as by a superposition of plane waves.
+% For the mathematical equivalence of \eqref{eq:sommerfeld_identity_bessel}, \eqref{eq:sommerfeld_identity_hankel} and \eqref{eq:weyl_identity} all three forms can be employed in the description of the same physics, namely the description of a scalar spherical wave. While all three of the forms involve the plane wave term $\exp{i k_z \abs{z}}$ to represent the vertically directed wave constituents, the lateral part of the field can be represented either by standing or propagating cylindrical waves as well as by a superposition of plane waves.
 
-The differing property of vertical and lateral, however, is that the properties of the lateral wave constituents solely depend on the integration variable while the set of vertical plane waves is in any case composed of propagating and evanescent portions, corresponding to the cases $k_\rho \lessgtr k$ in \eqref{eq:k_z}.
+% The differing property of vertical and lateral, however, is that the properties of the lateral wave constituents solely depend on the integration variable while the set of vertical plane waves is in any case composed of propagating and evanescent portions, corresponding to the cases $k_\rho \lessgtr k$ in \eqref{eq:k_z}.
 
-\fxnote{Hier noch schreiben wie sich das auswirkt.}
+% \fxnote{Hier noch schreiben wie sich das auswirkt.}
 
 
-\fxnote{Beweis, dass Sommerfeld-Identität auch mit komplexen Längen gilt!?}
+% \fxnote{Beweis, dass Sommerfeld-Identität auch mit komplexen Längen gilt!?}
 %Die räumlichen Größen $r$ und $z$ in \eqref{eq:sommerfeld_identity} waren in Sommerfelds ursprüngliche Analyse reell. Wie früh erkannt wurde \cite{Deschamps1971,Keller1971} behält \cref{lemma:sommerfeld_identity} jedoch auch für $r, z\in\C$ seine Gültigkeit. Die Kugelwelle verändert dabei jedoch ihre für $r, z\in\R$ isotrope Charakteristik hin zu einem gerichteten gaußschen Strahl.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
