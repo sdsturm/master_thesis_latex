@@ -234,6 +234,7 @@ and distance according to the following two definitions.
 		r = \euclideanNorm{\pvec{r}} = \sqrt{\pvec{r} \cdot \pvec{r}} \, .
 	\end{equation}
 \end{definition}
+
 \begin{definition}[Euclidean metric]\label{def:euclidean_metric}
 	Let $\pvec{r}_1, \pvec{r}_2 \in \C^3$ arbitrary. Then the \emph{Euclidean
 	metric} is defined as
@@ -246,6 +247,16 @@ and distance according to the following two definitions.
 		} \, .
 	\end{equation}
 \end{definition}
+
+\begin{remark}[Euclidean norm notation]
+	For the sake of simplicity in notation, and to be in accordance with
+	common practice \cite{vanBladel2007}, $\euclideanNorm{\robs}$ is
+	denoted as $\pvec \equiv \abs{\robs} \equiv \euclideanNorm{\robs}$
+	whenever the length of a physical vector is meant
+	and no other notation is clear from the context.
+\end{remark}
+
+
 
 
 
@@ -419,6 +430,7 @@ meaningful sign conventions of the metric tensor\footnote{
 	and $\left( - - - + \right)$ for $\exp{\im \omega t}$}
 describing the structure of the four-dimensional (Minkowski) space-time
 continuum \cite[pp.~624]{Jackson2013}\cite{Kaiser2016}.
+
 
 
 
@@ -650,11 +662,13 @@ for the straightforward evaluation by numerical integration.
 
 
 
+
 \subsection{Helmholtz Equation and Green's Function of Free Space}
 
 Let the following definitions prefix the present section.
 \begin{definition}[Domain]
-	An open, simply connected subset of a finite dimensional vector space is
+	An open, simply connected subset of a finite dimensional vector space or
+	the complex plane $\C$ is
 	called a \emph{domain}.
 \end{definition}
 \begin{definition}[Closure]
@@ -676,73 +690,117 @@ By application of \eqref{eq:fourier_transfrom_temporal_forward} to
 	\left( \laplace + k^2 \right) \phi \left( \robs, \omega \right) = 0
 	\qquad \omega = \mathrm{const.}
 \end{equation}
-is obtained, where $\omega$ is a parameter of the problem.
+is obtained, where $k = \omega / c$.
+Note that $\omega$ is no variable but a parameter of the problem.
 Hence, \eqref{eq:scalar_helmholtz_equation} is a \ac{PDE} in space only.
-Moreover, in the common scheme of classification \cite[pp.~38]{Sommerfeld1964}
-the type of \ac{PDE} changes from hyperbolic to elliptic type in the
-transition from \eqref{eq:scalar_wave_equation_physical_domain} to
+Moreover, in the common scheme of classification \cite[pp.~38]{Sommerfeld1964},
+the \ac{PDE} changes from hyperbolic to elliptic type by transition from
+\eqref{eq:scalar_wave_equation_physical_domain} to
 \eqref{eq:scalar_helmholtz_equation}\footnote{For this reason the present
 thesis avoids using the term \enquote{wave equation} for
 \eqref{eq:scalar_helmholtz_equation}, although this terminology is frequently
 used in the literature \cite[p.~238]{Sommerfeld1964}\cite{Coifman1993}}.
 
-
-% \begin{definition}[Delta function]
-% 	Let $\robs,\rsrc\in\R^3$ and
-% 	$f\left(\robs\right):\C^n\rightarrow\C$ be a differentiable function in
-% 	Dann ist die \emph{Delta-Funktion} $\diracDelta:\R^3 \rightarrow \C$ durch die Eigenschaften
-% 	\begin{equation}
-% 		\diracDelta\left(\robs\right) = \begin{cases*}
-% 			1 & $\robs = 0$ \\
-% 			0 & $\robs \neq 0$
-% 		\end{cases*} \, ,
-% 	\end{equation}
-% 	\begin{equation}
-% 		\int\limits_{\C^n} \diracDelta\left(\robs\right) \dd \robs = 1
-% 	\end{equation}
-% 	und
-% 	\begin{equation}\label{eq:delta_filter_property}
-% 		\int\limits_{\C^n} f\left(\robs\right) \diracDelta\left(\robs-\rsrc\right) \dd \robs = f\left(\rsrc\right)
-% 	\end{equation}
-% 	definiert. Eigenschaft \eqref{eq:delta_filter_property} heißt \emph{Filtereigenschaft} der $\diracDelta$-Funktion.
-% \end{definition}
-
-% \begin{definition}[Green'sfunction]
-% 	Sei $\mathcal{L}$ ein linearer Differentialoperator.
-% 	\begin{equation}
-% 		\mathcal{L} G\left(\robs, \rsrc \right) = -\diracDelta\left(\robs - \rsrc\right)
-% 	\end{equation}
-% \end{definition}
-
-
-
-
-
-
-
-
-
-% \begin{remark}[Types of solutions]
-% 	In the following no distinction is made between functions solving \eqref{eq:scalar_helmholtz_equation} point-wise and such only being weak solutions \cite[S.~22ff]{Strichartz2003}.
-% \end{remark}
-
-\begin{theorem}[Sommerfeld radiation condition {\cite[S.~189]{Sommerfeld1964}}]
-	\label{sommerfeld_radiation_condition}
-	Consider the scalar Helmholtz equation \eqref{eq:scalar_helmholtz_equation}
-	with a right-hand side of whose support is limited to a finite domain
-	$\Omega \subset \R^3$ such that $\forall \pvec{r} \in \Omega: r < \infty$.
-	Let $f \left( \pvec{r} \right)$ be a solution to this problem for open 
-	boundary conditions.
-	Then $f$ is the unique solution to \eqref{eq:scalar_helmholtz_equation}
-	if it fulfills the Sommerfeld radiation condition 
-	\begin{equation}
-		\lim_{r \to \infty}
-		r \left( \frac{\partial}{\partial r} + \im k \right) f \left( r \right) = 0 \, .
+The \ac{PDE} \eqref{eq:scalar_helmholtz_equation} does not uniquely define
+its solutions.
+However, it models such central physical phenomena like sonic waves
+and---in its vectorized form---electromagnetic waves including light.
+As there is no randomness observed in such waves,
+\eqref{eq:scalar_helmholtz_equation} has to be supplemented by appropriate
+boundary conditions to make a solution unique.
+For the case of an unbounded solution domain, the physically appropriate
+boundary condition is given by
+\begin{definition}[Sommerfeld radiation condition]
+	\label{def:sommerfeld_radiation_condition}
+	Let $f: \R^3 \mapsto \C$ be a function with support on a finite domain
+	$\Omega \subset \R^3$ and assume $k \in \R$ with $k > 0$.
+	Then a solution $\phi$ to
+	\begin{equation}\label{eq:scalar_helmholtz_equation_inhomogeneous}
+		\left( \laplace + k^2 \right) \phi \left( \robs \right) =
+		f \left( \robs \right)
 	\end{equation}
+	is said to obey the \emph{Sommerfeld radiation condition} if it fulfills
+	\cite{Sommerfeld1912}\cite{schot1992}
+	\begin{equation}\label{eq:sommerfeld_radiation_condition}
+		\lim_{r \to \infty}
+		r \left( \frac{\partial}{\partial r} + \im k \right)
+		\phi \left( r \right) = 0
+		\, .
+	\end{equation}
+\end{definition}
+
+The Sommerfeld condition ensures that a solution $\phi$ is a \emph{physical}
+solution as it carries energy \emph{away} from the source region $\Omega$ and is
+asymptotically small for $\lim_{r \to \infty}$.
+Furthermore, it can be shown \cite[pp.~190]{Sommerfeld1964} that such a function
+$\phi$ is the uniquely defined solution to
+\eqref{eq:scalar_helmholtz_equation_inhomogeneous}
+\begin{theorem}[Uniqueness]
+	A solution $\phi$ to \eqref{eq:scalar_helmholtz_equation_inhomogeneous}
+	for open boundary conditions which obeys
+	\eqref{eq:sommerfeld_radiation_condition} is unique.
 \end{theorem}
 
-\fxnote{Uraltes Paper vom Sommerfeld zur Ausstrahlungsbedingung raussuchen}
+In order to solve \eqref{eq:scalar_helmholtz_equation} for the general
+inhomogeneous case, it is beneficial first to consider the problem of Green's
+function.
+The Green's function is defined with $f$ in
+\eqref{eq:scalar_helmholtz_equation_inhomogeneous} being a source function
+according to
+\begin{definition}[Delta function]\label{def:dirac_delta}
+	Let $\robs$ and $\rsrc$ be two vectors in the Euclidean vector space
+	$\F^N$, where $\F \in \left\{\R, \C\right\}$ and
+	$N \in \left\{1, 2, 3\right\}$.
+	Then the $N$-dimensional \emph{delta function}\footnote{The concept is
+	termed \emph{function} here as the formal \cref{def:dirac_delta} is
+	sufficient for the present thesis purposes.
+	There is no benefit in a deeper consideration resorting to the theory of
+	distributions\cite{Strichartz2003}.} is denoted by
+	$\diracDelta$ and formally defined by the properties:
+	\begin{enumerate}[label=(\alph*)]
+		\item Point source behavior: for arbitrary $\Omega \subset \F^N$ we
+		have
+		\begin{equation}
+			\int\limits_{\Omega} \dd \pvec{r} \,
+			\diracDelta \left( \robs - \rsrc \right)
+			\begin{cases*}
+				1 & $\rsrc \in \Omega$ \\
+				0 & \text{else} \, .
+			\end{cases*} 
+		\end{equation}
+		\item Sifting functional: for a test function $\phi$ 
+		\cite{Strichartz2003}\cite[p.~35]{Olver2010} we have
+		\begin{equation}\label{eq:delta_filter_property}
+			\int\limits_{\F^N} \dd \pvec{r} \,
+			f \left( \robs \right)
+			\diracDelta \left(\robs-\rsrc\right) =
+			f \left( \rsrc \right)
+			\, .
+		\end{equation}
+	\end{enumerate}
+\end{definition}
 
+The Green's function of the Helmholtz equation for the important case of
+constant $k$ is given by the well-known \cite{Jackson2013}
+\begin{corollary}[Free-space Green's function]
+	Let $\rsrc, \robs \in \R^3$ with $\robs \neq \rsrc$ and assume
+	$k$ to be a constant function of $\robs$ with $\imag{k} \leq 0$.
+	Furthermore, let valid solutions to
+	\eqref{eq:scalar_helmholtz_equation_inhomogeneous} be restricted by
+	\cref{def:sommerfeld_radiation_condition}.
+	Then
+	\begin{equation}\label{eq:scalar_free_space_gf}
+		G_0 \left( \rdiff \right) =
+		\frac{\exp{-\im k \abs{\rdiff}}}{4\pi \abs{\rdiff}}
+	\end{equation}
+	is the unique solution to \eqref{eq:scalar_helmholtz_equation} for
+	$\diracDelta$-excitation at $\rsrc$.
+\end{corollary}
+
+Clearly, $G_0$ represents an outward propagating spherical scalar wave 
+centered at $\rsrc$.
+Subsequently, the shortcut $R \coloneqq \abs{\rdiff}$ shall be used for
+notational convenience.
 
 
 
@@ -752,32 +810,33 @@ used in the literature \cite[p.~238]{Sommerfeld1964}\cite{Coifman1993}}.
 
 \subsection{Complex Source Beams}
 
-% If the \ac{DCIM} is interpreted in terms of actual image sources the notions
-% of complex \emph{length} and \emph{distance} play a role.
-% Be precise about these terms a couple of common definitions
-% \cite{pohl2020, heuser2006}
-% needs to be stated at first.
+In case $k$ in \eqref{eq:scalar_helmholtz_equation_inhomogeneous} is not
+constant throughout $\R^3$ the Green's function is no longer given by the
+simple formula \eqref{eq:scalar_free_space_gf}.
+In the case of $k = k\left(z\right)$ it is instead expressed by spectral
+integrals where only the spectral Green's function is known analytically.
+The \ac{DCIM} aims to fit these integrands by terms which can be integrated
+analytically and which have the form of \eqref{eq:scalar_free_space_gf}.
+However, the distance $R \coloneqq \abs{\rdiff}$ in 
+\eqref{eq:scalar_free_space_gf} is written in case of the Euclidean metric
+according to \cref{def:euclidean_metric}.
+Therefore, $R$ is always a real, non-negative number.
+This property does not hold within the framework of \ac{DCIM}, where $R$
+is complex in general.
+This property is, in fact, the eponymous feature of the \ac{DCIM}.
 
-% A distance is mathematically specified by
-
-% It is easily shown that $\R^3 \subset \C^3$, as well as $\C^3$ itself are
-% vector spaces.
-% Additionally, an inner product can be defined on $\C^3$.
-% % NOTE: Dot product defined at the beginning
-% Equipped with the inner product given by \cref{def:dot_product} $\C^3$
-% becomes a Hilbert space.
-% Note that the dot product as given by \cref{def:dot_product} of an arbitrary
-% vector in $\C^3$ with itself is a non-negative real number. 
-
-% The definition of the dot product induces the familiar Euclidean norm and
-% metric on $\C^3$.
-
-% Geometrically, \cref{def:euclidean_norm} can be interpreted as the \emph{length}
-% of a vector $\pvec{r} \in \R^3$ while \cref{def:euclidean_metric} is the
-% \emph{distance} between two points $\pvec{r}_1, \pvec{r}_2 \in \R^3$.
-% The notions of length and distance somewhat lose their geometrical
-% interpretation in $\C^3$, however, according to the above definitions they
-% are still real non-negative numbers.
+Namely, the \enquote{distance} $R \in \C$ within the \ac{DCIM} is of the
+specific form
+\begin{equation}\label{eq:dcim_cmplx_length_sqrt_z}
+	R = \sqrt{\rho^2 + z^2}
+	\, ,
+\end{equation}
+where $\rho = \abs{\left(\rdiff\right) \times \uv{z}}$ and $z \in \C$ is a
+parameter obtained by the \ac{DCIM}.
+Clearly, in \eqref{eq:dcim_cmplx_length_sqrt_z} a decision has to be made how
+to choose the branch of the complex square root.
+However, it is obvious that $R$ in \eqref{eq:dcim_cmplx_length_sqrt_z} is not
+a length in the sense of a metric as specified in \cref{def:metric}.
 
 % With regard to complex image sources within the electromagnetic context, it is
 % observed that the output data of the \ac{DCIM} provides complex scalars
