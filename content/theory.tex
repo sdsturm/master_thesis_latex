@@ -661,6 +661,166 @@ for the straightforward evaluation by numerical integration.
 
 
 
+\subsection{Sommerfeld Integrals and Sommerfeld Identity}
+
+In the electromagnetic context inverse Hankel transform integrals
+are---in Arnold Sommerfeld's honor---predominantly referred to
+as \emph{Sommerfeld integrals} \cite{Sommerfeld1909, Mosig2021}.
+However, in this field only transforms of orders
+$\nu \in \left\{0, 1, 2\right\}$ occur\footnote{Transforms of order $\nu = 2$
+can, in fact, be expressed by ones of orders $\nu = 0$ and $\nu = 1$ in
+electromagnetic problems \cite{Michalski2005}.}
+
+Taking the significance of these integrals into account, it is adequate to
+introduce a special symbol for Sommerfeld integrals.
+\begin{definition}[Sommerfeld integrals]	
+	Inverse Hankel transforms of orders $\nu \in \left\{0, 1, 2\right\}$
+	are called \emph{Sommerfeld integrals}.
+	They are denoted by
+	\begin{equation}\label{eq:si_pos_real_axis_path}
+		\sommerfeldIntegral{\nu}
+		% \left\{ \tilde{f} \left( k_\rho \right) \right\} \coloneqq 
+		% \frac{1}{2\pi}
+		% \int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+		% \besselj{\nu}\left(k_\rho \rho\right) 
+		% \tilde{f} \left(k_\rho\right) 
+		% \, .
+	\end{equation}
+\end{definition}
+
+Much of Sommerfeld's original considerations \cite{Sommerfeld1909} regarding
+dipole radiation above a plane lossy ground are not directly based on the
+\ac{SIP} but on an alternative integration path given by
+\begin{corollary}[Extended integration path]
+	Let $\tilde{f} \left\{k_\rho\right\}$ be an even (odd) function of $k_\rho$
+	for even (odd) $\nu \in \N$.
+	Then the Sommerfeld integral \eqref{eq:si_pos_real_axis_path}
+	along the positive real axis path is equivalent to
+	\begin{equation}\label{eq:si_sommerfeld_intgration_path}
+		\sommerfeldIntegral{\nu}{\tilde{f} \left( k_\rho \right)} =
+		\frac{1}{4\pi}
+		\int\limits_{-\infty}^{\infty} \dd k_\rho \, k_\rho
+		\besselh{2}{\nu} \left(k_\rho \rho\right)
+		\tilde{f} \left(k_\rho\right) \, .
+	\end{equation}
+	The path over $\R \cup \left\{-\infty, \infty\right\}$
+	is called \acf{SIP}\cite[p.~66]{Chew1999}.
+\end{corollary}
+
+\begin{remark}[\acf{SIP}]
+	To render the integral \eqref{eq:si_sommerfeld_intgration_path} defined
+	the \ac{SIP} must avoid the logarithmic branch point introduced by
+	$\besselh{2}{\nu}$ at $k_\rho = 0$.
+	Formally this can be achieved by slight deformation of the path into
+	$\C$ around this point.
+\end{remark}
+
+The \ac{SIP} has a variety of advantages over the positive real axis path in
+\eqref{eq:si_pos_real_axis_path}.
+Much of the power of Sommerfeld's approach originates in the fact that the
+involved spectral domain functions are holomorphic on $\C$ with the possible
+exceptions of distinct poles, branch point and the corresponding branch cuts.
+This makes it possible to deform the path of integration, either to render
+the integrals defined in first place or---totally leaving the real axis
+path---to apply elaborated analytical and numerical techniques.
+In this context the positive real axis path in \eqref{eq:si_pos_real_axis_path}
+has the disadvantage of not being closed.
+In fact, also this path can be deformed by virtue of Cauchy's theorem, but
+the full power of this result combined with the residue theorem is only
+available with the \ac{SIP}.
+As the real $-\infty$ and $\infty$ can be interpreted as the same point in
+$\C \cup \left\{\infty\right\}$ in the picture of Riemann's sphere
+\cite[p.~180]{Meyberg2006}, the \ac{SIP} is a closed path in the complex plane
+and the integral along the \ac{SIP} is, as stated by Cauchy's theorem
+and Jordan's lemma, equal to the sum of residues of the captured singularities.
+
+The proof of equivalence for \eqref{eq:si_pos_real_axis_path} and
+\eqref{eq:si_sommerfeld_intgration_path}---which has turned out so fruitful in
+the early days of the study of wave propagation---is nowadays a classic textbook
+example \cite[p.~203]{Sommerfeld1964}.
+
+
+
+
+
+
+
+
+% \begin{equation}\label{eq:sommerfeld_id_pos_real_axis}
+% 	\frac{\exp{-\im k r}}{r} = 
+% 	-\im
+% 	\int\limits_{0}^{\infty} \dd k_\rho \,
+% 	\besselj{0} \left(k_\rho \rho\right) k_\rho 
+% 	\frac{\exp{-\im k_z \abs{z}}}{k_z}
+% \end{equation}
+
+% \begin{theorem}[Sommerfeld identity with complex vertical distance]
+% 	Let $\rho \in \R$ with $\rho > 0$ and $k \in C$ be defined with
+% 	$\imag{k} < 0$ where $\imag{k} \to 0$. Then \eqref{eq:sommerfeld_id_pos_real_axis} 
+% 	remains valid if $\abs{z}$ with $z \in \R$ is replaced by a complex distance
+% 	as defined in  
+
+	
+% \end{theorem}
+
+% \begin{equation}\label{eq:sommerfeld_identity_bessel}
+% 	\frac{\exp{\im k r}}{r} = \im \int\limits_{0}^{\infty} \frac{k_\rho}{k_z} \besselj{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, ,
+% \end{equation}
+% where
+% \begin{equation}\label{eq:k_z}
+% 	k_z = \sqrt{k^2 - k_\rho^2} \, ,
+% \end{equation}
+% is chosen such that $\imag{k_z} > 0$.
+
+% \begin{lemma}[Sommerfeld identity {\cite[p.~684]{Sommerfeld1909}, \cite{Chew1999}}]\label{lemma:sommerfeld_identity}
+% 	Let $r,\,k\in\C \setminus \left\{0\right\}$, $z \in \C$, $\rho \in \R$, $\real{r} > 0$, $\imag{k} > 0$ and $r^2 = \rho^2 + z^2$. Then the Sommerfeld identity reads
+% \end{lemma}
+
+% \begin{proof}
+% 	\fxnote{Beweis für komplexe Ortskoordinaten}
+% \end{proof}
+
+% With Cauchy's integral theorem in mind, Sommerfeld recognized a certain drawback in the integration path along the positive real $k_\rho$-axis when it comes to getting enlightening physical insights out of integrals like the one in \eqref{eq:sommerfeld_identity_bessel}. For a closed integration path would much better suit the theorem Sommerfeld derived an alternative representation of \eqref{eq:sommerfeld_identity_bessel} invoking a well-known identity \cite[eq.~10.4.4]{Olver2010} and the so-called \enquote{circuit relations} of Hankel functions \cite[p.~314]{Sommerfeld1964}. It is given by
+% \begin{corollary}[Sommerfeld identity in terms of Hankel functions]
+% 	The Sommerfeld identity in terms of Hankel functions reads
+% 	\begin{equation}\label{eq:sommerfeld_identity_hankel}
+% 		\frac{\exp{\im k r}}{r} = \frac{\im}{2} \int\limits_{-\infty}^{\infty} \frac{k_\rho}{k_z} \besselh{1}{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, .
+% 	\end{equation}
+% \end{corollary}
+% The third well-known formulation of the very same mathematical statement expands the Hankel transform in \eqref{eq:sommerfeld_identity_bessel} or \eqref{eq:sommerfeld_identity_hankel}, respectively, in a two-dimensional Fourier integral
+% \begin{corollary}[Weyl identity {\cite{Weyl1919}, \cite{Chew1999}}]\label{coll:wely_identity}
+% 	The Weyl identity reads
+% 	\begin{equation}\label{eq:weyl_identity}
+% 		\frac{\exp{\im k r}}{r} = \frac{\im}{2\pi} \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty} \frac{-\exp{-\im k_z \abs{z}}}{\im k_z} \exp{\im k_x x} \exp{-\im k_y y} \dd k_x \, \dd k_y \, .
+% 	\end{equation}
+% \end{corollary}
+
+% For the mathematical equivalence of \eqref{eq:sommerfeld_identity_bessel}, \eqref{eq:sommerfeld_identity_hankel} and \eqref{eq:weyl_identity} all three forms can be employed in the description of the same physics, namely the description of a scalar spherical wave. While all three of the forms involve the plane wave term $\exp{i k_z \abs{z}}$ to represent the vertically directed wave constituents, the lateral part of the field can be represented either by standing or propagating cylindrical waves as well as by a superposition of plane waves.
+
+% The differing property of vertical and lateral, however, is that the properties of the lateral wave constituents solely depend on the integration variable while the set of vertical plane waves is in any case composed of propagating and evanescent portions, corresponding to the cases $k_\rho \lessgtr k$ in \eqref{eq:k_z}.
+
+% \fxnote{Hier noch schreiben wie sich das auswirkt.}
+
+
+% \fxnote{Beweis, dass Sommerfeld-Identität auch mit komplexen Längen gilt!?}
+%Die räumlichen Größen $r$ und $z$ in \eqref{eq:sommerfeld_identity} waren in Sommerfelds ursprüngliche Analyse reell. Wie früh erkannt wurde \cite{Deschamps1971,Keller1971} behält \cref{lemma:sommerfeld_identity} jedoch auch für $r, z\in\C$ seine Gültigkeit. Die Kugelwelle verändert dabei jedoch ihre für $r, z\in\R$ isotrope Charakteristik hin zu einem gerichteten gaußschen Strahl.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \subsection{Helmholtz Equation and Green's Function of Free Space}
 
 Let the following definitions prefix the present section.
@@ -828,279 +988,61 @@ $G_0 \left(\rdiff\right)$ if the axioms of \cref{def:euclidean_metric} and
 As an example, assume $0 < k \in \R$ and
 $R = R_\mathrm{re} + \im R_\mathrm{im}$, where
 $R = R_\mathrm{re}, R_\mathrm{im} \in \R$.
-Substituting these into \eqref{eq:scalar_free_space_gf}, consideration of the
-absolute value
+Substituting these into \eqref{eq:scalar_free_space_gf}, the consideration
 \begin{equation}\label{eq:example_csb}
 	\abs{\frac{\exp{-\im k R}}{R}} = 
 	\abs{ \frac{\exp{-\im k R_\mathrm{re}} \exp{k R_\mathrm{im}}}{R} } = 
 	\frac{\exp{k R_\mathrm{im}}}{\abs{R}}
 \end{equation}
 suggests the complex length $R$ should be defined with $\imag{R} \leq 0$ in
-order to allow large magnitude $R$.
-
-There are, however, also arguments for a definition of $R$ with non-negative
-real part \cite{Hansen2009,Hansen2013}.
-Intuitively, such a definition is closer to the notion of \cref{def:metric},
-by which a distance is always a non-negative real number.
-A straightforward approach to define complex distance could be
+order to allow large magnitude $R$. Such freedom of choice can be achieved
+with
 \begin{equation}
 	R = \sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
 	\, ,
 \end{equation}
-% where, however a decision must be made regarding the s.
-The effect of the two particular choices $\real{R} \ge 0$ and $\imag{R} \leq 0$
-are illustrated in 
+which could be seen as a straightforward relaxation of the requirement
+$0 \leq R \in \R$ in \cref{def:metric}.
+As the complex square root $\sqrt{z}$ has a branch point at $z = 0$, an
+valid branch cut must be defined.
+It is common to use
+\begin{definition}[Branch cut of the complex square root]
+	\label{def:sqrt_standard_branch_cut}
+	Let $z \in \C$ be arbitrary.
+	The branch cut of $\sqrt{z}$ is defined from $z = 0$ along the real axis
+	to $-\infty$.
+\end{definition}
 
-
-
-Both choices are, in principle, possible with 
-\begin{definition}[Complex distance]
-	Let $\robs \in \R^3$ and $\rsrc \in \C^3$ be two vectors and let the branch
-	cut of the square root $\sqrt{z}$ for $z\in\C$ be defined along the
-	non-positive real axis to $-\infty$.
-	Then the \emph{complex distance} of $\robs$ from $\rsrc$ is defined by
-	the double valued mapping
+With \cref{def:sqrt_standard_branch_cut} possible contact with the branch cut
+can be avoided by choosing $R$ such that $\real{R} \geq 0$.
+Furthermore, this choice appears appealing from an intuitive point of view,
+as well as compared to the requirement $R \in \R$ of \cref{def:metric}.
+Therefore, the term complex distance is subsequently used according to
+\begin{definition}[Complex distance]\label{def:cmplx_distance}
+	Let $\robs \in \R^3$ and $\rsrc \in \C^3$ be two vectors.
+	The \emph{complex distance} from $\rsrc$ to $\robs$ is defined by
 	\begin{equation}
 		\cmplxlength{\rdiff} = 
 		\sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
+		\, ,
 	\end{equation}
-	up to the choice of one of the two Riemann sheets.
+	where the square root is evaluated with
+	$\real{\cmplxlength{\rdiff}} \geq 0$.
 \end{definition}
 
-The main feature of 
+As it turns out, the choice of \cref{def:cmplx_distance} even has a special
+physical meaning:
+with this choice the spherical symmetry of \eqref{eq:scalar_free_space_gf}
+passes over to a directive pattern.
+This pattern is similar to that of a single-sided Gaussian beam
+\cite{hecht2017}, at least for small angles near the beam axis.
+As the term Gaussian beam is more frequently used in another context, this
+wave object $G_0 \left(\robs, \rsrc\right)$ with $\rsrc \in \C^3$ is called
+\ac{CSB} in the following \cite{Hansen2009,Hansen2013}.
+Details of \ac{CSB} behavior can be found in the literature
+\cite{Deschamps1971,Keller1971,Couture1981}.
 
-
-
-
-
-
-
-
-
-
-
-% In case $k$ in \eqref{eq:scalar_helmholtz_equation_inhomogeneous} is not
-% constant throughout $\R^3$ the Green's function is no longer given by the
-% simple formula \eqref{eq:scalar_free_space_gf}.
-% In the case of $k = k\left(z\right)$ it is instead expressed by spectral
-% integrals where only the spectral Green's function is known analytically.
-% The \ac{DCIM} aims to fit these integrands by terms which can be integrated
-% analytically and which have the form of \eqref{eq:scalar_free_space_gf}.
-% However, the distance $R \coloneqq \abs{\rdiff}$ in 
-% \eqref{eq:scalar_free_space_gf} is written in case of the Euclidean metric
-% according to \cref{def:euclidean_metric}.
-% Therefore, $R$ is always a real, non-negative number.
-% This property does not hold within the framework of \ac{DCIM}, where $R$
-% is complex in general.
-% This property is, in fact, the eponymous feature of the \ac{DCIM}.
-
-Namely, the \enquote{distance} $R \in \C$ within the \ac{DCIM} is of the
-specific form
-\begin{equation}\label{eq:dcim_cmplx_length_sqrt_z}
-	R = \sqrt{\rho^2 + z^2}
-	\, ,
-\end{equation}
-where $\rho = \abs{\left(\rdiff\right) \times \uv{z}}$ and $z \in \C$ is a
-parameter obtained by the \ac{DCIM}.
-Clearly, in \eqref{eq:dcim_cmplx_length_sqrt_z} a decision has to be made how
-to choose the branch of the complex square root.
-However, it is obvious that $R$ in \eqref{eq:dcim_cmplx_length_sqrt_z} is not
-a length in the sense of a metric as specified in \cref{def:metric}.
-
-% With regard to complex image sources within the electromagnetic context, it is
-% observed that the output data of the \ac{DCIM} provides complex scalars
-% which can be interpreted length-like.
-% This fact does not cause problems if the \ac{DCIM} is applied as originally
-% intended, as these complex images are summated internally. Within the 
-% conventional algorithm they are never actually \enquote{placed} in a 
-% $\C^3$ solution domain of the electromagnetic field problem.
-% However, towards a possible integration of complex images into the \ac{FMM} the
-% aim is to do exactly this.
-
-% As it can easily be seen from \cref{def:metric} and \cref{def:norm}
-% the operation mapping a vector $\rsrc \in \C^3$ to a complex distance in the
-% \acs{DCIM}-sense can neither be a metric nor a norm.
-% Nevertheless, as it is demonstrated in a paper by \textcite{Hansen2009}, such a
-% complex distance can have a physical meaning.
-% One property of a complex distance which can be axiomatically postulated
-% is that a complex distance $r \in \C$ should have non-negative real part.
-% Within the context of \ac{DCIM} a reasonable definition of complex length
-% is \cite{Hansen2009, Hansen2013}
-% \begin{definition}[Complex length]
-% 	Let $x, y \in \R$, $z \in \C$ and the square root $\sqrt{c}$ of
-% 	an arbitrary complex number $c$ be defined with its branch cut along the
-% 	negative real axis.
-% 	Then the \emph{complex length} of a vector
-% 	$\pvec{r} = \uv{x}x + \uv{y}y +\uv{z}z$ is defined as
-% 	\begin{equation}
-% 		r_c =
-% 		\complexLength{\pvec{r}} =
-% 		\sqrt{\pvec{r} \cdot \overline{\pvec{r}}} =
-% 		\sqrt{x^2 + y^2 + z^2} \, ,
-% 	\end{equation}
-% 	where the square root is evaluated on the Riemann sheet on which 
-% 	$\real{r_c} \ge 0$.
-% \end{definition}
-
-
-
-
-
-
-\subsection{Sommerfeld Integrals}
-
-In the electromagnetic context inverse Hankel transform integrals
-are---in Arnold Sommerfeld's honor---predominantly referred to
-as \emph{Sommerfeld integrals} \cite{Sommerfeld1909, Mosig2021}.
-However, in this field only transforms of orders
-$\nu \in \left\{0, 1, 2\right\}$ occur\footnote{Transforms of order $\nu = 2$
-can, in fact, be expressed by ones of orders $\nu = 0$ and $\nu = 1$ in
-electromagnetic problems \cite{Michalski2005}.}
-
-Taking the significance of these integrals into account, it is adequate to
-introduce a special symbol for Sommerfeld integrals.
-\begin{definition}[Sommerfeld integrals]	
-	Inverse Hankel transforms of orders $\nu \in \left\{0, 1, 2\right\}$
-	are called \emph{Sommerfeld integrals}.
-	They are denoted by
-	\begin{equation}\label{eq:si_pos_real_axis_path}
-		\sommerfeldIntegral{\nu}
-		% \left\{ \tilde{f} \left( k_\rho \right) \right\} \coloneqq 
-		% \frac{1}{2\pi}
-		% \int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
-		% \besselj{\nu}\left(k_\rho \rho\right) 
-		% \tilde{f} \left(k_\rho\right) 
-		% \, .
-	\end{equation}
-\end{definition}
-
-Much of Sommerfeld's original considerations \cite{Sommerfeld1909} regarding
-dipole radiation above a plane lossy ground are not directly based on the
-\ac{SIP} but on an alternative integration path given by
-\begin{corollary}[Extended integration path]
-	Let $\tilde{f} \left\{k_\rho\right\}$ be an even (odd) function of $k_\rho$
-	for even (odd) $\nu \in \N$.
-	Then the Sommerfeld integral \eqref{eq:si_pos_real_axis_path}
-	along the positive real axis path is equivalent to
-	\begin{equation}\label{eq:si_sommerfeld_intgration_path}
-		\sommerfeldIntegral{\nu}{\tilde{f} \left( k_\rho \right)} =
-		\frac{1}{4\pi}
-		\int\limits_{-\infty}^{\infty} \dd k_\rho \, k_\rho
-		\besselh{2}{\nu} \left(k_\rho \rho\right)
-		\tilde{f} \left(k_\rho\right) \, .
-	\end{equation}
-	The path over $\R \cup \left\{-\infty, \infty\right\}$
-	is called \acf{SIP}\cite[p.~66]{Chew1999}.
-\end{corollary}
-
-\begin{remark}[\acf{SIP}]
-	To render the integral \eqref{eq:si_sommerfeld_intgration_path} defined
-	the \ac{SIP} must avoid the logarithmic branch point introduced by
-	$\besselh{2}{\nu}$ at $k_\rho = 0$.
-	Formally this can be achieved by slight deformation of the path into
-	$\C$ around this point.
-\end{remark}
-
-The \ac{SIP} has a variety of advantages over the positive real axis path in
-\eqref{eq:si_pos_real_axis_path}.
-Much of the power of Sommerfeld's approach originates in the fact that the
-involved spectral domain functions are holomorphic on $\C$ with the possible
-exceptions of distinct poles, branch point and the corresponding branch cuts.
-This makes it possible to deform the path of integration, either to render
-the integrals defined in first place or---totally leaving the real axis
-path---to apply elaborated analytical and numerical techniques.
-In this context the positive real axis path in \eqref{eq:si_pos_real_axis_path}
-has the disadvantage of not being closed.
-In fact, also this path can be deformed by virtue of Cauchy's theorem, but
-the full power of this result combined with the residue theorem is only
-available with the \ac{SIP}.
-As the real $-\infty$ and $\infty$ can be interpreted as the same point in
-$\C \cup \left\{\infty\right\}$ in the picture of Riemann's sphere
-\cite[p.~180]{Meyberg2006}, the \ac{SIP} is a closed path in the complex plane
-and the integral along the \ac{SIP} is, as stated by Cauchy's theorem
-and Jordan's lemma, equal to the sum of residues of the captured singularities.
-
-The proof of equivalence for \eqref{eq:si_pos_real_axis_path} and
-\eqref{eq:si_sommerfeld_intgration_path}---which has turned out so fruitful in
-the early days of the study of wave propagation---is nowadays a classic textbook
-example \cite[p.~203]{Sommerfeld1964}.
-
-
-
-
-
-
-
-\subsection{Sommerfeld identity}
-
-% \begin{equation}\label{eq:sommerfeld_id_pos_real_axis}
-% 	\frac{\exp{-\im k r}}{r} = 
-% 	-\im
-% 	\int\limits_{0}^{\infty} \dd k_\rho \,
-% 	\besselj{0} \left(k_\rho \rho\right) k_\rho 
-% 	\frac{\exp{-\im k_z \abs{z}}}{k_z}
-% \end{equation}
-
-% \begin{theorem}[Sommerfeld identity with complex vertical distance]
-% 	Let $\rho \in \R$ with $\rho > 0$ and $k \in C$ be defined with
-% 	$\imag{k} < 0$ where $\imag{k} \to 0$. Then \eqref{eq:sommerfeld_id_pos_real_axis} 
-% 	remains valid if $\abs{z}$ with $z \in \R$ is replaced by a complex distance
-% 	as defined in  
-
-	
-% \end{theorem}
-
-% \begin{equation}\label{eq:sommerfeld_identity_bessel}
-% 	\frac{\exp{\im k r}}{r} = \im \int\limits_{0}^{\infty} \frac{k_\rho}{k_z} \besselj{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, ,
-% \end{equation}
-% where
-% \begin{equation}\label{eq:k_z}
-% 	k_z = \sqrt{k^2 - k_\rho^2} \, ,
-% \end{equation}
-% is chosen such that $\imag{k_z} > 0$.
-
-% \begin{lemma}[Sommerfeld identity {\cite[p.~684]{Sommerfeld1909}, \cite{Chew1999}}]\label{lemma:sommerfeld_identity}
-% 	Let $r,\,k\in\C \setminus \left\{0\right\}$, $z \in \C$, $\rho \in \R$, $\real{r} > 0$, $\imag{k} > 0$ and $r^2 = \rho^2 + z^2$. Then the Sommerfeld identity reads
-% \end{lemma}
-
-% \begin{proof}
-% 	\fxnote{Beweis für komplexe Ortskoordinaten}
-% \end{proof}
-
-% With Cauchy's integral theorem in mind, Sommerfeld recognized a certain drawback in the integration path along the positive real $k_\rho$-axis when it comes to getting enlightening physical insights out of integrals like the one in \eqref{eq:sommerfeld_identity_bessel}. For a closed integration path would much better suit the theorem Sommerfeld derived an alternative representation of \eqref{eq:sommerfeld_identity_bessel} invoking a well-known identity \cite[eq.~10.4.4]{Olver2010} and the so-called \enquote{circuit relations} of Hankel functions \cite[p.~314]{Sommerfeld1964}. It is given by
-% \begin{corollary}[Sommerfeld identity in terms of Hankel functions]
-% 	The Sommerfeld identity in terms of Hankel functions reads
-% 	\begin{equation}\label{eq:sommerfeld_identity_hankel}
-% 		\frac{\exp{\im k r}}{r} = \frac{\im}{2} \int\limits_{-\infty}^{\infty} \frac{k_\rho}{k_z} \besselh{1}{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, .
-% 	\end{equation}
-% \end{corollary}
-% The third well-known formulation of the very same mathematical statement expands the Hankel transform in \eqref{eq:sommerfeld_identity_bessel} or \eqref{eq:sommerfeld_identity_hankel}, respectively, in a two-dimensional Fourier integral
-% \begin{corollary}[Weyl identity {\cite{Weyl1919}, \cite{Chew1999}}]\label{coll:wely_identity}
-% 	The Weyl identity reads
-% 	\begin{equation}\label{eq:weyl_identity}
-% 		\frac{\exp{\im k r}}{r} = \frac{\im}{2\pi} \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty} \frac{-\exp{-\im k_z \abs{z}}}{\im k_z} \exp{\im k_x x} \exp{-\im k_y y} \dd k_x \, \dd k_y \, .
-% 	\end{equation}
-% \end{corollary}
-
-% For the mathematical equivalence of \eqref{eq:sommerfeld_identity_bessel}, \eqref{eq:sommerfeld_identity_hankel} and \eqref{eq:weyl_identity} all three forms can be employed in the description of the same physics, namely the description of a scalar spherical wave. While all three of the forms involve the plane wave term $\exp{i k_z \abs{z}}$ to represent the vertically directed wave constituents, the lateral part of the field can be represented either by standing or propagating cylindrical waves as well as by a superposition of plane waves.
-
-% The differing property of vertical and lateral, however, is that the properties of the lateral wave constituents solely depend on the integration variable while the set of vertical plane waves is in any case composed of propagating and evanescent portions, corresponding to the cases $k_\rho \lessgtr k$ in \eqref{eq:k_z}.
-
-% \fxnote{Hier noch schreiben wie sich das auswirkt.}
-
-
-% \fxnote{Beweis, dass Sommerfeld-Identität auch mit komplexen Längen gilt!?}
-%Die räumlichen Größen $r$ und $z$ in \eqref{eq:sommerfeld_identity} waren in Sommerfelds ursprüngliche Analyse reell. Wie früh erkannt wurde \cite{Deschamps1971,Keller1971} behält \cref{lemma:sommerfeld_identity} jedoch auch für $r, z\in\C$ seine Gültigkeit. Die Kugelwelle verändert dabei jedoch ihre für $r, z\in\R$ isotrope Charakteristik hin zu einem gerichteten gaußschen Strahl.
-
-
-
-
-
-
-
-
-
-
+\fxnote{explain \ac{CSB} in context of \ac{DCIM}}
 
 
 
