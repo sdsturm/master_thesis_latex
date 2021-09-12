@@ -200,9 +200,15 @@
 \newcommand{\pdsecmixed}[2]{\frac{\partial^2}{\partial {#1} \partial {#2}}}	% 2nd mixed partial derivative
 \newcommand{\landau}[1]{\mathcal{O} \left( #1 \right)}
 \newcommand{\cmplxlength}[1]{\abs{#1}_\mathrm{c}}
-\newcommand{\sommerfeldIntegral}[2]{\mathcal{S}_{#1} \left\{#2\right\}}
-\newcommand{\fourierTransformForward}[1]{\mathcal{F} \left\{#1\right\}}
-\newcommand{\fourierTransformBackward}[1]{\mathcal{F}^{-1} \left\{#1\right\}}
+
+% Integral transforms
+\newcommand{\fourierTransformTemporal}{\mathcal{F}_{\mathrm{t}}}
+\newcommand{\fourierTransformTemporalInverse}{\mathcal{F}_{\mathrm{t}}^{-1}}
+\newcommand{\fourierTransformSpatial}{\mathcal{F}_{\mathrm{s}}}
+\newcommand{\fourierTransformSpatialInverse}{\mathcal{F}_{\mathrm{s}}^{-1}}
+\newcommand{\hankelTransform}[1]{\mathcal{H}_{#1}}
+\newcommand{\hankelTransformInverse}[1]{\mathcal{H}^{-1}_{#1}}
+\newcommand{\sommerfeldIntegral}[1]{\mathcal{S}_{#1}}
 
 % Misc
 \newcommand{\e}{\mathrm{e}}					% Euler's number

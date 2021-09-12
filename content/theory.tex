@@ -263,9 +263,10 @@ uses
 	\label{def:fourier_transfrom_temporal_forward}
 	Let $f \in L^1\left( \R \right)$ be a function of a variable $t \in \R$
 	which shall be called \emph{time}.
-	The \emph{Fourier transform with respect to time} is defined as 
+	Then the \emph{Fourier transform with respect to time} of $f$ is defined as 
 	\begin{equation}\label{eq:fourier_transfrom_temporal_forward}
-		\fourierTransformForward{f \left(t\right)} \coloneqq
+		\tilde{f} \left(\omega\right) = 
+		\left( \fourierTransformTemporal f \right) \left(\omega\right) = 
 		\tilde{f} \left( \omega \right) =
 		\int\limits_{-\infty}^{\infty} \dd t \,
 		\exp{-\im \omega t} 
@@ -285,8 +286,9 @@ given by
 	$\tilde{f} \in L^1 \left(\R\right)$. Then the
 	inverse Fourier transform with respect to time is given by
 	\begin{equation}\label{eq:fourier_transform_temporal_backward}
-		\fourierTransformBackward{\tilde{f} \left(\omega\right)} = 
-		f \left( t \right) =
+		f \left(t\right) =
+		\left( \fourierTransformTemporalInverse \tilde{f} \right)
+		\left( t \right) = 
 		\frac{1}{2\pi}
 		\int\limits_{-\infty}^{\infty} \dd \omega \,
 		\exp{\im \omega t} 
@@ -328,8 +330,8 @@ way of
 	which shall be called \emph{position} and assume $\pvec{k} \in \C^3$.
 	The \emph{Fourier transform with respect to space} is defined as
 	\begin{equation}\label{eq:fourier_transform_3space_forward}
-		\fourierTransformForward{f \left( \pvec{r} \right)} = 
 		\tilde{f} \left( \pvec{k} \right) = 
+		\left( \fourierTransformSpatial f \right) \left( \pvec{k} \right) = 
 		\iiint\limits_{\R^3} \dd \pvec{r} \,
 		\exp{\im \pvec{k} \cdot \pvec{r}}
 		f \left( \pvec{r} \right) \, ,
@@ -339,8 +341,8 @@ way of
 \end{definition}
 The inverse transform to \eqref{eq:fourier_transform_3space_forward} becomes
 \begin{equation}\label{eq:fourier_transform_3space_backward}
-	\fourierTransformBackward{\tilde{f} \left( \pvec{k} \right)} = 
 	f \left( \pvec{r} \right) = 
+	\left( \fourierTransformSpatialInverse \tilde{f} \right) \left(\pvec{r}\right) = 
 	\frac{1}{\left( 2\pi \right)^3}
 	\iiint\limits_{\R^3} \dd \pvec{k} \,
 	\exp{-\im \pvec{k} \cdot \pvec{r}}
@@ -351,7 +353,6 @@ Based on \cref{def:fourier_transfrom_temporal_forward} and
 of transforms
 \begin{equation}\label{eq:fourier_transform_4d_forward}
 	\tilde{f} \left( \pvec{k}, \omega \right) = 
-	\fourierTransformForward{ f \left(\pvec{r}, t\right) } =
 	\iiint\limits_{\R^3} \dd \robs
 	\int\limits_{-\infty}^{\infty} \dd t \,
 	\exp{\im \left( \pvec{k} \cdot \robs - \omega t \right)}
@@ -359,7 +360,6 @@ of transforms
 \end{equation}
 and
 \begin{equation}\label{eq:fourier_transform_4d_inverse}
-	\fourierTransformBackward{ \tilde{f} \left(\pvec{k}, \omega\right) } = 
 	f \left( \robs, t \right) = 
 	\frac{1}{\left(2\pi\right)^4}
 	\iiint\limits_{\R^3} \dd \pvec{k}
@@ -488,8 +488,9 @@ defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 	\label{coll:hankel_transform}
 	The Hankel transform of order $\nu$ of a function $f\left(\rho\right)$ is
 	given by
-	\begin{equation}\label{eq:hankel_transform_forward}
-		\tilde{f}_\nu\left(k_\rho\right) =
+	\begin{equation}\label{eq:hankel_transform}
+		\tilde{f}_\nu \left(k_\rho\right) =
+		\left( \hankelTransform{\nu} f \right) \left(k_\rho\right) = 
 		2\pi
 		\int\limits_{0}^{\infty} \dd \rho \, \rho
 		\besselj{\nu}\left(k_\rho \rho\right)
@@ -500,6 +501,7 @@ defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 	The inverse Hankel transform is given by
 	\begin{equation}\label{eq:hankel_transform_inverse}
 		f\left(\rho\right) =
+		\left( \hankelTransformInverse{\nu}\tilde{f}\right) \left(\rho\right) =
 		\frac{1}{2\pi}
 		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
 		\besselj{\nu}\left(k_\rho \rho\right)
@@ -590,7 +592,7 @@ defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 		\, ,
 	\end{equation}
 	which is the inverse Hankel transform \eqref{eq:hankel_transform_inverse}.
-	The connection of the forward transform \eqref{eq:hankel_transform_forward}
+	The connection of the forward transform \eqref{eq:hankel_transform}
 	to \eqref{eq:fourier_transform_2space_forward} can be shown in the same
 	manner.
 \end{proof}
@@ -834,12 +836,13 @@ introduce a special symbol for Sommerfeld integrals.
 	are called \emph{Sommerfeld integrals}.
 	They are denoted by
 	\begin{equation}\label{eq:si_pos_real_axis_path}
-		\sommerfeldIntegral{\nu}{\tilde{f} \left( k_\rho \right)} \coloneqq 
-		\frac{1}{2\pi}
-		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
-		\besselj{\nu}\left(k_\rho \rho\right) 
-		\tilde{f} \left(k_\rho\right) 
-		\, .
+		\sommerfeldIntegral{\nu}
+		% \left\{ \tilde{f} \left( k_\rho \right) \right\} \coloneqq 
+		% \frac{1}{2\pi}
+		% \int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+		% \besselj{\nu}\left(k_\rho \rho\right) 
+		% \tilde{f} \left(k_\rho\right) 
+		% \, .
 	\end{equation}
 \end{definition}
 
@@ -1211,7 +1214,7 @@ for the transversal part of the Laplacian operator \cite[p.~731]{Bronstein2016} 
 \begin{equation}\label{eq:H_z_pde}
 	\laplaceTrans H_z + \frac{\partial}{\partial z}\frac{1}{\mu}\frac{\partial}{\partial z} \mu H_z + k^2 H_z = 0 \,.
 \end{equation}
-If the Hankel transform \eqref{eq:hankel_transform_forward} for $\nu = 0$ is applied to \eqref{eq:H_z_pde} this corresponds to the formal substitution\footnote{Fourier transform \wrt $x$ and $y$ would correspond to $\laplaceTrans \rightarrow - k_x^2 - k_y^2$.} \cite{Michalski2016b}
+If the Hankel transform \eqref{eq:hankel_transform} for $\nu = 0$ is applied to \eqref{eq:H_z_pde} this corresponds to the formal substitution\footnote{Fourier transform \wrt $x$ and $y$ would correspond to $\laplaceTrans \rightarrow - k_x^2 - k_y^2$.} \cite{Michalski2016b}
 \begin{equation}
 	\laplaceTrans \rightarrow -k_\rho^2 \equiv - k_x^2 - k_y^2 \,.
 \end{equation}
