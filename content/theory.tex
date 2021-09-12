@@ -377,12 +377,13 @@ into an infinite number of \emph{plane waves}---expressed by the
 $\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}$ terms---where
 the expansion coefficients are given by \eqref{eq:fourier_transform_4d_forward}.
 Each one of these individual plane waves solves
-the homogeneous scalar wave equation \cite[p.~480]{Griffiths2011}
+the homogeneous scalar wave equation \cite[p.~32]{Sommerfeld1964}
 \begin{equation}\label{eq:scalar_wave_equation_physical_domain}
 	\left( \laplace - \frac{1}{c^2} \frac{\partial^2}{\partial t^2} \right)	
 	\phi \left( \pvec{r}, t \right) = 0
 \end{equation}
-in the \enquote{physical} $\left(\pvec{r}, t\right)$-domain.
+in the \enquote{physical} $\left(\pvec{r}, t\right)$-domain, where $c$ ist
+the velocity of propagation.
 However, if the same phasor convention of
 \cref{def:fourier_transfrom_temporal_forward} would also be used in
 \cref{def:fourier_transfrom_spatial_forward}, the kernel
@@ -621,6 +622,7 @@ first-order harmonic variation of $\tilde{f}$ in $k_\varphi$.
 The second order transform is amenable to second order harmonic variation in
 $k_\varphi$ and so on.
 
+\fxnote{Check this paragraph}
 This observation of a central mathematical property of the integral transforms
 given by \cref{coll:hankel_transform} directly leads the use case in
 electromagnetic theory.
@@ -645,34 +647,43 @@ for the straightforward evaluation by numerical integration.
 
 
 
+
 \subsection{Helmholtz Equation and Green's Function of Free Space}
 
-% Let the following definitions prefix the present section.
-% \begin{definition}[Domain]
-% 	An open, simply connected subset of a finite dimensional vector space is
-% 	called a \emph{domain}.
-% \end{definition}
-% \begin{definition}[Closure]
-% 	Let $\Omega$ be a domain.
-% 	The set $\overline{\Omega}$ consisting of $\Omega$ and all its limit points
-% 	is called \emph{closure} of $\Omega$.
-% \end{definition}
-% \begin{definition}[Boundary]
-% 	Let $\Omega \subset \R^3$ with closure $\overline{\Omega}$.
-% 	Then the set $\partial\Omega \coloneqq \overline{\Omega}\setminus\Omega$
-% 	is called \emph{boundary} of $\Omega$.
-% \end{definition}
+Let the following definitions prefix the present section.
+\begin{definition}[Domain]
+	An open, simply connected subset of a finite dimensional vector space is
+	called a \emph{domain}.
+\end{definition}
+\begin{definition}[Closure]
+	Let $\Omega$ be a domain.
+	The set $\overline{\Omega}$ consisting of $\Omega$ and all its limit points
+	is called \emph{closure} of $\Omega$.
+\end{definition}
+\begin{definition}[Boundary]
+	Let $\Omega \subset \R^3$ be a domain with closure $\overline{\Omega}$.
+	The set $\partial\Omega \coloneqq \overline{\Omega}\setminus\Omega$
+	is called \emph{boundary} of $\Omega$.
+\end{definition}
 
-% The scalar wave equation \eqref{eq:scalar_wave_equation_physical_domain}
-% is a \ac{PDE} equation both in space and in time.
-% By application of \eqref{eq:fourier_transfrom_temporal_forward} to
-% \eqref{eq:scalar_wave_equation_physical_domain} the scalar Helmholtz equation
-% \begin{equation}\label{eq:scalar_helmholtz_equation}
-% 	\left( \laplace + k^2 \right) \phi \left( \robs, \omega \right) = 0
-% 	\qquad \omega = \mathrm{const.}
-% \end{equation}
-% is obtained, where $\omega$ is now only a parameter.
-% Hence, \eqref{eq:scalar_helmholtz_equation} has become a \ac{PDE} in space only.
+The scalar wave equation \eqref{eq:scalar_wave_equation_physical_domain}
+is a \ac{PDE} equation both in space and in time.
+By application of \eqref{eq:fourier_transfrom_temporal_forward} to
+\eqref{eq:scalar_wave_equation_physical_domain} the scalar Helmholtz equation
+\begin{equation}\label{eq:scalar_helmholtz_equation}
+	\left( \laplace + k^2 \right) \phi \left( \robs, \omega \right) = 0
+	\qquad \omega = \mathrm{const.}
+\end{equation}
+is obtained, where $\omega$ is a parameter of the problem.
+Hence, \eqref{eq:scalar_helmholtz_equation} is a \ac{PDE} in space only.
+Moreover, in the common scheme of classification \cite[pp.~38]{Sommerfeld1964}
+the type of \ac{PDE} changes from hyperbolic to elliptic type in the
+transition from \eqref{eq:scalar_wave_equation_physical_domain} to
+\eqref{eq:scalar_helmholtz_equation}\footnote{For this reason the present
+thesis avoids using the term \enquote{wave equation} for
+\eqref{eq:scalar_helmholtz_equation}, although this terminology is frequently
+used in the literature \cite[p.~238]{Sommerfeld1964}\cite{Coifman1993}}.
+
 
 % \begin{definition}[Delta function]
 % 	Let $\robs,\rsrc\in\R^3$ and
@@ -737,7 +748,7 @@ for the straightforward evaluation by numerical integration.
 
 
 
-\subsection{Complex Euclidean Space and Complex Source Beams}
+\subsection{Complex Source Beams}
 
 % If the \ac{DCIM} is interpreted in terms of actual image sources the notions
 % of complex \emph{length} and \emph{distance} play a role.

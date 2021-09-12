@@ -49,10 +49,17 @@
 \pgfplotsset{compat=newest}
 \pgfplotsset{table/search path = {./../../numerical_results/}}
 \usepgfplotslibrary{external} 
-% \tikzexternalize[prefix=./figures_externalized/]
 \tikzexternalize[prefix=./external_figures/]
 
-\usepackage[]{biblatex}
+% Bibliography
+\usepackage[%
+    style=ieee,
+    backend=biber,
+    url=true,
+    isbn=false,
+    doi=false,
+    ]%
+{biblatex}
 \addbibresource{./../references.bib}
 
 \usepackage[%
