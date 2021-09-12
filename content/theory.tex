@@ -227,6 +227,7 @@ A valid inner product for the Euclidean space is given by
 
 With \cref{def:dot_product} we also obtain a way to actually compute length
 and distance according to the following two definitions.
+
 \begin{definition}[Euclidean norm]\label{def:euclidean_norm}
 	Let $\pvec{r} \in \C^3$ arbitrary. Then the \emph{Euclidean norm} of
 	$\pvec{r}$ is defined as
@@ -249,11 +250,8 @@ and distance according to the following two definitions.
 \end{definition}
 
 \begin{remark}[Euclidean norm notation]
-	For the sake of simplicity in notation, and to be in accordance with
-	common practice \cite{vanBladel2007}, $\euclideanNorm{\robs}$ is
-	denoted as $\pvec \equiv \abs{\robs} \equiv \euclideanNorm{\robs}$
-	whenever the length of a physical vector is meant
-	and no other notation is clear from the context.
+	For notational convenience the subscript $2$ is omitted and---unless
+	marked otherwise---the Euclidean norm is assumed by just writing $\norm{.}$
 \end{remark}
 
 
@@ -782,7 +780,7 @@ according to
 
 The Green's function of the Helmholtz equation for the important case of
 constant $k$ is given by the well-known \cite{Jackson2013}
-\begin{corollary}[Free-space Green's function]
+\begin{corollary}[Free-space Green's function]\label{coll:free_space_gf}
 	Let $\rsrc, \robs \in \R^3$ with $\robs \neq \rsrc$ and assume
 	$k$ to be a constant function of $\robs$ with $\imag{k} \leq 0$.
 	Furthermore, let valid solutions to
@@ -791,7 +789,7 @@ constant $k$ is given by the well-known \cite{Jackson2013}
 	Then
 	\begin{equation}\label{eq:scalar_free_space_gf}
 		G_0 \left( \rdiff \right) =
-		\frac{\exp{-\im k \abs{\rdiff}}}{4\pi \abs{\rdiff}}
+		\frac{\exp{-\im k \rdiffNorm}}{4\pi \rdiffNorm}
 	\end{equation}
 	is the unique solution to \eqref{eq:scalar_helmholtz_equation} for
 	$\diracDelta$-excitation at $\rsrc$.
@@ -799,8 +797,8 @@ constant $k$ is given by the well-known \cite{Jackson2013}
 
 Clearly, $G_0$ represents an outward propagating spherical scalar wave 
 centered at $\rsrc$.
-Subsequently, the shortcut $R \coloneqq \abs{\rdiff}$ shall be used for
-notational convenience.
+Subsequently, the shortcuts $\pvec{R} \coloneqq \rdiff$ and
+$R = \norm{\pvec{R}}$ shall be used for notational convenience.
 
 
 
@@ -810,20 +808,91 @@ notational convenience.
 
 \subsection{Complex Source Beams}
 
-In case $k$ in \eqref{eq:scalar_helmholtz_equation_inhomogeneous} is not
-constant throughout $\R^3$ the Green's function is no longer given by the
-simple formula \eqref{eq:scalar_free_space_gf}.
-In the case of $k = k\left(z\right)$ it is instead expressed by spectral
-integrals where only the spectral Green's function is known analytically.
-The \ac{DCIM} aims to fit these integrands by terms which can be integrated
-analytically and which have the form of \eqref{eq:scalar_free_space_gf}.
-However, the distance $R \coloneqq \abs{\rdiff}$ in 
-\eqref{eq:scalar_free_space_gf} is written in case of the Euclidean metric
-according to \cref{def:euclidean_metric}.
-Therefore, $R$ is always a real, non-negative number.
-This property does not hold within the framework of \ac{DCIM}, where $R$
-is complex in general.
-This property is, in fact, the eponymous feature of the \ac{DCIM}.
+In view of the assumptions of \cref{coll:free_space_gf} it is clear that
+$R$ is real and non-negative.
+However, according to the metric as specified by \cref{def:metric}, this even
+holds if the requirement $\rsrc, \robs \in \R^3$ is relaxed to
+$\rsrc, \robs \in \C^3$ as the dot product of a complex vector with itself
+is real quantity according to \cref{def:dot_product}.
+Conversely, a mapping $\cmplxlength{\pvec{z}}: \C^3 \mapsto \C$ for a vector
+$\pvec{z} = \rdiff$ with $\rsrc, \robs \in \C^3$ is not a norm according
+to \cref{def:norm}, \ie, such a definition of the distance between the
+points $\robs$ and $\rsrc$ is not a metric.
+
+However, it turns out that the usual observation point $\robs \in \R^3$ 
+in conjunction with a $\diracDelta$-source at \enquote{point} $\rsrc \in \C^3$
+causes a significant change in the behavior of the function
+$G_0 \left(\rdiff\right)$ if the axioms of \cref{def:euclidean_metric} and
+\cref{def:euclidean_norm} are dropped.
+
+As an example, assume $0 < k \in \R$ and
+$R = R_\mathrm{re} + \im R_\mathrm{im}$, where
+$R = R_\mathrm{re}, R_\mathrm{im} \in \R$.
+Substituting these into \eqref{eq:scalar_free_space_gf}, consideration of the
+absolute value
+\begin{equation}\label{eq:example_csb}
+	\abs{\frac{\exp{-\im k R}}{R}} = 
+	\abs{ \frac{\exp{-\im k R_\mathrm{re}} \exp{k R_\mathrm{im}}}{R} } = 
+	\frac{\exp{k R_\mathrm{im}}}{\abs{R}}
+\end{equation}
+suggests the complex length $R$ should be defined with $\imag{R} \leq 0$ in
+order to allow large magnitude $R$.
+
+There are, however, also arguments for a definition of $R$ with non-negative
+real part \cite{Hansen2009,Hansen2013}.
+Intuitively, such a definition is closer to the notion of \cref{def:metric},
+by which a distance is always a non-negative real number.
+A straightforward approach to define complex distance could be
+\begin{equation}
+	R = \sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
+	\, ,
+\end{equation}
+% where, however a decision must be made regarding the s.
+The effect of the two particular choices $\real{R} \ge 0$ and $\imag{R} \leq 0$
+are illustrated in 
+
+
+
+Both choices are, in principle, possible with 
+\begin{definition}[Complex distance]
+	Let $\robs \in \R^3$ and $\rsrc \in \C^3$ be two vectors and let the branch
+	cut of the square root $\sqrt{z}$ for $z\in\C$ be defined along the
+	non-positive real axis to $-\infty$.
+	Then the \emph{complex distance} of $\robs$ from $\rsrc$ is defined by
+	the double valued mapping
+	\begin{equation}
+		\cmplxlength{\rdiff} = 
+		\sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
+	\end{equation}
+	up to the choice of one of the two Riemann sheets.
+\end{definition}
+
+The main feature of 
+
+
+
+
+
+
+
+
+
+
+
+% In case $k$ in \eqref{eq:scalar_helmholtz_equation_inhomogeneous} is not
+% constant throughout $\R^3$ the Green's function is no longer given by the
+% simple formula \eqref{eq:scalar_free_space_gf}.
+% In the case of $k = k\left(z\right)$ it is instead expressed by spectral
+% integrals where only the spectral Green's function is known analytically.
+% The \ac{DCIM} aims to fit these integrands by terms which can be integrated
+% analytically and which have the form of \eqref{eq:scalar_free_space_gf}.
+% However, the distance $R \coloneqq \abs{\rdiff}$ in 
+% \eqref{eq:scalar_free_space_gf} is written in case of the Euclidean metric
+% according to \cref{def:euclidean_metric}.
+% Therefore, $R$ is always a real, non-negative number.
+% This property does not hold within the framework of \ac{DCIM}, where $R$
+% is complex in general.
+% This property is, in fact, the eponymous feature of the \ac{DCIM}.
 
 Namely, the \enquote{distance} $R \in \C$ within the \ac{DCIM} is of the
 specific form
@@ -1588,7 +1657,7 @@ addition theorem by handbooks on mathematical functions
 A more specialized version also plays a role in analytical field theory where
 \cite[p.~414]{Stratton2007}
 \begin{equation}\label{eq:addition_thrm_spherical_waves_stratton}
-	\frac{\exp{-\im k \abs{\rdiff}}}{\abs{\rdiff}} =
+	\frac{\exp{-\im k \rdiffNorm}}{\rdiffNorm} =
 	-\im k \sum\limits_{l=0}^{\infty}
 	\left(2l + 1\right)
 	\legendrepl{l} \left( \uv{r} \cdot \uv{r^\prime} \right)

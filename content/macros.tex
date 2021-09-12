@@ -168,6 +168,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{remark}{Remark}[theorem]
+\newtheorem*{example}{Example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Own mathematical commands
@@ -192,7 +193,6 @@
 \newcommand{\abs}[1]{\left\vert#1\right\vert}	% absolute value
 \newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
 \newcommand{\euclideanNorm}[1]{\norm{#1}_2} % Euclidean norm
-\newcommand{\complexLength}[1]{\norm{#1}_\mathrm{c}} % Euclidean norm
 \newcommand{\pd}[2][]{\frac{\partial#1}{\partial#2}} 	% partial derivative (function as an optional argument)
 \newcommand{\nd}[2][]{\frac{\dd#1}{\dd#2}} 	% normal derivative (function as an optional argument)
 \newcommand{\pdsec}[1]{\frac{\partial^2}{\partial {#1}^2}}	% 2nd partial derivative
@@ -242,7 +242,7 @@
 \newcommand{\robs}{\pvec{r}}
 \newcommand{\rsrc}{\pvec{r}^\prime}
 \newcommand{\rdiff}{\robs-\rsrc}
-\newcommand{\rdiffabs}{\abs{\rdiff}}
+\newcommand{\rdiffNorm}{\norm{\rdiff}}
 \newcommand{\ewaldintegral}{\oiint\limits_{S^2} \dd^2 \uv{k} \, }
 \newcommand{\te}{\mathrm{TE}}
 \newcommand{\tm}{\mathrm{TM}}
