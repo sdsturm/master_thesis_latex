@@ -809,6 +809,90 @@ $\rdiffNormSymbol = \norm{\pvec{R}}$ shall be used for notational convenience.
 
 
 
+\subsection{Complex Source Beams}
+
+In view of the assumptions of \cref{coll:free_space_gf} it is clear that
+$R$ is real and non-negative.
+However, according to the metric as specified by \cref{def:metric}, this even
+holds if the requirement $\rsrc, \robs \in \R^3$ is relaxed to
+$\rsrc, \robs \in \C^3$ as the dot product of a complex vector with itself
+is real quantity according to \cref{def:dot_product}.
+Conversely, a mapping $\cmplxlength{\pvec{z}}: \C^3 \mapsto \C$ for a vector
+$\pvec{z} = \rdiff$ with $\rsrc, \robs \in \C^3$ is not a norm according
+to \cref{def:norm}, \ie, such a definition of the distance between the
+points $\robs$ and $\rsrc$ is not a metric.
+
+However, it turns out that the usual observation point $\robs \in \R^3$ 
+in conjunction with a $\diracDelta$-source at \enquote{point} $\rsrc \in \C^3$
+causes a significant change in the behavior of the function
+$G_0 \left(\rdiff\right)$ if the axioms of \cref{def:euclidean_metric} and
+\cref{def:euclidean_norm} are dropped.
+
+As an example, assume $0 < k \in \R$ and
+$R = R_\mathrm{re} + \im R_\mathrm{im}$, where
+$R = R_\mathrm{re}, R_\mathrm{im} \in \R$.
+Substituting these into \eqref{eq:scalar_free_space_gf}, the consideration
+\begin{equation}\label{eq:example_csb}
+	\abs{\frac{\exp{-\im k R}}{R}} = 
+	\abs{ \frac{\exp{-\im k R_\mathrm{re}} \exp{k R_\mathrm{im}}}{R} } = 
+	\frac{\exp{k R_\mathrm{im}}}{\abs{R}}
+\end{equation}
+suggests the complex length $R$ should be defined with $\imag{R} \leq 0$ in
+order to allow large magnitude $R$. Such freedom of choice can be achieved
+with
+\begin{equation}
+	R = \sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
+	\, ,
+\end{equation}
+which could be seen as a straightforward relaxation of the requirement
+$0 \leq R \in \R$ in \cref{def:metric}.
+As the complex square root $\sqrt{z}$ has a branch point at $z = 0$, an
+valid branch cut must be defined.
+It is common to use
+\begin{definition}[Branch cut of the complex square root]
+	\label{def:sqrt_standard_branch_cut}
+	Let $z \in \C$ be arbitrary.
+	The branch cut of $\sqrt{z}$ is defined from $z = 0$ along the real axis
+	to $-\infty$.
+\end{definition}
+
+With \cref{def:sqrt_standard_branch_cut} possible contact with the branch cut
+can be avoided by choosing $R$ such that $\real{R} \geq 0$.
+Furthermore, this choice appears appealing from an intuitive point of view,
+as well as compared to the requirement $R \in \R$ of \cref{def:metric}.
+Therefore, the term complex distance is subsequently used according to
+\begin{definition}[Complex distance]\label{def:cmplx_distance}
+	Let $\robs \in \R^3$ and $\rsrc \in \C^3$ be two vectors.
+	The \emph{complex distance} from $\rsrc$ to $\robs$ is defined by
+	\begin{equation}
+		\cmplxlength{\rdiff} = 
+		\sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
+		\, ,
+	\end{equation}
+	where the square root is evaluated with
+	$\real{\cmplxlength{\rdiff}} \geq 0$.
+\end{definition}
+
+As it turns out, the choice of \cref{def:cmplx_distance} even has a special
+physical meaning:
+with this choice the spherical symmetry of \eqref{eq:scalar_free_space_gf}
+passes over to a directive pattern.
+This pattern is similar to that of a single-sided Gaussian beam
+\cite{hecht2017}, at least for small angles near the beam axis.
+As the term Gaussian beam is more frequently used in another context, this
+wave object $G_0 \left(\robs, \rsrc\right)$ with $\rsrc \in \C^3$ is called
+\ac{CSB} in the following \cite{Hansen2009,Hansen2013}.
+Details of \ac{CSB} behavior can be found in the literature
+\cite{Deschamps1971,Keller1971,Couture1981}.
+
+\fxnote{explain \ac{CSB} in context of \ac{DCIM}}
+
+
+
+
+
+
+
 \subsection{Sommerfeld Integrals and Sommerfeld Identity}
 
 Arnold Sommerfeld's approach towards a mathematical description of dipole
@@ -947,7 +1031,9 @@ function.
 				(0.2,-0.2) -- (0.2,0.2) -- (2,0.2) -- (2,0) --node[above]{SIP} (4,0);
 	\end{tikzpicture}
 	\caption[\acl{SIP} in the complex $k_\rho$-plane]
-	{\acf{SIP} in the complex $k_\rho$-plane.}
+	{\acf{SIP} in the complex $k_\rho$-plane. The exact form of the detour
+	is not critical, as long as the branch points $\pm k$ and the singularity
+	of $\besselh{2}{\nu} \left(0\right)$ are obviated.}
 	\label{fig:sip}
 \end{figure}
 
@@ -959,8 +1045,8 @@ The integration path of \eqref{eq:sommerfeld_integral_sip} will be called
 	}
 subsequently.
 The particular course of the \ac{SIP} ensures to sidestep the logarithmic
-branch point singularity of $\besselh{\nu}{0}$ \cite{Olver2010} as well as it
-allows for $\imag{k} \to 0$.
+branch point singularity of $\besselh{\nu}{2}\left(0\right)$ \cite{Olver2010}
+as well as it allows for $\imag{k} \to 0$.
 
 The \ac{SIP} has a variety of advantages over the positive real axis path in
 \eqref{eq:sommerfeld_integral_real_axis_path}.
@@ -984,99 +1070,16 @@ This enables the application of various exact and asymptotic techniques,
 analytical ones as well as numerical ones
 \cite{Sommerfeld1964,Chew1999,Michalski1985a,Michalski2016b}.
 
-
 The proof of equivalence for \eqref{eq:sommerfeld_integral_real_axis_path} and
 \eqref{eq:sommerfeld_integral_sip} is nowadays a classic textbook example
 \cite[p.~203]{Sommerfeld1964}.
 
+\fxnote{Sommerfeld identity for complex $\abs{z-z^\prime}$}
 
 
 
 
 
-
-
-
-
-
-
-\subsection{Complex Source Beams}
-
-In view of the assumptions of \cref{coll:free_space_gf} it is clear that
-$R$ is real and non-negative.
-However, according to the metric as specified by \cref{def:metric}, this even
-holds if the requirement $\rsrc, \robs \in \R^3$ is relaxed to
-$\rsrc, \robs \in \C^3$ as the dot product of a complex vector with itself
-is real quantity according to \cref{def:dot_product}.
-Conversely, a mapping $\cmplxlength{\pvec{z}}: \C^3 \mapsto \C$ for a vector
-$\pvec{z} = \rdiff$ with $\rsrc, \robs \in \C^3$ is not a norm according
-to \cref{def:norm}, \ie, such a definition of the distance between the
-points $\robs$ and $\rsrc$ is not a metric.
-
-However, it turns out that the usual observation point $\robs \in \R^3$ 
-in conjunction with a $\diracDelta$-source at \enquote{point} $\rsrc \in \C^3$
-causes a significant change in the behavior of the function
-$G_0 \left(\rdiff\right)$ if the axioms of \cref{def:euclidean_metric} and
-\cref{def:euclidean_norm} are dropped.
-
-As an example, assume $0 < k \in \R$ and
-$R = R_\mathrm{re} + \im R_\mathrm{im}$, where
-$R = R_\mathrm{re}, R_\mathrm{im} \in \R$.
-Substituting these into \eqref{eq:scalar_free_space_gf}, the consideration
-\begin{equation}\label{eq:example_csb}
-	\abs{\frac{\exp{-\im k R}}{R}} = 
-	\abs{ \frac{\exp{-\im k R_\mathrm{re}} \exp{k R_\mathrm{im}}}{R} } = 
-	\frac{\exp{k R_\mathrm{im}}}{\abs{R}}
-\end{equation}
-suggests the complex length $R$ should be defined with $\imag{R} \leq 0$ in
-order to allow large magnitude $R$. Such freedom of choice can be achieved
-with
-\begin{equation}
-	R = \sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
-	\, ,
-\end{equation}
-which could be seen as a straightforward relaxation of the requirement
-$0 \leq R \in \R$ in \cref{def:metric}.
-As the complex square root $\sqrt{z}$ has a branch point at $z = 0$, an
-valid branch cut must be defined.
-It is common to use
-\begin{definition}[Branch cut of the complex square root]
-	\label{def:sqrt_standard_branch_cut}
-	Let $z \in \C$ be arbitrary.
-	The branch cut of $\sqrt{z}$ is defined from $z = 0$ along the real axis
-	to $-\infty$.
-\end{definition}
-
-With \cref{def:sqrt_standard_branch_cut} possible contact with the branch cut
-can be avoided by choosing $R$ such that $\real{R} \geq 0$.
-Furthermore, this choice appears appealing from an intuitive point of view,
-as well as compared to the requirement $R \in \R$ of \cref{def:metric}.
-Therefore, the term complex distance is subsequently used according to
-\begin{definition}[Complex distance]\label{def:cmplx_distance}
-	Let $\robs \in \R^3$ and $\rsrc \in \C^3$ be two vectors.
-	The \emph{complex distance} from $\rsrc$ to $\robs$ is defined by
-	\begin{equation}
-		\cmplxlength{\rdiff} = 
-		\sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
-		\, ,
-	\end{equation}
-	where the square root is evaluated with
-	$\real{\cmplxlength{\rdiff}} \geq 0$.
-\end{definition}
-
-As it turns out, the choice of \cref{def:cmplx_distance} even has a special
-physical meaning:
-with this choice the spherical symmetry of \eqref{eq:scalar_free_space_gf}
-passes over to a directive pattern.
-This pattern is similar to that of a single-sided Gaussian beam
-\cite{hecht2017}, at least for small angles near the beam axis.
-As the term Gaussian beam is more frequently used in another context, this
-wave object $G_0 \left(\robs, \rsrc\right)$ with $\rsrc \in \C^3$ is called
-\ac{CSB} in the following \cite{Hansen2009,Hansen2013}.
-Details of \ac{CSB} behavior can be found in the literature
-\cite{Deschamps1971,Keller1971,Couture1981}.
-
-\fxnote{explain \ac{CSB} in context of \ac{DCIM}}
 
 
 
@@ -1091,29 +1094,40 @@ Details of \ac{CSB} behavior can be found in the literature
 
 The theory of classical electrodynamics, expressed axiomatically by Maxwell's
 equations, constitute an accepted and well-proven framework for thy analysis of
-\emph{macroscopic} electromagnetic phenomena.
-Macroscopic means that it can be justly assumed that the electromagnetic
-sources --- charges and currents --- are described by \emph{continous}
-functions of space. 
-In order to state a version of Maxwell's equations suitable to the problem at
-hand the following assumptions are made.
+macroscopic\footnote{An electromagnetic problem is considered \emph{macroscopic}
+if it can be justly assumed that the electromagnetic sources---charges and
+currents---are described by \emph{continous} functions of space.}
+electromagnetic phenomena.
+The subsequent section aims to demonstrate one possible way to derive the
+representation of electromagnetic wave fields in inhomogeneous media for in the
+important special case of a solution domain whose media parameters vary only in
+one Cartesian direction.
+This direction is defined to be the one of $\uv{z}$.
+
+As usual, at the very beginning there are Maxwell's equations.
+Out of their manifold manifestations it is advisable to choose the most
+simplified formulation still amenable to the problem at hand.
+In the present case the bounds of simplification are specified by the following
+assumptions.
 \begin{itemize}
-	\item All time dependent quantities are assumed to vary sinusoidally with
-	a single frequency $f > 0$ (in $\SI{}{\hertz}$) under time convention
-	as determined by \cref{def:fourier_transfrom_temporal_forward},
-	where $\omega = 2\pi f$.
-	\item All media are assumed to possess linear and isotropic behavior.
+	\item Only stationary \emph{time-harmonic} fields are considered.
+	The frequency $f > 0$ (in $\SI{}{\hertz}$) is treated as a parameter of the
+	problem, time convention is determined by
+	\cref{def:fourier_transfrom_temporal_forward}, where $\omega = 2\pi f$.
+	\item All media are assumed to be \emph{linear} and \emph{isotropic}.
 	Their electromagnetic properties are therefore fully described by two scalar
 	fields $\epsr, \mur \in \C$.
+	The material parameters depend on space in the particular way
+	$\epsr = \epsr\left(z\right)$ and $\mur = \mur\left(z\right)$.
 	\item Hypothetical magnetic (equivalent) sources $\pvec{M}$ and
-	$\varrho_\mathrm{m}$ are assumed to mathematically complement the physical
-	sources $\pvec{J}$ and $\varrho$.
+	$\varrho_\mathrm{m}$ are introduced to mathematically complement the
+	physical sources $\pvec{J}$ and $\varrho$.
 \end{itemize}
-Under these assumptions Maxwell's equations read \cite{Chew1999}
+Under these assumptions Maxwell's equations read \cite{Harrington2001,Chew1999}
 \begin{subequations}\label{eq:mwe_fd}
 	\begin{align}
-		&\curl \pvec{E}
-		= -\im\omega\mu\pvec{H} -\pvec{M} \label{eq:mwe_fd_faraday} \\
+		-&\curl \pvec{E}
+		= \im\omega\mu\pvec{H} + \pvec{M} \label{eq:mwe_fd_faraday} \\
 		&\curl \pvec{H}
 		= \im\omega\varepsilon\pvec{E} + \pvec{J} \label{eq:mwe_fd_ampere} \\
 		&\divergence \varepsilon\pvec{E}
@@ -1123,28 +1137,29 @@ Under these assumptions Maxwell's equations read \cite{Chew1999}
 	\end{align}
 \end{subequations}
 where $\varepsilon = \epsr \varepsilon_0$ and $\mu = \mur \mu_0$.
-The physical constants $\varepsilon_0$ and $\mu_0$ specify the
+The well-known physical constants $\varepsilon_0$ and $\mu_0$ specify the
 electromagnetic properties of vacuum.
-The vector fields are functions $\R^3 \mapsto \C^3$ and the scalars map
-$\R^3 \mapsto \C$.
+The vector and scalar fields in \eqref{eq:mwe_fd} are functions
+$\R^3 \mapsto \C^3$ and $\R^3 \mapsto \C$, respectively.
 
 The dimensionless quantity $\epsr \in \C$ is called relative permittivity 
-and can be composed of a real part describing the dielectric properties of a
-lossless medium and the conductivity of the medium which determines its losses
-\cite[p.~43]{Jin2015}:
+and can be composed as \cite[p.~43]{Jin2015}
 \begin{equation}
-	\epsr = \epsr^\prime - \im \frac{\sigma}{\omega \varepsilon_0} \,.
+	\epsr = \epsr^\prime - \im \frac{\sigma}{\omega \varepsilon_0} \,,
 \end{equation}
+where $\epsr^\prime$ describes the dielectric properties of a lossless medium
+and the imaginary part is a quantifies the losses due to the electrical
+conductivity $\sigma$ (measured in Siemens).
 
 In order to uniquely define an electromagnetic field problem and its solution,
 Maxwell's equations \eqref{eq:mwe_fd} have to be supplemented by appropriate
 boundary conditions.
-In a homogeneous domain these follow from
-\cref{sommerfeld_radiation_condition}.
+In a homogeneous domain these follow from the Sommerfeld condition of radiation
+as given by \cref{def:sommerfeld_radiation_condition}.
 
-At an interface separating two spatial domains $\Omega_1$ and $\Omega_2$ with
-different, but domain-wise constant material parameters the well-known
-continuity conditions \cite[pp.~20]{Jackson2013}
+At an interface separating two spatial domains $\Omega_1, \Omega_2 \subset \R^3$
+with different, but domain-wise constant material parameters the canonical
+continuity conditions
 \begin{subequations}\label{eq:mwe_continuity_at_interface}
 	\begin{align}
 		&\uv{n} \times \pvec{E}_1 - \uv{n} \times \pvec{E}_2 =
@@ -1156,78 +1171,98 @@ continuity conditions \cite[pp.~20]{Jackson2013}
 		\varrho_\mathrm{s} \\
 		&\uv{n} \cdot \left(\mu_1 \pvec{H}_1\right) -
 		\uv{n} \cdot \left(\mu_2 \pvec{H}_2\right) = 
-		\varrho_\mathrm{m,s} \\
+		\varrho_\mathrm{m,s}
 	\end{align}
 \end{subequations}
-must be fulfilled, where $\uv{n}$ is the normal unit vector on the interface
-between $\Omega_1$ and $\Omega_2$ and the subscript \enquote{s} denotes
-possible surface currents and charge densities at this interface.
-The right-hand sides $\pvec{M}_\mathrm{s}$ and $\varrho_\mathrm{m,s}$
-in \eqref{eq:mwe_continuity_at_interface} follow from the introduction of
-the corresponding hypothetical sources in \eqref{eq:mwe_fd}.
+can be derived \cite[pp.~20]{Jackson2013}, where the omitted arguments
+$\robs_{1,2} \in \Omega_{1,2}$ of the fields are understood in the
+$\robs_{1,2} \to \partial \Omega$ with the common boundary
+$\partial \Omega = \partial \Omega_1 = \partial \Omega_2$ and the unit normal
+vector $\uv{n}$ on $\partial \Omega$.
+The surface (indicated by the subscript $\mathrm{s}$) current and charge
+densities on the right-hand sides of \eqref{eq:mwe_continuity_at_interface}
+reside, if existent, on $\partial\Omega$.
 
 The arguably most prominent feature of Maxwell's equations is the possibility
-of wave solutions. Equations more suitable to deal with wave phenomena can
-readily obtained from \eqref{eq:mwe_fd}.
+of wave solutions.
+To particularly emphasize the wave nature of the fields, adapted \acp{PDE}
+can be derived from \eqref{eq:mwe_fd}.
 For example
 \begin{equation}\label{eq:curlcurl_E}
 	\mu\curl\frac{1}{\mu}\curl\pvec{E} - k^2\pvec{E} = 0 
 \end{equation}
-is readily derived from \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}.
+is readily derived from \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}
+for the homogeneous case $\pvec{J} = \pvec{M} = 0$.
 The corresponding equation
 \begin{equation}\label{eq:curlcurl_H}
 	\varepsilon\curl\frac{1}{\varepsilon}\curl\pvec{H} - k^2\pvec{H} = 0
 \end{equation}
-for the magnetic field is obtained analogously.
-For constant material parameters \eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H}
-reduce to the vector Helmholtz equation
+for the magnetic field follows analogously.
+In a domain $\Omega \in \R^3$ with constant material parameters
+\eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} reduce to the vector Helmholtz
+equation
 \begin{equation}\label{eq:vector_helmholtz_equation}
 	\laplace \pvec{F} + k^2 \pvec{F} = 0 \qquad
 	\pvec{F} \in \left\{\pvec{E}, \pvec{H}\right\}
+	\, .
 \end{equation}
 The quantity
 \begin{equation}\label{eq:wavenumber}
 	k = \omega^2 \sqrt{\varepsilon \mu}
 \end{equation}
 is called \emph{wavenumber}.
-To make a solution to \eqref{eq:curlcurl_E}, \eqref{eq:curlcurl_H} and
-\eqref{eq:vector_helmholtz_equation} uniquely defined $k$ has to be chosen
-according to
-\begin{definition}[Computation of the wavenumber $k$]\label{def:branch_of_k}
-	Assume $\epsr, \mur \in \C$ with $\imag{\epsr} \le 0$ and
-	$\imag{\mur} \le 0$. 
-	The square root in \eqref{eq:wavenumber} is defined with
-	$\imag{\sqrt{\epsr \mur}} \le 0$ and its branch cut along the negative real
-	axis.
-\end{definition}
-\begin{remark}
-	With the choice of $k$ according to \cref{def:branch_of_k} the radiation
-	condition as given by \cref{sommerfeld_radiation_condition} is fulfilled.
-\end{remark}
-For $k \in \R$ it makes sense also to define the wavelength as
+
+Consider now an open domain problem, \ie, $\Omega = \R^3$, where $\Omega$ may
+be compound of multiple disjoint subdomains
+$\Omega_1, \Omega_2, \dots, \Omega_N$ with domain-wise constant $\epsr$ and
+$\mur$.
+In order to be unique and physical, a solution to \eqref{eq:curlcurl_E},
+\eqref{eq:curlcurl_H} or \eqref{eq:vector_helmholtz_equation} must fulfill
+the radiation condition for large $\robs \in \Omega$.
+To ensure this, $k$ must have $\imag{k} \leq 0$ in all sub-domains $\Omega_n$
+which contain points $\robs$ with $r \to \infty$.
+Therefore, we restrict allowed values of $\epsr$ and $\mur$ to lie in
+$\Omega_{\epsr,\mur} = \left\{z \in \C : \real{z} > 0, \imag{z} \leq 0\right\}$.
+With these restrictions $\imag{\epsr \mur} \leq 0$ and therefore $\real{k} > 0$.
+As $\imag{k} \leq 0$ is guaranteed now if the square root in
+\eqref{eq:wavenumber} is evaluated with positive sign, it turns out that
+$G_0$ from \eqref{eq:scalar_free_space_gf} vanishes in the
+$\rdiffNorm \to \infty$ for $\epsr, \mur \in \Omega_{\epsr,\mur}$.
+Hence, the radiation is fulfilled for open boundary conditions with
+$\epsr, \mur \in \Omega_{\epsr,\mur}$.
+
+For real $k$ it makes sense to define the \emph{wavelength} as
 $\lambda = 2\pi / k$.
-If the vacuum values of the quantities $\lambda_0 = 2\pi / k_0 = c / f$,
-where $c$ is the vacuum speed of light, are considered, this is indicated by
-the subscript zero.
+The wavelength will be used later to define relative distances which makes
+the presentation of results independent of frequency.
+Vacuum values. \eg, $\lambda_0 = 2\pi / k_0 = c / f$,
+where $c$ is the vacuum speed of light, are indicated by the subscript zero.
+
+
+
+
+
+
+
+
 
 \subsection{Duality principle}
 \label{subsec:duality_principle}
 
-Instead of by a derivation analogous to the one of \eqref{eq:curlcurl_E},
-\eqref{eq:curlcurl_H} could also be directly obtained by by a principle
-which \textcite[\S12-1]{Feynman2011} summarized by stating that
-\enquote{the same equations have the same solutions}.
+The derivation of \eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} is analogous.
+This is due to a principle which \textcite[\S12-1]{Feynman2011} felicitously
+summarized by stating that \enquote{the same equations have the same solutions}.
 
 This so-called duality principle makes use of the fact that the symmetry of the
 complemented Maxwell's equations \eqref{eq:mwe_fd} in only broken by
 opposing signs in \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}.
-Taking this into account, a set of duality replacement rules can be established.
-Note that these rules are not unique as there are different possibilities how
-to define the set of substitutions \cite{Jin2015,Harrington2001,Chew1999}.
-The only criterion is, that the set of rules leaves \eqref{eq:mwe_fd} invariant.
-The present thesis uses the particular choice of 
+Taking this into account, one can establish as set of duality replacement rules.
+This set is not unique as, in fact, any set of rules which preserves the form
+of \eqref{eq:mwe_fd} is admissible.
+While different possibilities can be found can be found in the literature
+\cite{Jin2015,Harrington2001,Chew1999}, the present thesis uses
 \begin{definition}[Duality substitution rules for electrodynamic quantities]
-	The \emph{duality substitution rules for electrodynamic quantities} in
+	The \emph{duality substitution rules for electromagnetic quantities} in
 	\eqref{eq:mwe_fd} are defined as \cite[p.~9]{Chew1999}
 	\begin{subequations}
 		\begin{align}
@@ -1242,6 +1277,518 @@ The present thesis uses the particular choice of
 		\end{align}
 	\end{subequations}
 \end{definition}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Reduction to Ordinary Differential Equations}
+\label{subsec:reduction_to_odes}
+
+Assume a medium with parameters $\epsr = \epsr\left(z\right)$ and
+$\mur = \mur\left(z\right)$.
+In this case the study of wave fields governed by \eqref{eq:curlcurl_E} and
+\eqref{eq:curlcurl_H} can be reduced to the solution of two \acsp{ODE}.
+These \acsp{ODE} describe the so-called \emph{characteristic component} of an
+electromagnetic filed with only five non-vanishing components.
+Since the vanishing sixth component is the $\uv{z}$-component of either 
+$\pvec{E}$ or $\pvec{H}$, these \emph{modes} are termed \ac{TE} and \ac{TM},
+respectively.
+
+There are various ways to derive the \ac{TE} and \ac{TM} fields.
+One could either start with potential formulations as Sommerfeld originally
+did with the so-called Hertz vector $\pvec{\Lambda}$ \cite{Sommerfeld1909}.
+More modern approaches tailored towards integrals equation techniques use
+vector and scalar potentials \cite{Michalski1990,Eibert1997,Michalski2016b}.
+Yet another way is to directly consider the electromagnetic fields as
+demonstrated in the textbook by \textcite{Chew1999}.
+There, the horizontal component of a five-component field $\pvec{E}$ is
+used as the characteristic component of a \ac{TE}-field.
+The preceding derivation shows that the magnetic field component
+$H_z = \uv{z} \cdot \pvec{H}$ can be used alternatively to describe the very
+same \ac{TE}-field.
+
+
+Consider the electric portion of a generic \ac{TE} field
+\begin{equation}\label{eq:TE_E_field_components}
+	\pvec{E} = \uv{x}E_x + \uv{y}E_y \,.
+\end{equation}
+Obviously, the component $H_z = $ is contained in the solution to \eqref{eq:curlcurl_H}.
+Substituting \eqref{eq:mwe_fd_faraday} into \eqref{eq:curlcurl_H} for the
+homogeneous case $\pvec{M}  = 0$ yields
+\begin{equation}\label{eq:triple_curl_TE}
+	- \frac{\varepsilon}{\im \omega}
+	\curl \frac{1}{\varepsilon}
+	\curl \frac{1}{\mu} \curl \pvec{E} - k^2\pvec{H} = 0
+	\,.
+\end{equation}
+Expanding the $H_z$ component in \eqref{eq:triple_curl_TE} and taking advantage
+of the preconditions $\varepsilon = \varepsilon\left(z\right)$ and
+$\mu = \mu\left(z\right)$ we obtain
+\begin{equation}\label{eq:H_z_complicated}
+	\begin{split}
+		\frac{1}{\mu}
+		\left(
+			-\pdsec{x} \pd[E_y]{x} +
+			\pdsec{y} \pd[E_x]{y} +
+			\pdsec{x} \pd[E_x]{y} -
+			\pdsec{y} \pd[E_y]{x}
+		\right) \\
+		-\pd{z}\frac{1}{\mu}\pd{z}\pd[E_y]{x} +
+		\pd{z}\frac{1}{\mu}\pd{z}\pd[E_x]{y} +
+		\im \omega k^2 H_z = 0
+		\,.
+	\end{split}
+\end{equation}
+In \eqref{eq:H_z_complicated} the expression
+\begin{equation}
+	\pd[E_y]{x} = \pd[E_x]{y} - \im \omega \mu H_z
+	\, ,
+\end{equation}
+which is obtained from Faraday's law \eqref{eq:mwe_fd_faraday} can be used.
+Furthermore, by definition of the shortcut
+\begin{equation}\label{eq:laplace_transversal}
+	\laplaceTrans
+	\coloneqq
+	\frac{\partial^2}{\partial x^2} +
+	\frac{\partial^2}{\partial y^2}
+	=
+	\frac{1}{\rho}
+	\frac{\partial}{\partial \rho}
+	\rho
+	\frac{\partial}{\partial \rho}
+\end{equation}
+for the transversal part of the Laplacian operator \cite[p.~731]{Bronstein2016},
+\eqref{eq:H_z_complicated} can be written as 
+\begin{equation}\label{eq:H_z_pde}
+	\laplaceTrans H_z +
+	\frac{\partial}{\partial z}
+	\frac{1}{\mu}
+	\frac{\partial}{\partial z}
+	\mu H_z +
+	k^2 H_z = 0
+	\,.
+\end{equation}
+It can be shown, that the forward zeroth order Hankel transform
+\eqref{eq:hankel_transform} acting on the rightmost operator in
+\eqref{eq:laplace_transversal} corresponds to the formal
+substitution\footnote{Fourier transform with respect to $x$ and $y$ of the
+middle operator in \eqref{eq:laplace_transversal} corresponds to
+$\laplaceTrans \to - k_x^2 - k_y^2$.}
+\cite{Michalski2016b}
+\begin{equation}
+	\laplaceTrans \to -k_\rho^2 = - k_x^2 - k_y^2
+	\,.
+\end{equation}
+Finally, with
+\begin{equation}\label{eq:k_z_square}
+	k_z^2 \coloneqq k^2 - k_\rho^2
+\end{equation}
+\eqref{eq:H_z_pde} can be written as
+\begin{equation}\label{eq:TE_ODE}
+	\frac{\dd}{\dd z}
+	\frac{1}{\mu}
+	\frac{\dd}{\dd z}
+	\mu \tilde{H}_z +
+	k_z^2 \tilde{H}_z = 0
+	\, .
+\end{equation}
+Hence, \eqref{eq:E_z_pde} is reduced to a plain \ac{ODE} for the characteristic
+component of the \ac{TE} field in the $k_\rho$-spectral domain.
+
+The dual of a \ac{TE} field is a \ac{TM} field.
+This can be employed to readily obtain the spectral domain \ac{ODE} for the
+characteristic \ac{TM} component $E_z$ by duality.
+The spatial domain \ac{PDE} for $E_z$ reads
+\begin{equation}\label{eq:E_z_pde}
+	\laplaceTrans E_z +
+	\frac{\partial}{\partial z}
+	\frac{1}{\varepsilon}
+	\frac{\partial}{\partial z}
+	\varepsilon E_z + 
+	k^2 E_z = 0
+	\,,
+\end{equation}
+its spectral domain counterpart becomes
+\begin{equation}\label{eq:TM_ODE}
+	\frac{\dd}{\dd z}
+	\frac{1}{\varepsilon}
+	\frac{\dd}{\dd z}
+	\varepsilon \tilde{E}_z + 
+	k_z^2 \tilde{E}_z = 0 \,.
+\end{equation}
+
+Once the spectral domain \acp{ODE} \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE}
+are solved, the solution can be transformed back to spatial domain by
+inverse Hankel transform, \ie, by a Sommerfeld integral.
+
+The remaining components of both types of five-component fields can be obtained
+by differentiation of the spectral domain solutions \eqref{eq:TE_ODE} and
+\eqref{eq:TM_ODE} using \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}.
+The resulting spectral integrand are themselves solutions to a transformed
+version of Maxwell's equations \cite[pp.~75]{Chew1999}.
+
+Eventually, superposition of \ac{TE} and \ac{TM} solutions allows for the
+representation of arbitrary solutions to \eqref{eq:mwe_fd}.
+
+% Now \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} still assume the source-free case.
+% In contrast to that, the Green's functions for $\tilde{H}_z$ and $\tilde{E}_z$
+% are of particular interest in the study of dipole radiation over planar ground.
+% It is convenient to define the defining equations of these Green's functions in
+% terms of $\tilde{G}^\te \equiv \mu \tilde{H}_z$ and
+% $\tilde{G}^\tm \equiv \varepsilon \tilde{E}_z$ instead of $\tilde{H}_z$ and
+% $\tilde{E}_z$ directly. Given these definitions the Green's functions of
+% \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} are defined by
+% \begin{equation}\label{eq:TE_ODE_GF}
+% 	\left(\frac{\dd}{\dd z}
+% 	\frac{1}{\mu}\frac{\dd}{\dd z} +
+% 	\frac{k_z^2}{\mu}\right) \tilde{G}^\te =
+% 	-\diracDelta\left(z-z^\prime\right)
+% \end{equation}
+% and
+% \begin{equation}\label{eq:TM_ODE_GF}
+% 	\left(\frac{\dd}{\dd z}
+% 	\frac{1}{\varepsilon}\frac{\dd}{\dd z} +
+% 	\frac{k_z^2}{\varepsilon}\right) \tilde{G}^\tm =
+% 	-\diracDelta\left(z-z^\prime\right) \,,
+% \end{equation}
+% respectively.
+
+
+
+
+
+
+
+
+
+
+\subsection{Continuity conditions at material changes}
+\label{subsec:continuity_at_interfaces}
+
+The derivation of the characteristic components of \ac{TE} and \ac{TM} fields in
+\cref{subsec:reduction_to_odes} does only assume $\epsr = \epsr\left(z\right)$
+and $\mur = \mur\left(z\right)$.
+So far, the dependency on $z$ is still generic, with the sole requirement that
+the derivatives in \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} must exist.
+
+In the following $\epsr$ and $\mur$ are assumed to be domain-wise constant for
+adjacent intervals in $z$.
+The $n$-th domain is defined as
+$\Omega_n = \left\{z \in \R: z_{n,\mathrm{min}} \leq z < z_{n,\mathrm{max}}\right\}$,
+\ie, the discontinuities of $\epsr$ and $\mur$ occur at the interfaces
+$z_{n,\mathrm{min}}$ and $z_{n,\mathrm{max}}$.
+With that assumption the continuity condition for $\tilde{H}_z$ and
+$\tilde{E}_z$ at the boundaries of two neighboring domains with different
+$\epsr$ and/or $\mur$ need to be known.
+
+In fact these continuity conditions can readily be deduced from 
+\eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} using heuristic reasoning
+\cite[p.~47]{Chew1999}.
+Another approach to obtain the continuity conditions could follow a similar idea
+like the well-known derivation of the general continuity conditions for the
+electromagnetic field which is based on the integral form representation of
+Maxwell's equations \cite[pp.~20]{Jackson2013}.
+
+Anyhow, the continuity conditions for $\tilde{H}_z$ at a discontinuity of the
+material parameters read
+\begin{subequations}
+	\begin{equation}\label{eq:B_continuity}
+		\mu_i \tilde{H}_{z,i} = \mu_{i+1} \tilde{H}_{z,i+1}
+	\end{equation}
+	and
+	\begin{equation}\label{eq:H_z_tilde_second_continuity_condition}
+		\frac{1}{\mu_i}
+		\frac{\dd}{\dd z}
+		\mu_i \tilde{H}_{z,i} =
+		\frac{1}{\mu_{i+1}}
+		\frac{\dd}{\dd z}
+		\mu_{i+1} \tilde{H}_{z,i+1}
+		\,.
+	\end{equation}
+\end{subequations}
+Once more the duality principle can be employed to obtain the corresponding
+conditions 
+\begin{subequations}
+	\begin{equation}\label{eq:D_continuity}
+		\varepsilon_i \tilde{E}_{z,i} = \varepsilon_{i+1} \tilde{E}_{z,i+1}
+	\end{equation}
+	and
+	\begin{equation}\label{eq:E_z_tilde_second_continuity_condition}
+		\frac{1}{\varepsilon_i}
+		\frac{\dd}{\dd z}
+		\varepsilon_i \tilde{E}_{z,i} =
+		\frac{1}{\varepsilon_{i+1}}
+		\frac{\dd}{\dd z}
+		\varepsilon_{i+1} \tilde{E}_{z,i+1}
+		\,.
+	\end{equation}
+\end{subequations}
+for $\tilde{E}_z$.
+
+
+
+
+
+
+
+
+
+
+\subsection{Equivalent Transmission Line Networks and Spectral Green's Functions}
+\label{subsec:tl_greens_functions}
+
+Coming back to Richard Feynman's famous quote (see
+\cref{subsec:duality_principle}), inspection of \eqref{eq:TE_ODE} and
+\eqref{eq:TM_ODE} reveals distinctive similarities to another set of
+\acp{ODE} familiar to electrical engineers: the \acf{TL} equations. 
+
+Because of this familiarity has become a well-established procedure to re-use
+known results of transmission line theory in the solution process of
+electromagnetic field problem in half-space or planar multilayered solution
+domains.
+This approach is referred to as equivalent \ac{TL} network method or just
+network method in the literature.
+For the special case of multilayered media with domain-wise constant material
+parameters the \acp{TLGF} are known analytically for an arbitrary number of
+layers and outer boundary conditions which might be open, \ac{PEC}, \ac{PMC}
+or of impedance-type \cite[Section~2.4]{Felsen1994}\cite{Michalski1990,Eibert1997,Michalski2005,Michalski2016b}.
+
+To illustrate the behavior of voltage and current on the equivalent
+\ac{TM}-\ac{TL} of a Sommerfeld half-space an example is shown in
+\cref{fig:tlgf_example}.
+
+\begin{figure}
+   \begin{tikzpicture}
+    \pgfplotsset{small}
+    \matrix {
+        \begin{axis}[
+            width = \textwidth,
+            height = 0.25\textwidth,
+            grid = major,
+            xlabel = {$z / \lambda_0$},
+            ylabel = {$V_i$ in Volt},
+            xmin = -2,
+            xmax = 4,
+        ]
+            \addplot [color = blue] table [x = z_by_lambda_0, y = V_re]
+			{thesis_tlgf.dat};
+            \addplot [color = red] table [x = z_by_lambda_0, y = V_im]
+			{thesis_tlgf.dat};
+        \end{axis}
+        \\
+        \begin{axis}[
+            width = \textwidth,
+            height = 0.25\textwidth,
+            grid = major,
+            xlabel = {$z / \lambda_0$},
+            ylabel = {$I_i$ in Amp\`ere},
+            xmin = -2,
+            xmax = 4,
+        ]
+            \addplot [color = blue] table [x = z_by_lambda_0, y = I_re]
+			{thesis_tlgf.dat};
+            \addplot [color = red] table [x = z_by_lambda_0, y = I_im]
+			{thesis_tlgf.dat};
+        \end{axis}
+        \\
+        \begin{axis}[
+            width = \textwidth,
+            height = 0.25\textwidth,
+            grid = major,
+            xlabel = {$z / \lambda_0$},
+            ylabel = {$Z / Z_0$},
+            ytick = {-2, -1, 0, 1},
+            xmin = -2,
+            xmax = 4,
+        ]
+            \addplot [color = blue] table [x = z_by_lambda_0, y = Z_rel_re]
+			{thesis_tlgf.dat};
+            \addplot [color = red] table [x = z_by_lambda_0, y = Z_rel_im]
+			{thesis_tlgf.dat};
+        \end{axis}
+        \\
+        };
+    \end{tikzpicture}
+    \caption{Example case for \acp{TLGF}: the \ac{TM} lines are excited by
+	a unit-strength current source at $z^\prime = \lambda_0$, the medium
+	is a Sommerfeld non-magnetic half-space with lossy ground specified by
+	$\epsr = \num{9.0} - \num{1.0}\im$.}
+	\label{fig:tlgf_example}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The equations describing voltage and current on a $z$-directed transmission
+line with propagation constant $k_\rho$ read \cite{Felsen1994,Michalski2016b}
+\begin{subequations}\label{eq:tl_ode_system}
+	\begin{align}
+		\frac{\dd}{\dd z} V\left(z\right)
+		&= \im k_z Z^\tx I\left(z\right) \label{eq:tl_ode_system_dV} \\
+		\frac{\dd}{\dd z} I\left(z\right)
+		&= \im k_z Y^\tx V\left(z\right) \label{eq:tl_ode_system_dI} \, ,
+	\end{align}
+\end{subequations}
+with $Z^\tx = 1/Y^\tx$ and $\tx$ stands either for \ac{TE} or \ac{TM}.
+Obviously \eqref{eq:tl_ode_system_dV} and \eqref{eq:tl_ode_system_dI} are dual
+equations with the relations given by \cref{tab:tl_duality}.
+\fxnote{check time convention in \eqref{eq:tl_ode_system}}
+
+\begin{table}[hbt]
+	\centering
+	\begin{tabular}{cc}
+		\toprule%
+		\textbf{original} & \textbf{dual}\\ \midrule
+		$V_i$ & $I_v$ \\
+		$I_i$ & $V_v$ \\
+		$Z$ & $Y$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Duality substitution rules for \ac{TLGF}.}
+	\label{tab:tl_duality}
+\end{table}
+
+
+Auch im Fall der Leitungen lassen sich in Modelle der Führung von TM-Wellen von
+entsprechenden Wellenleitern für TE-Wellen unterscheiden.
+Die ausschlaggebende Größe ist die charakteristische Leitungsimpedanz $Z^\tx$
+bzw. -admittanz $Y^\tx$, die sich sich im TM-Fall durch
+\begin{equation}
+	Z^\tm\left(z\right) =
+	\frac{k_z\left(z\right)}{\omega \varepsilon\left(z\right)}
+\end{equation}
+und im TE-Fall durch
+\begin{equation}
+	Y^\te\left(z\right) = \frac{k_{z}\left(z\right)}{\omega \mu\left(z\right)}
+\end{equation}
+bestimmt. Die Ausbreitungskonstante $k_z$ ist in beiden Fällen gleich.
+
+Für die Definition der Greenschen Funktionen von \eqref{eq:tl_ode_system} gibt
+es nun
+\begin{itemize}
+	\item die Möglichkeit
+	\begin{subequations}\label{eq:tl_first_order_odes_i_source}
+		\begin{align}
+			\frac{\dd}{\dd z} V^{\isrc,\tx}\left(z\right)
+			&= -\im k_z Z^\tx I^{\isrc,\tx}\left(z\right) \label{eq:tl_first_order_odes_i_source_homo}\\
+			\frac{\dd}{\dd z} I^{\isrc,\tx}\left(z\right)
+			&=-\im k_z Y^\tx V^{\isrc,\tx}\left(z\right) + \diracDelta\left(z-z^\prime\right)
+		\end{align}
+	\end{subequations}
+	der Anregung mit einer impulsförmigen Einheitsstromquelle (oberer Index
+	$\isrc$) bei $z^\prime$, sowie 
+	\item den analogen Fall
+	\begin{subequations}\label{eq:tl_first_order_odes_v_source}
+		\begin{align}
+			\frac{\dd}{\dd z} V^{\vsrc,\tx}\left(z\right)
+			&= -\im k_z Z^\tx I^{\vsrc,\tx}\left(z\right) + \diracDelta\left(z-z^\prime\right) \\
+			\frac{\dd}{\dd z} I^{\vsrc,\tx}\left(z\right)
+			&=-\im k_z Y^\tx V^{\vsrc,\tx}\left(z\right) \label{eq:tl_first_order_odes_v_source_homo}
+		\end{align}
+	\end{subequations}
+	 mit einer Spannungsquelle (oberer Index $\vsrc$) bei $z^\prime$ als
+	 treibender Größe \cite{Michalski2016b}.
+\end{itemize}
+Aus den Systemen erster Ordnung \eqref{eq:tl_first_order_odes_i_source} und
+\eqref{eq:tl_first_order_odes_v_source} lassen sich durch Differenziation der
+einen und Einsetzen der jeweils anderen Gleichung die Gleichungen zweiter
+Ordnung
+\begin{equation}\label{eq:tl_2nd_order_ode_isrc}
+	\left(\frac{\dd}{\dd z}
+	\frac{1}{\im k_z Z^\tx}
+	\frac{\dd}{\dd z} +
+	\frac{k_z^2}{\im k_z Z^\tx}\right)
+	V^{\isrc,\tx} =
+	-\diracDelta\left(z-z^\prime\right)
+\end{equation}
+und
+\begin{equation}\label{eq:tl_2nd_order_ode_vsrc}
+	\left(\frac{\dd}{\dd z}
+	\frac{1}{\im k_z Y^\tx}
+	\frac{\dd}{\dd z} +
+	\frac{k_z^2}{\im k_z Y^\tx}\right)
+	I^{\vsrc,\tx} =
+	-\diracDelta\left(z-z^\prime\right)
+\end{equation}
+gewinnen.
+Durch Vergleich erkennt man die Dualität zwischen \eqref{eq:TE_ODE_GF} und
+\eqref{eq:tl_2nd_order_ode_isrc} sowie \eqref{eq:TM_ODE_GF} und
+\eqref{eq:tl_2nd_order_ode_isrc}.
+Damit lassen sich die Lösungen von \eqref{eq:TE_ODE_GF} und \eqref{eq:TM_ODE_GF}
+durch die wohlbekannten Greenschen Funktionen der Leitungsgleichungen ausdrücken.
+
+So ergibt der Vergleich von \eqref{eq:TE_ODE_GF} mit
+\eqref{eq:tl_2nd_order_ode_isrc} im TE-Fall
+\begin{equation}\label{eq:G_tilde_TE_tl_quantities}
+	\tilde{G}^\te \equiv \frac{1}{\im \omega} V^{\isrc,\te} \,
+\end{equation}
+der Vergleich von \eqref{eq:TM_ODE_GF} mit \eqref{eq:tl_2nd_order_ode_vsrc}
+im TM-Fall liefert
+\begin{equation}\label{eq:G_tilde_TM_tl_quantities}
+	\tilde{G}^\tm \equiv \frac{1}{\im \omega} I^{\vsrc,\tm} \, .
+\end{equation}
+
+Aus der Leitungstheorie \cite{Pozar2011} sind wesentliche Aspekte der
+Wellenausbreitung von Spannung und Stromstärke auf Leitungen, die durch
+\eqref{eq:tl_ode_system_dI} und \eqref{eq:tl_ode_system_dV} beschrieben werden,
+bekannt.
+So sind beispielsweise Spannung und Strom außerhalb von Quellregionen---im
+vorliegenden Kontext also für $z \neq z^\prime$---stetig.
+Ein Vergleich von \eqref{eq:G_tilde_TE_tl_quantities} und
+\eqref{eq:G_tilde_TM_tl_quantities} mit \eqref{eq:B_continuity} und
+\eqref{eq:D_continuity} legt daher offen, dass die Lösung über die
+Netzwerk-Methode bereits eine der an die Stetigkeit der charakteristischen
+Feldkomponenten erfüllt.
+Dass auch die Bedingungen \eqref{eq:H_z_tilde_second_continuity_condition} und
+\eqref{eq:E_z_tilde_second_continuity_condition} automatisch erfüllt ist, lässt
+sich durch Einsetzten der Lösung für $V^{\isrc,\te}$ in
+\eqref{eq:tl_first_order_odes_i_source_homo} und jener für $I^{\vsrc,\tm}$ in
+\eqref{eq:tl_first_order_odes_v_source_homo} erkennen.
+Man erhält dadurch
+\begin{equation}
+	\frac{1}{\mu} \frac{\dd}{\dd z} \tilde{G}^\te \equiv - I^{\isrc,\te}
+\end{equation}
+sowie
+\begin{equation}
+	\frac{1}{\varepsilon} \frac{\dd}{\dd z} \tilde{G}^\tm \equiv - V^{\vsrc,\tm} \,,
+\end{equation}
+für $z \neq z^\prime$ sind also \eqref{eq:H_z_tilde_second_continuity_condition}
+und \eqref{eq:E_z_tilde_second_continuity_condition} ebenfalls befriedigt.
+
+Damit sind die Greenschen Funktionen der charakteristischen Komponenten
+$\tilde{H}_z$ und $\tilde{E}_z$ von TE bzw.
+TM-Feldern im $k_\rho$-Spektralbereich auf die in \cref{app:tl_greens_functions}
+zusammengefassten bekannten Greenschen Funktionen für Spannung und Stromstärke
+Übertragungsleitungen zurückgeführt.
+
+\subsection{Image principle}
+
+Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
+
+
+
+
 
 \subsection{Sommerfeld Half-Space Problem and Multilayered Media}
 
@@ -1284,261 +1831,6 @@ The present thesis uses the particular choice of
 % 	\caption[Sommerfeld half-space]{Sommerfeld half-space problem with coordinate systems.}
 % 	\label{fig:half_space}
 % \end{figure}
-
-\subsection{Planarly Inhomogeneous Media and Five-Component Fields}
-\label{subsec:five_component_filds}
-
-Assume a medium described by parameters $\epsr\left(z\right), \mur\left(z\right)$ which depend only on the $z$-coordinate. In this case the study of wave fields governed by \eqref{eq:curlcurl_E} an \eqref{eq:curlcurl_H} can be reduced to the solution of two \acsp{ODE}. These \acsp{ODE} describe the so-called \emph{characteristic component} of an electromagnetic filed with only five non-vanishing components. Since the vanishing sixth component is the $z$-component of either the electric or magnetic field these fields are called \ac{TE} and \ac{TM}, respectively. Once the characteristic component is known, the remaining field components can be obtained by mere differentiation \cite[pp.~75]{Chew1999}. Linear superposition of \ac{TE} and \ac{TM} solutions eventually allows for the representation of arbitrary solutions to \eqref{eq:mwe_fd}.
-
-As an example consider a generic \ac{TE} field
-\begin{equation}\label{eq:TE_E_field_components}
-	\pvec{E} = \pvec{E}^\te = \uv{x}E_x + \uv{y}E_y \,.
-\end{equation}
-The choice of a characteristic component for this \ac{TE} field is not unique. Either the transverse component of $\pvec{E}$ as well as the vertical component of $\pvec{H}$ will do. In this example $H_z$ shall considered as characteristic component.
-
-Apparently $H_z$ is contained in the solution to \eqref{eq:curlcurl_H}. Substituting \eqref{eq:mwe_fd_faraday} into \eqref{eq:curlcurl_H} yields
-\begin{equation}\label{eq:triple_curl_TE}
-	- \frac{\varepsilon}{\im \omega}\curl\frac{1}{\varepsilon}\curl\frac{1}{\mu} \curl \pvec{E} - k^2\pvec{H} = 0 \,.
-\end{equation}
-Expanding the $H_z$ component in \eqref{eq:triple_curl_TE} and using the precondition $\varepsilon = \varepsilon\left(z\right)$ and $\mu = \mu\left(z\right)$ we obtain
-\begin{equation}\label{eq:H_z_complicated}
-	\begin{split}
-		\frac{1}{\mu} \left(-\pdsec{x} \pd[E_y]{x} + \pdsec{y} \pd[E_x]{y} + \pdsec{x} \pd[E_x]{y} - \pdsec{y} \pd[E_y]{x}\right) \\ -\pd{z}\frac{1}{\mu}\pd{z}\pd[E_y]{x} + \pd{z}\frac{1}{\mu}\pd{z}\pd[E_x]{y} + \im \omega k^2 H_z = 0 \,.
-	\end{split}
-\end{equation}
-In \eqref{eq:H_z_complicated} the expression
-\begin{equation}
-	\pd[E_y]{x} = \pd[E_x]{y} - \im \omega \mu H_z \,,
-\end{equation}
-attained from \eqref{eq:mwe_fd_faraday}, as well as the shortcut
-\begin{equation}\label{eq:laplace_transversal}
-	\laplaceTrans \equiv \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} = \frac{1}{\rho}\frac{\partial}{\partial \rho} \rho \frac{\partial}{\partial \rho}
-\end{equation}
-for the transversal part of the Laplacian operator \cite[p.~731]{Bronstein2016} are conveniently used to write
-\begin{equation}\label{eq:H_z_pde}
-	\laplaceTrans H_z + \frac{\partial}{\partial z}\frac{1}{\mu}\frac{\partial}{\partial z} \mu H_z + k^2 H_z = 0 \,.
-\end{equation}
-If the Hankel transform \eqref{eq:hankel_transform} for $\nu = 0$ is applied to \eqref{eq:H_z_pde} this corresponds to the formal substitution\footnote{Fourier transform \wrt $x$ and $y$ would correspond to $\laplaceTrans \rightarrow - k_x^2 - k_y^2$.} \cite{Michalski2016b}
-\begin{equation}
-	\laplaceTrans \rightarrow -k_\rho^2 \equiv - k_x^2 - k_y^2 \,.
-\end{equation}
-Using the vertical component
-\begin{equation}\label{eq:k_z_square}
-	k_z^2 = k^2 - k_\rho^2
-\end{equation}
-of the wavenumber in the transformed version \eqref{eq:H_z_pde} the \ac{ODE}
-\begin{equation}\label{eq:TE_ODE}
-	\frac{\dd}{\dd z}\frac{1}{\mu}\frac{\dd}{\dd z}\mu  \tilde{H}_z + k_z^2 \tilde{H}_z = 0
-\end{equation}
-is obtained for the characteristic component of the \ac{TE} field. The solution $\tilde{H}_z$ of \eqref{eq:TE_ODE} can be interpreted as the $k_\rho$-spectral domain version of the spatial domain solution $H_z$.
-
-The dual of a \ac{TE} field is a \ac{TM} field. This circumstance can be employed to readily obtain the spectral domain \ac{ODE} for the characteristic component of the \ac{TM} field by the duality principle. The spatial domain equation for $E_z$ reads
-\begin{equation}\label{eq:E_z_pde}
-	\laplaceTrans E_z + \frac{\partial}{\partial z}\frac{1}{\varepsilon}\frac{\partial}{\partial z} \varepsilon E_z + k^2 E_z = 0 \,,
-\end{equation}
-its spectral domain counterpart becomes
-\begin{equation}\label{eq:TM_ODE}
-	\frac{\dd}{\dd z}\frac{1}{\varepsilon}\frac{\dd}{\dd z}\varepsilon \tilde{E}_z + k_z^2 \tilde{E}_z = 0 \,.
-\end{equation}
-
-Now \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} still assume the source-free case. In contrast to that, the Green's functions for $\tilde{H}_z$ and $\tilde{E}_z$ are of particular interest in the study of dipole radiation over planar ground. It is convenient to define the defining equations of these Green's functions in terms of $\tilde{G}^\te \equiv \mu \tilde{H}_z$ and $\tilde{G}^\tm \equiv \varepsilon \tilde{E}_z$ instead of $\tilde{H}_z$ and $\tilde{E}_z$ directly. Given these definitions the Green's functions of \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} are defined by
-\begin{equation}\label{eq:TE_ODE_GF}
-	\left(\frac{\dd}{\dd z}\frac{1}{\mu}\frac{\dd}{\dd z} + \frac{k_z^2}{\mu}\right) \tilde{G}^\te = -\diracDelta\left(z-z^\prime\right)
-\end{equation}
-and
-\begin{equation}\label{eq:TM_ODE_GF}
-	\left(\frac{\dd}{\dd z}\frac{1}{\varepsilon}\frac{\dd}{\dd z} + \frac{k_z^2}{\varepsilon}\right) \tilde{G}^\tm = -\diracDelta\left(z-z^\prime\right) \,,
-\end{equation}
-respectively.
-
-\subsection{Continuity conditions at material changes}
-\label{subsec:continuity_at_interfaces}
-
-The derivation of the characteristic components of \ac{TE} and \ac{TM} fields in \cref{subsec:5_comp_filds} still assumes a generic dependence of $\epsr$ and $\mur$ on $z$. Solely the existence of the derivatives in \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} is required. In the following $\epsr$ and $\mur$ are assumed to be piece-wise constant in $z$. With that assumption the continuity condition for $\tilde{H}_z$ and $\tilde{E}_z$ at a discontinuity of the material parameters need to be known.
-
-In fact these continuity conditions can readily be deduced from \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} using heuristic reasoning \cite[p.~47]{Chew1999}. Another approach to obtain the continuity conditions could follow a similar idea like the well-known derivation of the general continuity conditions for the electromagnetic field which is based on the integral form representation of Maxwell's equations \cite[pp.~20]{Jackson2013}.
-
-In any case the continuity conditions for $\tilde{H}_z$ at a discontinuity of the material parameters read
-\begin{subequations}
-	\begin{equation}\label{eq:B_continuity}
-		\mu_i \tilde{H}_{z,i} = \mu_{i+1} \tilde{H}_{z,i+1}
-	\end{equation}
-	and
-	\begin{equation}\label{eq:H_z_tilde_second_continuity_condition}
-		\frac{1}{\mu_i}\frac{\dd}{\dd z} \mu_i \tilde{H}_{z,i} = \frac{1}{\mu_{i+1}}\frac{\dd}{\dd z} \mu_{i+1} \tilde{H}_{z,i+1} \,.
-	\end{equation}
-\end{subequations}
-Once more the duality principle can be employed to obtain the corresponding conditions for $\tilde{E}_z$ as
-\begin{subequations}
-	\begin{equation}\label{eq:D_continuity}
-		\varepsilon_i \tilde{E}_{z,i} = \varepsilon_{i+1} \tilde{E}_{z,i+1}
-	\end{equation}
-	and
-	\begin{equation}\label{eq:E_z_tilde_second_continuity_condition}
-		\frac{1}{\varepsilon_i}\frac{\dd}{\dd z} \varepsilon_i \tilde{E}_{z,i} = \frac{1}{\varepsilon_{i+1}}\frac{\dd}{\dd z} \varepsilon_{i+1} \tilde{E}_{z,i+1} \,.
-	\end{equation}
-\end{subequations}
-
-\fxnote{Allgemeinere Schreibweise für die Stetigkeit einführen. Darauf hinweisen, dass die Größen außerhalb von Quellen (!) immer stetig sind. Siehe \cite[S.~7]{Michalski2016b}}
-
-\subsection{Equivalent transmission line networks and spectral Green's functions}
-\label{subsec:tl_greens_functions}
-
-If or if not inspired by Feynman's famous quote (see \cref{subsec:duality_principle}), inspection of \eqref{eq:TE_ODE_GF} and \eqref{eq:TM_ODE_GF} reveals distinctive similarities of these equations with the equations governing voltage and current on transmission lines \cite[Section 2.4]{Felsen1994}. These similarities have been widely employed in the solution of spectral Green's functions of half-space and multilayered media problems. Despite the known solution this method -- hereinafter called the \emph{network-method} -- offers yet another advantage -- it allows for the transfer of a certain \emph{feeling} about the quantities on transmission lines to those in the $k_\rho$ spectral domain.
-
-The equations describing voltage and current on a $z$-directed transmission line with propagation constant $k_\rho$ read \cite{Felsen1994} \cite{Michalski2016b}
-\begin{subequations}\label{eq:tl_ode_system}
-	\begin{align}
-		\frac{\dd}{\dd z} V\left(z\right) &= \im k_z Z^\tx I\left(z\right) \label{eq:tl_ode_system_dV} \\
-		\frac{\dd}{\dd z} I\left(z\right) &= \im k_z Y^\tx V\left(z\right) \label{eq:tl_ode_system_dI} \, ,
-	\end{align}
-\end{subequations}
-with $Z^\tx = 1/Y^\tx$ and $\tx$ stands either for \ac{TE} or \ac{TM}. Obviously \eqref{eq:tl_ode_system_dV} and \eqref{eq:tl_ode_system_dI} are dual equations with the relations given by \cref{tab:tl_duality}.
-\fxnote{check time convention in \eqref{eq:tl_ode_system}}
-
-\begin{table}[hbt]
-	\centering
-	\begin{tabular}{cc}
-		\toprule%
-		\textbf{original} & \textbf{dual}\\ \midrule
-		$V$ & $I$ \\
-		$I$ & $V$ \\
-		$Z$ & $Y$ \\
-		$Y$ & $Z$ \\
-		\bottomrule
-	\end{tabular}
-	\caption[Duality substitution rules for transmission line quantities]{Duality substitution rules for transmission line quantities.}
-	\label{tab:tl_duality}
-\end{table}
-
-
-
-% \begin{figure}
-%    \begin{tikzpicture}
-%     \pgfplotsset{small}
-%     \matrix {
-%         \begin{axis}[
-%             width = \textwidth,
-%             height = 0.25\textwidth,
-%             grid = major,
-%             xlabel = {$z / \lambda_0$},
-%             ylabel = {$V$ in Volt},
-%             xmin = -2,
-%             xmax = 4,
-%         ]
-%             \addplot [color = blue] table [x = z_by_lambda_0, y = V_re]
-% 			{thesis_tlgf.dat};
-%             \addplot [color = red] table [x = z_by_lambda_0, y = V_im]
-% 			{thesis_tlgf.dat};
-%         \end{axis}
-%         \\
-%         \begin{axis}[
-%             width = \textwidth,
-%             height = 0.25\textwidth,
-%             grid = major,
-%             xlabel = {$z / \lambda_0$},
-%             ylabel = {$I$ in Amp\`ere},
-%             xmin = -2,
-%             xmax = 4,
-%         ]
-%             \addplot [color = blue] table [x = z_by_lambda_0, y = I_re]
-% 			{thesis_tlgf.dat};
-%             \addplot [color = red] table [x = z_by_lambda_0, y = I_im]
-% 			{thesis_tlgf.dat};
-%         \end{axis}
-%         \\
-%         \begin{axis}[
-%             width = \textwidth,
-%             height = 0.25\textwidth,
-%             grid = major,
-%             xlabel = {$z / \lambda_0$},
-%             ylabel = {$Z / Z_0$},
-%             ytick = {-2, -1, 0, 1},
-%             xmin = -2,
-%             xmax = 4,
-%         ]
-%             \addplot [color = blue] table [x = z_by_lambda_0, y = Z_rel_re]
-% 			{thesis_tlgf.dat};
-%             \addplot [color = red] table [x = z_by_lambda_0, y = Z_rel_im]
-% 			{thesis_tlgf.dat};
-%         \end{axis}
-%         \\
-%         };
-%     \end{tikzpicture}
-% 	\label{fig:tlgf_example}
-% 	\caption[{Example for a typical \acs{TLGF}]
-% 	{Example for the \ac{TLGF} $V_{i}^{\mathrm{TM}}$ with $z^\prime = \lambda_0$.
-% 	The ground parameters are $\epsr = 9 - \im$ and $\mur = 1$.}
-% \end{figure}
-
-
-
-
-
-
-Auch im Fall der Leitungen lassen sich in Modelle der Führung von TM-Wellen von entsprechenden Wellenleitern für TE-Wellen unterscheiden. Die ausschlaggebende Größe ist die charakteristische Leitungsimpedanz $Z^\tx$ bzw. -admittanz $Y^\tx$, die sich sich im TM-Fall durch
-\begin{equation}
-	Z^\tm\left(z\right) = \frac{k_z\left(z\right)}{\omega \varepsilon\left(z\right)}
-\end{equation}
-und im TE-Fall durch
-\begin{equation}
-	Y^\te\left(z\right) = \frac{k_{z}\left(z\right)}{\omega \mu\left(z\right)}
-\end{equation}
-bestimmt. Die Ausbreitungskonstante $k_z$ ist in beiden Fällen gleich.
-
-Für die Definition der Greenschen Funktionen von \eqref{eq:tl_ode_system} gibt es nun
-\begin{itemize}
-	\item die Möglichkeit
-	\begin{subequations}\label{eq:tl_first_order_odes_i_source}
-		\begin{align}
-			\frac{\dd}{\dd z} V^{\isrc,\tx}\left(z\right) &= -\im k_z Z^\tx I^{\isrc,\tx}\left(z\right) \label{eq:tl_first_order_odes_i_source_homo}\\
-			\frac{\dd}{\dd z} I^{\isrc,\tx}\left(z\right) &=-\im k_z Y^\tx V^{\isrc,\tx}\left(z\right) + \diracDelta\left(z-z^\prime\right)
-		\end{align}
-	\end{subequations}
-	der Anregung mit einer impulsförmigen Einheitsstromquelle (oberer Index $\isrc$) bei $z^\prime$, sowie 
-	\item den analogen Fall
-	\begin{subequations}\label{eq:tl_first_order_odes_v_source}
-		\begin{align}
-			\frac{\dd}{\dd z} V^{\vsrc,\tx}\left(z\right) &= -\im k_z Z^\tx I^{\vsrc,\tx}\left(z\right) + \diracDelta\left(z-z^\prime\right) \\
-			\frac{\dd}{\dd z} I^{\vsrc,\tx}\left(z\right) &=-\im k_z Y^\tx V^{\vsrc,\tx}\left(z\right) \label{eq:tl_first_order_odes_v_source_homo}
-		\end{align}
-	\end{subequations}
-	 mit einer Spannungsquelle (oberer Index $\vsrc$) bei $z^\prime$ als treibender Größe \cite{Michalski2016b}.
-\end{itemize}
-Aus den Systemen erster Ordnung \eqref{eq:tl_first_order_odes_i_source} und \eqref{eq:tl_first_order_odes_v_source} lassen sich durch Differenziation der einen und Einsetzen der jeweils anderen Gleichung die Gleichungen zweiter Ordnung
-\begin{equation}\label{eq:tl_2nd_order_ode_isrc}
-	\left(\frac{\dd}{\dd z} \frac{1}{\im k_z Z^\tx} \frac{\dd}{\dd z} + \frac{k_z^2}{\im k_z Z^\tx}\right)  V^{\isrc,\tx} = -\diracDelta\left(z-z^\prime\right)
-\end{equation}
-und
-\begin{equation}\label{eq:tl_2nd_order_ode_vsrc}
-	\left(\frac{\dd}{\dd z} \frac{1}{\im k_z Y^\tx} \frac{\dd}{\dd z} + \frac{k_z^2}{\im k_z Y^\tx}\right)  I^{\vsrc,\tx} = -\diracDelta\left(z-z^\prime\right)
-\end{equation}
-gewinnen. Durch Vergleich erkennt man die Dualität zwischen \eqref{eq:TE_ODE_GF} und \eqref{eq:tl_2nd_order_ode_isrc} sowie \eqref{eq:TM_ODE_GF} und \eqref{eq:tl_2nd_order_ode_isrc}. Damit lassen sich die Lösungen von \eqref{eq:TE_ODE_GF} und \eqref{eq:TM_ODE_GF} durch die wohlbekannten Greenschen Funktionen der Leitungsgleichungen ausdrücken.
-
-So ergibt der Vergleich von \eqref{eq:TE_ODE_GF} mit \eqref{eq:tl_2nd_order_ode_isrc} im TE-Fall
-\begin{equation}\label{eq:G_tilde_TE_tl_quantities}
-	\tilde{G}^\te \equiv \frac{1}{\im \omega} V^{\isrc,\te} \,
-\end{equation}
-der Vergleich von \eqref{eq:TM_ODE_GF} mit \eqref{eq:tl_2nd_order_ode_vsrc} im TM-Fall liefert
-\begin{equation}\label{eq:G_tilde_TM_tl_quantities}
-	\tilde{G}^\tm \equiv \frac{1}{\im \omega} I^{\vsrc,\tm} \, .
-\end{equation}
-
-Aus der Leitungstheorie \cite{Pozar2011} sind wesentliche Aspekte der Wellenausbreitung von Spannung und Stromstärke auf Leitungen, die durch \eqref{eq:tl_ode_system_dI} und \eqref{eq:tl_ode_system_dV} beschrieben werden, bekannt. So sind beispielsweise Spannung und Strom außerhalb von Quellregionen -- im vorliegenden Kontext also für $z \neq z^\prime$ -- stetig. Ein Vergleich von \eqref{eq:G_tilde_TE_tl_quantities} und \eqref{eq:G_tilde_TM_tl_quantities} mit \eqref{eq:B_continuity} und \eqref{eq:D_continuity} legt daher offen, dass die Lösung über die Netzwerk-Methode bereits eine der an die Stetigkeit der charakteristischen Feldkomponenten erfüllt. Dass auch die Bedingungen \eqref{eq:H_z_tilde_second_continuity_condition} und \eqref{eq:E_z_tilde_second_continuity_condition} automatisch erfüllt ist, lässt sich durch Einsetzten der Lösung für $V^{\isrc,\te}$ in \eqref{eq:tl_first_order_odes_i_source_homo} und jener für $I^{\vsrc,\tm}$ in \eqref{eq:tl_first_order_odes_v_source_homo} erkennen. Man erhält dadurch
-\begin{equation}
-	\frac{1}{\mu} \frac{\dd}{\dd z} \tilde{G}^\te \equiv - I^{\isrc,\te}
-\end{equation}
-sowie
-\begin{equation}
-	\frac{1}{\varepsilon} \frac{\dd}{\dd z} \tilde{G}^\tm \equiv - V^{\vsrc,\tm} \,,
-\end{equation}
-für $z \neq z^\prime$ sind also \eqref{eq:H_z_tilde_second_continuity_condition} und \eqref{eq:E_z_tilde_second_continuity_condition} ebenfalls befriedigt.
-
-Damit sind die Greenschen Funktionen der charakteristischen Komponenten $\tilde{H}_z$ und $\tilde{E}_z$ von TE bzw. TM-Feldern im $k_\rho$-Spektralbereich auf die in \cref{app:tl_greens_functions} zusammengefassten bekannten Greenschen Funktionen für Spannung und Stromstärke Übertragungsleitungen zurückgeführt.
-
-\subsection{Image principle}
-
-Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
 
 \section{Numerical Computation of Sommerfeld Integrals}
@@ -1721,57 +2013,3 @@ Substituting \eqref{eq:fmm_jP_expansion_plane_waves} into
 
 
 
-\begin{figure}
-   \begin{tikzpicture}
-    \pgfplotsset{small}
-    \matrix {
-        \begin{axis}[
-            width = \textwidth,
-            height = 0.25\textwidth,
-            grid = major,
-            xlabel = {$z / \lambda_0$},
-            ylabel = {$V$ in Volt},
-            xmin = -2,
-            xmax = 4,
-        ]
-            \addplot [color = blue] table [x = z_by_lambda_0, y = V_re]
-			{thesis_tlgf.dat};
-            \addplot [color = red] table [x = z_by_lambda_0, y = V_im]
-			{thesis_tlgf.dat};
-        \end{axis}
-        \\
-        \begin{axis}[
-            width = \textwidth,
-            height = 0.25\textwidth,
-            grid = major,
-            xlabel = {$z / \lambda_0$},
-            ylabel = {$I$ in Amp\`ere},
-            xmin = -2,
-            xmax = 4,
-        ]
-            \addplot [color = blue] table [x = z_by_lambda_0, y = I_re]
-			{thesis_tlgf.dat};
-            \addplot [color = red] table [x = z_by_lambda_0, y = I_im]
-			{thesis_tlgf.dat};
-        \end{axis}
-        \\
-        \begin{axis}[
-            width = \textwidth,
-            height = 0.25\textwidth,
-            grid = major,
-            xlabel = {$z / \lambda_0$},
-            ylabel = {$Z / Z_0$},
-            ytick = {-2, -1, 0, 1},
-            xmin = -2,
-            xmax = 4,
-        ]
-            \addplot [color = blue] table [x = z_by_lambda_0, y = Z_rel_re]
-			{thesis_tlgf.dat};
-            \addplot [color = red] table [x = z_by_lambda_0, y = Z_rel_im]
-			{thesis_tlgf.dat};
-        \end{axis}
-        \\
-        };
-    \end{tikzpicture}
-    \caption[]{A TLGF}
-\end{figure}
