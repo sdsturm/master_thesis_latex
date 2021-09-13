@@ -935,8 +935,8 @@ function.
 	\begin{tikzpicture}[
         decoration={
             markings, 
-            mark= at position 0.25 with {\arrow{stealth}},
-            mark= at position 0.75 with {\arrow{stealth}},
+            mark= at position 0.375 with {\arrow{stealth}},
+            mark= at position 0.625 with {\arrow{stealth}},
             },
     ]
 		\draw [->,>=stealth] (-4.5,0) -- (4.5,0) node[right] {$\real{k_\rho}$};
@@ -959,106 +959,35 @@ The integration path of \eqref{eq:sommerfeld_integral_sip} will be called
 	}
 subsequently.
 The particular course of the \ac{SIP} ensures to sidestep the logarithmic
-branch point singularity \cite{Olver2010} of $\besselh{\nu}{0}$ as well as it
+branch point singularity of $\besselh{\nu}{0}$ \cite{Olver2010} as well as it
 allows for $\imag{k} \to 0$.
 
 The \ac{SIP} has a variety of advantages over the positive real axis path in
 \eqref{eq:sommerfeld_integral_real_axis_path}.
-
 Much of the power of Sommerfeld's approach originates in the fact that the
-involved spectral domain functions are holomorphic on $\C$ with the possible
-exceptions of distinct poles, branch point and the corresponding branch cuts.
-This makes it possible to deform the path of integration, either to render
-the integrals defined in first place or---totally leaving the real axis
-path---to apply elaborated analytical and numerical techniques.
-In this context the positive real axis path in \eqref{eq:si_pos_real_axis_path}
-has the disadvantage of not being closed.
-In fact, also this path can be deformed by virtue of Cauchy's theorem, but
-the full power of this result combined with the residue theorem is only
-available with the \ac{SIP}.
-As the real $-\infty$ and $\infty$ can be interpreted as the same point in
-$\C \cup \left\{\infty\right\}$ in the picture of Riemann's sphere
-\cite[p.~180]{Meyberg2006}, the \ac{SIP} is a closed path in the complex plane
-and the integral along the \ac{SIP} is, as stated by Cauchy's theorem
-and Jordan's lemma, equal to the sum of residues of the captured singularities.
+involved spectral domain functions $\tilde{f}$ are holomorphic on $\C$ except at 
+distinct poles and, as can be shown \cite{Michalski2016b}, at most two
+branch points and the corresponding branch cuts.
 
-The proof of equivalence for \eqref{eq:si_pos_real_axis_path} and
-\eqref{eq:si_sommerfeld_intgration_path}---which has turned out so fruitful in
-the early days of the study of wave propagation---is nowadays a classic textbook
-example \cite[p.~203]{Sommerfeld1964}.
+In the picture of Riemann's sphere \cite[p.~180]{Meyberg2006}, the real
+$-\infty$ and $\infty$ in \eqref{eq:sommerfeld_integral_sip} can be interpreted
+as the same point on $\C \cup \left\{\infty\right\}$.
+Another way to think of this is that, for $\rho > 0$, the real axis path in
+\eqref{eq:sommerfeld_integral_sip} can be closed at infinity in the lower
+complex $k_\rho$-half-plane by virtue of Jordan's lemma.
+
+Corresponding to Cauchy's theorem and the residue theorem, the result of
+integration along the closes \ac{SIP} is constituted solely by the integration
+around the branch cuts and the residues of the poles.
+
+This enables the application of various exact and asymptotic techniques,
+analytical ones as well as numerical ones
+\cite{Sommerfeld1964,Chew1999,Michalski1985a,Michalski2016b}.
 
 
-
-
-
-
-
-
-% \begin{equation}\label{eq:sommerfeld_id_pos_real_axis}
-% \end{equation}
-
-% \begin{theorem}[Sommerfeld identity with complex vertical distance]
-% 	Let $\rho \in \R$ with $\rho > 0$ and $k \in C$ be defined with
-% 	$\imag{k} < 0$ where $\imag{k} \to 0$. Then \eqref{eq:sommerfeld_id_pos_real_axis} 
-% 	remains valid if $\abs{z}$ with $z \in \R$ is replaced by a complex distance
-% 	as defined in  
-
-	
-% \end{theorem}
-
-% \begin{equation}\label{eq:sommerfeld_identity_bessel}
-% 	\frac{\exp{\im k r}}{r} = \im \int\limits_{0}^{\infty} \frac{k_\rho}{k_z} \besselj{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, ,
-% \end{equation}
-% where
-% \begin{equation}\label{eq:k_z}
-% 	k_z = \sqrt{k^2 - k_\rho^2} \, ,
-% \end{equation}
-% is chosen such that $\imag{k_z} > 0$.
-
-% \begin{lemma}[Sommerfeld identity {\cite[p.~684]{Sommerfeld1909}, \cite{Chew1999}}]\label{lemma:sommerfeld_identity}
-% 	Let $r,\,k\in\C \setminus \left\{0\right\}$, $z \in \C$, $\rho \in \R$, $\real{r} > 0$, $\imag{k} > 0$ and $r^2 = \rho^2 + z^2$. Then the Sommerfeld identity reads
-% \end{lemma}
-
-% \begin{proof}
-% 	\fxnote{Beweis für komplexe Ortskoordinaten}
-% \end{proof}
-
-% With Cauchy's integral theorem in mind, Sommerfeld recognized a certain drawback in the integration path along the positive real $k_\rho$-axis when it comes to getting enlightening physical insights out of integrals like the one in \eqref{eq:sommerfeld_identity_bessel}. For a closed integration path would much better suit the theorem Sommerfeld derived an alternative representation of \eqref{eq:sommerfeld_identity_bessel} invoking a well-known identity \cite[eq.~10.4.4]{Olver2010} and the so-called \enquote{circuit relations} of Hankel functions \cite[p.~314]{Sommerfeld1964}. It is given by
-% \begin{corollary}[Sommerfeld identity in terms of Hankel functions]
-% 	The Sommerfeld identity in terms of Hankel functions reads
-% 	\begin{equation}\label{eq:sommerfeld_identity_hankel}
-% 		\frac{\exp{\im k r}}{r} = \frac{\im}{2} \int\limits_{-\infty}^{\infty} \frac{k_\rho}{k_z} \besselh{1}{0} \left(k_\rho \rho\right) \exp{i k_z \abs{z}} \dd k_\rho \, .
-% 	\end{equation}
-% \end{corollary}
-% The third well-known formulation of the very same mathematical statement expands the Hankel transform in \eqref{eq:sommerfeld_identity_bessel} or \eqref{eq:sommerfeld_identity_hankel}, respectively, in a two-dimensional Fourier integral
-% \begin{corollary}[Weyl identity {\cite{Weyl1919}, \cite{Chew1999}}]\label{coll:wely_identity}
-% 	The Weyl identity reads
-% 	\begin{equation}\label{eq:weyl_identity}
-% 		\frac{\exp{\im k r}}{r} = \frac{\im}{2\pi} \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty} \frac{-\exp{-\im k_z \abs{z}}}{\im k_z} \exp{\im k_x x} \exp{-\im k_y y} \dd k_x \, \dd k_y \, .
-% 	\end{equation}
-% \end{corollary}
-
-% For the mathematical equivalence of \eqref{eq:sommerfeld_identity_bessel}, \eqref{eq:sommerfeld_identity_hankel} and \eqref{eq:weyl_identity} all three forms can be employed in the description of the same physics, namely the description of a scalar spherical wave. While all three of the forms involve the plane wave term $\exp{i k_z \abs{z}}$ to represent the vertically directed wave constituents, the lateral part of the field can be represented either by standing or propagating cylindrical waves as well as by a superposition of plane waves.
-
-% The differing property of vertical and lateral, however, is that the properties of the lateral wave constituents solely depend on the integration variable while the set of vertical plane waves is in any case composed of propagating and evanescent portions, corresponding to the cases $k_\rho \lessgtr k$ in \eqref{eq:k_z}.
-
-% \fxnote{Hier noch schreiben wie sich das auswirkt.}
-
-
-% \fxnote{Beweis, dass Sommerfeld-Identität auch mit komplexen Längen gilt!?}
-%Die räumlichen Größen $r$ und $z$ in \eqref{eq:sommerfeld_identity} waren in Sommerfelds ursprüngliche Analyse reell. Wie früh erkannt wurde \cite{Deschamps1971,Keller1971} behält \cref{lemma:sommerfeld_identity} jedoch auch für $r, z\in\C$ seine Gültigkeit. Die Kugelwelle verändert dabei jedoch ihre für $r, z\in\R$ isotrope Charakteristik hin zu einem gerichteten gaußschen Strahl.
-
-
-
-
-
-
-
-
-
-
-
-
+The proof of equivalence for \eqref{eq:sommerfeld_integral_real_axis_path} and
+\eqref{eq:sommerfeld_integral_sip} is nowadays a classic textbook example
+\cite[p.~203]{Sommerfeld1964}.
 
 
 
