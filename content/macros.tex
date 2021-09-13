@@ -4,6 +4,7 @@
 \newcommand{\ie}{i.\,e.\xspace}%
 \newcommand{\eg}{e.\,g.\xspace}%
 \newcommand{\wrt}{w.\,r.\,t.\xspace}%
+\newcommand{\vs}{vs.\xspace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Acronyms
@@ -176,29 +177,34 @@
 
 % Physical and geometrical vectors
 \newcommand{\pvec}[1]{\mathbfit{#1}}     	% general "physical" vector and vector in frequency domain
-\newcommand{\tdvec}[1]{\bm{\mathfrak{#1}}}	% time domain
 \newcommand{\uv}[1]{\hat{\pvec{#1}}} 		% unit vector
 \newcommand{\dyad}[1]{\overline{\pvec{#1}}}
+
+% Linear Algebra
 \renewcommand{\vec}[1]{\mathsfbfit{#1}} 	% n-dimensional vector
 \newcommand{\mat}[1]{\mathsfbfit{#1}} 		% <n x n> matrix
 
 % Operators
-\newcommand{\op}[1]{\mathcal{#1}} 			% operator that takes a scalar-valued function
-\newcommand{\vecop}[1]{\bm{\mathcal{#1}}} 	% operator that takes a vector-valued function
-\DeclareMathOperator{\laplace}{\Delta}		% scalar Laplacian operator
-\DeclareMathOperator{\laplaceTrans}{\laplace_\mathrm{t}}	% transversal Laplacian operator
 \DeclareMathOperator{\gradient}{\nabla}		% gradient operator
 \DeclareMathOperator{\divergence}{\nabla\cdot}		% divergence operator
 \DeclareMathOperator{\curl}{\nabla\times}			% curl operator
+
+\DeclareMathOperator{\laplace}{\Delta}		% scalar Laplacian operator
+\DeclareMathOperator{\laplaceTrans}{\laplace_\mathrm{t}}	% transversal Laplacian operator
+
 \newcommand{\abs}[1]{\left\vert#1\right\vert}	% absolute value
+
 \newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
 \newcommand{\euclideanNorm}[1]{\norm{#1}_2} % Euclidean norm
+
+\newcommand{\cmplxlength}[1]{\abs{#1}_\mathrm{c}}
+
 \newcommand{\pd}[2][]{\frac{\partial#1}{\partial#2}} 	% partial derivative (function as an optional argument)
 \newcommand{\nd}[2][]{\frac{\dd#1}{\dd#2}} 	% normal derivative (function as an optional argument)
 \newcommand{\pdsec}[1]{\frac{\partial^2}{\partial {#1}^2}}	% 2nd partial derivative
 \newcommand{\pdsecmixed}[2]{\frac{\partial^2}{\partial {#1} \partial {#2}}}	% 2nd mixed partial derivative
+
 \newcommand{\landau}[1]{\mathcal{O} \left( #1 \right)}
-\newcommand{\cmplxlength}[1]{\abs{#1}_\mathrm{c}}
 
 % Integral transforms
 \newcommand{\fourierTransformTemporal}{\mathcal{F}_{\mathrm{t}}}
@@ -210,20 +216,17 @@
 \newcommand{\sommerfeldIntegral}[1]{\mathcal{S}_{#1}}
 
 % Misc
+\renewcommand{\pi}{\uppi}
 \newcommand{\e}{\mathrm{e}}					% Euler's number
 \renewcommand{\exp}[1]{\e^{#1}\,}			% exponential function
-\renewcommand{\pi}{\uppi}
 \newcommand{\dd}{\mathrm{d}}  				% the differential symbol is actually an operator
-\DeclareMathOperator{\const}{const.}
 
 % Complex numbers
 \newcommand{\im}{\mathrm{j}}
-%\renewcommand{\Re}{\mathrm{Re}\;}
-%\renewcommand{\Im}{\mathrm{Im}\;}
 \newcommand{\real}[1]{\Re\mathrm{e}\left(#1\right)}
 \newcommand{\imag}[1]{\Im\mathrm{m}\left(#1\right)}
 
-% Blackboard font: for special sets of numbers
+% Blackboard font: fields
 \newcommand{\C}{\mathbb{C}}	% complex numbers
 \newcommand{\R}{\mathbb{R}}	% real numbers
 \newcommand{\N}{\mathbb{N}}	% natural numbers
@@ -243,10 +246,15 @@
 \newcommand{\rsrc}{\pvec{r}^\prime}
 \newcommand{\rdiff}{\robs-\rsrc}
 \newcommand{\rdiffNorm}{\norm{\rdiff}}
+\newcommand{\rdiffSymbol}{\pvec{R}}
+\newcommand{\rdiffNormSymbol}{R}
+
 \newcommand{\ewaldintegral}{\oiint\limits_{S^2} \dd^2 \uv{k} \, }
+
+\newcommand{\tx}{\mathrm{TX}}
 \newcommand{\te}{\mathrm{TE}}
 \newcommand{\tm}{\mathrm{TM}}
-\newcommand{\tx}{\mathrm{TX}}
+
 \newcommand{\isrc}{\mathrm{i}}
 \newcommand{\vsrc}{\mathrm{v}}
 
