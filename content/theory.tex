@@ -13,19 +13,26 @@ with the Sommerfeld problem's solution domain---are pointed out.
 
 \subsection{Notation}
 
-If not specifically marked, the notation in the present thesis follows the
-textbook by \textcite{vanBladel2007}.
-In particular, vectors in $\R^3$ which possess a physical meaning are denoted in
-bold and italic serif font, \eg, the position vector $\pvec{r}$.
-Source points are marked by a prime, observation points are unprimed.
+Let the following notes regarding notation prepended this chapter.
+\begin{description}
+	\item[Physical vectors:] Vectors in $\R^3$ a physical meaning are denoted in
+	bold and italic serif font, \eg, the position vector $\pvec{r}$.
+	Source points are marked by a prime, observation points are unprimed.
+	Unit vectors are marked as $\uv{u}$.
+	\item[Linear algebra:] Entities with reference to linear algebra,~\ie,
+	matrices and vectors are denoted in bold, italic and sans-serif font.
+	Matrices, \eg, $\mat{A}$, are distinguished from column vectors,~\eg,
+	$\vec{v}$, by the use of upper and lower case symbols, respectively.
+	\item[Special functions:] The notation of special functions and related
+	symbols is in accordance to the NIST Handbook of Mathematical Functions
+	\cite{Olver2010}.
+\end{description}
 
-Entities with reference to linear algebra, \ie, matrices and vectors are denoted
-in bold, italic and sans-serif font. Matrices, \eg, $\mat{A}$, are distinguished
-from column vectors, \eg, $\vec{v}$, by the use of upper and lower case symbols,
-respectively.
+Otherwise, if not explicitly labeled, the notation in the present thesis
+follows the textbook by \textcite{vanBladel2007}.
 
-The notation of special functions and related symbols is in accordance to the
-NIST Handbook of Mathematical Functions \cite{Olver2010}.
+
+
 
 
 
@@ -320,7 +327,7 @@ given by
 	Sommerfeld, originally use the alternative $\exp{-\mathrm{i} \omega t}$
 	time convention.
 	The conversion to $\exp{\im \omega t}$ is done by the formal substitution
-	$\mathrm{i} \to -\im$. In addition, the kinds of Hankel functions, \ie,
+	$\mathrm{i} \to -\im$. In addition, the kinds of Hankel functions,~\ie,
 	of propagating cylindrical or spherical waves, must be changed.}.
 \end{remark}
 
@@ -403,9 +410,9 @@ The reason why the phasor convention of
 \cref{def:fourier_transfrom_spatial_forward} is the physically reasonable choice
 under the $\exp{\im \omega t}$ time convention
 can be seen if we assume $\pvec{r} = \uv{x} x$ and $\pvec{k} = \uv{x} k_x$
-with $x, k_x \in \R$ and $k_x > 0$, \ie, a lossless right-handed medium.
+with $x, k_x \in \R$ and $k_x > 0$,~\ie, a lossless right-handed medium.
 Then $\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}$ describes
-a plane wave whose wave fronts propagate \emph{forward}, \ie, in positive
+a plane wave whose wave fronts propagate \emph{forward},~\ie, in positive
 $x$-direction, as time evolves.
 In contrast,
 $\exp{-\im \left( \pvec{k} \cdot \robs + \omega t \right)}$
@@ -467,11 +474,11 @@ where the geometrical meaning of the dot product is incorporated.
 Note that $z = \uv{z} \cdot \pvec{r}$ is unaffected by the integral in
 \eqref{eq:fourier_transform_2space_forward}.
 It is therefore sufficient to consider only $f = f\left(\rho, \varphi\right)$
-and $\tilde{f} \left(k_\rho, k_\varphi\right)$, \ie, to use planar polar
+and $\tilde{f} \left(k_\rho, k_\varphi\right)$,~\ie, to use planar polar
 coordinates.
 
 Assume further that both functions $f$ and $\tilde{f}$ possess---or
-can be coordinate-transformed to obtain---azimuthal symmetry, \ie, the
+can be coordinate-transformed to obtain---azimuthal symmetry,~\ie, the
 functions do not depend on the coordinate $\varphi$ in \cref{def:cyl_coords}.
 For such functions of azimuthal symmetry the 2D integrals in 
 
@@ -484,7 +491,7 @@ Such transforms are referred to as Hankel transforms or, synonymously,
 Fourier-Bessel transforms in mathematical context.
 As the Hankel transform is essentially a special case of a two-dimensional
 Fourier transform, the specific shape of the former depends on the choice of
-definition of the latter, \ie, on \cref{def:fourier_transfrom_temporal_forward}.
+definition of the latter,~\ie, on \cref{def:fourier_transfrom_temporal_forward}.
 
 The following result gives the Hankel transform as it is obtained on the
 basis of \cref{def:fourier_transfrom_temporal_forward} and
@@ -642,7 +649,7 @@ electromagnetic theory.
 In the study of wave fields in media of planar inhomogeneity the spatial domain
 fields are represented by inverse Hankel transforms whose counterparts in the 
 $k_\rho$-spectral-domain are known in analytical form.
-As it turns out, these functions are either azimuthally symmetric, \ie,
+As it turns out, these functions are either azimuthally symmetric,~\ie,
 independent of $k_\varphi$, or depend on $k_\varphi$ via trigonometric
 functions. 
 Here, a prominent feature of the representation of spatial domain fields in
@@ -819,7 +826,7 @@ $\rsrc, \robs \in \C^3$ as the dot product of a complex vector with itself
 is real quantity according to \cref{def:dot_product}.
 Conversely, a mapping $\cmplxlength{\pvec{z}}: \C^3 \mapsto \C$ for a vector
 $\pvec{z} = \rdiff$ with $\rsrc, \robs \in \C^3$ is not a norm according
-to \cref{def:norm}, \ie, such a definition of the distance between the
+to \cref{def:norm},~\ie, such a definition of the distance between the
 points $\robs$ and $\rsrc$ is not a metric.
 
 However, it turns out that the usual observation point $\robs \in \R^3$ 
@@ -1212,7 +1219,7 @@ The quantity
 \end{equation}
 is called \emph{wavenumber}.
 
-Consider now an open domain problem, \ie, $\Omega = \R^3$, where $\Omega$ may
+Consider now an open domain problem,~\ie, $\Omega = \R^3$, where $\Omega$ may
 be compound of multiple disjoint subdomains
 $\Omega_1, \Omega_2, \dots, \Omega_N$ with domain-wise constant $\epsr$ and
 $\mur$.
@@ -1426,7 +1433,7 @@ its spectral domain counterpart becomes
 
 Once the spectral domain \acp{ODE} \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE}
 are solved, the solution can be transformed back to spatial domain by
-inverse Hankel transform, \ie, by a Sommerfeld integral.
+inverse Hankel transform,~\ie, by a Sommerfeld integral.
 
 The remaining components of both types of five-component fields can be obtained
 by differentiation of the spectral domain solutions \eqref{eq:TE_ODE} and
@@ -1469,8 +1476,55 @@ representation of arbitrary solutions to \eqref{eq:mwe_fd}.
 
 
 
-\subsection{Continuity conditions at material changes}
+\subsection{Continuity Conditions at Boundaries}
 \label{subsec:continuity_at_interfaces}
+
+\begin{figure}
+    \centering
+        \begin{tikzpicture}[
+        scale = 0.7,
+		]
+
+        % Coordinate axis
+        \draw [->,>=stealth] (-1,-1) -- (-1,10) node[above] {$\left(z\right)$};
+        \draw (-1.1,3.5) -- (-0.9,3.5) node[right] {$z^\prime$};
+        \draw (-1.1,5.5) -- (-0.9,5.5) node[right] {$z$};
+
+        % Top BC
+        \draw[draw=none,pattern=north west lines] (0,9) -- (7.5,9) -- (7.5,9.5)
+        --node[above]{open($z_N\to\infty$), PEC, PMC} (0,9.5) -- cycle;
+
+        % Layers
+        \draw (0,9) -- (7.5,9) node[right]{$z_{N}$};
+        \node at (4,8.5) [align=center] {$\Omega_{N-1}$};
+        \draw (0,8) -- (7.5,8) node[right]{$z_{N-1}$};
+        \node at (4,7.5) [align=center] {$\Omega_{N-2}$};
+        \draw (0,7) -- (7.5,7) node[right]{$z_{N-2}$};
+        \node at (4,6.6) [align=center] {\vdots};
+        \draw (0,6) -- (7.5,6) node[right]{$z_{m+1}$};
+        \node at (4,5.5) [align=center] {$\Omega_m$};
+        \draw (0,5) -- (7.5,5) node[right]{$z_m$};
+        \node at (4,4.6) [align=center] {\vdots};
+        \draw (0,4) -- (7.5,4) node[right]{$z_{n+1}$};
+        \node at (4,3.5) [align=center] {$\Omega_n$};
+        \draw (0,3) -- (7.5,3) node[right]{$z_n$};
+        \node at (4,2.6) [align=center] {\vdots};
+        \draw (0,2) -- (7.5,2) node[right]{$z_2$};
+        \node at (4,1.5) [align=center] {$\Omega_1$};
+        \draw (0,1) -- (7.5,1) node[right]{$z_1$};
+        \node at (4,0.5) [align=center] {$\Omega_0$};
+        \draw (0,0) --(7.5,0) node[right]{$z_0$};
+
+        % Bottom BC
+        \draw[draw=none,pattern=north west lines] (0,0) -- (7.5,0) -- (7.5,-0.5)
+        --node[below]{open($z_0\to-\infty$), PEC, PMC} (0,-0.5) -- cycle;
+    \end{tikzpicture}
+    \caption[Multilayered medium with indexing scheme]
+	{Multilayered medium with indexing scheme.
+	The layers are defined as domains
+	$\Omega_i = \left\{z \in \R\,:\, z_i \leq z < z_{i+1}\right\}$.}
+    \label{fig:multilayered_medium_spec}
+\end{figure}
 
 The derivation of the characteristic components of \ac{TE} and \ac{TM} fields in
 \cref{subsec:reduction_to_odes} does only assume $\epsr = \epsr\left(z\right)$
@@ -1480,53 +1534,62 @@ the derivatives in \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} must exist.
 
 In the following $\epsr$ and $\mur$ are assumed to be domain-wise constant for
 adjacent intervals in $z$.
-The $n$-th domain is defined as
-$\Omega_n = \left\{z \in \R: z_{n,\mathrm{min}} \leq z < z_{n,\mathrm{max}}\right\}$,
-\ie, the discontinuities of $\epsr$ and $\mur$ occur at the interfaces
-$z_{n,\mathrm{min}}$ and $z_{n,\mathrm{max}}$.
+The domains corresponding to these layers are defined in
+\cref{fig:multilayered_medium_spec}.
+Each domain,~\ie, each layer, is assigned its domain-wise constant pair of
+material parameters $\epsr,\mur$ and wavenumber according to
+\eqref{eq:wavenumber}.
+Accordingly, the discontinuities of $\epsr$ and $\mur$ occur at the interfaces
+$z_i$.
+Within the conventions of \cref{fig:multilayered_medium_spec} Sommerfeld problem
+corresponds to $N=2$ with one single finite boundary at $z_1 = 0$ and open
+boundary conditions at $z_0$ and $z_2$.
 With that assumption the continuity condition for $\tilde{H}_z$ and
 $\tilde{E}_z$ at the boundaries of two neighboring domains with different
 $\epsr$ and/or $\mur$ need to be known.
 
-In fact these continuity conditions can readily be deduced from 
-\eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} using heuristic reasoning
-\cite[p.~47]{Chew1999}.
-Another approach to obtain the continuity conditions could follow a similar idea
-like the well-known derivation of the general continuity conditions for the
-electromagnetic field which is based on the integral form representation of
-Maxwell's equations \cite[pp.~20]{Jackson2013}.
-
-Anyhow, the continuity conditions for $\tilde{H}_z$ at a discontinuity of the
-material parameters read
+One, heuristic, way to obtain these continuity conditions is to deduce them from 
+\eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} \cite[p.~47]{Chew1999}.
+Another approach would be to follow the idea behind a common derivation of
+\eqref{eq:mwe_continuity_at_interface}, which re-writes the governing 
+differential equations in integral form and then considers small loops or
+volumes around the interface \cite[pp.~20]{Jackson2013}.
+Anyhow, the continuity conditions for $\tilde{H}_z$ at the boundary $z_i$ read
 \begin{subequations}
 	\begin{equation}\label{eq:B_continuity}
-		\mu_i \tilde{H}_{z,i} = \mu_{i+1} \tilde{H}_{z,i+1}
+		\mu_i \tilde{H}_{z} \left(z^{-}\right) =
+		\mu_{i+1} \tilde{H}_{z} \left(z^{+}\right)
 	\end{equation}
 	and
 	\begin{equation}\label{eq:H_z_tilde_second_continuity_condition}
 		\frac{1}{\mu_i}
 		\frac{\dd}{\dd z}
-		\mu_i \tilde{H}_{z,i} =
+		\mu_i \tilde{H}_{z}\left(z^{-}\right)
+		=
 		\frac{1}{\mu_{i+1}}
 		\frac{\dd}{\dd z}
-		\mu_{i+1} \tilde{H}_{z,i+1}
-		\,.
+		\mu_{i+1} \tilde{H}_{z} \left(z^{+}\right)
+		\,,
 	\end{equation}
 \end{subequations}
+where $z^{\pm} \to z_i$ from both sides.
 Once more the duality principle can be employed to obtain the corresponding
 conditions 
 \begin{subequations}
 	\begin{equation}\label{eq:D_continuity}
-		\varepsilon_i \tilde{E}_{z,i} = \varepsilon_{i+1} \tilde{E}_{z,i+1}
+		\varepsilon_i \tilde{E}_{z,i} \left(z^{-}\right)
+		=
+		\varepsilon_{i+1} \tilde{E}_{z,i+1} \left(z^{+}\right)
 	\end{equation}
 	and
 	\begin{equation}\label{eq:E_z_tilde_second_continuity_condition}
 		\frac{1}{\varepsilon_i}
 		\frac{\dd}{\dd z}
-		\varepsilon_i \tilde{E}_{z,i} =
+		\varepsilon_i \tilde{E}_{z,i} \left(z^{-}\right)
+		=
 		\frac{1}{\varepsilon_{i+1}}
 		\frac{\dd}{\dd z}
-		\varepsilon_{i+1} \tilde{E}_{z,i+1}
+		\varepsilon_{i+1} \tilde{E}_{z,i+1} \left(z^{+}\right)
 		\,.
 	\end{equation}
 \end{subequations}
@@ -1545,23 +1608,94 @@ for $\tilde{E}_z$.
 \label{subsec:tl_greens_functions}
 
 Coming back to Richard Feynman's famous quote (see
-\cref{subsec:duality_principle}), inspection of \eqref{eq:TE_ODE} and
+\cref{subsec:duality_principle}), comparison of \eqref{eq:TE_ODE} and
 \eqref{eq:TM_ODE} reveals distinctive similarities to another set of
-\acp{ODE} familiar to electrical engineers: the \acf{TL} equations. 
+\acp{ODE} familiar to electrical engineers: the \acp{ODE} describing 
+voltage and current on transmission lines. 
 
-Because of this familiarity has become a well-established procedure to re-use
-known results of transmission line theory in the solution process of
+Because of this familiarity, it has become a well-established procedure to
+re-use known results of transmission line theory in the solution process of
 electromagnetic field problem in half-space or planar multilayered solution
 domains.
-This approach is referred to as equivalent \ac{TL} network method or just
-network method in the literature.
+This approach is referred to as equivalent transmission line network method or
+just network method in the literature.
 For the special case of multilayered media with domain-wise constant material
 parameters the \acp{TLGF} are known analytically for an arbitrary number of
 layers and outer boundary conditions which might be open, \ac{PEC}, \ac{PMC}
-or of impedance-type \cite[Section~2.4]{Felsen1994}\cite{Michalski1990,Eibert1997,Michalski2005,Michalski2016b}.
+or of impedance-type \cite[Section~2.4]{Felsen1994}\cite{Michalski1990,
+Eibert1997,Michalski2005,Michalski2016b}.
+
+Just as in planar layered media, \ac{TE} and \ac{TM} modes can be distinguished
+on transmission lines.
+The homogeneous transmission line equations for a $z$-directed line with
+propagation \enquote{constant} $k_z$ are given by
+\cite{Felsen1994,Michalski2016b}
+\begin{subequations}\label{eq:tl_ode_system}
+	\begin{align}
+		\frac{\dd}{\dd z} V\left(z\right)
+		&=
+		-\im k_z Z^\tx I\left(z\right) \label{eq:tl_ode_system_dV} \\
+		\frac{\dd}{\dd z} I\left(z\right)
+		&=
+		-\im k_z Y^\tx V\left(z\right) \label{eq:tl_ode_system_dI} \, ,
+	\end{align}
+\end{subequations}
+where with regard to the characteristic impedance $Z = Y^{-1}$ a distinction has
+to be made for $\tx \in \left\{\te,\tm\right\}$.
+Within the framework of multilayered media the transmission line
+characteristics in the $i$-th layer are determined by
+\begin{equation}
+	k_{zi} = \sqrt{{k_i}^2 - {k_\rho}^2}
+	\,
+\end{equation}
+\begin{equation}
+	Z_i^\tm = \frac{k_{zi}}{\omega \varepsilon_i}
+\end{equation}
+and
+\begin{equation}
+	Z_i^\te = \frac{\omega \mu_i}{k_{zi}}
+	\, .
+\end{equation}
+With that, the four \acp{TLGF} of \eqref{eq:tl_ode_system}
+\begin{itemize}
+	\item voltage due to unit-strength $\diracDelta$-like current source $V_i$
+	\item current due to unit-strength $\diracDelta$-like current source $I_i$
+	\item voltage due to unit-strength $\diracDelta$-like voltage source $V_v$
+	\item current due to unit-strength $\diracDelta$-like voltage source $I_v$
+\end{itemize}
+are known analytically for the geometry shown in
+\cref{fig:multilayered_medium_spec} and more or less ready to use expressions
+for special cases as well as for a general multilayered medium can be found in
+the literature 
+\cite{Michalski1990,Hsu1993,Ho1994,Eibert1997,Michalski2005}.
+As the coupled \acp{ODE} \eqref{eq:tl_ode_system_dV} and
+\eqref{eq:tl_ode_system_dI} are dual
+equations, the set of duality rules for the \acp{TLGF} can be formulated as
+given by \cref{tab:tlgf_duality}.
+
+\begin{table}[hbt]
+	\centering
+	\begin{tabular}{cc}
+		\toprule%
+		\textbf{original} & \textbf{dual}\\ \midrule
+		$V_i$ & $I_v$ \\
+		$I_i$ & $V_v$ \\
+		$Z$ & $Y$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Duality substitution rules for \acp{TLGF}.}
+	\label{tab:tlgf_duality}
+\end{table}
+
+
+
+
+
+
+
 
 To illustrate the behavior of voltage and current on the equivalent
-\ac{TM}-\ac{TL} of a Sommerfeld half-space an example is shown in
+\ac{TM} transmission line of a Sommerfeld half-space an example is shown in
 \cref{fig:tlgf_example}.
 
 \begin{figure}
@@ -1570,7 +1704,7 @@ To illustrate the behavior of voltage and current on the equivalent
     \matrix {
         \begin{axis}[
             width = \textwidth,
-            height = 0.25\textwidth,
+            height = 0.22\textwidth,
             grid = major,
             xlabel = {$z / \lambda_0$},
             ylabel = {$V_i$ in Volt},
@@ -1585,7 +1719,7 @@ To illustrate the behavior of voltage and current on the equivalent
         \\
         \begin{axis}[
             width = \textwidth,
-            height = 0.25\textwidth,
+            height = 0.22\textwidth,
             grid = major,
             xlabel = {$z / \lambda_0$},
             ylabel = {$I_i$ in Amp\`ere},
@@ -1600,7 +1734,7 @@ To illustrate the behavior of voltage and current on the equivalent
         \\
         \begin{axis}[
             width = \textwidth,
-            height = 0.25\textwidth,
+            height = 0.22\textwidth,
             grid = major,
             xlabel = {$z / \lambda_0$},
             ylabel = {$Z / Z_0$},
@@ -1640,49 +1774,6 @@ To illustrate the behavior of voltage and current on the equivalent
 
 
 
-The equations describing voltage and current on a $z$-directed transmission
-line with propagation constant $k_\rho$ read \cite{Felsen1994,Michalski2016b}
-\begin{subequations}\label{eq:tl_ode_system}
-	\begin{align}
-		\frac{\dd}{\dd z} V\left(z\right)
-		&= \im k_z Z^\tx I\left(z\right) \label{eq:tl_ode_system_dV} \\
-		\frac{\dd}{\dd z} I\left(z\right)
-		&= \im k_z Y^\tx V\left(z\right) \label{eq:tl_ode_system_dI} \, ,
-	\end{align}
-\end{subequations}
-with $Z^\tx = 1/Y^\tx$ and $\tx$ stands either for \ac{TE} or \ac{TM}.
-Obviously \eqref{eq:tl_ode_system_dV} and \eqref{eq:tl_ode_system_dI} are dual
-equations with the relations given by \cref{tab:tl_duality}.
-\fxnote{check time convention in \eqref{eq:tl_ode_system}}
-
-\begin{table}[hbt]
-	\centering
-	\begin{tabular}{cc}
-		\toprule%
-		\textbf{original} & \textbf{dual}\\ \midrule
-		$V_i$ & $I_v$ \\
-		$I_i$ & $V_v$ \\
-		$Z$ & $Y$ \\
-		\bottomrule
-	\end{tabular}
-	\caption{Duality substitution rules for \ac{TLGF}.}
-	\label{tab:tl_duality}
-\end{table}
-
-
-Auch im Fall der Leitungen lassen sich in Modelle der Führung von TM-Wellen von
-entsprechenden Wellenleitern für TE-Wellen unterscheiden.
-Die ausschlaggebende Größe ist die charakteristische Leitungsimpedanz $Z^\tx$
-bzw. -admittanz $Y^\tx$, die sich sich im TM-Fall durch
-\begin{equation}
-	Z^\tm\left(z\right) =
-	\frac{k_z\left(z\right)}{\omega \varepsilon\left(z\right)}
-\end{equation}
-und im TE-Fall durch
-\begin{equation}
-	Y^\te\left(z\right) = \frac{k_{z}\left(z\right)}{\omega \mu\left(z\right)}
-\end{equation}
-bestimmt. Die Ausbreitungskonstante $k_z$ ist in beiden Fällen gleich.
 
 Für die Definition der Greenschen Funktionen von \eqref{eq:tl_ode_system} gibt
 es nun
