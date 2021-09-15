@@ -243,7 +243,8 @@
 \newcommand{\rdiffSymbol}{\pvec{R}}
 \newcommand{\rdiffNormSymbol}{R}
 
-\newcommand{\ewaldintegral}{\oiint\limits_{S^2} \dd^2 \uv{k} \, }
+\newcommand{\unitSphereSymbol}{S^2}
+\newcommand{\ewaldintegral}{\oiint\limits_{\unitSphereSymbol} \dd^2 \uv{k} \, }
 
 \newcommand{\tx}{\mathrm{TX}}
 \newcommand{\te}{\mathrm{TE}}
@@ -256,9 +257,9 @@
 \newcommand{\mur}[1][]{\mu_{\mathrm{r}#1}} 	% relative permeability (layer index as an optional argument)
 
 % FMM definitions
-\newcommand{\fmmDiffGroupCenters}{\pvec{t}_{m,m^\prime}}
-\newcommand{\fmmGroupCenter}[1]{\pvec{c}_{#1}}
-\newcommand{\fmmSrcGroupCenter}{\pvec{c}_{m^\prime}}
-\newcommand{\fmmObsGroupCenter}{\pvec{c}_{m}}
+\newcommand{\fmmDiffGroupCenters}{\pvec{X}_{mm^\prime}}
+\newcommand{\fmmGroupCenter}[1]{\pvec{X}_{#1}}
+\newcommand{\fmmSrcGroupCenter}{\fmmGroupCenter{m^\prime}}
+\newcommand{\fmmObsGroupCenter}{\fmmGroupCenter{m}}
 \newcommand{\fmmMultiIndex}{\vec{m}}
 

@@ -1295,8 +1295,8 @@ While different possibilities can be found can be found in the literature
 
 
 
-\subsection{Reduction to Ordinary Differential Equations}
-\label{subsec:reduction_to_odes}
+\subsection{Five-Component Fields}
+\label{subsec:five_component_fields}
 
 Assume a medium with parameters $\epsr = \epsr\left(z\right)$ and
 $\mur = \mur\left(z\right)$.
@@ -1307,58 +1307,50 @@ electromagnetic filed with only five non-vanishing components.
 Since the vanishing sixth component is the $\uv{z}$-component of either 
 $\pvec{E}$ or $\pvec{H}$, these \emph{modes} are termed \ac{TE} and \ac{TM},
 respectively.
+The following derivation of a generic \ac{TM} field and its continuity
+conditions at a change of $\epsr$ or $\mur$ in $z$ is essentially the solution
+to an example problem in the textbook by \textcite[p.~140]{Chew1999}.
 
-There are various ways to derive the \ac{TE} and \ac{TM} fields.
-One could either start with potential formulations as Sommerfeld originally
-did with the so-called Hertz vector $\pvec{\Lambda}$ \cite{Sommerfeld1909}.
-More modern approaches tailored towards integrals equation techniques use
-vector and scalar potentials \cite{Michalski1990,Eibert1997,Michalski2016b}.
-Yet another way is to directly consider the electromagnetic fields as
-demonstrated in the textbook by \textcite{Chew1999}.
-There, the horizontal component of a five-component field $\pvec{E}$ is
-used as the characteristic component of a \ac{TE}-field.
-The preceding derivation shows that the magnetic field component
-$H_z = \uv{z} \cdot \pvec{H}$ can be used alternatively to describe the very
-same \ac{TE}-field.
-
-
-Consider the electric portion of a generic \ac{TE} field
+Consider the $E_z = \uv{z} \cdot \pvec{E}$ as the characteristic component
+of a generic \ac{TM} field
 \begin{equation}\label{eq:TE_E_field_components}
-	\pvec{E} = \uv{x}E_x + \uv{y}E_y \,.
+	\pvec{H} = \uv{x}H_x + \uv{y}H_y \,.
 \end{equation}
-Obviously, the component $H_z = $ is contained in the solution to \eqref{eq:curlcurl_H}.
-Substituting \eqref{eq:mwe_fd_faraday} into \eqref{eq:curlcurl_H} for the
-homogeneous case $\pvec{M}  = 0$ yields
-\begin{equation}\label{eq:triple_curl_TE}
-	- \frac{\varepsilon}{\im \omega}
-	\curl \frac{1}{\varepsilon}
-	\curl \frac{1}{\mu} \curl \pvec{E} - k^2\pvec{H} = 0
+Obviously, the component $E_z$ is contained in \eqref{eq:curlcurl_E}.
+Substituting \eqref{eq:mwe_fd_ampere} into \eqref{eq:curlcurl_E} for the
+homogeneous case $\pvec{J}  = 0$ yields
+\begin{equation}\label{eq:triple_curl_TM}
+	- \frac{\mu}{\im \omega}
+	\curl \frac{1}{\mu}
+	\curl \frac{1}{\varepsilon} \curl \pvec{H} - k^2\pvec{E} = 0
 	\,.
 \end{equation}
-Expanding the $H_z$ component in \eqref{eq:triple_curl_TE} and taking advantage
+Expanding the $E_z$ component in \eqref{eq:triple_curl_TM} and taking advantage
 of the preconditions $\varepsilon = \varepsilon\left(z\right)$ and
 $\mu = \mu\left(z\right)$ we obtain
-\begin{equation}\label{eq:H_z_complicated}
+\begin{equation}\label{eq:E_z_complicated}
 	\begin{split}
-		\frac{1}{\mu}
+		\frac{1}{\varepsilon}
 		\left(
-			-\pdsec{x} \pd[E_y]{x} +
-			\pdsec{y} \pd[E_x]{y} +
-			\pdsec{x} \pd[E_x]{y} -
-			\pdsec{y} \pd[E_y]{x}
+			-\pdsec{x} \pd[H_y]{x} +
+			\pdsec{y} \pd[H_x]{y} +
+			\pdsec{x} \pd[H_x]{y} -
+			\pdsec{y} \pd[H_y]{x}
 		\right) \\
-		-\pd{z}\frac{1}{\mu}\pd{z}\pd[E_y]{x} +
-		\pd{z}\frac{1}{\mu}\pd{z}\pd[E_x]{y} +
-		\im \omega k^2 H_z = 0
+		-\pd{z}\frac{1}{\varepsilon}\pd{z}\pd[H_y]{x} +
+		\pd{z}\frac{1}{\mu}\pd{z}\pd[H_x]{y} +
+		\im \omega k^2 E_z = 0
 		\,.
 	\end{split}
 \end{equation}
-In \eqref{eq:H_z_complicated} the expression
+In \eqref{eq:E_z_complicated} the expression
 \begin{equation}
-	\pd[E_y]{x} = \pd[E_x]{y} - \im \omega \mu H_z
+	\pd[H_y]{x} = \pd[H_x]{y} - \im \omega \varepsilon E_z
 	\, ,
 \end{equation}
-which is obtained from Faraday's law \eqref{eq:mwe_fd_faraday} can be used.
+which is obtained \eqref{eq:mwe_fd_ampere} can be used.
+
+
 Furthermore, by definition of the shortcut
 \begin{equation}\label{eq:laplace_transversal}
 	\laplaceTrans
@@ -1382,8 +1374,8 @@ for the transversal part of the Laplacian operator \cite[p.~731]{Bronstein2016},
 	k^2 H_z = 0
 	\,.
 \end{equation}
-It can be shown, that the forward zeroth order Hankel transform
-\eqref{eq:hankel_transform} acting on the rightmost operator in
+It can be shown \cite[p.~231]{Davies2002}, that the forward zeroth order Hankel
+transform \eqref{eq:hankel_transform} acting on the rightmost operator in
 \eqref{eq:laplace_transversal} corresponds to the formal
 substitution\footnote{Fourier transform with respect to $x$ and $y$ of the
 middle operator in \eqref{eq:laplace_transversal} corresponds to
@@ -1935,28 +1927,31 @@ Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
 \section{Fast Multipole Method for the Helmholtz Equation}
 
-\subsection{Definitions}
+\subsection{Geometrical Definition}
 
 The following considerations concerning the \ac{FMM} use the geometrical
-assumptions elucidated by \cref{fig:fmm_geometry}. The solution domain is
-subdivided into cubical group boxes of side length $w$.
-Note that $\rdiff$ can be written as the sum of three vectors. These, as well
-as the possible ground are aligned with the global Cartesian coordinate system.
-
-Based on this grouping scheme $\rdiff$ can be written as
-\begin{equation}
+assumptions elucidated by \cref{fig:fmm_geometry}.
+The crucial idea is to write $\rdiff$ as a sum
+\begin{equation}\label{eq:fmm_rdiff_parts}
 	\rdiff =
 	\left( \robs - \fmmObsGroupCenter              \right) +
 	\left( \fmmObsGroupCenter - \fmmSrcGroupCenter \right) -
 	\left( \rsrc - \fmmSrcGroupCenter              \right) \, ,
 \end{equation}
-where $\fmmSrcGroupCenter$ and $\fmmObsGroupCenter$ denote the centers of
-source and observation boxes, respectively.
-Based on this notation the shorthand notations 
+of three vectors, where $\fmmSrcGroupCenter$ and $\fmmObsGroupCenter$ are the
+centers of localized groups of source and observation points, respectively.
+Within the scope of the present thesis the grouping scheme is chosen
+according to \cref{fig:fmm_geometry},~\ie, all groups are cubes with side
+length $w$.
+Towards an inclusion of a ground half-space at $z < 0$ the whole grouping
+configuration is aligned with $z = 0$ as shown.
+Based on \eqref{eq:fmm_rdiff_parts} the shorthand notations 
 $\fmmDiffGroupCenters \coloneqq \fmmObsGroupCenter - \fmmSrcGroupCenter$
 and 
 $\pvec{d} \coloneqq \left( \robs - \fmmObsGroupCenter \right) - \left( \rsrc - \fmmSrcGroupCenter \right)$
 are introduced.
+This notation is in accordance to the popular prescription of the \ac{FMM}
+algorithm by \textcite{Coifman1993}.
 
 \begin{figure}
 	\centering
@@ -1976,23 +1971,23 @@ are introduced.
 		
 		% Coordinate system
 		\draw [color=gray!20]  [step=\w] (-0.5*\w,-1.5*\w) grid (4.5*\w,2.5*\w);
-		\draw[->,>=stealth] (-0.75*\w,0) -- (4.75*\w,0) node[right] {$x$, $y$};
-		\draw[->,>=stealth] (0,-1.75*\w) -- (0,2.75*\w) node[above] {$z$};
+		\draw[->,>=stealth] (-0.75*\w,0) -- (4.75*\w,0) node[right] {$\left(x,y\right)$};
+		\draw[->,>=stealth] (0,-1.75*\w) -- (0,2.75*\w) node[above] {$\left(z\right)$};
 		\foreach \c in {1,2,3,4}{\draw (\c*\w,-.1) -- (\c*\w,.1) node[below=4pt] {$\c w$};}
 		\foreach \c in {1,2}{\draw (-0.1,\c*\w) -- (0.1,\c*\w) node[left=4pt] {$\c w$};}
 		\draw (-0.1,-0.1) node[below left] {$0$};
 		
 		% Vectors
-		\draw[->, >=stealth] (r_s) -- node[below]{$\fmmDiffGroupCenters$} (r_o);
-		\draw[->, >=stealth, line width=1.0pt, red] (r_prime) -- node[above]{$\rdiff$} (r);
-		\draw[->, >=stealth] (r_prime) -- node[left]{$\fmmSrcGroupCenter - \rsrc$} (r_s);
-		\draw[->, >=stealth] (r_o) -- node[right]{$\robs - \fmmObsGroupCenter$} (r);
+		\draw[->, >=stealth] (r_s) -- node[below right]{$\fmmDiffGroupCenters$} (r_o);
+		\draw[->, >=stealth, line width=1.0pt, red] (r_prime) -- node[above left]{$\rdiff$} (r);
+		\draw[->, >=stealth] (r_prime) -- (r_s);
+		\draw[->, >=stealth] (r_o) -- (r);
 		
 		% Points
 		\fill (r) circle (\dotsize) node[above]{$\robs$};
 		\fill (r_prime) circle (\dotsize) node[above]{$\rsrc$};
 		\fill (r_s) circle (\dotsize) node[below]{$\fmmSrcGroupCenter$};
-		\fill (r_o) circle (\dotsize) node[below]{$\fmmObsGroupCenter$};
+		\fill (r_o) circle (\dotsize) node[below right]{$\fmmObsGroupCenter$};
 		
 		% Group boxes
 		\draw($(r_s) - (\w/2,\w/2)$) rectangle ($(r_s) + (\w/2,\w/2)$);
@@ -2007,14 +2002,14 @@ are introduced.
 
 \subsection{Conventional Free-Space Approach}
 
-The classical derivation of the \ac{FMM} for the free-space Green's function
-of the Helmholtz equation is based on two elementary identities.
+The conventional \ac{FMM} for the free-space Green's function
+of the Helmholtz equation \eqref{eq:scalar_free_space_gf} is based on two
+elementary identities.
 
 The first identity is, in a more general form, referred to as Gegenbauer's
 addition theorem by handbooks on mathematical functions
 \cite[eq. 10.23.8]{Olver2010} \cite[9.1.80]{Abramowitz2014}.
-A more specialized version also plays a role in analytical field theory where
-\cite[p.~414]{Stratton2007}
+The more specialized version \cite[p.~414]{Stratton2007}
 \begin{equation}\label{eq:addition_thrm_spherical_waves_stratton}
 	\frac{\exp{-\im k \rdiffNorm}}{\rdiffNorm} =
 	-\im k \sum\limits_{l=0}^{\infty}
@@ -2029,78 +2024,83 @@ A more specialized version also plays a role in analytical field theory where
 		& r > r^\prime
 	\end{cases}
 \end{equation}
-is known as the \emph{addition theorem for spherical wave functions}
-\cite[p.~362]{Jin2015}.
-The expression on the right-hand side expands an offset spherical wave
-($\rsrc \neq 0$) by a series of spherical waves centered at the origin.
+plays a role in analytical field theory and is known as the \enquote{addition
+theorem for spherical wave functions} \cite[p.~362]{Jin2015}.
+The expression on the right-hand side expands an offset ($\rsrc \neq 0$)
+spherical wave by a series of spherical waves centered at the origin.
 
 The identity desired towards the \ac{FMM} is obtained from
-\eqref{eq:addition_thrm_spherical_waves_stratton} by flipping the sign of 
-$\rsrc$ for $r > r^\prime$.
-Using the notation of \cref{fig:fmm_geometry}, it is given by
+\eqref{eq:addition_thrm_spherical_waves_stratton} for $r > r^\prime$ by
+flipping the direction of $\rsrc$.
+In the notation of \cref{fig:fmm_geometry}, it is given by
 \begin{corollary}[Gegenbauer's addition theorem]
-	Let $\pvec{t}, \pvec{d} \in \R^3$, $d < t$, $k \in \C$ and
-	\eqref{eq:addition_thrm_spherical_waves_stratton} be given.
+	Let $\pvec{X}, \pvec{d} \in \R^3$ be two vectors with
+	$d < X$ and assume $0 < k \in \R$.
 	Then Gegenbauer's addition reads
 	\begin{equation}\label{eq:fmm_std_gegenbauer}
-		\frac{\exp{-\im k \abs{\pvec{t} + \pvec{d}}}}{\abs{\pvec{t} + \pvec{d}}} = 
+		\frac{\exp{-\im k \norm{\pvec{X} + \pvec{d}}}}{\norm{\pvec{X} + \pvec{d}}} = 
 		-\im k \sum\limits_{l=0}^{\infty}
 		\left( -1 \right)^l
 		\left( 2l + 1 \right) \,
 		\sphbesselj{l} \left( k d  \right) \,
-		\sphbesselh{2}{l} \left( k t \right) \, 
-		\legendrepl{l} \left( \uv{d} \cdot \uv{t} \right) \, .
+		\sphbesselh{2}{l} \left( k X \right) \, 
+		\legendrepl{l} \left( \uv{X} \cdot  \uv{d} \right) \, .
 	\end{equation}
 \end{corollary} 
-
 \begin{proof}
-	\fxnote{TODO}
+	The respective left-hand sides of
+	\eqref{eq:addition_thrm_spherical_waves_stratton} and
+	\eqref{eq:fmm_std_gegenbauer} correspond via $\robs \widehat{=} \pvec{X}$
+	and $-\rsrc \widehat{=} \pvec{d}$.
+	From the reflection formula of Legendre polynomials
+	\cite[(14.7.17)]{Olver2010}
+	\begin{equation}\label{eq:legendre_pol_reflection_formula}
+		\legendrepl{l} \left(-\cos \theta\right) =
+		\left(-1\right)^l \legendrepl{l} \left( \cos \theta \right)
+	\end{equation}
+	it is noted that $\legendrepl{l}$ is even (odd) for even (odd) degree $l$.
+	As $\uv{X} \cdot \uv{d} \widehat{=} -\uv{r} \cdot \uv{r^\prime} $
+	the factor $\left(-1\right)^l$ in \eqref{eq:fmm_std_gegenbauer} follows
+	directly from \eqref{eq:legendre_pol_reflection_formula}.
 \end{proof}
 
 The second major identity towards \ac{FMM} expands the product 
-$\sphbesselj{l} \left( k b \right) \legendrepl{l} \left( \uv{b} \cdot \uv{a} \right)$
+$\sphbesselj{l} \left( k d \right) \legendrepl{l} \left( \uv{X} \cdot \uv{d} \right)$
 into an integral of weighted propagating plane waves. For compact notation, it
 is useful to introduce
-\begin{definition}[Ewald sphere of propagating plane waves]\label{def:ewald_sphere}
-	Let $S^2$ denote the unit sphere in $\R^3$. Then
+\begin{definition}[Ewald sphere]\label{def:ewald_sphere}
+	Let $\unitSphereSymbol$ denote the unit sphere in $\R^3$. Then
 	integrals of the form
 	\begin{equation}\label{eq:ewald_sphere_integral}
-		\ewaldintegral \left(\uv{k}\right) 
+		\ewaldintegral f \left(\uv{k}\right) 
 		\coloneqq
-		\int\limits_{\phi = 0}^{2\pi} \int\limits_{\theta = 0}^{\pi}
-		\sin\left(\theta \right) \dd \theta \dd \phi \, ,
+		\int\limits_{\varphi = 0}^{2\pi} \dd \varphi \, 
+		\int\limits_{\vartheta = 0}^{\pi} \dd \vartheta  \, 
+		\sin\left(\vartheta \right)
+		f \left(\uv{k}\right)
+		\, ,
 	\end{equation}
 	where
 	\begin{equation}
 		\uv{k} =
-		\uv{x} \sin \left(\theta\right) \cos \phi +
-		\uv{y} \sin \left(\theta\right) \sin \phi +
-		\uv{z} \cos \theta \, ,
+		\uv{x} \sin \left(\vartheta\right) \cos \varphi +
+		\uv{y} \sin \left(\vartheta\right) \sin \varphi +
+		\uv{z} \cos \vartheta \, ,
 	\end{equation}
-	are called \emph{integrals over the Ewald sphere of propagating plane waves}.
+	are said to be an integration over the \emph{Ewald sphere} of propagating
+	plane waves.
 \end{definition}
 With this notation the desired identity reads
 \begin{equation}\label{eq:fmm_jP_expansion_plane_waves}
-		\sphbesselj{l} \left( k b    \right) \,
-		\legendrepl{l} \left( \uv{b} \cdot \uv{a} \right) = 
+		\sphbesselj{l} \left( k d \right) \,
+		\legendrepl{l} \left( \uv{X} \cdot \uv{d} \right) = 
 		\frac{\im^l}{4\pi}	
 		\ewaldintegral
-		\exp{-\im \pvec{k} \cdot \pvec{b}}
-		\legendrepl{l} \left( \uv{k} \cdot \uv{a} \right)
+		\exp{-\im \pvec{k} \cdot \pvec{d}}
+		\legendrepl{l} \left( \uv{k} \cdot \uv{X} \right)
 \end{equation}
 Note that is a special case of another wave expansion well-established in
 electromagnetic theory \cite[p.~410]{Stratton2007}.
 
 Substituting \eqref{eq:fmm_jP_expansion_plane_waves} into
 \eqref{eq:fmm_std_gegenbauer}
-
-
-
-
-
-
-
-
-
-
-
