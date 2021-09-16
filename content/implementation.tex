@@ -13,6 +13,71 @@
 
 \section{Fast Multipole Method}
 
+\subsection{Geometrical Definition}
+
+The following considerations concerning the \ac{FMM} use the geometrical
+assumptions elucidated by \cref{fig:fmm_geometry}.
+
+
+
+Within the scope of the present thesis the grouping scheme is chosen
+according to \cref{fig:fmm_geometry},~\ie, all groups are cubes with side
+length $w$.
+Towards an inclusion of a ground half-space at $z < 0$ the whole grouping
+configuration is aligned with $z = 0$ as shown.
+
+
+
+This notation is in accordance to the popular prescription of the \ac{FMM}
+algorithm by \textcite{Coifman1993}.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		[scale = 0.7]
+		
+		\newcommand{\w}{3}
+		\newcommand{\dotsize}{1.5pt}
+		
+		\coordinate(r_s) at (1.5*\w,0.5*\w);
+		\coordinate(r_o) at ($(r_s) + (2*\w,\w)$);
+		\coordinate(r_prime) at ($(r_s) + (0.2*\w,0.45*\w)$);
+		\coordinate(r) at ($(r_o) + (-0.3*\w,0.3*\w)$);
+		
+		% Ground
+		\fill[color = blue!30!white] (-0.5*\w,0) rectangle (4.5*\w,-1.5*\w);
+		
+		% Coordinate system
+		\draw [color=gray!20]  [step=\w] (-0.5*\w,-1.5*\w) grid (4.5*\w,2.5*\w);
+		\draw[->,>=stealth] (-0.75*\w,0) -- (4.75*\w,0) node[right] {$\left(x,y\right)$};
+		\draw[->,>=stealth] (0,-1.75*\w) -- (0,2.75*\w) node[above] {$\left(z\right)$};
+		\foreach \c in {1,2,3,4}{\draw (\c*\w,-.1) -- (\c*\w,.1) node[below=4pt] {$\c w$};}
+		\foreach \c in {1,2}{\draw (-0.1,\c*\w) -- (0.1,\c*\w) node[left=4pt] {$\c w$};}
+		\draw (-0.1,-0.1) node[below left] {$0$};
+		
+		% Vectors
+		\draw[->, >=stealth] (r_s) -- node[below right]{$\fmmDiffGroupCenters$} (r_o);
+		\draw[->, >=stealth, line width=1.0pt, red] (r_prime) -- node[above left]{$\rdiff$} (r);
+		\draw[->, >=stealth] (r_prime) -- (r_s);
+		\draw[->, >=stealth] (r_o) -- (r);
+		
+		% Points
+		\fill (r) circle (\dotsize) node[above]{$\robs$};
+		\fill (r_prime) circle (\dotsize) node[above]{$\rsrc$};
+		\fill (r_s) circle (\dotsize) node[below]{$\fmmSrcGroupCenter$};
+		\fill (r_o) circle (\dotsize) node[below right]{$\fmmObsGroupCenter$};
+		
+		% Group boxes
+		\draw($(r_s) - (\w/2,\w/2)$) rectangle ($(r_s) + (\w/2,\w/2)$);
+		\draw($(r_o) - (\w/2,\w/2)$) rectangle ($(r_o) + (\w/2,\w/2)$);
+		
+	\end{tikzpicture}
+
+	\caption[\acs{FMM} geometry]
+	{Geometric definition of the \ac{FMM} implementation.}
+	\label{fig:fmm_geometry}
+\end{figure}
+
 Within this thesis the goal is not to develop a fully-featured \ac{FMM}
 implementation, \eg, for the use in an electromagnetic solver.
 It is rather desired to have a simple but flexible test code to examine

@@ -15,6 +15,10 @@ with the Sommerfeld problem's solution domain---are pointed out.
 
 Let the following notes regarding notation prepended this chapter.
 \begin{description}
+	\item[Complex numbers:] Real and complex numbers are marked in the
+	respective context if necessary. For a complex number $z \in C$ the complex 
+	conjugate is denoted by $\complexConjugate{z}$ and the absolute value of
+	$z$ is written as $\abs{z} = \sqrt{z \complexConjugate{z}}$.
 	\item[Physical vectors:] Vectors in $\R^3$ a physical meaning are denoted in
 	bold and italic serif font, \eg, the position vector $\pvec{r}$.
 	Source points are marked by a prime, observation points are unprimed.
@@ -42,7 +46,7 @@ follows the textbook by \textcite{vanBladel2007}.
 
 The following discussions will deal with vectors in various forms therefore
 it is adequate to be precise about
-\begin{definition}[Vector space {\cite[p.~73]{heuser2006}}]
+\begin{definition}[Vector space {\cite[73]{heuser2006}}]
 	Let $\F$ be a field (in particular $\F = \R,\C$). A \emph{vector space
 	over} $\F$ (or $\F$-vector space) is a nonempty set $\mathcal{V}$, whose
 	elements are called \emph{vectors} and in which the following two operations
@@ -393,7 +397,7 @@ into an infinite number of \emph{plane waves}---expressed by the
 $\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}$ terms---where
 the expansion coefficients are given by \eqref{eq:fourier_transform_4d_forward}.
 Each one of these individual plane waves solves
-the homogeneous scalar wave equation \cite[p.~32]{Sommerfeld1964}
+the homogeneous scalar wave equation \cite[32]{Sommerfeld1964}
 \begin{equation}\label{eq:scalar_wave_equation_physical_domain}
 	\left( \laplace - \frac{1}{c^2} \frac{\partial^2}{\partial t^2} \right)	
 	\phi \left( \pvec{r}, t \right) = 0
@@ -434,7 +438,7 @@ meaningful sign conventions of the metric tensor\footnote{
 	$\left( + + + - \right)$ for $\exp{-\mathrm{i} \omega t}$
 	and $\left( - - - + \right)$ for $\exp{\im \omega t}$}
 describing the structure of the four-dimensional (Minkowski) space-time
-continuum \cite[pp.~624]{Jackson2013}\cite{Kaiser2016}.
+continuum \cite[p624]{Jackson2013}\cite{Kaiser2016}.
 
 
 
@@ -498,7 +502,7 @@ basis of \cref{def:fourier_transfrom_temporal_forward} and
 \cref{def:fourier_transfrom_spatial_forward} as well as a proof for this
 connection\footnote{The proof treats the derivation of the inverse Hankel
 transform. A corresponding approach for the forward transform can be found
-in the book by \textcite[pp.~229]{Davies2002}}.
+in the book by \textcite[p229]{Davies2002}}.
 Details regarding the function spaces on which the Hankel transform pair is
 defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 
@@ -599,7 +603,7 @@ defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 	\end{equation}
 	The inner integral in \eqref{eq:ht_proof_after_orthogonality} is identified
 	as a form of Bessel's integral \cite[(10.19.2)]{Olver2010} for integer
-	Bessel functions of integer order \cite[p.~314]{Davies2002}.
+	Bessel functions of integer order \cite[314]{Davies2002}.
 	With this \eqref{eq:ht_proof_after_orthogonality} can be written as
 	\begin{equation}
 		f_m \left(\rho\right) =
@@ -700,13 +704,13 @@ By application of \eqref{eq:fourier_transfrom_temporal_forward} to
 is obtained, where $k = \omega / c$.
 Note that $\omega$ is no variable but a parameter of the problem.
 Hence, \eqref{eq:scalar_helmholtz_equation} is a \ac{PDE} in space only.
-Moreover, in the common scheme of classification \cite[pp.~38]{Sommerfeld1964},
+Moreover, in the common scheme of classification \cite[p38]{Sommerfeld1964},
 the \ac{PDE} changes from hyperbolic to elliptic type by transition from
 \eqref{eq:scalar_wave_equation_physical_domain} to
 \eqref{eq:scalar_helmholtz_equation}\footnote{For this reason the present
 thesis avoids using the term \enquote{wave equation} for
 \eqref{eq:scalar_helmholtz_equation}, although this terminology is frequently
-used in the literature \cite[p.~238]{Sommerfeld1964}\cite{Coifman1993}}.
+used in the literature \cite[238]{Sommerfeld1964}\cite{Coifman1993}}.
 
 The \ac{PDE} \eqref{eq:scalar_helmholtz_equation} does not uniquely define
 its solutions.
@@ -739,7 +743,7 @@ boundary condition is given by
 The Sommerfeld condition ensures that a solution $\phi$ is a \emph{physical}
 solution as it carries energy \emph{away} from the source region $\Omega$ and is
 asymptotically small for $\lim_{r \to \infty}$.
-Furthermore, it can be shown \cite[pp.~190]{Sommerfeld1964} that such a function
+Furthermore, it can be shown \cite[p190]{Sommerfeld1964} that such a function
 $\phi$ is the uniquely defined solution to
 \eqref{eq:scalar_helmholtz_equation_inhomogeneous}
 \begin{theorem}[Uniqueness]
@@ -776,7 +780,7 @@ according to
 			\end{cases*} 
 		\end{equation}
 		\item Sifting functional: for a test function $\phi$ 
-		\cite{Strichartz2003}\cite[p.~35]{Olver2010} we have
+		\cite{Strichartz2003}\cite[35]{Olver2010} we have
 		\begin{equation}\label{eq:delta_filter_property}
 			\int\limits_{\F^N} \dd \pvec{r} \,
 			f \left( \robs \right)
@@ -916,7 +920,7 @@ The very core of the Sommerfeld formalism is now an expression which represents
 the free-space Green's function \eqref{eq:scalar_free_space_gf} by an infinite
 superposition of these eigenfunctions.
 This \emph{Sommerfeld identity} is given by the central
-\cite[eq.~(10)]{Sommerfeld1909}\cite[p.~66]{Chew1999}
+\cite[eq.~(10)]{Sommerfeld1909}\cite[66]{Chew1999}
 \begin{theorem}[Sommerfeld identity]\label{thm:sommerfeld_identity}
 	Let $\robs, \rsrc \in \R^3$ with $\robs \neq \rsrc$ be two vectors and
 	$k \in \C$ with $\real{k} > 0$ and $\imag{k} < 0$.
@@ -1062,7 +1066,7 @@ involved spectral domain functions $\tilde{f}$ are holomorphic on $\C$ except at
 distinct poles and, as can be shown \cite{Michalski2016b}, at most two
 branch points and the corresponding branch cuts.
 
-In the picture of Riemann's sphere \cite[p.~180]{Meyberg2006}, the real
+In the picture of Riemann's sphere \cite[180]{Meyberg2006}, the real
 $-\infty$ and $\infty$ in \eqref{eq:sommerfeld_integral_sip} can be interpreted
 as the same point on $\C \cup \left\{\infty\right\}$.
 Another way to think of this is that, for $\rho > 0$, the real axis path in
@@ -1079,7 +1083,7 @@ analytical ones as well as numerical ones
 
 The proof of equivalence for \eqref{eq:sommerfeld_integral_real_axis_path} and
 \eqref{eq:sommerfeld_integral_sip} is nowadays a classic textbook example
-\cite[p.~203]{Sommerfeld1964}.
+\cite[203]{Sommerfeld1964}.
 
 \fxnote{Sommerfeld identity for complex $\abs{z-z^\prime}$}
 
@@ -1150,7 +1154,7 @@ The vector and scalar fields in \eqref{eq:mwe_fd} are functions
 $\R^3 \mapsto \C^3$ and $\R^3 \mapsto \C$, respectively.
 
 The dimensionless quantity $\epsr \in \C$ is called relative permittivity 
-and can be composed as \cite[p.~43]{Jin2015}
+and can be composed as \cite[43]{Jin2015}
 \begin{equation}
 	\epsr = \epsr^\prime - \im \frac{\sigma}{\omega \varepsilon_0} \,,
 \end{equation}
@@ -1181,7 +1185,7 @@ continuity conditions
 		\varrho_\mathrm{m,s}
 	\end{align}
 \end{subequations}
-can be derived \cite[pp.~20]{Jackson2013}, where the omitted arguments
+can be derived \cite[p20]{Jackson2013}, where the omitted arguments
 $\robs_{1,2} \in \Omega_{1,2}$ of the fields are understood in the
 $\robs_{1,2} \to \partial \Omega$ with the common boundary
 $\partial \Omega = \partial \Omega_1 = \partial \Omega_2$ and the unit normal
@@ -1270,7 +1274,7 @@ While different possibilities can be found can be found in the literature
 \cite{Jin2015,Harrington2001,Chew1999}, the present thesis uses
 \begin{definition}[Duality substitution rules for electrodynamic quantities]
 	The \emph{duality substitution rules for electromagnetic quantities} in
-	\eqref{eq:mwe_fd} are defined as \cite[p.~9]{Chew1999}
+	\eqref{eq:mwe_fd} are defined as \cite[9]{Chew1999}
 	\begin{subequations}
 		\begin{align}
 		\pvec{E} &\to \pvec{H} \\
@@ -1309,7 +1313,7 @@ $\pvec{E}$ or $\pvec{H}$, these \emph{modes} are termed \ac{TE} and \ac{TM},
 respectively.
 The following derivation of a generic \ac{TM} field and its continuity
 conditions at a change of $\epsr$ or $\mur$ in $z$ is essentially the solution
-to an example problem in the textbook by \textcite[p.~140]{Chew1999}.
+to an example problem in the textbook by \textcite[140]{Chew1999}.
 
 Consider the $E_z = \uv{z} \cdot \pvec{E}$ as the characteristic component
 of a generic \ac{TM} field
@@ -1363,7 +1367,7 @@ Furthermore, by definition of the shortcut
 	\rho
 	\frac{\partial}{\partial \rho}
 \end{equation}
-for the transversal part of the Laplacian operator \cite[p.~731]{Bronstein2016},
+for the transversal part of the Laplacian operator \cite[731]{Bronstein2016},
 \eqref{eq:H_z_complicated} can be written as 
 \begin{equation}\label{eq:H_z_pde}
 	\laplaceTrans H_z +
@@ -1374,7 +1378,7 @@ for the transversal part of the Laplacian operator \cite[p.~731]{Bronstein2016},
 	k^2 H_z = 0
 	\,.
 \end{equation}
-It can be shown \cite[p.~231]{Davies2002}, that the forward zeroth order Hankel
+It can be shown \cite[231]{Davies2002}, that the forward zeroth order Hankel
 transform \eqref{eq:hankel_transform} acting on the rightmost operator in
 \eqref{eq:laplace_transversal} corresponds to the formal
 substitution\footnote{Fourier transform with respect to $x$ and $y$ of the
@@ -1431,7 +1435,7 @@ The remaining components of both types of five-component fields can be obtained
 by differentiation of the spectral domain solutions \eqref{eq:TE_ODE} and
 \eqref{eq:TM_ODE} using \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}.
 The resulting spectral integrand are themselves solutions to a transformed
-version of Maxwell's equations \cite[pp.~75]{Chew1999}.
+version of Maxwell's equations \cite[p75]{Chew1999}.
 
 Eventually, superposition of \ac{TE} and \ac{TM} solutions allows for the
 representation of arbitrary solutions to \eqref{eq:mwe_fd}.
@@ -1541,11 +1545,11 @@ $\tilde{E}_z$ at the boundaries of two neighboring domains with different
 $\epsr$ and/or $\mur$ need to be known.
 
 One, heuristic, way to obtain these continuity conditions is to deduce them from 
-\eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} \cite[p.~47]{Chew1999}.
+\eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} \cite[47]{Chew1999}.
 Another approach would be to follow the idea behind a common derivation of
 \eqref{eq:mwe_continuity_at_interface}, which re-writes the governing 
 differential equations in integral form and then considers small loops or
-volumes around the interface \cite[pp.~20]{Jackson2013}.
+volumes around the interface \cite[p20]{Jackson2013}.
 Anyhow, the continuity conditions for $\tilde{H}_z$ at the boundary $z_i$ read
 \begin{subequations}
 	\begin{equation}\label{eq:B_continuity}
@@ -1925,13 +1929,18 @@ Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 \subsection{Discrete Complex Image Method}
 
 
+
+
+
+
+
+
+
 \section{Fast Multipole Method for the Helmholtz Equation}
 
-\subsection{Geometrical Definition}
+\subsection{Conventional Free-Space Approach}
 
-The following considerations concerning the \ac{FMM} use the geometrical
-assumptions elucidated by \cref{fig:fmm_geometry}.
-The crucial idea is to write $\rdiff$ as a sum
+The crucial idea of the \ac{FMM} is to write $\rdiff$ as a sum
 \begin{equation}\label{eq:fmm_rdiff_parts}
 	\rdiff =
 	\left( \robs - \fmmObsGroupCenter              \right) +
@@ -1940,100 +1949,111 @@ The crucial idea is to write $\rdiff$ as a sum
 \end{equation}
 of three vectors, where $\fmmSrcGroupCenter$ and $\fmmObsGroupCenter$ are the
 centers of localized groups of source and observation points, respectively.
-Within the scope of the present thesis the grouping scheme is chosen
-according to \cref{fig:fmm_geometry},~\ie, all groups are cubes with side
-length $w$.
-Towards an inclusion of a ground half-space at $z < 0$ the whole grouping
-configuration is aligned with $z = 0$ as shown.
 Based on \eqref{eq:fmm_rdiff_parts} the shorthand notations 
 $\fmmDiffGroupCenters \coloneqq \fmmObsGroupCenter - \fmmSrcGroupCenter$
 and 
 $\pvec{d} \coloneqq \left( \robs - \fmmObsGroupCenter \right) - \left( \rsrc - \fmmSrcGroupCenter \right)$
 are introduced.
-This notation is in accordance to the popular prescription of the \ac{FMM}
-algorithm by \textcite{Coifman1993}.
-
-\begin{figure}
-	\centering
-	\begin{tikzpicture}
-		[scale = 0.7]
-		
-		\newcommand{\w}{3}
-		\newcommand{\dotsize}{1.5pt}
-		
-		\coordinate(r_s) at (1.5*\w,0.5*\w);
-		\coordinate(r_o) at ($(r_s) + (2*\w,\w)$);
-		\coordinate(r_prime) at ($(r_s) + (0.2*\w,0.45*\w)$);
-		\coordinate(r) at ($(r_o) + (-0.3*\w,0.3*\w)$);
-		
-		% Ground
-		\fill[color = blue!30!white] (-0.5*\w,0) rectangle (4.5*\w,-1.5*\w);
-		
-		% Coordinate system
-		\draw [color=gray!20]  [step=\w] (-0.5*\w,-1.5*\w) grid (4.5*\w,2.5*\w);
-		\draw[->,>=stealth] (-0.75*\w,0) -- (4.75*\w,0) node[right] {$\left(x,y\right)$};
-		\draw[->,>=stealth] (0,-1.75*\w) -- (0,2.75*\w) node[above] {$\left(z\right)$};
-		\foreach \c in {1,2,3,4}{\draw (\c*\w,-.1) -- (\c*\w,.1) node[below=4pt] {$\c w$};}
-		\foreach \c in {1,2}{\draw (-0.1,\c*\w) -- (0.1,\c*\w) node[left=4pt] {$\c w$};}
-		\draw (-0.1,-0.1) node[below left] {$0$};
-		
-		% Vectors
-		\draw[->, >=stealth] (r_s) -- node[below right]{$\fmmDiffGroupCenters$} (r_o);
-		\draw[->, >=stealth, line width=1.0pt, red] (r_prime) -- node[above left]{$\rdiff$} (r);
-		\draw[->, >=stealth] (r_prime) -- (r_s);
-		\draw[->, >=stealth] (r_o) -- (r);
-		
-		% Points
-		\fill (r) circle (\dotsize) node[above]{$\robs$};
-		\fill (r_prime) circle (\dotsize) node[above]{$\rsrc$};
-		\fill (r_s) circle (\dotsize) node[below]{$\fmmSrcGroupCenter$};
-		\fill (r_o) circle (\dotsize) node[below right]{$\fmmObsGroupCenter$};
-		
-		% Group boxes
-		\draw($(r_s) - (\w/2,\w/2)$) rectangle ($(r_s) + (\w/2,\w/2)$);
-		\draw($(r_o) - (\w/2,\w/2)$) rectangle ($(r_o) + (\w/2,\w/2)$);
-		
-	\end{tikzpicture}
-
-	\caption[\acs{FMM} geometry]
-	{Geometric definition of the \ac{FMM} implementation.}
-	\label{fig:fmm_geometry}
-\end{figure}
-
-\subsection{Conventional Free-Space Approach}
+The Green's function of the Helmholtz equation is then \emph{factorized} into
+three terms which represent
+\begin{enumerate}
+	\item the \emph{aggregation} of a localized source distribution to the
+	reference point $\fmmSrcGroupCenter$, 
+	\item the \emph{translation} of the combined effect from
+	$\fmmSrcGroupCenter$ to the reference point $\fmmObsGroupCenter$ of a
+	localized and \enquote{far-away} groups of observation locations
+	and finally
+	\item the distribution or \emph{disaggregation} of the combined effect from
+	$\fmmObsGroupCenter$ to the individual source points.
+\end{enumerate}
 
 The conventional \ac{FMM} for the free-space Green's function
 of the Helmholtz equation \eqref{eq:scalar_free_space_gf} is based on two
-elementary identities.
+elementary identities which, in the literature \cite{Rokhlin1993,Coifman1993},
+are usually assumed to be given or are derived from more general formulas from
+handbooks on mathematical functions \cite{Abramowitz2014,Abramowitz2014}.
+The aim of the subsequent section is to approach these identities from
+the perspective of electrodynamics to emphasize the underlying idea and to
+illustrate why the methods carries the term multipole in its name.
 
-The first identity is, in a more general form, referred to as Gegenbauer's
-addition theorem by handbooks on mathematical functions
-\cite[eq. 10.23.8]{Olver2010} \cite[9.1.80]{Abramowitz2014}.
-The more specialized version \cite[p.~414]{Stratton2007}
-\begin{equation}\label{eq:addition_thrm_spherical_waves_stratton}
+As it is well-known, the Green's function of the Helmholtz equation
+\eqref{eq:scalar_helmholtz_equation} is given by
+\eqref{eq:scalar_helmholtz_equation}.
+Clearly, $G_0\left(\robs, \rsrc\right)$ is a function of $r$ only for
+$\rsrc = 0$ and its expression in spherical coordinates according to
+\cref{def:sph_coords} is most trivial.
+The expansion of $G_0\left(\robs, \rsrc\right)$ in terms of solutions of
+\eqref{eq:scalar_helmholtz_equation} in spherical coordinates for the
+off-centered case $\rsrc \neq 0$ is a classical result in electromagnetic
+theory.
+For $r > r^\prime$ this so-called \emph{multiple-expansion} is given by
+\cite[492]{Jackson2013}
+\begin{equation}\label{eq:multipole_expansion_jackson}
+	\frac{\exp{-\im k \rdiffNorm}}{4\pi \rdiffNorm} = 
+	-\im k \sum_{l = 0}^{\infty}
+	\sphbesselj{l} \left(k r^\prime\right)
+	\sphbesselh{2}{l} \left(k r\right)
+	\sum_{m = -l}^{l}
+	\complexConjugate{\operatorname{Y}}_{l m}
+	\left( \vartheta^\prime, \varphi^\prime \right) 
+	\operatorname{Y}_{l m}
+	\left( \vartheta, \varphi\right)
+	\qquad
+	r > r^\prime
+\end{equation}
+where $\sphbesselj{l}$ and $\sphbesselh{2}{l}$ are the spherical Bessel and
+second-kind spherical Hankel function of $l$-th order, respectively, and
+$\operatorname{Y}_{l m}$ denotes the spherical harmonic of $l$-th degree and
+$m$-th order.
+The variables $\vartheta, \varphi$ and $\vartheta^\prime, \varphi^\prime$ are
+the spherical angles of $\robs$ and $\rsrc$, respectively.
+The multipole expansion \eqref{eq:multipole_expansion_jackson} is especially
+useful if the field of a source distribution of local support within a
+\enquote{small} domain is considered for \enquote{far-away} observation points
+$\robs$.
+For such a configuration the series over $l$ in
+\eqref{eq:multipole_expansion_jackson} converges quickly and accurate
+approximations can be obtained with relatively few terms.
+In the electrostatic counterpart of \eqref{eq:multipole_expansion_jackson},~\ie,
+the multipole expansion for the Poisson equation
+(\eqref{eq:scalar_helmholtz_equation} for $k \to 0$) the series terms correspond
+to the individual fields of a monopole, dipole, quadrupole,
+and so forth, hence this kind of expansion is called multipole expansion.
+
+Towards the form of \eqref{eq:multipole_expansion_jackson} which is used within
+the \ac{FMM} it is useful to express the cosine of the angle enclosed by
+$\robs$ and $\rsrc$ as
+\begin{equation}\label{eq:cos_gamma_sph_coords}
+	\uv{r} \cdot \uv{r}^\prime =
+	\cos \left(\vartheta\right) \cos \vartheta^\prime +
+	\sin \left(\vartheta\right) \sin \left(\vartheta^\prime\right)
+	\cos \left(\varphi - \varphi^\prime\right)
+	\, .
+\end{equation}
+With the addition theorem for the spherical harmonics
+\cite[(14.30.9)]{Olver2010} and \eqref{eq:cos_gamma_sph_coords} the multipole
+series \eqref{eq:multipole_expansion_jackson} can be written
+as\footnote{A ground up derivation of \eqref{eq:multiple_expansion_fmm} is
+shown in the textbook by \textcite[414]{Stratton2007}}
+\begin{equation}\label{eq:multiple_expansion_fmm}
 	\frac{\exp{-\im k \rdiffNorm}}{\rdiffNorm} =
 	-\im k \sum\limits_{l=0}^{\infty}
 	\left(2l + 1\right)
+	\sphbesselj{l}    \left( k r^\prime \right)
+	\sphbesselh{2}{l} \left( k r        \right)
 	\legendrepl{l} \left( \uv{r} \cdot \uv{r^\prime} \right)
-	\begin{cases}
-		\sphbesselj{l}    \left( k r        \right)
-		\sphbesselh{2}{l} \left( k r^\prime \right)
-		& r < r^\prime \\
-		\sphbesselj{l}    \left( k r^\prime \right)
-		\sphbesselh{2}{l} \left( k r        \right)
-		& r > r^\prime
-	\end{cases}
+	\qquad
+	r > r^\prime
+	\, .
 \end{equation}
-plays a role in analytical field theory and is known as the \enquote{addition
-theorem for spherical wave functions} \cite[p.~362]{Jin2015}.
-The expression on the right-hand side expands an offset ($\rsrc \neq 0$)
-spherical wave by a series of spherical waves centered at the origin.
+The form \eqref{eq:multiple_expansion_fmm} is sometimes called \enquote{addition
+theorem for spherical wave functions} \cite[362]{Jin2015} as it expands the
+Green's function of the Helmholtz equation in terms of spherical waves for the
+off-centered case $\rsrc$.
 
-The identity desired towards the \ac{FMM} is obtained from
-\eqref{eq:addition_thrm_spherical_waves_stratton} for $r > r^\prime$ by
-flipping the direction of $\rsrc$.
-In the notation of \cref{fig:fmm_geometry}, it is given by
-\begin{corollary}[Gegenbauer's addition theorem]
+Now \eqref{eq:multiple_expansion_fmm} is almost the first major \ac{FMM}
+identity, as by only flipping the sign of $\rsrc$ we obtain
+\begin{lemma}[Gegenbauer's addition theorem]
 	Let $\pvec{X}, \pvec{d} \in \R^3$ be two vectors with
 	$d < X$ and assume $0 < k \in \R$.
 	Then Gegenbauer's addition reads
@@ -2044,22 +2064,25 @@ In the notation of \cref{fig:fmm_geometry}, it is given by
 		\left( 2l + 1 \right) \,
 		\sphbesselj{l} \left( k d  \right) \,
 		\sphbesselh{2}{l} \left( k X \right) \, 
-		\legendrepl{l} \left( \uv{X} \cdot  \uv{d} \right) \, .
+		\legendrepl{l} \left( \uv{X} \cdot  \uv{d} \right)
+		\, .
 	\end{equation}
-\end{corollary} 
+\end{lemma} 
 \begin{proof}
-	The respective left-hand sides of
-	\eqref{eq:addition_thrm_spherical_waves_stratton} and
-	\eqref{eq:fmm_std_gegenbauer} correspond via $\robs \widehat{=} \pvec{X}$
-	and $-\rsrc \widehat{=} \pvec{d}$.
+	By inspection of the respective left-hand sides of
+	\eqref{eq:multiple_expansion_fmm} and
+	\eqref{eq:fmm_std_gegenbauer} it is observed that $\robs = \pvec{X}$
+	and $-\rsrc = \pvec{d}$.
 	From the reflection formula of Legendre polynomials
 	\cite[(14.7.17)]{Olver2010}
 	\begin{equation}\label{eq:legendre_pol_reflection_formula}
-		\legendrepl{l} \left(-\cos \theta\right) =
-		\left(-1\right)^l \legendrepl{l} \left( \cos \theta \right)
+		\legendrepl{l} \left( \uv{X} \cdot \uv{d} \right) =
+		\legendrepl{l} \left( \uv{r} \cdot \left(-\uv{r}^\prime\right) \right) =
+		\legendrepl{l} \left( -\uv{r} \cdot \uv{r}^\prime \right) =
+		\left(-1\right)^l \legendrepl{l} \left( \uv{r} \cdot \uv{r}^\prime \right)
 	\end{equation}
-	it is noted that $\legendrepl{l}$ is even (odd) for even (odd) degree $l$.
-	As $\uv{X} \cdot \uv{d} \widehat{=} -\uv{r} \cdot \uv{r^\prime} $
+	it is known that $\legendrepl{l}$ is even (odd) for even (odd) degree $l$.
+	As $\uv{X} \cdot \uv{d} = -\uv{r} \cdot \uv{r^\prime} $
 	the factor $\left(-1\right)^l$ in \eqref{eq:fmm_std_gegenbauer} follows
 	directly from \eqref{eq:legendre_pol_reflection_formula}.
 \end{proof}
@@ -2068,7 +2091,7 @@ The second major identity towards \ac{FMM} expands the product
 $\sphbesselj{l} \left( k d \right) \legendrepl{l} \left( \uv{X} \cdot \uv{d} \right)$
 into an integral of weighted propagating plane waves. For compact notation, it
 is useful to introduce
-\begin{definition}[Ewald sphere]\label{def:ewald_sphere}
+\begin{definition}[Ewald spheren integration]\label{def:ewald_sphere}
 	Let $\unitSphereSymbol$ denote the unit sphere in $\R^3$. Then
 	integrals of the form
 	\begin{equation}\label{eq:ewald_sphere_integral}
@@ -2090,17 +2113,64 @@ is useful to introduce
 	are said to be an integration over the \emph{Ewald sphere} of propagating
 	plane waves.
 \end{definition}
-With this notation the desired identity reads
-\begin{equation}\label{eq:fmm_jP_expansion_plane_waves}
+
+\begin{lemma}[Plane wave expansion]
+	Let $\pvec{X}, \pvec{d} \in \R^3$ be two vectors with
+	$d < X$ and assume $0 < k \in \R$.
+	Then we have \cite[410]{Stratton2007}
+	\begin{equation}\label{eq:fmm_jP_expansion_plane_waves}
 		\sphbesselj{l} \left( k d \right) \,
 		\legendrepl{l} \left( \uv{X} \cdot \uv{d} \right) = 
 		\frac{\im^l}{4\pi}	
 		\ewaldintegral
 		\exp{-\im \pvec{k} \cdot \pvec{d}}
 		\legendrepl{l} \left( \uv{k} \cdot \uv{X} \right)
-\end{equation}
-Note that is a special case of another wave expansion well-established in
-electromagnetic theory \cite[p.~410]{Stratton2007}.
+		\, .
+	\end{equation}
+\end{lemma}
 
 Substituting \eqref{eq:fmm_jP_expansion_plane_waves} into
-\eqref{eq:fmm_std_gegenbauer}
+\eqref{eq:fmm_std_gegenbauer} yields
+\begin{equation}\label{eq:fmm_before_interchange}
+	\frac{\exp{-\im k \norm{\pvec{X} + \pvec{d}}}}{\norm{\pvec{X} + \pvec{d}}} = 
+	\frac{-\im k}{4\pi}
+	\sum\limits_{l=0}^{\infty}
+	\left( -\im \right)^l
+	\left( 2l + 1 \right) \,
+	\sphbesselh{2}{l} \left( k X \right) 
+	\ewaldintegral
+	\exp{-\im \pvec{k} \cdot \pvec{d}}
+	\legendrepl{l} \left( \uv{k} \cdot \uv{X} \right)
+	\, .
+\end{equation}
+If the multipole expansion is truncated at finite $l$ summation and integration
+in \eqref{eq:fmm_before_interchange} can be interchanged
+\cite{Rokhlin1993,Coifman1993} to obtain
+\begin{equation}\label{eq:fmm_std}
+	\frac{\exp{-\im k \norm{\pvec{X} + \pvec{d}}}}{\norm{\pvec{X} + \pvec{d}}}
+	\approx 
+	\frac{-\im k}{4\pi}
+	\ewaldintegral
+	\exp{-\im \pvec{k} \cdot \pvec{d}} \,
+	\mathcal{T}_L
+	\left( \uv{k}, \pvec{X} \right)
+	\, ,
+\end{equation}
+where the quantity
+\begin{equation}
+	\mathcal{T}_L
+	\left( \uv{k}, \pvec{X} \right)
+	\coloneqq
+	\sum\limits_{l=0}^{L}
+	\left( -\im \right)^l
+	\left( 2l + 1 \right) \,
+	\sphbesselh{2}{l} \left( k X \right) 
+	\legendrepl{l} \left( \uv{k} \cdot \uv{X} \right)
+	\, ,
+\end{equation}
+is called \emph{translation operator}.
+
+
+
+
+
