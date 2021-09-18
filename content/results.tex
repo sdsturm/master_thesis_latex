@@ -271,6 +271,136 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
     $a \in \left\{ \rho, z \right\}$.}
 \end{figure}
 
+
+
+
+
+
+
+\begin{figure}
+    \newcommand{\sizeFactor}{0.47}
+    \centering
+    \begin{subfigure}[t]{\textwidth}
+        \begin{tikzpicture}
+            \pgfplotsset{small}
+            \matrix {
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                colorbar horizontal,
+                unbounded coords = jump,
+                colorbar style = {xlabel = {$20\log_{10}\abs{G_\mathrm{tot}}$}},
+                xlabel = {$\rho / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+            ]
+            \addplot3 [
+                surf,
+                point meta max=-26, point meta min=-97,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_tm_full_log,
+                ]
+                {thesis_generic_scalar_near_region.dat};
+
+                \draw (axis cs:0,0,0) -- (axis cs:10,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                colorbar horizontal,
+                colorbar style = {xlabel = {$\real{G_\mathrm{refl}}$}},
+                xlabel = {$\rho / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+            ]
+            \addplot3 [
+                surf,
+                point meta max=0.00065, point meta min=-0.00066,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_tm_refl_re,
+                ]
+                {thesis_generic_scalar_near_region.dat};
+
+                \draw (axis cs:0,0,0) -- (axis cs:10,0,0);
+            \end{axis}
+            \\
+            };
+        \end{tikzpicture}
+        \caption{\ac{TM} case}
+        \label{fig:generic_scalar_near_region_tm}
+    \end{subfigure}
+
+    \begin{subfigure}[t]{\textwidth}
+        \begin{tikzpicture}
+            \pgfplotsset{small}
+            \matrix {
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                colorbar horizontal,
+                unbounded coords = jump,
+                colorbar style = {xlabel = {$20\log_{10}\abs{G_\mathrm{tot}}$}},
+                xlabel = {$\rho / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+            ]
+            \addplot3 [
+                surf,
+                point meta max=-26, point meta min=-97,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_te_full_log,
+                ]
+                {thesis_generic_scalar_near_region.dat};
+
+                \draw (axis cs:0,0,0) -- (axis cs:10,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                colorbar horizontal,
+                colorbar style = {xlabel = {$\real{G_\mathrm{refl}}$}},
+                xlabel = {$\rho / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+            ]
+            \addplot3 [
+                surf,
+                point meta max=0.00065, point meta min=-0.00066,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_te_refl_re,
+                ]
+                {thesis_generic_scalar_near_region.dat};
+
+                \draw (axis cs:0,0,0) -- (axis cs:10,0,0);
+            \end{axis}
+            \\
+            };
+        \end{tikzpicture}
+        \caption{\ac{TE} case}
+        \label{fig:generic_scalar_near_region_te}
+    \end{subfigure}
+
+    \caption[Generic scalar Green's function for a source over dry ground]
+    {Generic scalar Green's function for a source at
+    $\rsrc = \lambda_0 \uv{z}$ over dry ground specified by
+    $\epsr^\prime = \num{3}$, $\sigma = \SI{0.1}{\milli\siemens\per\metre}$
+    at $f = \SI{10}{\mega\hertz}$.
+    The left plots show the magnitude of the total field while on the right
+    the real part of the extracted reflected contribution is shown.}
+    \label{fig:generic_scalar_near_region}
+\end{figure}
+
+
 \section{Discrete Complex Image Method}
 
 \section{Fast Multipole Method With Complex Image Sources}

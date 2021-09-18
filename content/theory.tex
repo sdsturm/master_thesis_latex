@@ -1091,6 +1091,147 @@ Details of \ac{CSB} behavior can be found in the literature
 \fxnote{explain \ac{CSB} in context of \ac{DCIM}}
 
 
+\begin{figure}
+    \newcommand{\sizeFactor}{0.3}
+    \centering
+    \begin{tikzpicture}
+        \pgfplotsset{small}
+        \matrix {
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\real{\rdiffNormSymbol} \geq 0$,
+					$\rsrc = \num{-0.1}\lambda_0 \uv{z}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g1_1,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\real{\rdiffNormSymbol} \geq 0$,
+					$\rsrc = \num{-0.5}\lambda_0 \uv{z}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g1_2,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            &&
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\real{\rdiffNormSymbol} \geq 0$,
+					$\rsrc = \num{1.0}\lambda_0 \uv{z}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g1_3,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            \\
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\real{\rdiffNormSymbol} \geq 0$,
+					$\rsrc = \num{-0.1}\lambda_0 \uv{z}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g2_1,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\real{\rdiffNormSymbol} \geq 0$,
+					$\rsrc = \num{-0.5}\lambda_0 \uv{z}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g2_2,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            &&
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\real{\rdiffNormSymbol} \geq 0$,
+					$\rsrc = \num{-1.0}\lambda_0 \uv{z}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g2_3,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            \\
+            };
+    \end{tikzpicture}
+    \caption{Real part of \acp{CSB} for different imaginary offsets and
+	two different definitions of complex length.}
+	\label{fig:thesis_csb_examples}
+\end{figure}
+
+
+
 
 
 
