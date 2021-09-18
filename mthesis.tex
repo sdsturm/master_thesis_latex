@@ -53,6 +53,12 @@
 \usepgfplotslibrary{external} 
 \tikzexternalize[prefix=./external_figures/]
 
+% For HFT titlepage
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{setspace}
+\usepackage{calc}
+
 % Bibliography
 \usepackage[%
     style=ieee,
@@ -86,7 +92,14 @@
 
 \begin{document}
 
+\include{titlepage/titlepage.tex}
+
+\cleardoublepage
+
+\include{content/abstract.tex}
+
 \tableofcontents
+\cleardoublepage
 
 \include{content/introduction.tex}
 \include{content/theory.tex}
