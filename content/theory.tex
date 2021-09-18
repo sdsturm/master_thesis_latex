@@ -819,6 +819,175 @@ $\rdiffNormSymbol = \norm{\pvec{R}}$ shall be used for notational convenience.
 
 
 
+\subsection{Helmholtz Equation for Problems of Azimuthal Symmetry}
+
+In Green's function problems arising in the area of electromagnetic waves
+in plane stratified media the inhomogeneous medium is characterized by
+$k = k\left(z\right)$.
+The sole functional dependency of the wavenumber on the Cartesian and cylindrical 
+$z$-coordinate can be employed to reduce the governing Helmholtz
+equation \eqref{eq:scalar_free_space_gf} to an \ac{ODE}.
+
+The second circumstance on which this simplification relies is the fact that 
+the driving force in a Green's function problem is \emph{point-like}.
+By transformation of variables this point source can be brought to
+coincidence with the $z$-axis in cylindrical coordinates.
+As $k$ depends on $z$ only, symmetry arguments lead to the conclusion that
+the solution $\phi = \phi \left(\rho, z\right)$ does not depend on $\varphi$
+in this arrangement.
+The angle $\varphi$ is commonly referred to as azimuth, hence the prescribed
+problem is of \emph{azimuthal symmetry}.
+
+The homogeneous Helmholtz equation \eqref{eq:scalar_helmholtz_equation} in
+cylindrical coordinates reads
+\begin{equation}\label{eq:scalar_helmholtz_equation_cyl_coords}
+	\left( \laplaceTrans + \frac{\partial^2}{\partial z^2} + k^2 \right)
+	\phi \left(\rho, z\right) = 0
+	\, ,
+\end{equation}
+where it follows from the above assumptions that the azimuthal derivative in
+the transverse part of the Laplacian operator
+\begin{equation}\label{eq:def_laplace_trans}
+	\laplaceTrans \coloneqq
+	\frac{1}{\rho}
+	\frac{\partial}{\partial \rho}
+	\rho
+	\frac{\partial}{\partial \rho}
+	+
+	\frac{1}{\rho^2}
+	\frac{\partial^2}{\partial \varphi^2}
+\end{equation}
+vanishes. 
+The desired reduction of \eqref{eq:scalar_helmholtz_equation_cyl_coords} to
+and \ac{ODE} can be achieved by means of
+\begin{corollary}[$k_\rho$ spectral domain]\label{coll:k_rho_domain}
+	Let $\phi: \R^3 \mapsto \C$ be a function of azimuthal symmetry
+	$\phi = \phi \left(\rho, z\right)$.
+	Let further the problem which is obtained by application of
+	\eqref{eq:hankel_transform} to
+	\eqref{eq:scalar_helmholtz_equation_cyl_coords} be referred to as the
+	representation of \eqref{eq:scalar_helmholtz_equation_cyl_coords}
+	in the $k_\rho$ spectral domain.
+	Then we have the formal substitution 
+	\begin{equation}\label{eq:k_rho_domain_laplaceTrans_replacement}
+		\laplaceTrans \to -k_\rho^2
+	\end{equation}
+	in transition of \eqref{eq:scalar_helmholtz_equation_cyl_coords} from the
+	$\rho$ to the $k_\rho$ spectral domain.
+\end{corollary}
+\begin{proof}
+	The Hankel transform pair as given by \cref{coll:hankel_transform} does not
+	act on the $z$-dependency of $\phi$.
+	Hence, it is sufficient to consider
+	$\phi = \phi \left(\rho\right)$ which, in terms of an inverse Hankel
+	transform, can be expressed as
+	\begin{equation}
+		\phi \left(\rho\right) =
+		\left(\hankelTransformInverse{0} \tilde{\phi} \left(k_\rho\right)\right)
+		\left(\rho\right)
+		\, .
+	\end{equation}
+	With the notation of \eqref{eq:def_laplace_trans} we have
+	\begin{equation}\label{eq:k_rho_domain_proof_01}
+		\laplaceTrans
+		\phi \left(\rho\right) =
+		\frac{1}{2\pi}
+		\frac{1}{\rho}
+		\frac{\dd}{\dd \rho}
+		\rho
+		\frac{\dd}{\dd \rho}
+		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+		\besselj{0}\left(k_\rho \rho\right)
+		\tilde{\phi} \left(k_\rho\right)
+		\, .
+	\end{equation}
+	We assume that the properties of $\tilde{\phi}$ are such that interchanging
+	integration and differentiation is legitimate in
+	\eqref{eq:k_rho_domain_proof_01} and note that
+	$\besselj{0}\left(k_\rho \rho\right)$ is the only function in the spectral
+	integrand depending on $\rho$.
+	With \cite[(10.6.6)]{Olver2010}
+	\begin{equation}
+		\frac{1}{z}
+		\frac{\dd}{\dd z}
+		\left( z^\nu \besselj{\nu} \left(z\right) \right) =
+		z^{\nu - 1} \besselj{\nu - 1} \left(z\right)
+	\end{equation}
+	and \cite[(10.4.1)]{Olver2010}
+	\begin{equation}
+		\frac{\dd}{\dd z} \besselj{0} \left(z\right) = 
+		-\besselj{1} \left(z\right)
+	\end{equation}
+	the action of the derivatives on $\besselj{0}\left(k_\rho \rho\right)$ 
+	is determined by straightforward calculation and
+	\begin{equation}\label{eq:k_rho_domain_proof_02}
+		\laplaceTrans
+		\phi \left(\rho\right) =
+		\frac{1}{2\pi}
+		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+		\besselj{0}\left(k_\rho \rho\right)
+		\left( -k_\rho^2 \right)
+		\tilde{\phi} \left(k_\rho\right) 
+	\end{equation}
+	is obtained.
+	Comparison of \eqref{eq:k_rho_domain_proof_01} and
+	\eqref{eq:k_rho_domain_proof_02} reveals that indeed
+	\begin{equation}
+		\laplaceTrans
+		\phi \left(\rho\right)
+		\to
+		-k_\rho^2 
+		\phi \left(k_\rho\right)
+	\end{equation}
+	corresponds to the transition from the spatial $\rho$ to the spectral
+	$k_\rho$ domain.
+\end{proof}
+\begin{remark}[Bessel's equation]
+	An alternative representation of $\laplaceTrans$ is given by
+	\cite[(1.5.15)]{Olver2010}
+	\begin{equation}
+		\laplaceTrans =
+		\frac{\partial^2}{\partial \rho^2} + 
+		\frac{1}{\rho}
+		\frac{\partial}{\partial \rho} + 
+		\frac{1}{\rho^2}
+		\frac{\partial^2}{\partial \varphi^2}
+		\, ,
+	\end{equation}
+	where the radial part is similar to the derivatives in Bessel's equation
+	\cite[(10.2.1)]{Olver2010}.
+	Therefore, the Hankel transform transfers Bessel's equation into an
+	algebraic equation.
+	The connection to \cref{coll:k_rho_domain} is given noting that 
+	solutions of Bessel's equation are functions solving the radial part arising
+	in a separation of variables ansatz for
+	\eqref{eq:scalar_helmholtz_equation_cyl_coords}.
+	Hence, the inverse Hankel transform \emph{constructs} a solution to
+	\eqref{eq:scalar_helmholtz_equation_cyl_coords} by superposition of
+	eigenfunctions.
+\end{remark}
+
+With \cref{coll:k_rho_domain} the reduction of
+\eqref{eq:scalar_helmholtz_equation_cyl_coords} to an \ac{ODE} is now
+straightforward.
+Using
+\begin{equation}
+	k_z^2 \coloneqq k^2 - k_\rho^2
+	\, ,
+\end{equation}
+for notational convenience, the \ac{PDE}
+\eqref{eq:scalar_helmholtz_equation_cyl_coords} becomes
+\begin{equation}
+	\left( \frac{\dd^2}{\dd z^2} + k_z^2 \right)
+	\phi \left(\rho, z\right) = 0
+\end{equation}
+in the $k_\rho$ spectral domain.
+
+
+
+
+
+
 
 \subsection{Complex Source Beams}
 
