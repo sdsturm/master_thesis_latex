@@ -85,7 +85,7 @@
 
 \usepackage[english,capitalise]{cleveref} % After loading hyperref!
 
-\include{content/macros.tex}
+\input{custom/macros}
 
 \fxsetup{draft}
 %\fxsetup{final}
@@ -94,20 +94,20 @@
 
 \pagenumbering{roman}
 
-\include{titlepage/titlepage.tex}
+\include{titlepage/titlepage}
 
 \cleardoublepage
 
-\include{content/abstract.tex}
+\include{content/abstract}
 
 \tableofcontents
 \cleardoublepage
 
 \pagenumbering{arabic}
 
-\include{content/introduction.tex}
-\include{content/theory.tex}
-\include{content/results.tex}
+\include{content/introduction}
+\include{content/theory}
+\include{content/results}
 
 \listoffigures
 \listoftables
