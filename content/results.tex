@@ -1,3 +1,174 @@
+\part{Implementation and Numerical Results}
+
+
+
+
+
+
+\chapter{Computer Implementation}
+
+\section{Numerical Integration of Sommerfeld Integrals}
+
+\section{Discrete Complex Image Method}
+
+\subsection{Fitting Algorithm}
+
+\cite{Hua1989}
+\cite{Sarkar1995}
+\cite{mohammadi-ghazi2016}
+\cite{vandenberg2008, spgl1site}
+
+\section{Fast Multipole Method}
+
+\subsection{Geometrical Definition}
+
+The following considerations concerning the \ac{FMM} use the geometrical
+assumptions elucidated by \cref{fig:fmm_geometry}.
+
+
+
+Within the scope of the present thesis the grouping scheme is chosen
+according to \cref{fig:fmm_geometry},~\ie, all groups are cubes with side
+length $w$.
+Towards an inclusion of a ground half-space at $z < 0$ the whole grouping
+configuration is aligned with $z = 0$ as shown.
+
+
+
+This notation is in accordance to the popular prescription of the \ac{FMM}
+algorithm by \textcite{Coifman1993}.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		[scale = 0.7]
+		
+		\newcommand{\w}{3}
+		\newcommand{\dotsize}{1.5pt}
+		
+		\coordinate(r_s) at (1.5*\w,0.5*\w);
+		\coordinate(r_o) at ($(r_s) + (2*\w,\w)$);
+		\coordinate(r_prime) at ($(r_s) + (0.2*\w,0.45*\w)$);
+		\coordinate(r) at ($(r_o) + (-0.3*\w,0.3*\w)$);
+		
+		% Ground
+		\fill[color = blue!30!white] (-0.5*\w,0) rectangle (4.5*\w,-1.5*\w);
+		
+		% Coordinate system
+		\draw [color=gray!20]  [step=\w] (-0.5*\w,-1.5*\w) grid (4.5*\w,2.5*\w);
+		\draw[->,>=stealth] (-0.75*\w,0) -- (4.75*\w,0) node[right] {$\left(x,y\right)$};
+		\draw[->,>=stealth] (0,-1.75*\w) -- (0,2.75*\w) node[above] {$\left(z\right)$};
+		\foreach \c in {1,2,3,4}{\draw (\c*\w,-.1) -- (\c*\w,.1) node[below=4pt] {$\c w$};}
+		\foreach \c in {1,2}{\draw (-0.1,\c*\w) -- (0.1,\c*\w) node[left=4pt] {$\c w$};}
+		\draw (-0.1,-0.1) node[below left] {$0$};
+		
+		% Vectors
+		\draw[->, >=stealth] (r_s) -- node[below right]{$\fmmDiffGroupCenters$} (r_o);
+		\draw[->, >=stealth, line width=1.0pt, red] (r_prime) -- node[above left]{$\rdiff$} (r);
+		\draw[->, >=stealth] (r_prime) -- (r_s);
+		\draw[->, >=stealth] (r_o) -- (r);
+		
+		% Points
+		\fill (r) circle (\dotsize) node[above]{$\robs$};
+		\fill (r_prime) circle (\dotsize) node[above]{$\rsrc$};
+		\fill (r_s) circle (\dotsize) node[below]{$\fmmSrcGroupCenter$};
+		\fill (r_o) circle (\dotsize) node[below right]{$\fmmObsGroupCenter$};
+		
+		% Group boxes
+		\draw($(r_s) - (\w/2,\w/2)$) rectangle ($(r_s) + (\w/2,\w/2)$);
+		\draw($(r_o) - (\w/2,\w/2)$) rectangle ($(r_o) + (\w/2,\w/2)$);
+		
+	\end{tikzpicture}
+
+	\caption[\acs{FMM} geometry]
+	{Geometric definition of the \ac{FMM} implementation.}
+	\label{fig:fmm_geometry}
+\end{figure}
+
+Within this thesis the goal is not to develop a fully-featured \ac{FMM}
+implementation, \eg, for the use in an electromagnetic solver.
+It is rather desired to have a simple but flexible test code to examine
+different possibilities to adapt the \ac{FMM} to the half-space Green's
+function.
+With this key requirement in mind an experimental version of the \ac{FMM}
+is implemented which is restricted in the following aspects.
+\begin{itemize}
+	\item Only the scalar case is considered.
+	\item Only $\diracDelta$-functions are used as basis and testing functions.
+	\item The locations of basis and testing functions are set arbitrarily or 
+	according to a specific test case. No real body-like structures are
+	considered.
+	\item Near interactions are not considered as their conventional \ac{MoM}
+	treatment is straightforward.
+\end{itemize}
+
+Even though the described setup is conceptually similar to the examples
+provided in a paper by \textcite{Hansen2013}, it is found that the subject
+of this thesis requires a more versatile approach.
+Therefore, the above specifications are merged into the prescription of the
+algorithm given by the popular paper by \textcite{Coifman1993}.
+
+Throughout this thesis the regular grouping scheme elucidated by
+\cref{fig:fmm_geometry} is assumed for all considerations regarding the \ac{FMM}.
+All groups are cubical with side length $w$ and uniquely identified by a
+multiindex $\fmmMultiIndex \in \Z^3$ defined as
+\begin{equation}
+	\fmmMultiIndex \left(\pvec{r}\right) \coloneqq \lfloor \pvec{r} / w \rfloor
+\end{equation}
+where the floor function is defined to operate component-wise on the vector
+$\pvec{r}$ given in Cartesian coordinates.
+
+The centers of certain source and observation groups are denoted by 
+$\fmmGroupCenter{\fmmMultiIndex^\prime}$ and 
+$\fmmGroupCenter{\fmmMultiIndex}$, respectively.
+The connection between two group centers is denoted by
+$\fmmDiffGroupCenters{\fmmMultiIndex}{\fmmMultiIndex^\prime} \coloneqq \fmmGroupCenter{\fmmMultiIndex} - \fmmGroupCenter{\fmmMultiIndex^\prime}$.
+
+Within each group the source or observation points belonging to this group
+are consecutively numbered by an index $\alpha \in \N$.
+Globally, all points are identified by a unique index $n \in \N$.
+The small example given in \cref{tab:fmm_grouping} illustrates
+the chosen indexing scheme.
+
+The implemented version of the \ac{FMM} does impose no restrictions to the
+locations of basis and testing functions other than the fulfillment of the
+separation criterion which makes the \ac{FMM} applicable.
+The basis and testing functions are especially not assumed to be arranged
+according to Galerkin's method \cite[p.~7]{Harrington1993}, where the
+self-coupling case regularly occurs.
+
+Due to this freedom it turns out to be advantageous to establish two separate
+correspondences as the one given by \cref{tab:fmm_grouping}: one for source
+points and one for observation points.
+
+\begin{table}[hbt]
+	\centering
+	\begin{tabular}{ccc}
+		\toprule%
+		$\fmmMultiIndex$ & $\alpha$ & $n$ \\
+		\midrule
+		$\left(0, 0, 0\right)$ & $1$ & $1$ \\
+		                       & $2$ & $2$ \\
+		                       & $3$ & $3$ \\
+		\midrule
+		$\left(5, 0, 2\right)$ & $1$ & $4$ \\
+		                       & $2$ & $5$ \\
+		                       & $3$ & $6$ \\
+		                       & $4$ & $7$ \\
+		\midrule
+		$\left(0, 3, 0\right)$ & $1$ & $8$ \\
+		                       & $2$ & $9$ \\
+		                       & $3$ & $10$ \\
+		\bottomrule
+	\end{tabular}
+
+	\caption[\acs{FMM} grouping scheme]
+	{\acs{FMM} grouping scheme. The setup in this example has three groups
+	containing three, four, and another three points, respectively.}
+
+	\label{tab:fmm_grouping}
+
+\end{table}
 \chapter{Implementation and Numerical Results}
 
 All results are computed using \texttt{double} precision floating point numbers.

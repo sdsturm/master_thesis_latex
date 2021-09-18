@@ -1,9 +1,14 @@
-\chapter{Theory}
-\label{ch:theory}
+\part{Theoretical Considerations}
 
-\section{Mathematical Preliminaries}
 
-The aim of the present section is, in first place, to provide a unified
+
+
+
+
+\chapter{Mathematical Preliminaries}
+\label{ch:math_preliminaries}
+
+The aim of this chapter is, in first place, to provide a unified
 treatment of major ideas and theorems which form the foundation of the study
 of electromagnetic ware propagation in half-space environments and
 multilayered media.
@@ -11,7 +16,10 @@ Secondly, important consequences for the topic at hand---namely the computation
 of highly accurate reference results and the aspired combination of the \ac{FMM}
 with the Sommerfeld problem's solution domain---are pointed out.
 
-\subsection{Notation}
+
+
+
+\section{Notation}
 
 Let the following notes regarding notation prepended this chapter.
 \begin{description}
@@ -42,7 +50,8 @@ follows the textbook by \textcite{vanBladel2007}.
 
 
 
-\subsection{Basic Definitions and Terms}
+\section{Basic Definitions and Terms}
+\label{sec:basic_definitions_and_terms}
 
 The following discussions will deal with vectors in various forms therefore
 it is adequate to be precise about
@@ -271,7 +280,9 @@ and distance according to the following two definitions.
 
 
 
-\subsection{Fourier Transforms}
+
+\section{Fourier Transforms}
+\label{sec:fourier_transforms}
 
 Although large portions of the study of electromagnetism heavily rely on the
 decomposition of functions into---as well as on the composition of functions
@@ -297,7 +308,7 @@ uses
 	where $\omega$ is a parameter called \emph{angular frequency}.
 \end{definition}
 Provided a transformed function possesses certain well-known properties
-\cite{heuser2006, strichartz2003}, an inverse transform to
+\cite{heuser2006, Strichartz2003}, an inverse transform to
 \eqref{eq:fourier_transfrom_temporal_forward} exists.
 With \cref{def:fourier_transfrom_temporal_forward}  this inverse operation is
 given by
@@ -446,8 +457,10 @@ continuum \cite[p624]{Jackson2013}\cite{Kaiser2016}.
 
 
 
-\subsection{Hankel Transform}
-\label{subsec:hankel_transform}
+
+
+\section{Hankel Transform}
+\label{sec:hankel_transform}
 
 Planar Fourier-type expansion integrals play a predominant role in the study
 of wave fields in solution domains with are inhomogeneous only in one
@@ -672,9 +685,17 @@ for the straightforward evaluation by numerical integration.
 
 
 
+\chapter{Scalar Case}
+\label{ch:scalar_case}
 
-\subsection{Helmholtz Equation and Green's Function of Free Space}
-\label{subsec:helmholtz_eq_and_gf}
+
+
+
+
+
+
+\section{Helmholtz Equation and Green's Function of Free Space}
+\label{sec:helmholtz_eq_and_gf}
 
 Let the following definitions prefix the present section.
 \begin{definition}[Domain]
@@ -704,7 +725,7 @@ By application of \eqref{eq:fourier_transfrom_temporal_forward} to
 is obtained, where $k = \omega / c$.
 Note that $\omega$ is no variable but a parameter of the problem.
 Hence, \eqref{eq:scalar_helmholtz_equation} is a \ac{PDE} in space only.
-Moreover, in the common scheme of classification \cite[p38]{Sommerfeld1964},
+Moreover, in the common scheme of classification \cite[38]{Sommerfeld1964},
 the \ac{PDE} changes from hyperbolic to elliptic type by transition from
 \eqref{eq:scalar_wave_equation_physical_domain} to
 \eqref{eq:scalar_helmholtz_equation}\footnote{For this reason the present
@@ -819,7 +840,9 @@ $\rdiffNormSymbol = \norm{\pvec{R}}$ shall be used for notational convenience.
 
 
 
-\subsection{Helmholtz Equation for Problems of Azimuthal Symmetry}
+
+\section{Helmholtz Equation for Problems of Azimuthal Symmetry}
+\label{sec:helmholtz_eq_az_symmetry}
 
 In Green's function problems arising in the area of electromagnetic waves
 in plane stratified media the inhomogeneous medium is characterized by
@@ -899,14 +922,13 @@ and \ac{ODE} can be achieved by means of
 		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
 		\besselj{0}\left(k_\rho \rho\right)
 		\tilde{\phi} \left(k_\rho\right)
-		\, .
+		\, ,
 	\end{equation}
-	We assume that the properties of $\tilde{\phi}$ are such that interchanging
-	integration and differentiation is legitimate in
-	\eqref{eq:k_rho_domain_proof_01} and note that
-	$\besselj{0}\left(k_\rho \rho\right)$ is the only function in the spectral
-	integrand depending on $\rho$.
-	With \cite[(10.6.6)]{Olver2010}
+	where it is noted that $\besselj{0}\left(k_\rho \rho\right)$ is the only
+	function in the spectral integrand depending on $\rho$.
+	Under the assumption that interchange of integration and differentiation in 
+	\eqref{eq:k_rho_domain_proof_01} is legitimate as well as with
+	\cite[(10.6.6)]{Olver2010}
 	\begin{equation}
 		\frac{1}{z}
 		\frac{\dd}{\dd z}
@@ -989,7 +1011,8 @@ in the $k_\rho$ spectral domain.
 
 
 
-\subsection{Complex Source Beams}
+\section{Complex Source Beams}
+\label{sec:cmplx_src_beams}
 
 In view of the assumptions of \cref{coll:free_space_gf} it is clear that
 $R$ is real and non-negative.
@@ -1073,7 +1096,10 @@ Details of \ac{CSB} behavior can be found in the literature
 
 
 
-\subsection{Sommerfeld Integrals and Sommerfeld Identity}
+
+
+\section{Sommerfeld Integrals and Sommerfeld Identity}
+\label{sec:sommerfeld_integrals_and_identity}
 
 Arnold Sommerfeld's approach towards a mathematical description of dipole
 radiation above flat earth combines the results of the two preceding
@@ -1267,10 +1293,17 @@ The proof of equivalence for \eqref{eq:sommerfeld_integral_real_axis_path} and
 
 
 
-\section{Electromagnetic Waves in Planar Multilayered Media}
+\chapter{Electromagnetic Waves in Planar Multilayered Media}
+\label{ch:em_case}
 
-\subsection{Fundamental equations}
-\label{subsec:em_fundamental_equations}
+
+
+
+
+
+
+\section{Fundamental equations}
+\label{sec:em_fundamental_equations}
 
 The theory of classical electrodynamics, expressed axiomatically by Maxwell's
 equations, constitute an accepted and well-proven framework for thy analysis of
@@ -1426,8 +1459,8 @@ where $c$ is the vacuum speed of light, are indicated by the subscript zero.
 
 
 
-\subsection{Duality principle}
-\label{subsec:duality_principle}
+\section{Duality principle}
+\label{sec:duality_principle}
 
 The derivation of \eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} is analogous.
 This is due to a principle which \textcite[\S12-1]{Feynman2011} felicitously
@@ -1468,8 +1501,8 @@ While different possibilities can be found can be found in the literature
 
 
 
-\subsection{Five-Component Fields}
-\label{subsec:five_component_fields}
+\section{Five-Component Fields}
+\label{sec:five_component_fields}
 
 Assume a medium with parameters $\epsr = \epsr\left(z\right)$ and
 $\mur = \mur\left(z\right)$.
@@ -1641,8 +1674,8 @@ representation of arbitrary solutions to \eqref{eq:mwe_fd}.
 
 
 
-\subsection{Continuity Conditions at Boundaries}
-\label{subsec:continuity_at_interfaces}
+\section{Continuity Conditions at Boundaries}
+\label{sec:continuity_at_interfaces}
 
 \begin{figure}
     \centering
@@ -1769,8 +1802,8 @@ for $\tilde{E}_z$.
 
 
 
-\subsection{Equivalent Transmission Line Networks and Spectral Green's Functions}
-\label{subsec:tl_greens_functions}
+\section{Equivalent Transmission Line Networks and Spectral Green's Functions}
+\label{sec:tl_greens_functions}
 
 Coming back to Richard Feynman's famous quote (see
 \cref{subsec:duality_principle}), comparison of \eqref{eq:TE_ODE} and
@@ -2038,7 +2071,8 @@ TM-Feldern im $k_\rho$-Spektralbereich auf die in \cref{app:tl_greens_functions}
 zusammengefassten bekannten Greenschen Funktionen für Spannung und Stromstärke
 Übertragungsleitungen zurückgeführt.
 
-\subsection{Image principle}
+\section{Image principle}
+\label{sec:img_principle}
 
 Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
@@ -2046,7 +2080,6 @@ Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
 
 
-\subsection{Sommerfeld Half-Space Problem and Multilayered Media}
 
 % \begin{figure}[htb]
 % 	\centering
@@ -2089,15 +2122,13 @@ Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 % \end{figure}
 
 
-\section{Numerical Computation of Sommerfeld Integrals}
+\chapter{Numerical Computation of Sommerfeld Integrals}
 
-\subsection{Asymptotic Methods}
+\section{Numerical Integration}
 
-\subsection{Numerical Integration}
+\section{Discrete Complex Image Method}
 
-\subsection{Discrete Complex Image Method}
-
-
+\section{Asymptotic Methods}
 
 
 
@@ -2105,9 +2136,9 @@ Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
 
 
-\section{Fast Multipole Method for the Helmholtz Equation}
+\chapter{Fast Multipole Method for the Helmholtz Equation}
 
-\subsection{Conventional Free-Space Approach}
+\section{Conventional Free-Space Approach}
 
 The crucial idea of the \ac{FMM} is to write $\rdiff$ as a sum
 \begin{equation}\label{eq:fmm_rdiff_parts}
