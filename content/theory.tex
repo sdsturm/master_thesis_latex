@@ -1295,6 +1295,7 @@ This \emph{Sommerfeld identity} is given by the central
 	at all $k_\rho \in \C$ except at the branch points $\pm k$ of $k_z$ and
 	on the corresponding branch cut(s).
 \end{theorem}
+
 Due to the analytic properties of the integrand in
 \eqref{eq:sommerfeld_identity_pos_real_axis} the restriction $\imag{k} < 0$
 in \cref{thm:sommerfeld_identity} can readily be resolved by
@@ -1304,6 +1305,11 @@ in \cref{thm:sommerfeld_identity} can readily be resolved by
 	into the first quadrant of the complex $k_\rho$-plane to render the integral
 	defined.
 \end{corollary}
+
+\begin{definition}[\acl{SIP}]
+	In \eqref{eq:sommerfeld_identity_pos_real_axis} the path of integration
+	along the non-negative real axis is called \emph{\acf{SIP}}.
+\end{definition}
 
 Clearly, \eqref{eq:sommerfeld_identity_pos_real_axis} is an inverse Hankel
 transform and can be written as
@@ -1336,7 +1342,7 @@ This flexibility proves especially fruitful if the transformed function
 $\tilde{f} \left(k_\rho\right) = \exp{-\im k_z \abs{z - z^\prime}} k_z^{-1}$ of
 \eqref{eq:sommerfeld_identity_pos_real_axis} is replaced by a more general
 function.
-\begin{corollary}[Sommerfeld integration path]
+\begin{corollary}[\acf{EIP}]
 	Let $\tilde{f} \left(k_\rho\right)$ be an even (odd) function of $k_\rho$
 	for even (odd) $\nu \in \N$.
 	Then we have
@@ -1347,17 +1353,17 @@ function.
 		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
 		\besselj{0} \left(k_\rho \rho\right)
 		\tilde{f} \left(k_\rho\right) 
-		\label{eq:sommerfeld_integral_real_axis_path}
+		\label{eq:sommerfeld_integral_sip}
 		\\
 		&\equiv
 		\frac{1}{4\pi}
 		\int\limits_{-\infty}^{\infty} \dd k_\rho \, k_\rho
 		\besselh{2}{\nu} \left(k_\rho \rho\right)
 		\tilde{f} \left(k_\rho\right)
-		\label{eq:sommerfeld_integral_sip}
+		\label{eq:sommerfeld_integral_eip}
 		\, ,
 	\end{align}
-	where the path of integration in \eqref{eq:sommerfeld_integral_sip} is
+	where the path of integration in \eqref{eq:sommerfeld_integral_eip} is
 	understood in the way shown in \cref{fig:sip}.
 \end{corollary}
 	
@@ -1384,18 +1390,18 @@ function.
 	\label{fig:sip}
 \end{figure}
 
-The integration path of \eqref{eq:sommerfeld_integral_sip} will be called
-\acf{SIP}\footnote{
+The integration path of \eqref{eq:sommerfeld_integral_eip} is called
+\acf{EIP}\footnote{
 	The term \acl{SIP} is not used uniformly in the literature.
-	Sometimes also the positive real axis path is termed \ac{SIP}, while the
-	path in \cref{fig:sip} is called differently.
+	Sometimes the whole real axis path is termed \ac{SIP}, while the
+	path in non-negative real axis path is called differently.
 	}
 subsequently.
-The particular course of the \ac{SIP} ensures to sidestep the logarithmic
+The particular course of the \ac{EIP} ensures to sidestep the logarithmic
 branch point singularity of $\besselh{\nu}{2}\left(0\right)$ \cite{Olver2010}
 as well as it allows for $\imag{k} \to 0$.
 
-The \ac{SIP} has a variety of advantages over the positive real axis path in
+The \ac{EIP} has a variety of advantages over the positive real axis path in
 \eqref{eq:sommerfeld_integral_real_axis_path}.
 Much of the power of Sommerfeld's approach originates in the fact that the
 involved spectral domain functions $\tilde{f}$ are holomorphic on $\C$ except at 
@@ -1410,7 +1416,7 @@ Another way to think of this is that, for $\rho > 0$, the real axis path in
 complex $k_\rho$-half-plane by virtue of Jordan's lemma.
 
 Corresponding to Cauchy's theorem and the residue theorem, the result of
-integration along the closes \ac{SIP} is constituted solely by the integration
+integration along the closes \ac{EIP} is constituted solely by the integration
 around the branch cuts and the residues of the poles.
 
 This enables the application of various exact and asymptotic techniques,
