@@ -1490,9 +1490,9 @@ Under these assumptions Maxwell's equations read \cite{Harrington2001,Chew1999}
 		= \im\omega\mu\pvec{H} + \pvec{M} \label{eq:mwe_fd_faraday} \\
 		&\curl \pvec{H}
 		= \im\omega\varepsilon\pvec{E} + \pvec{J} \label{eq:mwe_fd_ampere} \\
-		&\divergence \varepsilon\pvec{E}
+		&\divergence \left(\varepsilon\pvec{E}\right)
 		= \varrho \label{eq:mwe_fd_gauss} \\
-		&\divergence \mu\pvec{H}
+		&\divergence \left(\mu\pvec{H}\right) 
 		= \varrho_\mathrm{m} \,, \label{eq:mwe_fd_gauss_magnetic}
 	\end{align}
 \end{subequations}
@@ -1545,14 +1545,14 @@ reside, if existent, on $\partial\Omega$.
 
 The arguably most prominent feature of Maxwell's equations is the possibility
 of wave solutions.
-To particularly emphasize the wave nature of the fields, adapted \acp{PDE}
-can be derived from \eqref{eq:mwe_fd}.
+To give particular emphasis on the wave nature of the fields for $\omega > 0$,
+more suitable \acp{PDE} can be derived from \eqref{eq:mwe_fd}.
 For example
 \begin{equation}\label{eq:curlcurl_E}
 	\mu\curl\frac{1}{\mu}\curl\pvec{E} - k^2\pvec{E} = 0 
 \end{equation}
 is readily derived from \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}
-for the homogeneous case $\pvec{J} = \pvec{M} = 0$.
+for a spatial domain free of sources,~\ie, $\pvec{J} = \pvec{M} = 0$.
 The corresponding equation
 \begin{equation}\label{eq:curlcurl_H}
 	\varepsilon\curl\frac{1}{\varepsilon}\curl\pvec{H} - k^2\pvec{H} = 0
@@ -1651,175 +1651,118 @@ While different possibilities can be found can be found in the literature
 \section{Five-Component Fields}
 \label{sec:five_component_fields}
 
-Assume a medium with parameters $\epsr = \epsr\left(z\right)$ and
-$\mur = \mur\left(z\right)$.
-In this case the study of wave fields governed by \eqref{eq:curlcurl_E} and
-\eqref{eq:curlcurl_H} can be reduced to the solution of two \acsp{ODE}.
-These \acsp{ODE} describe the so-called \emph{characteristic component} of an
+In media of one-dimensional inhomogeneity,\ie, $\epsr = \epsr\left(z\right)$ and
+$\mur = \mur\left(z\right)$ the study of wave fields governed by
+\eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} can be reduced to the solution
+of two \acp{ODE}.
+These equations describe a so-called \emph{characteristic component} of an
 electromagnetic filed with only five non-vanishing components.
-Since the vanishing sixth component is the $\uv{z}$-component of either 
-$\pvec{E}$ or $\pvec{H}$, these \emph{modes} are termed \ac{TE} and \ac{TM},
-respectively.
-The following derivation of a generic \ac{TM} field and its continuity
-conditions at a change of $\epsr$ or $\mur$ in $z$ is essentially the solution
-to an example problem in the textbook by \textcite[140]{Chew1999}.
+Since either $\pvec{E}$ or $\pvec{H}$ have no $\uv{z}$ component, these
+\emph{modes} are termed \ac{TE} and \ac{TM}, respectively.
+
+% The following derivation of a generic \ac{TM} field and its continuity
+% conditions at a change of $\epsr$ or $\mur$ in $z$ is essentially the solution
+% to an example problem in the textbook by \textcite[140]{Chew1999}.
 
 Consider the $E_z = \uv{z} \cdot \pvec{E}$ as the characteristic component
 of a generic \ac{TM} field
-\begin{equation}\label{eq:TE_E_field_components}
-	\pvec{H} = \uv{x}H_x + \uv{y}H_y \,.
-\end{equation}
-Obviously, the component $E_z$ is contained in \eqref{eq:curlcurl_E}.
-Substituting \eqref{eq:mwe_fd_ampere} into \eqref{eq:curlcurl_E} for the
-homogeneous case $\pvec{J}  = 0$ yields
-\begin{equation}\label{eq:triple_curl_TM}
-	- \frac{\mu}{\im \omega}
-	\curl \frac{1}{\mu}
-	\curl \frac{1}{\varepsilon} \curl \pvec{H} - k^2\pvec{E} = 0
-	\,.
-\end{equation}
-Expanding the $E_z$ component in \eqref{eq:triple_curl_TM} and taking advantage
-of the preconditions $\varepsilon = \varepsilon\left(z\right)$ and
-$\mu = \mu\left(z\right)$ we obtain
-\begin{equation}\label{eq:E_z_complicated}
-	\begin{split}
-		\frac{1}{\varepsilon}
-		\left(
-			-\pdsec{x} \pd[H_y]{x} +
-			\pdsec{y} \pd[H_x]{y} +
-			\pdsec{x} \pd[H_x]{y} -
-			\pdsec{y} \pd[H_y]{x}
-		\right) \\
-		-\pd{z}\frac{1}{\varepsilon}\pd{z}\pd[H_y]{x} +
-		\pd{z}\frac{1}{\mu}\pd{z}\pd[H_x]{y} +
-		\im \omega k^2 E_z = 0
-		\,.
-	\end{split}
-\end{equation}
-In \eqref{eq:E_z_complicated} the expression
-\begin{equation}
-	\pd[H_y]{x} = \pd[H_x]{y} - \im \omega \varepsilon E_z
-	\, ,
-\end{equation}
-which is obtained \eqref{eq:mwe_fd_ampere} can be used.
-
-
-Furthermore, by definition of the shortcut
-\begin{equation}\label{eq:laplace_transversal}
-	\laplaceTrans
-	\coloneqq
-	\frac{\partial^2}{\partial x^2} +
-	\frac{\partial^2}{\partial y^2}
-	=
-	\frac{1}{\rho}
-	\frac{\partial}{\partial \rho}
-	\rho
-	\frac{\partial}{\partial \rho}
-\end{equation}
-for the transversal part of the Laplacian operator \cite[731]{Bronstein2016},
-\eqref{eq:H_z_complicated} can be written as 
-\begin{equation}\label{eq:H_z_pde}
-	\laplaceTrans H_z +
-	\frac{\partial}{\partial z}
-	\frac{1}{\mu}
-	\frac{\partial}{\partial z}
-	\mu H_z +
-	k^2 H_z = 0
-	\,.
-\end{equation}
-It can be shown \cite[231]{Davies2002}, that the forward zeroth order Hankel
-transform \eqref{eq:hankel_transform} acting on the rightmost operator in
-\eqref{eq:laplace_transversal} corresponds to the formal
-substitution\footnote{Fourier transform with respect to $x$ and $y$ of the
-middle operator in \eqref{eq:laplace_transversal} corresponds to
-$\laplaceTrans \to - k_x^2 - k_y^2$.}
-\cite{Michalski2016b}
-\begin{equation}
-	\laplaceTrans \to -k_\rho^2 = - k_x^2 - k_y^2
-	\,.
-\end{equation}
-Finally, with
-\begin{equation}\label{eq:k_z_square}
-	k_z^2 \coloneqq k^2 - k_\rho^2
-\end{equation}
-\eqref{eq:H_z_pde} can be written as
-\begin{equation}\label{eq:TE_ODE}
-	\frac{\dd}{\dd z}
-	\frac{1}{\mu}
-	\frac{\dd}{\dd z}
-	\mu \tilde{H}_z +
-	k_z^2 \tilde{H}_z = 0
+\begin{equation}\label{eq:generic_TM_field_components}
+	\pvec{H} = \uv{x}H_x + \uv{y}H_y 
+	\qquad
+	\pvec{E} = \uv{x}E_x + \uv{y}E_y \uv{z}E_z
 	\, .
 \end{equation}
-Hence, \eqref{eq:E_z_pde} is reduced to a plain \ac{ODE} for the characteristic
-component of the \ac{TE} field in the $k_\rho$-spectral domain.
-
-The dual of a \ac{TE} field is a \ac{TM} field.
-This can be employed to readily obtain the spectral domain \ac{ODE} for the
-characteristic \ac{TM} component $E_z$ by duality.
-The spatial domain \ac{PDE} for $E_z$ reads
-\begin{equation}\label{eq:E_z_pde}
-	\laplaceTrans E_z +
+Obviously, the component $E_z$ is contained in \eqref{eq:curlcurl_E}.
+Its governing equation
+\begin{equation}\label{eq:TM_E_z_PDE_first_step}
+	\laplaceTrans E_z
+	+
 	\frac{\partial}{\partial z}
+	\left(
+		\frac{\partial}{\partial x} E_x + 
+		\frac{\partial}{\partial y} E_y + 
+	\right)
+	-
+	k^2 E_z
+	=
+	0
+\end{equation}
+is straightforwardly obtained by extracting the $z$-component of
+\eqref{eq:curlcurl_E}, where the properties $\epsr = \epsr\left(z\right)$ and
+$\mur = \mur\left(z\right)$ are employed together with Schwarz's theorem.
+From Gauss's law \eqref{eq:mwe_fd_gauss} for the homogeneous case $\varrho = 0$
+\begin{equation}
+	\frac{\partial}{\partial x} E_x + 
+	\frac{\partial}{\partial y} E_y + 
+	=
+	-
 	\frac{1}{\varepsilon}
 	\frac{\partial}{\partial z}
-	\varepsilon E_z + 
-	k^2 E_z = 0
-	\,,
+	\varepsilon E_z
 \end{equation}
-its spectral domain counterpart becomes
-\begin{equation}\label{eq:TM_ODE}
-	\frac{\dd}{\dd z}
-	\frac{1}{\varepsilon}
-	\frac{\dd}{\dd z}
-	\varepsilon \tilde{E}_z + 
-	k_z^2 \tilde{E}_z = 0 \,.
+is obtained which can be used in \eqref{eq:TM_E_z_PDE_first_step} to write
+\begin{equation}\label{eq:TM_characteristic_component_PDE}
+	\left(
+		\laplaceTrans 
+		+
+		\varepsilon
+		\frac{\partial}{\partial z}
+		\frac{1}{\varepsilon}
+		\frac{\partial}{\partial z}
+		+
+		k^2
+	\right)
+	\varepsilon E_z = 0
 \end{equation}
+for the characteristic component $\varepsilon E_z$ of this \ac{TM}
+field\footnote{Alternatively to $\varepsilon E_z$ the transverse component
+$H_\mathrm{t}$ could also be used as characteristic component
+\cite[46]{Chew1999}.}.
 
-Once the spectral domain \acp{ODE} \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE}
-are solved, the solution can be transformed back to spatial domain by
-inverse Hankel transform,~\ie, by a Sommerfeld integral.
-
-The remaining components of both types of five-component fields can be obtained
-by differentiation of the spectral domain solutions \eqref{eq:TE_ODE} and
-\eqref{eq:TM_ODE} using \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}.
-The resulting spectral integrand are themselves solutions to a transformed
-version of Maxwell's equations \cite[p75]{Chew1999}.
-
-Eventually, superposition of \ac{TE} and \ac{TM} solutions allows for the
-representation of arbitrary solutions to \eqref{eq:mwe_fd}.
-
-% Now \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} still assume the source-free case.
-% In contrast to that, the Green's functions for $\tilde{H}_z$ and $\tilde{E}_z$
-% are of particular interest in the study of dipole radiation over planar ground.
-% It is convenient to define the defining equations of these Green's functions in
-% terms of $\tilde{G}^\te \equiv \mu \tilde{H}_z$ and
-% $\tilde{G}^\tm \equiv \varepsilon \tilde{E}_z$ instead of $\tilde{H}_z$ and
-% $\tilde{E}_z$ directly. Given these definitions the Green's functions of
-% \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} are defined by
-% \begin{equation}\label{eq:TE_ODE_GF}
-% 	\left(\frac{\dd}{\dd z}
-% 	\frac{1}{\mu}\frac{\dd}{\dd z} +
-% 	\frac{k_z^2}{\mu}\right) \tilde{G}^\te =
-% 	-\diracDelta\left(z-z^\prime\right)
-% \end{equation}
-% and
-% \begin{equation}\label{eq:TM_ODE_GF}
-% 	\left(\frac{\dd}{\dd z}
-% 	\frac{1}{\varepsilon}\frac{\dd}{\dd z} +
-% 	\frac{k_z^2}{\varepsilon}\right) \tilde{G}^\tm =
-% 	-\diracDelta\left(z-z^\prime\right) \,,
-% \end{equation}
-% respectively.
+So far the \ac{TM} characteristic of \eqref{eq:generic_TM_field_components} has
+not yet been employed.
+The missing $H_z$ component comes into play as this very property allows
+for calculation of the remaining five field components from a known solution for
+$E_z$ \cite[\S\S2.3.3]{Chew1999}.
 
 
+With \eqref{eq:TM_characteristic_component_PDE} in mind consider now the field
+of a \ac{VED},~\ie, an infinitesimal $\uv{z}$-directed current element.
+As the assumptions state that $\varepsilon$ and $\mu$ do depend on $z$ only
+one can, without loss of generality, lie the \ac{VED} onto the Cartesian
+and cylindrical $z$-axis.
+As the driving current density has no transverse component it is a justifiable
+assumption that the \ac{VED} field is of azimuthal symmetry.
+By the nature of \eqref{eq:mwe_fd_ampere} we can further deduce that $\pvec{H}$
+has no vertical component.
+With these two arguments the fields depend on position in the particular way
+of $\pvec{E} = \pvec{E} \left(\rho, z\right)$ and
+$\pvec{E} = \pvec{E} \left(\rho, z\right)$.
+Furthermore, it is known the solution of Maxwell's equation for the
+\ac{VED} is a \ac{TM} field.
+These characteristics allow for application of the Hankel transform to
+reduce \eqref{eq:TM_characteristic_component_PDE}
+\begin{equation}\label{eq:TM_characteristic_component_ODE}
+	\left(
+		\varepsilon
+		\frac{\dd}{\dd z}
+		\frac{1}{\varepsilon}
+		\frac{\dd}{\dd z}
+		+
+		k_z^2
+	\right)
+	\varepsilon \tilde{E}_z = 0
+	\, ,
+\end{equation}
+where again \eqref{eq:def_k_z_of_k_rho} is used for notational convenience.
+Hence, the characteristic component of the \ac{VED} field obeys the \ac{ODE}
+\eqref{eq:TM_characteristic_component_ODE} in the $k_\rho$ spectral domain.
+The spectral-domain solution $\tilde{E}_z$ again solves Maxwell's equations
+by which the remaining components can also be obtained in the spectral domain.
+The spatial domain solution for each component is then found by inverse Hankel
+transformation,~\ie, by means of Sommerfeld integrals.
 
-
-
-
-
-
-
+\fxnote{\ac{HED}, dyadic Green's functions}
 
 \section{Continuity Conditions at Boundaries}
 \label{sec:continuity_at_interfaces}
