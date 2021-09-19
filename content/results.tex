@@ -402,6 +402,316 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
 \end{figure}
 
 
+
+
+\begin{figure}
+    \newcommand{\sizeFactor}{0.33}
+    \newcommand{\pointMetaMax}{0.310}
+    \newcommand{\pointMetaMin}{-0.811}
+
+    \centering
+    \begin{tikzpicture}
+        \pgfplotsset{small}
+        \matrix (m) {
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+                title = $\real{G^\mathrm{EJ}_{xx}}$,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                point meta max = \pointMetaMax, point meta min = \pointMetaMin,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = G_EJ_xx,
+                ]
+                {thesis_dgf_hs.dat};
+                \draw[thick] (axis cs:-5,0,0) -- (axis cs:5,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+                title = $\real{G^\mathrm{EJ}_{xy}}$,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                point meta max = \pointMetaMax, point meta min = \pointMetaMin,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = G_EJ_xy,
+                ]
+                {thesis_dgf_hs.dat};
+                \draw[thick] (axis cs:-5,0,0) -- (axis cs:5,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+                title = $\real{G^\mathrm{EJ}_{xz}}$,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                point meta max = \pointMetaMax, point meta min = \pointMetaMin,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = G_EJ_xz,
+                ]
+                {thesis_dgf_hs.dat};
+                \draw[thick] (axis cs:-5,0,0) -- (axis cs:5,0,0);
+            \end{axis}
+            \\
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+                title = $\real{G^\mathrm{EJ}_{yx}}$,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                point meta max = \pointMetaMax, point meta min = \pointMetaMin,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = G_EJ_yx,
+                ]
+                {thesis_dgf_hs.dat};
+                \draw[thick] (axis cs:-5,0,0) -- (axis cs:5,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+                title = $\real{G^\mathrm{EJ}_{yy}}$,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                point meta max = \pointMetaMax, point meta min = \pointMetaMin,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = G_EJ_yy,
+                ]
+                {thesis_dgf_hs.dat};
+                \draw[thick] (axis cs:-5,0,0) -- (axis cs:5,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+                title = $\real{G^\mathrm{EJ}_{yz}}$,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                point meta max = \pointMetaMax, point meta min = \pointMetaMin,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = G_EJ_yz,
+                ]
+                {thesis_dgf_hs.dat};
+                \draw[thick] (axis cs:-5,0,0) -- (axis cs:5,0,0);
+            \end{axis}
+            \\
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+                title = $\real{G^\mathrm{EJ}_{zx}}$,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                point meta max = \pointMetaMax, point meta min = \pointMetaMin,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = G_EJ_zx,
+                ]
+                {thesis_dgf_hs.dat};
+                \draw[thick] (axis cs:-5,0,0) -- (axis cs:5,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+                title = $\real{G^\mathrm{EJ}_{zy}}$,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                point meta max = \pointMetaMax, point meta min = \pointMetaMin,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = G_EJ_zy,
+                ]
+                {thesis_dgf_hs.dat};
+                \draw[thick] (axis cs:-5,0,0) -- (axis cs:5,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+                title = $\real{G^\mathrm{EJ}_{zz}}$,
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                point meta max = \pointMetaMax, point meta min = \pointMetaMin,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = G_EJ_zz,
+                ]
+                {thesis_dgf_hs.dat};
+                \draw[thick] (axis cs:-5,0,0) -- (axis cs:5,0,0);
+            \end{axis}
+            \\
+            };
+            \begin{axis}[
+                anchor = north west,
+                at = {(m.south west)},
+                hide axis,
+                scale only axis,
+                height=0pt,
+                width=0pt,
+                colormap/jet,
+                colorbar horizontal,
+                point meta max=\pointMetaMax,
+                point meta min=\pointMetaMin,
+                colorbar style={
+                    width=\textwidth,
+                    xtick={-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3},
+                    xlabel = {Real part of components in $\si{\volt\per\metre}$},
+                    }
+                ]
+                \addplot [draw=none] coordinates {(0,0)};
+            \end{axis}
+        \end{tikzpicture} 
+        \caption[Dyadic Green's function $\dyad{G}^\mathrm{EJ}$ for a source at
+        $\rsrc = \lambda_0 \uv{z}$ over dry ground]
+        {Dyadic Green's function $\dyad{G}^\mathrm{EJ}$ in the
+        $y = 0$ cut plane for a source at $\rsrc = \lambda_0 \uv{z}$ over dry
+        ground.}
+\end{figure}
+
+
 \section{Discrete Complex Image Method}
 
-\section{Fast Multipole Method With Complex Image Sources}
+
+\begin{figure}
+    \newcommand{\heightFactor}{0.3}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            name=plot1,
+            width = \textwidth,
+            height = \heightFactor\textwidth,
+            xlabel = {$t$},
+            xtick = {0,0.1,0.2},
+            ylabel = {Random signal $y\left(t\right)$},
+            grid = major,
+            enlargelimits = false,
+            legend entries={$\real{y}$,$\real{y}$},
+            ]
+            \addplot [
+                blue,
+                ] table [
+                    x = t,
+                    y = y_true_re,
+                    ] {thesis_gpof_synth_signal.dat};
+            \addplot [
+                red,
+                ] table [
+                    x = t,
+                    y = y_true_im,
+                    ] {thesis_gpof_synth_signal.dat};
+            \addplot [draw=magenta, fill=magenta, fill opacity = 0.1] coordinates {(0.1,40) (0.2,40) (0.2,-40) (0.1,-40)};
+        \end{axis}
+        \begin{axis}[
+            name=plot2,
+            at={($(plot1.south)+(0,-0.1\textwidth)$)},
+            width = \textwidth,
+            height = \heightFactor\textwidth,
+            anchor=north,
+            xlabel = {$t$},
+            xtick = {0,0.1,0.2},
+            ylabel = {Relative error in $\si{\decibel}$},
+            grid = both,
+            enlargelimits = false,
+            ]
+            \addplot [
+                blue,
+                ] table [
+                    x = t,
+                    y = rel_err_db,
+                    ] {thesis_gpof_synth_signal.dat};
+            \addplot [draw=magenta, fill=magenta, fill opacity = 0.1] coordinates {(0.1,-70) (0.2,-70) (0.2,-300) (0.1,-300)};
+        \end{axis}
+    \end{tikzpicture}
+    \caption[]
+    {Reconstruction of a random exponential series signal with known model
+    order by parameters obtained by the \ac{GPOF} method.
+    Only the signal for $0 \leq t \leq \num{0.1}$ is fed into the algorithm.}
+    \label{fig:thesis_gpof_synth_signal}
+\end{figure}
+
+
+
+\section{Fast Multipole Method}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \pgfplotsset{small}
+        \begin{axis}[
+            width=0.6\textwidth,
+            colormap/jet,
+            colorbar,
+            colorbar style = {ylabel = {Relative error in $\si{\decibel}$}},
+            xlabel = {$x / \lambda_0$},
+            ylabel = {$y / \lambda_0$},
+            xmode = log,
+            ymode = log,
+            view = {0}{90},
+        ]
+        \addplot3 [
+            surf,
+            mesh/ordering=y varies,
+            ] table[
+                x = x_by_lambda_0, y = y_by_lambda_0, z = rel_err_db,
+                ]
+                {thesis_fmm_standard_accuracy.dat};
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Accuracy of standard \ac{FMM} implementation with real sources]
+    {Accuracy of standard \ac{FMM} implementation with real sources.}
+    \label{fig:thesis_fmm_standard_accuracy}
+\end{figure}
+
