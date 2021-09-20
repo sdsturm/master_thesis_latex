@@ -1958,110 +1958,6 @@ transformation,~\ie, by means of Sommerfeld integrals.
 
 
 
-\subsection{Dyadic Green's Functions}
-
-The problem arising from the combination of solving \eqref{eq:VED_E_z_ODE}
-for the excitation specified by \eqref{eq:VED_current_density} defines a Green's
-function.
-As noted in \cref{subsec:E_z_comp_of_VED}, all five non-vanishing components of
-the \ac{VED} field can readily be derived with knowledge of
-$\tilde{E}_z$.
-This holds for the fields in the spectral domain (by differentiation) as well as
-for their counterparts in the spatial domain (Sommerfeld integrals).
-
-The procedure sketched in \cref{subsec:E_z_comp_of_VED} makes particular use of
-physical reasoning to derive an \ac{ODE} for the characteristic component of 
-the \ac{VED}. 
-In contrast to the \ac{VED}, the field of a \ac{HED} has six non-vanishing
-components.
-It can be shown, however, that the \ac{HED} field can be decomposed into two
-five-component fields, one \ac{TM} and one \ac{TE}
-\cite{Sommerfeld1926,Sommerfeld1964,Chew1999}
-Therefore, in the \ac{HED} case two \acp{ODE} arise describing the two
-characteristic components.
-The dual cases of \ac{VMD} and \ac{HMD} again follow by duality.
-
-Knowing the fields of \ac{VED} and \ac{HED} is---using the superposition
-and duality principles---sufficient to represent the field of infinitesimal
-dipole of arbitrary direction $\uv{l}$ which may be of electric or magnetic
-nature.
-In practical applications, \eg, numerical solvers, it is, however, more
-convenient to assimilate these results into a form which is typically referred
-to as dyadic Green's function.
-For example the dyadic Green's function of the electric field for electric
-excitation $\dyadicGF{EJ}$ yields the electric field of the $\uv{l}$-directed
-\ac{HD} via
-\begin{equation}
-	\pvec{E}_\mathrm{HD} \left(\robs\right) = 
-	\iiint\limits_{V} \dd \robs \, 
-	\dyadicGF{EJ} \left(\robs, \rsrc\right)
-	\cdot
-	I \uv{l} \diracDelta \left(\rdiff\right)
-	\qquad \rsrc \in V
-	\, ,
-\end{equation}
-from which the tensor nature of dyadic Green's functions becomes clear.
-
-In the representation in terms of Cartesian coordinates and basis vectors the
-second-rank tensor fields representing dyadic Green's functions can be written
-as a superposition
-\begin{equation}\label{eq:dyadic_gf_in_cartesian_dyads}
-	\dyad{G} = 
-	\uv{x}\uv{x} G_{xx} +
-	\uv{x}\uv{y} G_{xy} +
-	\uv{x}\uv{z} G_{xz} +
-	\uv{y}\uv{x} G_{yx} +
-	\uv{y}\uv{y} G_{yy} +
-	\ldots
-	% \uv{y}\uv{z} G_{yz} +
-	% \uv{z}\uv{x} G_{zx} +
-	% \uv{z}\uv{y} G_{zy} +
-	% \uv{z}\uv{z} G_{zz} +
-\end{equation}
-of dyads.
-Alternatively, \eqref{eq:dyadic_gf_in_cartesian_dyads} may be represented
-as a $3 \times 3$ matrix in which case the current density vector $\pvec{J}$ is
-interpreted as a column vector in the sense of linear algebra.
-In the matrix representation the columns of the dyadic Green's functions have
-a distinct physical meaning.
-For example the $\dyadicGF{EJ} \cdot \uv{x}$ and $\dyadicGF{EJ} \cdot \uv{x}$
-represent the electric field of $\uv{x}$ and $\uv{y}$-directed \acp{VED},
-respectively, while $\dyadicGF{EJ} \cdot \uv{z}$ is the electric field of
-a \ac{VED}.
-
-A comprehensive derivation of all four dyadic Green's functions $\dyadicGF{EJ}$,
-$\dyadicGF{EM}$, $\dyadicGF{HJ}$ and $\dyadicGF{HM}$, both in spectral and in
-spatial domain is given in the comprehensive encyclopedia chapter by
-\textcite{Michalski2005}.
-In the Cartesian matrix picture we have the reciprocity relations
-\cite{Michalski2005}
-\begin{subequations}\label{eq:dgf_reciprocity}
-	\begin{align}
-	\dyadicGF{EJ}
-	\left(\robs, \rsrc\right)
-	&= 
-	\transpose{\dyadicGF{EJ} \left(\rsrc, \robs\right)}
-	\\ 
-	\dyadicGF{HM}
-	\left(\robs, \rsrc\right)
-	&= 
-	\transpose{\dyadicGF{HM} \left(\rsrc, \robs\right)}
-	\\
-	\dyadicGF{EM}
-	\left(\robs, \rsrc\right)
-	&=
-	-\transpose{\dyadicGF{HJ} \left(\rsrc, \robs\right)}
-	\end{align}
-\end{subequations}
-for the dyadic Green's functions, where $\transpose{\mat{A}}$ denotes the
-transpose of matrix $\mat{A}$.
-
-
-
-
-
-
-
 \subsection{Equivalent Transmission Line Network Method}
 \label{subsec:network_method}
 
@@ -2322,6 +2218,122 @@ To illustrate the behavior of voltage and current on the equivalent
 
 
 
+\subsection{Dyadic Green's Functions}
+\label{subsec:dyadic_greens_functions}
+
+The problem arising from the combination of solving \eqref{eq:VED_E_z_ODE}
+for the excitation specified by \eqref{eq:VED_current_density} defines a Green's
+function.
+As noted in \cref{subsec:E_z_comp_of_VED}, all five non-vanishing components of
+the \ac{VED} field can readily be derived with knowledge of
+$\tilde{E}_z$.
+This holds for the fields in the spectral domain (by differentiation) as well as
+for their counterparts in the spatial domain (Sommerfeld integrals).
+
+The procedure sketched in \cref{subsec:E_z_comp_of_VED} makes particular use of
+physical reasoning to derive an \ac{ODE} for the characteristic component of 
+the \ac{VED}. 
+In contrast to the \ac{VED}, the field of a \ac{HED} has six non-vanishing
+components.
+It can be shown, however, that the \ac{HED} field can be decomposed into two
+five-component fields, one \ac{TM} and one \ac{TE}
+\cite{Sommerfeld1926,Sommerfeld1964,Chew1999}
+Therefore, in the \ac{HED} case two \acp{ODE} arise describing the two
+characteristic components.
+The dual cases of \ac{VMD} and \ac{HMD} again follow by duality.
+
+Knowing the fields of \ac{VED} and \ac{HED} is---using the superposition
+and duality principles---sufficient to represent the field of infinitesimal
+dipole of arbitrary direction $\uv{l}$ which may be of electric or magnetic
+nature.
+In practical applications, \eg, numerical solvers, it is, however, more
+convenient to assimilate these results into a form which is typically referred
+to as dyadic Green's function.
+For example the dyadic Green's function of the electric field for electric
+excitation $\dyadicGF{EJ}$ yields the electric field of the $\uv{l}$-directed
+\ac{HD} via
+\begin{equation}
+	\pvec{E}_\mathrm{HD} \left(\robs\right) = 
+	\iiint\limits_{V} \dd \robs \, 
+	\dyadicGF{EJ} \left(\robs, \rsrc\right)
+	\cdot
+	I \uv{l} \diracDelta \left(\rdiff\right)
+	\qquad \rsrc \in V
+	\, ,
+\end{equation}
+from which the tensor nature of dyadic Green's functions becomes clear.
+
+In the representation in terms of Cartesian coordinates and basis vectors the
+second-rank tensor fields representing dyadic Green's functions can be written
+as a superposition
+\begin{equation}\label{eq:dyadic_gf_in_cartesian_dyads}
+	\dyad{G} = 
+	\uv{x}\uv{x} G_{xx} +
+	\uv{x}\uv{y} G_{xy} +
+	\uv{x}\uv{z} G_{xz} +
+	\uv{y}\uv{x} G_{yx} +
+	\uv{y}\uv{y} G_{yy} +
+	\ldots
+	% \uv{y}\uv{z} G_{yz} +
+	% \uv{z}\uv{x} G_{zx} +
+	% \uv{z}\uv{y} G_{zy} +
+	% \uv{z}\uv{z} G_{zz} +
+\end{equation}
+of dyads.
+Alternatively, \eqref{eq:dyadic_gf_in_cartesian_dyads} may be represented
+as a $3 \times 3$ matrix in which case the current density vector $\pvec{J}$ is
+interpreted as a column vector in the sense of linear algebra.
+In the matrix representation the columns of the dyadic Green's functions have
+a distinct physical meaning.
+For example the $\dyadicGF{EJ} \cdot \uv{x}$ and $\dyadicGF{EJ} \cdot \uv{x}$
+represent the electric field of $\uv{x}$ and $\uv{y}$-directed \acp{VED},
+respectively, while $\dyadicGF{EJ} \cdot \uv{z}$ is the electric field of
+a \ac{VED}.
+
+A comprehensive derivation of all four dyadic Green's functions $\dyadicGF{EJ}$,
+$\dyadicGF{EM}$, $\dyadicGF{HJ}$ and $\dyadicGF{HM}$, both in spectral and in
+spatial domain is given in the comprehensive encyclopedia chapter by
+\textcite{Michalski2005}.
+In the Cartesian matrix picture we have the reciprocity relations
+\cite{Michalski2005}
+\begin{subequations}\label{eq:dgf_reciprocity}
+	\begin{align}
+	\dyadicGF{EJ}
+	\left(\robs, \rsrc\right)
+	&= 
+	\transpose{\dyadicGF{EJ} \left(\rsrc, \robs\right)}
+	\\ 
+	\dyadicGF{HM}
+	\left(\robs, \rsrc\right)
+	&= 
+	\transpose{\dyadicGF{HM} \left(\rsrc, \robs\right)}
+	\\
+	\dyadicGF{EM}
+	\left(\robs, \rsrc\right)
+	&=
+	-\transpose{\dyadicGF{HJ} \left(\rsrc, \robs\right)}
+	\end{align}
+\end{subequations}
+for the dyadic Green's functions, where $\transpose{\mat{A}}$ denotes the
+transpose of matrix $\mat{A}$.
+
+
+
+
+
+
+
+
+\subsection{Generic Scalar Green's Functions}
+\label{subsec:generic_scalar_greens_functions}
+
+
+
+
+
+
+
+
 \section{Image Principle}
 \label{sec:imgage_principle}
 
@@ -2332,48 +2344,11 @@ Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
 
 
-% \begin{figure}[htb]
-% 	\centering
-	
-% 	% Define view angle
-% 	\tdplotsetmaincoords{75}{120}
-% 	\begin{tikzpicture}[tdplot_main_coords,scale=0.8]
-		
-% 		\begin{scope}[canvas is xy plane at z=0]
-% 			\filldraw[fill=blue!30!white] (-5,-5) rectangle (5,5);
-% 		\end{scope}
-% 		\begin{scope}[canvas is yz plane at x=5]
-% 			\filldraw[fill=blue!30!white] (5,0) rectangle (-5,-4);
-% 		\end{scope}
-% 		\begin{scope}[canvas is xz plane at y=5]
-% 			\filldraw[fill=blue!30!white] (5,0) rectangle (-5,-4);
-% 		\end{scope}
-		
-% 		% Draw cartesian coordinate system.
-% 		\draw[thick,-latex] (0,0,0) -- (3.5,0,0) node[anchor=east]{$x$};
-% 		\draw[thick,-latex] (0,0,0) -- (0,3.5,0) node[anchor=west]{$y$};
-% 		\draw[thick,-latex] (0,0,0) -- (0,0,3.5) node[anchor=south]{$z$};
-		
-% 		% Draw observation point
-% 		\pgfmathsetmacro{\rvec}{5}
-% 		\pgfmathsetmacro{\thetavec}{40}
-% 		\pgfmathsetmacro{\phivec}{150}
-% 		\coordinate (O) at (0,0,0);
-% 		\tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
-% 		\draw[-latex] (O) --node[anchor=east]{$r$} (P) node[anchor=west]{$\robs$};
-% 		\draw[dashed] (O) --node[anchor=south]{$\rho$} (Pxy);
-% 		\draw[dashed] (P) --node[anchor=west]{$z$} (Pxy);
-% 		\tdplotdrawarc[-latex]{(O)}{1.2}{0}{\phivec}{anchor=north}{$\varphi$}
-% 		\tdplotsetthetaplanecoords{\phivec}
-% 		\tdplotdrawarc[tdplot_rotated_coords,-latex]{(0,0,0)}{1.2}{0}{\thetavec}{anchor=south}{$\vartheta$}
-		
-% 	\end{tikzpicture}
-% 	\caption[Sommerfeld half-space]{Sommerfeld half-space problem with coordinate systems.}
-% 	\label{fig:half_space}
-% \end{figure}
-
-
 \chapter{Numerical Computation of Sommerfeld Integrals}
+
+
+
+
 
 \section{Numerical Integration}
 
@@ -2388,6 +2363,12 @@ Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
 
 \chapter{Fast Multipole Method for the Helmholtz Equation}
+\label{ch:fmm}
+
+
+
+
+
 
 \section{Conventional Free-Space Approach}
 

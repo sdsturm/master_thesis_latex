@@ -169,7 +169,16 @@ points and one for observation points.
 	\label{tab:fmm_grouping}
 
 \end{table}
-\chapter{Implementation and Numerical Results}
+
+
+
+
+
+
+
+
+\chapter{Numerical Results}
+\label{ch:numerical_results}
 
 All results are computed using \texttt{double} precision floating point numbers.
 
@@ -184,6 +193,25 @@ Throughout this chapter relative errors are computed according to
         \SI{}{\decibel}\, .
     \end{equation}
 \end{definition}
+
+
+\begin{table}[hbt]
+	\centering
+	\begin{tabular}{ccc}
+		\toprule%
+		Name & $\epsr^\prime$ & $\sigma$ \\
+		\midrule
+		Dry ground & $\num{3}$  & $\SI{0.1}{\milli\siemens\per\metre}$ \\
+		Seawater   & $\num{81}$ & $\SI{4.0}{\siemens\per\metre}$ \\
+		\bottomrule
+	\end{tabular}
+
+	\caption[Example half-space environments]
+	{Example half-space environments used for numerical examples.
+    Both environments are considered at $f = \SI{10}{\mega\hertz}$.}
+	\label{tab:numerical_examples_half_spaces}
+\end{table}
+
 
 \section{Numerical Integration of Sommerfeld Integrals}
 
@@ -392,10 +420,8 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
     \end{subfigure}
 
     \caption[Generic scalar Green's function for a source over dry ground]
-    {Generic scalar Green's function for a source at
-    $\rsrc = \lambda_0 \uv{z}$ over dry ground specified by
-    $\epsr^\prime = \num{3}$, $\sigma = \SI{0.1}{\milli\siemens\per\metre}$
-    at $f = \SI{10}{\mega\hertz}$.
+    {Generic scalar Green's functions for a source at
+    $\rsrc = \lambda_0 \uv{z}$ over dry ground.
     The left plots show the magnitude of the total field while on the right
     the real part of the extracted reflected contribution is shown.}
     \label{fig:generic_scalar_near_region}
@@ -677,9 +703,112 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
     \end{tikzpicture}
     \caption[]
     {Reconstruction of a random exponential series signal with known model
-    order by parameters obtained by the \ac{GPOF} method.
-    Only the signal for $0 \leq t \leq \num{0.1}$ is fed into the algorithm.}
+    order $M = \num{10}$ from parameters obtained by the \ac{GPOF} method.
+    The signal is sampled with $f_\mathrm{s} = 10 f_\mathrm{max}$ at
+    $N = \num{100}$ points where only the signal for $0 \leq t \leq \num{0.1}$
+    is fed into the algorithm.
+    The extrapolated region is visualized by colored background.}
     \label{fig:thesis_gpof_synth_signal}
+\end{figure}
+
+
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \newcommand{\sizeFactor}{0.47}
+        \begin{tikzpicture}
+            \pgfplotsset{small}
+            \matrix {
+                \begin{axis}[
+                    width=\sizeFactor\textwidth,
+                    height=\sizeFactor\textwidth,
+                    colormap/jet,
+                    colorbar horizontal,
+                    colorbar style = {xlabel = Relative error in $\si{\decibel}$},
+                    unbounded coords = jump,
+                    xlabel = {$\rho / \lambda_0$},
+                    ylabel = {$z / \lambda_0$},
+                    view = {0}{90},
+                    title = {TM case},
+                ]
+                \addplot3 [
+                    surf,
+                    mesh/ordering=y varies,
+                    ] table[
+                        x = rho_by_lambda_0, y = z_by_lambda_0, z = rel_err_db_tm,
+                        ]
+                        {thesis_dcim_near_range_error.dat};
+                \end{axis}
+                &
+                \begin{axis}[
+                    width=\sizeFactor\textwidth,
+                    height=\sizeFactor\textwidth,
+                    colormap/jet,
+                    colorbar horizontal,
+                    colorbar style = {xlabel = Relative error in $\si{\decibel}$},
+                    unbounded coords = jump,
+                    xlabel = {$\rho / \lambda_0$},
+                    ylabel = {$z / \lambda_0$},
+                    view = {0}{90},
+                    title = {TE case},
+                ]
+                \addplot3 [
+                    surf,
+                    mesh/ordering=y varies,
+                    ] table[
+                        x = rho_by_lambda_0, y = z_by_lambda_0, z = rel_err_db_te,
+                        ]
+                        {thesis_dcim_near_range_error.dat};
+                \end{axis}
+                \\
+            };
+        \end{tikzpicture}
+        \caption{Accuracy.}
+    \end{subfigure}
+
+    \begin{subfigure}[]{\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \pgfplotsset{small}
+            \begin{axis}[
+                width = \textwidth,
+                height = 0.3\textwidth,
+                xlabel = {$z / \lambda_0$},
+                ylabel = {Number of images},
+                grid = major,
+                enlargelimits = false,
+                legend entries = {TM case,TE case},
+            ]
+            \addplot[
+                only marks,
+                mark = o,
+                color = blue,
+                ]
+                table [
+                    x = z_by_lambda_0,
+                    y = N_images_tm,
+                ]
+                {thesis_dcim_near_range_images.dat};
+            \addplot[
+                only marks,
+                mark = asterisk,
+                color = red,
+            ]
+            table [
+                x = z_by_lambda_0,
+                y = N_images_te,
+                ]
+                {thesis_dcim_near_range_images.dat};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Number of complex images.}
+    \end{subfigure}
+
+    \caption{Generic scalar Green's function in air over dry ground via
+    \ac{DCIM} for $\rsrc = \lambda_0 \uv{z}$.}
+    \label{fig:dcim_near_range}
 \end{figure}
 
 
@@ -711,7 +840,14 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
         \end{axis}
     \end{tikzpicture}
     \caption[Accuracy of standard \ac{FMM} implementation with real sources]
-    {Accuracy of standard \ac{FMM} implementation with real sources.}
+    {Accuracy of standard \ac{FMM} implementation with real sources.
+    The cubical boxes are of side length $w = \lambda_0$.
+    A total $\num{3600}$ observation points are distributed in the Cartesian
+    $z = 0$ plane.
+    Due to the logarithmic spacing each source point lies within an own
+    group.
+    The total $\num{500}$ source points are contained within a single group at
+    $\fmmMultiIndex = \left(0,0,20\right)$.}
     \label{fig:thesis_fmm_standard_accuracy}
 \end{figure}
 
