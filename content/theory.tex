@@ -847,8 +847,8 @@ $\rdiffNormSymbol = \norm{\pvec{R}}$ shall be used for notational convenience.
 In Green's function problems arising in the area of electromagnetic waves
 in plane stratified media the inhomogeneous medium is characterized by
 $k = k\left(z\right)$.
-The sole functional dependency of the wavenumber on the Cartesian and cylindrical 
-$z$-coordinate can be employed to reduce the governing Helmholtz
+The sole functional dependency of the wavenumber on the Cartesian and
+cylindrical  $z$-coordinate can be employed to reduce the governing Helmholtz
 equation \eqref{eq:scalar_free_space_gf} to an \ac{ODE}.
 
 The second circumstance on which this simplification relies is the fact that 
@@ -1483,6 +1483,7 @@ assumptions.
 	$\varrho_\mathrm{m}$ are introduced to mathematically complement the
 	physical sources $\pvec{J}$ and $\varrho$.
 \end{itemize}
+
 Under these assumptions Maxwell's equations read \cite{Harrington2001,Chew1999}
 \begin{subequations}\label{eq:mwe_fd}
 	\begin{align}
@@ -1651,6 +1652,14 @@ While different possibilities can be found can be found in the literature
 \section{Five-Component Fields}
 \label{sec:five_component_fields}
 
+
+
+
+
+
+\subsection{Generic \acs{TM} and \acs{TE} Fields}
+\label{subsec:generic_TM_and_TE_fields}
+
 In media of one-dimensional inhomogeneity,\ie, $\epsr = \epsr\left(z\right)$ and
 $\mur = \mur\left(z\right)$ the study of wave fields governed by
 \eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} can be reduced to the solution
@@ -1674,6 +1683,18 @@ of a generic \ac{TM} field
 \end{equation}
 Obviously, the component $E_z$ is contained in \eqref{eq:curlcurl_E}.
 Its governing equation
+\begin{equation}\label{eq:TM_characteristic_component_PDE_step_01}
+	-\frac{\partial^2}{\partial x^2} E_z
+	-\frac{\partial^2}{\partial y^2} E_z
+	+\frac{\partial^2}{\partial x \partial z} E_x
+	+\frac{\partial^2}{\partial y \partial z} E_y
+	-k^2 E_z
+	= 0
+\end{equation}
+is straightforwardly obtained by extracting the $z$-component of
+\eqref{eq:curlcurl_E} and using $\mur = \mur\left(z\right)$.
+With Schwarz's theorem \eqref{eq:TM_characteristic_component_PDE_step_01} can
+be written as
 \begin{equation}\label{eq:TM_E_z_PDE_first_step}
 	\laplaceTrans E_z
 	+
@@ -1686,12 +1707,13 @@ Its governing equation
 	k^2 E_z
 	=
 	0
+	\, ,
 \end{equation}
-is straightforwardly obtained by extracting the $z$-component of
-\eqref{eq:curlcurl_E}, where the properties $\epsr = \epsr\left(z\right)$ and
-$\mur = \mur\left(z\right)$ are employed together with Schwarz's theorem.
+where again the notation \eqref{eq:def_laplace_trans} is used to express the
+transverse part of the Laplacian operator.
 From Gauss's law \eqref{eq:mwe_fd_gauss} for the homogeneous case $\varrho = 0$
-\begin{equation}
+we have
+\begin{equation}\label{eq:TM_E_z_PDE_second_step}
 	\frac{\partial}{\partial x} E_x + 
 	\frac{\partial}{\partial y} E_y + 
 	=
@@ -1699,8 +1721,10 @@ From Gauss's law \eqref{eq:mwe_fd_gauss} for the homogeneous case $\varrho = 0$
 	\frac{1}{\varepsilon}
 	\frac{\partial}{\partial z}
 	\varepsilon E_z
+	\, .
 \end{equation}
-is obtained which can be used in \eqref{eq:TM_E_z_PDE_first_step} to write
+Combining \eqref{eq:TM_E_z_PDE_first_step} \eqref{eq:TM_E_z_PDE_second_step}
+we have
 \begin{equation}\label{eq:TM_characteristic_component_PDE}
 	\left(
 		\laplaceTrans 
@@ -1714,58 +1738,64 @@ is obtained which can be used in \eqref{eq:TM_E_z_PDE_first_step} to write
 	\right)
 	\varepsilon E_z = 0
 \end{equation}
-for the characteristic component $\varepsilon E_z$ of this \ac{TM}
+for the characteristic component $\varepsilon E_z$ of the \ac{TM}
 field\footnote{Alternatively to $\varepsilon E_z$ the transverse component
 $H_\mathrm{t}$ could also be used as characteristic component
 \cite[46]{Chew1999}.}.
+The dual of a \ac{TM} field is \ac{TE}.
+The spectral domain representation of its characteristic quantity $\mu H_z$
+follows readily by duality and reads
+\begin{equation}\label{eq:TE_characteristic_component_PDE}
+	\left(
+		\laplaceTrans 
+		+
+		\mu
+		\frac{\partial}{\partial z}
+		\frac{1}{\mu}
+		\frac{\partial}{\partial z}
+		+
+		k^2
+	\right)
+	\mu H_z = 0
+	\, .
+\end{equation}
 
 So far the \ac{TM} characteristic of \eqref{eq:generic_TM_field_components} has
 not yet been employed.
 The missing $H_z$ component comes into play as this very property allows
-for calculation of the remaining five field components from a known solution for
-$E_z$ \cite[\S\S2.3.3]{Chew1999}.
+to obtain the remaining five field components from a known solution for $E_z$
+by differentiation \cite[\S\S2.3.3]{Chew1999}.
 
 
-With \eqref{eq:TM_characteristic_component_PDE} in mind consider now the field
-of a \ac{VED},~\ie, an infinitesimal $\uv{z}$-directed current element.
-As the assumptions state that $\varepsilon$ and $\mu$ do depend on $z$ only
-one can, without loss of generality, lie the \ac{VED} onto the Cartesian
-and cylindrical $z$-axis.
-As the driving current density has no transverse component it is a justifiable
-assumption that the \ac{VED} field is of azimuthal symmetry.
-By the nature of \eqref{eq:mwe_fd_ampere} we can further deduce that $\pvec{H}$
-has no vertical component.
-With these two arguments the fields depend on position in the particular way
-of $\pvec{E} = \pvec{E} \left(\rho, z\right)$ and
-$\pvec{E} = \pvec{E} \left(\rho, z\right)$.
-Furthermore, it is known the solution of Maxwell's equation for the
-\ac{VED} is a \ac{TM} field.
-These characteristics allow for application of the Hankel transform to
-reduce \eqref{eq:TM_characteristic_component_PDE}
-\begin{equation}\label{eq:TM_characteristic_component_ODE}
-	\left(
-		\varepsilon
-		\frac{\dd}{\dd z}
-		\frac{1}{\varepsilon}
-		\frac{\dd}{\dd z}
-		+
-		k_z^2
-	\right)
-	\varepsilon \tilde{E}_z = 0
-	\, ,
-\end{equation}
-where again \eqref{eq:def_k_z_of_k_rho} is used for notational convenience.
-Hence, the characteristic component of the \ac{VED} field obeys the \ac{ODE}
-\eqref{eq:TM_characteristic_component_ODE} in the $k_\rho$ spectral domain.
-The spectral-domain solution $\tilde{E}_z$ again solves Maxwell's equations
-by which the remaining components can also be obtained in the spectral domain.
-The spatial domain solution for each component is then found by inverse Hankel
-transformation,~\ie, by means of Sommerfeld integrals.
 
-\fxnote{\ac{HED}, dyadic Green's functions, specialize z-dependency of the medium}
 
-\section{Continuity Conditions at Boundaries}
-\label{sec:continuity_at_interfaces}
+
+
+
+\subsection{Plane Stratified Media and Continuity Conditions at Interfaces}
+\label{subsec:layered_media_and_continuity_conditions}
+
+So far, neither \eqref{eq:TM_characteristic_component_PDE} nor
+\eqref{eq:VED_E_z_ODE} impose any restrictions on \emph{how} exactly $\epsr$
+and $\mur$ depend on $z$ other than existence of the involved derivatives.
+Henceforth, it is assumed that the material parameters are domain-wise
+constant.
+The individual domains embrace adjacent intervals in $z$ which may be of finite,
+semi-infinite or infinite extent, where the latter is equivalent to the
+homogeneous space case.
+In accordance to history and the nomenclature in literature the domains are
+termed \emph{layers}.
+At the upper (lower) boundaries of the top (bottom) layer boundary conditions 
+need to be imposed if these boundaries are at finite $z$.
+Important within the scope of the present thesis are mainly the Dirichlet-like
+boundary conditions of \ac{PEC} and \ac{PMC} type, which are defined by
+vanishing transversal components of $\pvec{E}$ and $\pvec{H}$ on the boundary,
+respectively.
+The geometrical setup of the solution domain as well as the indexing scheme is
+visualized in \cref{fig:multilayered_medium_spec}.
+Within this convention the Sommerfeld problem corresponds to a solution domain
+with $N=2$, one single interface at $z_1 = 0$ and open outer boundary
+conditions.
 
 \begin{figure}
     \centering
@@ -1814,74 +1844,55 @@ transformation,~\ie, by means of Sommerfeld integrals.
     \label{fig:multilayered_medium_spec}
 \end{figure}
 
-The derivation of the characteristic components of \ac{TE} and \ac{TM} fields in
-\cref{subsec:reduction_to_odes} does only assume $\epsr = \epsr\left(z\right)$
-and $\mur = \mur\left(z\right)$.
-So far, the dependency on $z$ is still generic, with the sole requirement that
-the derivatives in \eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} must exist.
-
-In the following $\epsr$ and $\mur$ are assumed to be domain-wise constant for
-adjacent intervals in $z$.
-The domains corresponding to these layers are defined in
-\cref{fig:multilayered_medium_spec}.
-Each domain,~\ie, each layer, is assigned its domain-wise constant pair of
-material parameters $\epsr,\mur$ and wavenumber according to
-\eqref{eq:wavenumber}.
-Accordingly, the discontinuities of $\epsr$ and $\mur$ occur at the interfaces
-$z_i$.
-Within the conventions of \cref{fig:multilayered_medium_spec} Sommerfeld problem
-corresponds to $N=2$ with one single finite boundary at $z_1 = 0$ and open
-boundary conditions at $z_0$ and $z_2$.
-With that assumption the continuity condition for $\tilde{H}_z$ and
-$\tilde{E}_z$ at the boundaries of two neighboring domains with different
-$\epsr$ and/or $\mur$ need to be known.
-
-One, heuristic, way to obtain these continuity conditions is to deduce them from 
-\eqref{eq:TE_ODE} and \eqref{eq:TM_ODE} \cite[47]{Chew1999}.
-Another approach would be to follow the idea behind a common derivation of
-\eqref{eq:mwe_continuity_at_interface}, which re-writes the governing 
-differential equations in integral form and then considers small loops or
-volumes around the interface \cite[p20]{Jackson2013}.
-Anyhow, the continuity conditions for $\tilde{H}_z$ at the boundary $z_i$ read
-\begin{subequations}
-	\begin{equation}\label{eq:B_continuity}
-		\mu_i \tilde{H}_{z} \left(z^{-}\right) =
-		\mu_{i+1} \tilde{H}_{z} \left(z^{+}\right)
+According to \cref{fig:multilayered_medium_spec} discontinuities of $\epsr$ and
+$\mur$ may occur at the interface coordinates $z_i$.
+Hence, continuity conditions for the characteristic components of \ac{TM} and
+\ac{TE} fields need to be derived at these interfaces.
+A heuristic way to obtain these continuity conditions is to deduce them directly
+from \eqref{eq:TM_characteristic_component_PDE} and
+\eqref{eq:TE_characteristic_component_PDE} by the requirement that the
+involved derivatives shall exist \cite[47]{Chew1999}.
+Another approach may employ \eqref{eq:mwe_continuity_at_interface}.
+Anyhow, the continuity conditions for $\varepsilon E_z$ at the boundary
+$z_i$ read
+\begin{subequations}\label{eq:TM_continuity}
+	\begin{equation}\label{eq:TM_continuity_1}
+		\varepsilon_i E_{z} \left(z^{-}\right) =
+		\varepsilon_{i-1} E_{z} \left(z^{+}\right)
 	\end{equation}
 	and
-	\begin{equation}\label{eq:H_z_tilde_second_continuity_condition}
-		\frac{1}{\mu_i}
+	\begin{equation}\label{eq:TM_continuity_2}
+		\frac{1}{\varepsilon_i}
 		\frac{\dd}{\dd z}
-		\mu_i \tilde{H}_{z}\left(z^{-}\right)
+		\varepsilon_i E_{z}\left(z^{-}\right)
 		=
-		\frac{1}{\mu_{i+1}}
+		\frac{1}{\varepsilon_{i+1}}
 		\frac{\dd}{\dd z}
-		\mu_{i+1} \tilde{H}_{z} \left(z^{+}\right)
+		\varepsilon_{i-1} E_{z} \left(z^{+}\right)
 		\,,
 	\end{equation}
 \end{subequations}
 where $z^{\pm} \to z_i$ from both sides.
 Once more the duality principle can be employed to obtain the corresponding
 conditions 
-\begin{subequations}
-	\begin{equation}\label{eq:D_continuity}
-		\varepsilon_i \tilde{E}_{z,i} \left(z^{-}\right)
-		=
-		\varepsilon_{i+1} \tilde{E}_{z,i+1} \left(z^{+}\right)
+\begin{subequations}\label{eq:TE_continuity}
+	\begin{equation}\label{eq:TE_continuity_1}
+		\mu_i H_{z} \left(z^{-}\right) =
+		\mu_{i-1} H_{z} \left(z^{+}\right)
 	\end{equation}
 	and
-	\begin{equation}\label{eq:E_z_tilde_second_continuity_condition}
-		\frac{1}{\varepsilon_i}
+	\begin{equation}\label{eq:TE_continuity_2}
+		\frac{1}{\mu_i}
 		\frac{\dd}{\dd z}
-		\varepsilon_i \tilde{E}_{z,i} \left(z^{-}\right)
+		\mu_i H_{z}\left(z^{-}\right)
 		=
-		\frac{1}{\varepsilon_{i+1}}
+		\frac{1}{\mu_{i+1}}
 		\frac{\dd}{\dd z}
-		\varepsilon_{i+1} \tilde{E}_{z,i+1} \left(z^{+}\right)
-		\,.
+		\mu_{i-1} H_{z} \left(z^{+}\right)
+		\,,
 	\end{equation}
 \end{subequations}
-for $\tilde{E}_z$.
+for $H_z$.
 
 
 
@@ -1890,48 +1901,221 @@ for $\tilde{E}_z$.
 
 
 
+\subsection{Characteristic Component of the \ac{VED} Field}
+\label{subsec:E_z_comp_of_VED}
+
+With \eqref{eq:TM_characteristic_component_PDE} in mind consider now 
+a \ac{VED},~\ie, an infinitesimal $\uv{z}$-directed current element.
+As $\varepsilon = \varepsilon\left(z\right)$ and $\mu = \mu\left(z\right)$,
+one can, without loss of generality, lay the \ac{VED} onto the Cartesian
+and cylindrical $z$-axis, \ie,
+\begin{equation}\label{eq:VED_current_density}
+	\pvec{J} \left(\pvec{r}\right) =
+	I \uv{z}
+	\diracDelta\left(x\right)
+	\diracDelta\left(y\right)
+	\diracDelta\left(z - z^\prime\right)
+	\, .
+\end{equation}
+As the driving current density has no transverse component it is a justifiable
+assumption that the \ac{VED} field is of azimuthal symmetry.
+By the nature of \eqref{eq:mwe_fd_ampere} we can further deduce that $\pvec{H}$
+has no vertical component.
+With these two arguments the \ac{VED} field is known to be \ac{TM} and to depend
+on position in the particular way
+$\pvec{F} = \pvec{F} \left(\rho, z\right)$,
+$\pvec{F} \in \left\{\pvec{E}, \pvec{H}\right\}$.
+
+These characteristics allow to apply the Hankel transform
+\eqref{eq:hankel_transform} to \eqref{eq:TM_characteristic_component_PDE}.
+Then, with \cref{coll:k_rho_domain}, the \ac{PDE}
+\eqref{eq:TM_characteristic_component_PDE} reduces to the \ac{ODE}
+\begin{equation}\label{eq:VED_E_z_ODE}
+	\left(
+		\varepsilon \left(z\right)
+		\frac{\dd}{\dd z}
+		\frac{1}{\varepsilon \left(z\right)}
+		\frac{\dd}{\dd z}
+		+
+		k_z^2 \left(z\right)
+	\right)
+	\varepsilon \left(z\right)
+	\tilde{E}_z \left(k_\rho, z, z^\prime\right) = 0
+	\qquad
+	z \neq z^\prime
+\end{equation}
+in the $k_\rho$ spectral domain, where again the Pythagorean relation
+\eqref{eq:def_k_z_of_k_rho} is used for notational convenience.
+
+The spectral-domain solution $\tilde{E}_z$ again obeys Maxwell's equations.
+Therefore, spectral domain equations for the remaining field components can be
+obtained by differentiation.
+The spatial domain solution for each component is then found by inverse Hankel
+transformation,~\ie, by means of Sommerfeld integrals.
 
 
-\section{Equivalent Transmission Line Networks and Spectral Green's Functions}
-\label{sec:tl_greens_functions}
+
+
+
+
+\subsection{Dyadic Green's Functions}
+
+The problem arising from the combination of solving \eqref{eq:VED_E_z_ODE}
+for the excitation specified by \eqref{eq:VED_current_density} defines a Green's
+function.
+As noted in \cref{subsec:E_z_comp_of_VED}, all five non-vanishing components of
+the \ac{VED} field can readily be derived with knowledge of
+$\tilde{E}_z$.
+This holds for the fields in the spectral domain (by differentiation) as well as
+for their counterparts in the spatial domain (Sommerfeld integrals).
+
+The procedure sketched in \cref{subsec:E_z_comp_of_VED} makes particular use of
+physical reasoning to derive an \ac{ODE} for the characteristic component of 
+the \ac{VED}. 
+In contrast to the \ac{VED}, the field of a \ac{HED} has six non-vanishing
+components.
+It can be shown, however, that the \ac{HED} field can be decomposed into two
+five-component fields, one \ac{TM} and one \ac{TE}
+\cite{Sommerfeld1926,Sommerfeld1964,Chew1999}
+Therefore, in the \ac{HED} case two \acp{ODE} arise describing the two
+characteristic components.
+The dual cases of \ac{VMD} and \ac{HMD} again follow by duality.
+
+Knowing the fields of \ac{VED} and \ac{HED} is---using the superposition
+and duality principles---sufficient to represent the field of infinitesimal
+dipole of arbitrary direction $\uv{l}$ which may be of electric or magnetic
+nature.
+In practical applications, \eg, numerical solvers, it is, however, more
+convenient to assimilate these results into a form which is typically referred
+to as dyadic Green's function.
+For example the dyadic Green's function of the electric field for electric
+excitation $\dyadicGF{EJ}$ yields the electric field of the $\uv{l}$-directed
+\ac{HD} via
+\begin{equation}
+	\pvec{E}_\mathrm{HD} \left(\robs\right) = 
+	\iiint\limits_{V} \dd \robs \, 
+	\dyadicGF{EJ} \left(\robs, \rsrc\right)
+	\cdot
+	I \uv{l} \diracDelta \left(\rdiff\right)
+	\qquad \rsrc \in V
+	\, ,
+\end{equation}
+from which the tensor nature of dyadic Green's functions becomes clear.
+
+In the representation in terms of Cartesian coordinates and basis vectors the
+second-rank tensor fields representing dyadic Green's functions can be written
+as a superposition
+\begin{equation}\label{eq:dyadic_gf_in_cartesian_dyads}
+	\dyad{G} = 
+	\uv{x}\uv{x} G_{xx} +
+	\uv{x}\uv{y} G_{xy} +
+	\uv{x}\uv{z} G_{xz} +
+	\uv{y}\uv{x} G_{yx} +
+	\uv{y}\uv{y} G_{yy} +
+	\ldots
+	% \uv{y}\uv{z} G_{yz} +
+	% \uv{z}\uv{x} G_{zx} +
+	% \uv{z}\uv{y} G_{zy} +
+	% \uv{z}\uv{z} G_{zz} +
+\end{equation}
+of dyads.
+Alternatively, \eqref{eq:dyadic_gf_in_cartesian_dyads} may be represented
+as a $3 \times 3$ matrix in which case the current density vector $\pvec{J}$ is
+interpreted as a column vector in the sense of linear algebra.
+In the matrix representation the columns of the dyadic Green's functions have
+a distinct physical meaning.
+For example the $\dyadicGF{EJ} \cdot \uv{x}$ and $\dyadicGF{EJ} \cdot \uv{x}$
+represent the electric field of $\uv{x}$ and $\uv{y}$-directed \acp{VED},
+respectively, while $\dyadicGF{EJ} \cdot \uv{z}$ is the electric field of
+a \ac{VED}.
+
+A comprehensive derivation of all four dyadic Green's functions $\dyadicGF{EJ}$,
+$\dyadicGF{EM}$, $\dyadicGF{HJ}$ and $\dyadicGF{HM}$, both in spectral and in
+spatial domain is given in the comprehensive encyclopedia chapter by
+\textcite{Michalski2005}.
+In the Cartesian matrix picture we have the reciprocity relations
+\cite{Michalski2005}
+\begin{subequations}\label{eq:dgf_reciprocity}
+	\begin{align}
+	\dyadicGF{EJ}
+	\left(\robs, \rsrc\right)
+	&= 
+	\transpose{\dyadicGF{EJ} \left(\rsrc, \robs\right)}
+	\\ 
+	\dyadicGF{HM}
+	\left(\robs, \rsrc\right)
+	&= 
+	\transpose{\dyadicGF{HM} \left(\rsrc, \robs\right)}
+	\\
+	\dyadicGF{EM}
+	\left(\robs, \rsrc\right)
+	&=
+	-\transpose{\dyadicGF{HJ} \left(\rsrc, \robs\right)}
+	\end{align}
+\end{subequations}
+for the dyadic Green's functions, where $\transpose{\mat{A}}$ denotes the
+transpose of matrix $\mat{A}$.
+
+
+
+
+
+
+
+\subsection{Equivalent Transmission Line Network Method}
+\label{subsec:network_method}
 
 Coming back to Richard Feynman's famous quote (see
-\cref{subsec:duality_principle}), comparison of \eqref{eq:TE_ODE} and
-\eqref{eq:TM_ODE} reveals distinctive similarities to another set of
-\acp{ODE} familiar to electrical engineers: the \acp{ODE} describing 
-voltage and current on transmission lines. 
+\cref{sec:duality_principle}), inspection of \eqref{eq:VED_E_z_ODE} reminds of
+a rather similar equation arising in another area well-known to electrical
+engineers: transmission line theory.
 
-Because of this familiarity, it has become a well-established procedure to
-re-use known results of transmission line theory in the solution process of
-electromagnetic field problem in half-space or planar multilayered solution
-domains.
-This approach is referred to as equivalent transmission line network method or
-just network method in the literature.
-For the special case of multilayered media with domain-wise constant material
-parameters the \acp{TLGF} are known analytically for an arbitrary number of
-layers and outer boundary conditions which might be open, \ac{PEC}, \ac{PMC}
-or of impedance-type \cite[Section~2.4]{Felsen1994}\cite{Michalski1990,
-Eibert1997,Michalski2005,Michalski2016b}.
+% Because of this familiarity, it has become a well-established procedure to
+% re-use known results of transmission line theory in the solution process of
+% electromagnetic field problem in half-space or planar multilayered solution
+% domains.
+% This approach is referred to as equivalent transmission line network method or
+% just network method in the literature.
+% For the special case of multilayered media with domain-wise constant material
+% parameters the \acp{TLGF} are known analytically for an arbitrary number of
+% layers and outer boundary conditions which might be open, \ac{PEC}, \ac{PMC}
+% or of impedance-type \cite[Section~2.4]{Felsen1994}\cite{Michalski1990,
+% Eibert1997,Michalski2005,Michalski2016b}.
 
-Just as in planar layered media, \ac{TE} and \ac{TM} modes can be distinguished
-on transmission lines.
+% Just as in planar layered media, \ac{TE} and \ac{TM} modes can be distinguished
+% on transmission lines.
+
 The homogeneous transmission line equations for a $z$-directed line with
 propagation \enquote{constant} $k_z$ are given by
 \cite{Felsen1994,Michalski2016b}
 \begin{subequations}\label{eq:tl_ode_system}
 	\begin{align}
-		\frac{\dd}{\dd z} V\left(z\right)
+		\frac{\dd}{\dd z}
+		V^\tx
 		&=
-		-\im k_z Z^\tx I\left(z\right) \label{eq:tl_ode_system_dV} \\
-		\frac{\dd}{\dd z} I\left(z\right)
+		-\im
+		k_z
+		Z^\tx
+		I^\tx
+		\label{eq:tl_ode_system_dV}
+		\\
+		\frac{\dd}{\dd z}
+		I^\tx
 		&=
-		-\im k_z Y^\tx V\left(z\right) \label{eq:tl_ode_system_dI} \, ,
+		-\im
+		k_z
+		Y^\tx
+		V^\tx
+		\label{eq:tl_ode_system_dI}
+		\, ,
 	\end{align}
 \end{subequations}
-where with regard to the characteristic impedance $Z = Y^{-1}$ a distinction has
-to be made for $\tx \in \left\{\te,\tm\right\}$.
+where with regard to the characteristic impedance $Z \equiv Y^{-1}$ a
+distinction is made for $\tx \in \left\{\te,\tm\right\}$, \ie, different
+characteristic impedances are assumed for transmission lines carrying
+\ac{TM} and \ac{TE} modes.
 Within the framework of multilayered media the transmission line
-characteristics in the $i$-th layer are determined by
+characteristics in the $i$-th layer are determined by \cite{Michalski2016b}
 \begin{equation}
 	k_{zi} = \sqrt{{k_i}^2 - {k_\rho}^2}
 	\,
@@ -1944,23 +2128,50 @@ and
 	Z_i^\te = \frac{\omega \mu_i}{k_{zi}}
 	\, .
 \end{equation}
-With that, the four \acp{TLGF} of \eqref{eq:tl_ode_system}
+
+From \eqref{eq:tl_ode_system} the second order \acp{ODE}
+\begin{equation}\label{eq:tl_2nd_order_ode_isrc}
+	\left(
+		\frac{\dd}{\dd z}
+		\frac{1}{\im k_z Z^\tx}
+		\frac{\dd}{\dd z} +
+		\frac{k_z^2}{\im k_z Z^\tx}
+	\right)
+	V^\tx
+	=
+	0
+\end{equation}
+and
+\begin{equation}\label{eq:tl_2nd_order_ode_vsrc}
+	\left(
+		\frac{\dd}{\dd z}
+		\frac{1}{\im k_z Y^\tx}
+		\frac{\dd}{\dd z} +
+		\frac{k_z^2}{\im k_z Y^\tx}
+	\right)
+	I^\tx
+	=
+	0
+\end{equation}
+can be derived.
+Regarding the Green's functions of \eqref{eq:tl_2nd_order_ode_isrc} and
+\eqref{eq:tl_2nd_order_ode_vsrc} four cases can be distinguished.
 \begin{itemize}
 	\item voltage due to unit-strength $\diracDelta$-like current source $V_i$
 	\item current due to unit-strength $\diracDelta$-like current source $I_i$
 	\item voltage due to unit-strength $\diracDelta$-like voltage source $V_v$
 	\item current due to unit-strength $\diracDelta$-like voltage source $I_v$
 \end{itemize}
-are known analytically for the geometry shown in
-\cref{fig:multilayered_medium_spec} and more or less ready to use expressions
-for special cases as well as for a general multilayered medium can be found in
-the literature 
+These \ac{TLGF} are known analytically for the geometry shown in
+\cref{fig:multilayered_medium_spec}.
+The literature provides more or less ready to use expressions for the \acp{TLGF}
+for special cases as well as for a general multilayered medium 
 \cite{Michalski1990,Hsu1993,Ho1994,Eibert1997,Michalski2005}.
+
 As the coupled \acp{ODE} \eqref{eq:tl_ode_system_dV} and
 \eqref{eq:tl_ode_system_dI} are dual
 equations, the set of duality rules for the \acp{TLGF} can be formulated as
 given by \cref{tab:tlgf_duality}.
-
 \begin{table}[hbt]
 	\centering
 	\begin{tabular}{cc}
@@ -2060,109 +2271,59 @@ To illustrate the behavior of voltage and current on the equivalent
 
 
 
+% So ergibt der Vergleich von \eqref{eq:TE_ODE_GF} mit
+% \eqref{eq:tl_2nd_order_ode_isrc} im TE-Fall
+% \begin{equation}\label{eq:G_tilde_TE_tl_quantities}
+% 	\tilde{G}^\te \equiv \frac{1}{\im \omega} V^{\isrc,\te} \,
+% \end{equation}
+% der Vergleich von \eqref{eq:TM_ODE_GF} mit \eqref{eq:tl_2nd_order_ode_vsrc}
+% im TM-Fall liefert
+% \begin{equation}\label{eq:G_tilde_TM_tl_quantities}
+% 	\tilde{G}^\tm \equiv \frac{1}{\im \omega} I^{\vsrc,\tm} \, .
+% \end{equation}
+
+% Aus der Leitungstheorie \cite{Pozar2011} sind wesentliche Aspekte der
+% Wellenausbreitung von Spannung und Stromstärke auf Leitungen, die durch
+% \eqref{eq:tl_ode_system_dI} und \eqref{eq:tl_ode_system_dV} beschrieben werden,
+% bekannt.
+% So sind beispielsweise Spannung und Strom außerhalb von Quellregionen---im
+% vorliegenden Kontext also für $z \neq z^\prime$---stetig.
+% Ein Vergleich von \eqref{eq:G_tilde_TE_tl_quantities} und
+% \eqref{eq:G_tilde_TM_tl_quantities} mit \eqref{eq:B_continuity} und
+% \eqref{eq:D_continuity} legt daher offen, dass die Lösung über die
+% Netzwerk-Methode bereits eine der an die Stetigkeit der charakteristischen
+% Feldkomponenten erfüllt.
+% Dass auch die Bedingungen \eqref{eq:H_z_tilde_second_continuity_condition} und
+% \eqref{eq:E_z_tilde_second_continuity_condition} automatisch erfüllt ist, lässt
+% sich durch Einsetzten der Lösung für $V^{\isrc,\te}$ in
+% \eqref{eq:tl_first_order_odes_i_source_homo} und jener für $I^{\vsrc,\tm}$ in
+% \eqref{eq:tl_first_order_odes_v_source_homo} erkennen.
+% Man erhält dadurch
+% \begin{equation}
+% 	\frac{1}{\mu} \frac{\dd}{\dd z} \tilde{G}^\te \equiv - I^{\isrc,\te}
+% \end{equation}
+% sowie
+% \begin{equation}
+% 	\frac{1}{\varepsilon} \frac{\dd}{\dd z} \tilde{G}^\tm \equiv - V^{\vsrc,\tm} \,,
+% \end{equation}
+% für $z \neq z^\prime$ sind also \eqref{eq:H_z_tilde_second_continuity_condition}
+% und \eqref{eq:E_z_tilde_second_continuity_condition} ebenfalls befriedigt.
+
+% Damit sind die Greenschen Funktionen der charakteristischen Komponenten
+% $\tilde{H}_z$ und $\tilde{E}_z$ von TE bzw.
+% TM-Feldern im $k_\rho$-Spektralbereich auf die in \cref{app:tl_greens_functions}
+% zusammengefassten bekannten Greenschen Funktionen für Spannung und Stromstärke
+% Übertragungsleitungen zurückgeführt.
 
 
 
-Für die Definition der Greenschen Funktionen von \eqref{eq:tl_ode_system} gibt
-es nun
-\begin{itemize}
-	\item die Möglichkeit
-	\begin{subequations}\label{eq:tl_first_order_odes_i_source}
-		\begin{align}
-			\frac{\dd}{\dd z} V^{\isrc,\tx}\left(z\right)
-			&= -\im k_z Z^\tx I^{\isrc,\tx}\left(z\right) \label{eq:tl_first_order_odes_i_source_homo}\\
-			\frac{\dd}{\dd z} I^{\isrc,\tx}\left(z\right)
-			&=-\im k_z Y^\tx V^{\isrc,\tx}\left(z\right) + \diracDelta\left(z-z^\prime\right)
-		\end{align}
-	\end{subequations}
-	der Anregung mit einer impulsförmigen Einheitsstromquelle (oberer Index
-	$\isrc$) bei $z^\prime$, sowie 
-	\item den analogen Fall
-	\begin{subequations}\label{eq:tl_first_order_odes_v_source}
-		\begin{align}
-			\frac{\dd}{\dd z} V^{\vsrc,\tx}\left(z\right)
-			&= -\im k_z Z^\tx I^{\vsrc,\tx}\left(z\right) + \diracDelta\left(z-z^\prime\right) \\
-			\frac{\dd}{\dd z} I^{\vsrc,\tx}\left(z\right)
-			&=-\im k_z Y^\tx V^{\vsrc,\tx}\left(z\right) \label{eq:tl_first_order_odes_v_source_homo}
-		\end{align}
-	\end{subequations}
-	 mit einer Spannungsquelle (oberer Index $\vsrc$) bei $z^\prime$ als
-	 treibender Größe \cite{Michalski2016b}.
-\end{itemize}
-Aus den Systemen erster Ordnung \eqref{eq:tl_first_order_odes_i_source} und
-\eqref{eq:tl_first_order_odes_v_source} lassen sich durch Differenziation der
-einen und Einsetzen der jeweils anderen Gleichung die Gleichungen zweiter
-Ordnung
-\begin{equation}\label{eq:tl_2nd_order_ode_isrc}
-	\left(\frac{\dd}{\dd z}
-	\frac{1}{\im k_z Z^\tx}
-	\frac{\dd}{\dd z} +
-	\frac{k_z^2}{\im k_z Z^\tx}\right)
-	V^{\isrc,\tx} =
-	-\diracDelta\left(z-z^\prime\right)
-\end{equation}
-und
-\begin{equation}\label{eq:tl_2nd_order_ode_vsrc}
-	\left(\frac{\dd}{\dd z}
-	\frac{1}{\im k_z Y^\tx}
-	\frac{\dd}{\dd z} +
-	\frac{k_z^2}{\im k_z Y^\tx}\right)
-	I^{\vsrc,\tx} =
-	-\diracDelta\left(z-z^\prime\right)
-\end{equation}
-gewinnen.
-Durch Vergleich erkennt man die Dualität zwischen \eqref{eq:TE_ODE_GF} und
-\eqref{eq:tl_2nd_order_ode_isrc} sowie \eqref{eq:TM_ODE_GF} und
-\eqref{eq:tl_2nd_order_ode_isrc}.
-Damit lassen sich die Lösungen von \eqref{eq:TE_ODE_GF} und \eqref{eq:TM_ODE_GF}
-durch die wohlbekannten Greenschen Funktionen der Leitungsgleichungen ausdrücken.
 
-So ergibt der Vergleich von \eqref{eq:TE_ODE_GF} mit
-\eqref{eq:tl_2nd_order_ode_isrc} im TE-Fall
-\begin{equation}\label{eq:G_tilde_TE_tl_quantities}
-	\tilde{G}^\te \equiv \frac{1}{\im \omega} V^{\isrc,\te} \,
-\end{equation}
-der Vergleich von \eqref{eq:TM_ODE_GF} mit \eqref{eq:tl_2nd_order_ode_vsrc}
-im TM-Fall liefert
-\begin{equation}\label{eq:G_tilde_TM_tl_quantities}
-	\tilde{G}^\tm \equiv \frac{1}{\im \omega} I^{\vsrc,\tm} \, .
-\end{equation}
 
-Aus der Leitungstheorie \cite{Pozar2011} sind wesentliche Aspekte der
-Wellenausbreitung von Spannung und Stromstärke auf Leitungen, die durch
-\eqref{eq:tl_ode_system_dI} und \eqref{eq:tl_ode_system_dV} beschrieben werden,
-bekannt.
-So sind beispielsweise Spannung und Strom außerhalb von Quellregionen---im
-vorliegenden Kontext also für $z \neq z^\prime$---stetig.
-Ein Vergleich von \eqref{eq:G_tilde_TE_tl_quantities} und
-\eqref{eq:G_tilde_TM_tl_quantities} mit \eqref{eq:B_continuity} und
-\eqref{eq:D_continuity} legt daher offen, dass die Lösung über die
-Netzwerk-Methode bereits eine der an die Stetigkeit der charakteristischen
-Feldkomponenten erfüllt.
-Dass auch die Bedingungen \eqref{eq:H_z_tilde_second_continuity_condition} und
-\eqref{eq:E_z_tilde_second_continuity_condition} automatisch erfüllt ist, lässt
-sich durch Einsetzten der Lösung für $V^{\isrc,\te}$ in
-\eqref{eq:tl_first_order_odes_i_source_homo} und jener für $I^{\vsrc,\tm}$ in
-\eqref{eq:tl_first_order_odes_v_source_homo} erkennen.
-Man erhält dadurch
-\begin{equation}
-	\frac{1}{\mu} \frac{\dd}{\dd z} \tilde{G}^\te \equiv - I^{\isrc,\te}
-\end{equation}
-sowie
-\begin{equation}
-	\frac{1}{\varepsilon} \frac{\dd}{\dd z} \tilde{G}^\tm \equiv - V^{\vsrc,\tm} \,,
-\end{equation}
-für $z \neq z^\prime$ sind also \eqref{eq:H_z_tilde_second_continuity_condition}
-und \eqref{eq:E_z_tilde_second_continuity_condition} ebenfalls befriedigt.
 
-Damit sind die Greenschen Funktionen der charakteristischen Komponenten
-$\tilde{H}_z$ und $\tilde{E}_z$ von TE bzw.
-TM-Feldern im $k_\rho$-Spektralbereich auf die in \cref{app:tl_greens_functions}
-zusammengefassten bekannten Greenschen Funktionen für Spannung und Stromstärke
-Übertragungsleitungen zurückgeführt.
 
-\section{Image principle}
-\label{sec:img_principle}
+
+\section{Image Principle}
+\label{sec:imgage_principle}
 
 Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 

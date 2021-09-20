@@ -173,10 +173,13 @@
 \newcommand{\pvec}[1]{\mathbfit{#1}}     	% general "physical" vector and vector in frequency domain
 \newcommand{\uv}[1]{\hat{\pvec{#1}}} 		% unit vector
 \newcommand{\dyad}[1]{\overline{\pvec{#1}}}
+\newcommand{\dyadicGF}[1]{\dyad{G}^\mathrm{#1}}
+\newcommand{\dyadicGFcomp}[2]{\dyadicGF{#1}_{#2}}
 
 % Linear Algebra
 \renewcommand{\vec}[1]{\mathsfbfit{#1}} 	% n-dimensional vector
 \newcommand{\mat}[1]{\mathsfbfit{#1}} 		% <n x n> matrix
+\newcommand{\transpose}[1]{\left(#1\right) ^\mathrm{T}}
 
 % Operators
 \DeclareMathOperator{\gradient}{\nabla}		% gradient operator
