@@ -331,7 +331,7 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
                 ] table[
                     x = x_by_lambda_0, y = z_by_lambda_0, z = g_tm_full_log,
                 ]
-                {thesis_generic_scalar_near_region.dat};
+                {thesis_generic_sgf_dry_ground.dat};
 
                 \draw[thick] (axis cs:0,0,0) -- (axis cs:10,0,0);
             \end{axis}
@@ -353,7 +353,7 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
                 ] table[
                     x = x_by_lambda_0, y = z_by_lambda_0, z = g_tm_refl_re,
                 ]
-                {thesis_generic_scalar_near_region.dat};
+                {thesis_generic_sgf_dry_ground.dat};
 
                 \draw[thick] (axis cs:0,0,0) -- (axis cs:10,0,0);
             \end{axis}
@@ -361,7 +361,7 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
             };
         \end{tikzpicture}
         \caption{\ac{TM} case}
-        \label{fig:generic_scalar_near_region_tm}
+        \label{fig:thesis_generic_sgf_dry_ground_tm}
     \end{subfigure}
 
     \begin{subfigure}[t]{\textwidth}
@@ -386,7 +386,7 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
                 ] table[
                     x = x_by_lambda_0, y = z_by_lambda_0, z = g_te_full_log,
                 ]
-                {thesis_generic_scalar_near_region.dat};
+                {thesis_generic_sgf_dry_ground.dat};
 
                 \draw[thick] (axis cs:0,0,0) -- (axis cs:10,0,0);
             \end{axis}
@@ -408,7 +408,7 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
                 ] table[
                     x = x_by_lambda_0, y = z_by_lambda_0, z = g_te_refl_re,
                 ]
-                {thesis_generic_scalar_near_region.dat};
+                {thesis_generic_sgf_dry_ground.dat};
 
                 \draw[thick] (axis cs:0,0,0) -- (axis cs:10,0,0);
             \end{axis}
@@ -416,7 +416,7 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
             };
         \end{tikzpicture}
         \caption{\ac{TE} case}
-        \label{fig:generic_scalar_near_region_te}
+        \label{fig:thesis_generic_sgf_dry_ground_te}
     \end{subfigure}
 
     \caption[Generic scalar Green's function for a source over dry ground]
@@ -424,8 +424,140 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
     $\rsrc = \lambda_0 \uv{z}$ over dry ground.
     The left plots show the magnitude of the total field while on the right
     the real part of the extracted reflected contribution is shown.}
-    \label{fig:generic_scalar_near_region}
+    \label{fig:thesis_generic_sgf_dry_ground}
 \end{figure}
+
+
+
+
+
+
+
+\begin{figure}
+    \newcommand{\sizeFactor}{0.47}
+    \centering
+    \begin{subfigure}[t]{\textwidth}
+        \begin{tikzpicture}
+            \pgfplotsset{small}
+            \matrix {
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                colorbar horizontal,
+                unbounded coords = jump,
+                colorbar style = {xlabel = {$20\log_{10}\abs{G_\mathrm{tot}}$}},
+                xlabel = {$\rho / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+            ]
+            \addplot3 [
+                surf,
+                point meta max=-26, point meta min=-97,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_tm_full_log,
+                ]
+                {thesis_generic_sgf_seawater.dat};
+
+                \draw[thick] (axis cs:0,0,0) -- (axis cs:10,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                colorbar horizontal,
+                unbounded coords = jump,
+                colorbar style = {xlabel = {$\real{G_\mathrm{refl}}$}},
+                xlabel = {$\rho / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+            ]
+            \addplot3 [
+                surf,
+                point meta max=0.00065, point meta min=-0.00066,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_tm_refl_re,
+                ]
+                {thesis_generic_sgf_seawater.dat};
+
+                \draw[thick] (axis cs:0,0,0) -- (axis cs:10,0,0);
+            \end{axis}
+            \\
+            };
+        \end{tikzpicture}
+        \caption{\ac{TM} case}
+        \label{fig:thesis_generic_sgf_seawater_tm}
+    \end{subfigure}
+
+    \begin{subfigure}[t]{\textwidth}
+        \begin{tikzpicture}
+            \pgfplotsset{small}
+            \matrix {
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                colorbar horizontal,
+                unbounded coords = jump,
+                colorbar style = {xlabel = {$20\log_{10}\abs{G_\mathrm{tot}}$}},
+                xlabel = {$\rho / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+            ]
+            \addplot3 [
+                surf,
+                point meta max=-26, point meta min=-97,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_te_full_log,
+                ]
+                {thesis_generic_sgf_seawater.dat};
+
+                \draw[thick] (axis cs:0,0,0) -- (axis cs:10,0,0);
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                colorbar horizontal,
+                unbounded coords = jump,
+                colorbar style = {xlabel = {$\real{G_\mathrm{refl}}$}},
+                xlabel = {$\rho / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                view = {0}{90},
+            ]
+            \addplot3 [
+                surf,
+                point meta max=0.00065, point meta min=-0.00066,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g_te_refl_re,
+                ]
+                {thesis_generic_sgf_seawater.dat};
+
+                \draw[thick] (axis cs:0,0,0) -- (axis cs:10,0,0);
+            \end{axis}
+            \\
+            };
+        \end{tikzpicture}
+        \caption{\ac{TE} case}
+        \label{fig:thesis_generic_sgf_seawater_te}
+    \end{subfigure}
+
+    \caption[Generic scalar Green's function for a source over seawater]
+    {Generic scalar Green's functions for a source at
+    $\rsrc = \lambda_0 \uv{z}$ over seawater.
+    The left plots show the magnitude of the total field while on the right
+    the real part of the extracted reflected contribution is shown.}
+    \label{fig:thesis_generic_sgf_seawater}
+\end{figure}
+
+
+
 
 
 
@@ -730,6 +862,7 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
                     unbounded coords = jump,
                     xlabel = {$\rho / \lambda_0$},
                     ylabel = {$z / \lambda_0$},
+                    xmode = log,
                     view = {0}{90},
                     title = {TM case},
                 ]
@@ -739,7 +872,7 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
                     ] table[
                         x = rho_by_lambda_0, y = z_by_lambda_0, z = rel_err_db_tm,
                         ]
-                        {thesis_dcim_near_range_error.dat};
+                        {thesis_dcim_error.dat};
                 \end{axis}
                 &
                 \begin{axis}[
@@ -751,6 +884,7 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
                     unbounded coords = jump,
                     xlabel = {$\rho / \lambda_0$},
                     ylabel = {$z / \lambda_0$},
+                    xmode = log,
                     view = {0}{90},
                     title = {TE case},
                 ]
@@ -760,12 +894,13 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
                     ] table[
                         x = rho_by_lambda_0, y = z_by_lambda_0, z = rel_err_db_te,
                         ]
-                        {thesis_dcim_near_range_error.dat};
+                        {thesis_dcim_error.dat};
                 \end{axis}
                 \\
             };
         \end{tikzpicture}
-        \caption{Accuracy.}
+        \caption{Accuracy. The upper bounds are $\SI{-33.21}{\decibel}$ and
+        $\SI{-58.62}{\decibel}$ for the \ac{TM} and \ac{TE} case, respectively.}
     \end{subfigure}
 
     \begin{subfigure}[]{\textwidth}
@@ -788,9 +923,9 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
                 ]
                 table [
                     x = z_by_lambda_0,
-                    y = N_images_tm,
+                    y = n_images_tm,
                 ]
-                {thesis_dcim_near_range_images.dat};
+                {thesis_dcim_images.dat};
             \addplot[
                 only marks,
                 mark = asterisk,
@@ -798,19 +933,21 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
             ]
             table [
                 x = z_by_lambda_0,
-                y = N_images_te,
+                y = n_images_te,
                 ]
-                {thesis_dcim_near_range_images.dat};
+                {thesis_dcim_images.dat};
             \end{axis}
         \end{tikzpicture}
         \caption{Number of complex images.}
     \end{subfigure}
 
-    \caption{Generic scalar Green's function in air over dry ground via
-    \ac{DCIM} for $\rsrc = \lambda_0 \uv{z}$.}
-    \label{fig:dcim_near_range}
+    \caption{Accuracy and required complex images for \ac{DCIM} computation
+    of generic scalar Green's functions over dry ground with the source at
+    $\rsrc = \lambda_0 \uv{z}$.
+    The \ac{DCIM} is $\num{17.93}$ times faster than \ac{PE} accelerated
+    numerical integration along the \ac{SIP}.}
+    \label{fig:dcim_dry_ground}
 \end{figure}
-
 
 
 \section{Fast Multipole Method}
