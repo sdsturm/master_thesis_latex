@@ -23,19 +23,22 @@ with the Sommerfeld problem's solution domain---are pointed out.
 
 Let the following notes regarding notation prepended this chapter.
 \begin{description}
-	\item[Complex numbers:] Real and complex numbers are marked in the
-	respective context if necessary. For a complex number $z \in C$ the complex 
+	\item[Complex numbers] Real and complex numbers are marked in the
+	respective context if necessary.
+	For an arbitrary complex number $z \in C$ the complex 
 	conjugate is denoted by $\complexConjugate{z}$ and the absolute value of
 	$z$ is written as $\abs{z} = \sqrt{z \complexConjugate{z}}$.
-	\item[Physical vectors:] Vectors in $\R^3$ a physical meaning are denoted in
-	bold and italic serif font, \eg, the position vector $\pvec{r}$.
-	Source points are marked by a prime, observation points are unprimed.
-	Unit vectors are marked as $\uv{u}$.
-	\item[Linear algebra:] Entities with reference to linear algebra,~\ie,
+	\item[Physical vectors] Vectors in $\R^3$ with a physical meaning are
+	denoted in bold and italic serif font, \eg, the position vector $\pvec{r}$.
+	Source points are marked by a prime.
+	Unit vectors are marked by a hat, \eg, $\uv{u}$.
+	\item[Linear algebra] Entities with reference to linear algebra, \ie,
 	matrices and vectors are denoted in bold, italic and sans-serif font.
-	Matrices, \eg, $\mat{A}$, are distinguished from column vectors,~\eg,
+	Matrices, \eg, $\mat{A}$, are distinguished from column vectors, \eg,
 	$\vec{v}$, by the use of upper and lower case symbols, respectively.
-	\item[Special functions:] The notation of special functions and related
+	In general, vectors are assumed to be column vectors, row vectors are
+	indicated by explicit transposition, \eg, $\transpose{\vec{v}}$.
+	\item[Special functions] The notation of special functions and related
 	symbols is in accordance to the NIST Handbook of Mathematical Functions
 	\cite{Olver2010}.
 \end{description}
@@ -61,54 +64,53 @@ it is adequate to be precise about
 	elements are called \emph{vectors} and in which the following two operations
 	are defined:
 	\begin{enumerate}
-		\item Addition: To every pair of vectors $x, y \in \mathcal{V}$ there
-		corresponds a vector $x + y$, in a way such that
+		\item Addition: for $x, y, z \in \mathcal{V}$ we have
 		\begin{enumerate}[label=(\alph*)]
 			\item $x + y = y + x$
 			\item $x + \left(y + z\right) = \left(x + y\right) + z$
 			\item $\mathcal{V}$ contains a unique \emph{zero vector} $0$ such
-			that $x + 0 = x \forall x \in \mathcal{V}$
-			\item To each $x \in \mathcal{V}$ there exists a unique
+			that $x + 0 = x$ for all $x \in \mathcal{V}$
+			\item to each $x \in \mathcal{V}$ there exists a unique
 			$-x \in \mathcal{V}$ such that $x + \left(-x\right) = 0$
 		\end{enumerate}
-		\item Scalar multiplication: To every pair $(a, x)$ of a scalar
-		$\alpha \in \F$ and a vector $x \in \mathcal{V}$ there corresponds a
-		vector $\alpha x \in \mathcal{V}$, in such a way that
+		\item Scalar multiplication: for $\alpha,\beta \in \F$ and
+		$x \in \mathcal{V}$ we have
 		\begin{enumerate}[label=(\alph*), start = 5]
 			\item $\alpha \left(\beta\right) = \left(\alpha \beta\right) x$ for
 			all $\beta \in \F$ 
 			\item $1 x = x$
 		\end{enumerate}
-		These operations satisfy the distributive laws
-		\begin{enumerate}[label=(\alph*), start = 7]
-			\item $\alpha \left(x + y\right) = \alpha x + \alpha y$
-			\item $\left(\alpha + \beta\right) x = \alpha x + \beta x$.
-		\end{enumerate}
+	\end{enumerate}
+	These operations satisfy the distributive laws
+	\begin{enumerate}[label=(\alph*), start = 7]
+		\item $\alpha \left(x + y\right) = \alpha x + \alpha y$
+		\item $\left(\alpha + \beta\right) x = \alpha x + \beta x$.
 	\end{enumerate}
 \end{definition}
 
-In the geometrical context we have to express vectors by means of coordinates
+In the geometrical context vectors have to be expressed in terms of coordinates
 and basis vectors in order to perform actual computations.
-The definition of the three major orthonormal coordinate systems in which a
-vector $\pvec{r} \in \R^3$ can be represented shall be based on 
+The two curvilinear orthonormal coordinate systems used throughout the present
+thesis are based on the standard rectangular system given by
 \begin{definition}[Cartesian coordinate system]
-	Let $\pvec{r}$ be an arbitrary vector in $\R$ and let that the
-	basis vectors $\left\{\uv{x}, \uv{y}, \uv{z}\right\}$ be orthonormal and
+	Let $\pvec{r}$ be an arbitrary vector in $\R$ and let that the set of
+	Cartesian basis vectors $\left\{\uv{x}, \uv{y}, \uv{z}\right\}$ be 
 	constant for all $\pvec{r} \in \R^3$.
 	Then the representation of $\pvec{r}$ in the \emph{Cartesian coordinate
 	system} is given by
 	\begin{equation}
-		\pvec{r} = \uv{x}x + \uv{y}y + \uv{z},
+		\pvec{r} = \uv{x}x + \uv{y}y + \uv{z}z
+		\, .
 	\end{equation}
 \end{definition}
 The representation of a vector $\pvec{r} \in \R^3$ in Cartesian coordinates
 relates to the common curvilinear systems according to the following two
-definition.
+definitions.
 \begin{definition}[Cylindrical coordinate system]
 	\label{def:cyl_coords}
 	Let a vector in $\R^3$ be given in Cartesian coordinates and unit vectors
 	by $\uv{x}x + \uv{y}y + \uv{z}z$.
-	The \emph{cylindrical coordinate system} is defined by 
+	Then the \emph{cylindrical coordinate system} is defined by 
 	\begin{subequations}
 		\begin{align}
 			&x = \rho \cos \varphi
@@ -142,7 +144,7 @@ definition.
 	\label{def:sph_coords}
 	Let a vector in $\R^3$ be given in Cartesian coordinates and unit vectors
 	by $\uv{x}x + \uv{y}y + \uv{z}z$.
-	The \emph{spherical coordinate system} is defined by 
+	Then the \emph{spherical coordinate system} is defined by 
 	\begin{subequations}
 		\begin{align}
 			&x = r \sin \left(\vartheta\right) \cos \varphi
@@ -184,17 +186,17 @@ definition.
 	\end{subequations}
 \end{definition}
 
-The notion of a \emph{distance} is familiar in Euclidean geometry,
-\ie, in $\R2$ and
-$\R3$.
-As the term must be extended to complex space in the following, it shall be
-pointed out that the usual concept of distance relies on
-\begin{definition}[Metric and metric space]\label{def:metric}
+The notion of \emph{distance} is familiar in Euclidean geometry,
+\ie, in $\R^2$ and
+$\R^3$.
+As the term must be extended to complex space $\C^3$ in the following, it shall
+be pointed out that the usual concept of distance relies on
+\begin{definition}[Metric]\label{def:metric}
 	Let $\mathcal{X}$ be a set. A non-negative function
 	$d: \mathcal{X} \times \mathcal{X} \mapsto \R$ is called a \emph{metric}
 	on $\mathcal{X}$ if it fulfills the following four properties.
 	\begin{enumerate}[label=(\alph*)]
-		\item $0 \le d\left(x_1, x_2\right) < 0$ for all
+		\item $0 \le d\left(x_1, x_2\right) < \infty$ for all
 		$x_1, x_2 \in \mathcal{X}$
 		\item $d\left(x_1, x_2\right) = 0$ if and only if $x_1 = x_2$
 		\item $d\left(x_1, x_2\right) = d\left(x_2, x_1\right)$ for all
@@ -202,15 +204,13 @@ pointed out that the usual concept of distance relies on
 		\item $d\left(x_1, x_3\right) \le d\left(x_1, x_2\right) + d\left(x_2, x_3\right)$
 		for all $x_1, x_2, x_3 \in \mathcal{X}$
 	\end{enumerate}
-	A set $\mathcal{X}$ together with a metric $d$ defined on $\mathcal{X}$ is
-	called a \emph{metric space} and denoted by $\left(\mathcal{X}, d\right)$.
 \end{definition}
 
 From a geometrical point of view the term distance is closely related to
 \emph{length}.
 Usual axioms regarding length are that a length should be real and non-negative.
 These perceptions are predicated on
-\begin{definition}[Norm and normed space]\label{def:norm}
+\begin{definition}[Norm]\label{def:norm}
 	Let $\mathcal{V}$ be a $\F$-vector space.
 	A non-negative real-valued functional $x \mapsto \left\Vert x \right\Vert$
 	from $\mathcal{V}$ into $\R$ is called a \emph{norm} if
@@ -221,32 +221,29 @@ These perceptions are predicated on
 		\item $\norm{x_1 + x_2} \le \norm{x_1} + \norm{x_2}$ for every
 		$x_1, x_2 \in \mathcal{V}$.
 	\end{enumerate}
-	A $\F$-vector space $\mathcal{V}$ together with a norm
-	$\left\Vert . \right\Vert$ is called a \emph{normed space} and denoted by
-	$\left( \mathcal{V}, \left\Vert . \right\Vert \right)$.
 \end{definition}
 
 As it is well known \cite{heuser2006}, vector spaces obtain a set of
 mathematically advantageous properties if a metric and a norm can be defined on
 them.
 The essentially beneficial properties of a Hilbert space become available if,
-in addition, an inner product can be defined.
-A valid inner product for the Euclidean space is given by
+in addition, an inner product can be defined on a normed vector (Banach) space.
+A valid inner product for complex Euclidean space is given by
 \begin{definition}[Dot product]\label{def:dot_product}
-	Let $\C^N$ be a finite-dimensional vector space and
-	$\pvec{a}, \pvec{b} \in \C^N$.
-	Assume that the coordinates of $\pvec{a}$ and $\pvec{b}$ are given in
+	Let $\pvec{a}, \pvec{b} \in \C^3$ be two arbitrary vectors and
+	assume that the coordinates of $\pvec{a}$ and $\pvec{b}$ are given in
 	the Cartesian representation.
-	Then the \emph{dot product}
-	is defined as 
+	Then the \emph{dot product} on $\C^3$ is defined as 
 	\begin{equation}
-		\pvec{a} \cdot \pvec{b} = \sum\limits_{n = 1}^{N} a_n \bar{b}_n \, ,
+		\pvec{a} \cdot \pvec{b} =
+		\sum\limits_{n = 1}^{N} a_n \complexConjugate{b}_n
+		\, .
 	\end{equation}
-	where $\bar{b}_n$ denotes the complex conjugate of $b$.
 \end{definition}
 
-With \cref{def:dot_product} we also obtain a way to actually compute length
-and distance according to the following two definitions.
+With \cref{def:dot_product} a practical prescription how to actually compute
+length and distance in Euclidean space is obtained, see the following two
+definitions.
 
 \begin{definition}[Euclidean norm]\label{def:euclidean_norm}
 	Let $\pvec{r} \in \C^3$ arbitrary. Then the \emph{Euclidean norm} of
@@ -285,87 +282,103 @@ and distance according to the following two definitions.
 \label{sec:fourier_transforms}
 
 Although large portions of the study of electromagnetism heavily rely on the
-decomposition of functions into---as well as on the composition of functions
-from---spectra of different frequencies, no specific definition of the Fourier
-transform prevails throughout the field.
-For the ubiquitous Fourier transform with respect to time the present thesis
-uses
+decomposition of functions into spectra of frequencies, no specific definition
+of the Fourier transform prevails throughout the field.
+Concerning the ubiquitous Fourier transform with respect to time the present
+thesis relies on
+
 \begin{definition}[Fourier transform with respect to time]
 	\label{def:fourier_transfrom_temporal_forward}
-	Let $f \in L^1\left( \R \right)$ be a function of a variable $t \in \R$
-	which shall be called \emph{time}.
+	Let $f \in L^1 \left(\R\right)$ be a function of a variable
+	$t \in \R$ called \emph{time}\footnote{
+		For the sake of simplicity,
+		\cref{def:fourier_transfrom_temporal_forward} is given
+		in this particular way even though the function spaces
+		on which \eqref{eq:fourier_transfrom_temporal_forward} is defined can
+		be extended well beyond $L^1$ \cite{grochenig2001,pohl2020}.
+	}.
 	Then the \emph{Fourier transform with respect to time} of $f$ is defined as 
 	\begin{equation}\label{eq:fourier_transfrom_temporal_forward}
 		\tilde{f} \left(\omega\right) = 
-		\left( \fourierTransformTemporal f \right) \left(\omega\right) = 
-		\tilde{f} \left( \omega \right) =
-		\int\limits_{-\infty}^{\infty} \dd t \,
-		\exp{-\im \omega t} 
+		\fourierTransformTemporal \left\{f \left(t\right)\right\}
+		\int\limits_{-\infty}^{\infty}
 		f\left( t \right)
+		\exp{-\im \omega t} 
+		\dd t
 		\qquad \omega \in \R
 		\, ,
 	\end{equation}
 	where $\omega$ is a parameter called \emph{angular frequency}.
 \end{definition}
 Provided a transformed function possesses certain well-known properties
-\cite{heuser2006, Strichartz2003}, an inverse transform to
+\cite{grochenig2001,pohl2020}, an inverse transform to
 \eqref{eq:fourier_transfrom_temporal_forward} exists.
 With \cref{def:fourier_transfrom_temporal_forward}  this inverse operation is
 given by
 \begin{lemma}[Inverse Fourier tansform with respect to time]
+	\label{lemma:fourier_transfrom_temporal_inverse}
 	Let $f \in L^1 \left(\R\right)$ such that
 	$\tilde{f} \in L^1 \left(\R\right)$. Then the
 	inverse Fourier transform with respect to time is given by
 	\begin{equation}\label{eq:fourier_transform_temporal_backward}
 		f \left(t\right) =
-		\left( \fourierTransformTemporalInverse \tilde{f} \right)
+		\fourierTransformTemporalInverse
+		\left\{\tilde{f}\left(\omega\right)\right\} 
 		\left( t \right) = 
 		\frac{1}{2\pi}
-		\int\limits_{-\infty}^{\infty} \dd \omega \,
-		\exp{\im \omega t} 
+		\int\limits_{-\infty}^{\infty} 
 		\tilde{f} \left( \omega \right)
+		\exp{\im \omega t} 
+		\dd \omega 
 		\qquad t \in \R
 		\, .
 	\end{equation}
 \end{lemma}
 
+An important consequence of \cref{def:fourier_transfrom_temporal_forward} is
+
 \begin{remark}[Time convention]\label{rem:time_convention}
-	If the pair of transforms formed by
+	If the pair of transforms
 	\eqref{eq:fourier_transfrom_temporal_forward} and
 	\eqref{eq:fourier_transform_temporal_backward} is applied to \acp{ODE}
-	or \acp{PDE} containing a differentiation with respect to time, then
+	or \acp{PDE} containing differentiation with respect to time, then
 	\cref{def:fourier_transfrom_temporal_forward} is equivalent to the
-	assumption a time dependency $\propto\exp{\im \omega t}$ for all
-	functions of time in $\omega$-spectral domain\footnote{Within the course of
-	the present thesis expressions taken from the literature are adapted to the
-	$\exp{\im \omega t}$ convention. Some of these, \eg, the work of
-	Sommerfeld, originally use the alternative $\exp{-\mathrm{i} \omega t}$
-	time convention.
-	The conversion to $\exp{\im \omega t}$ is done by the formal substitution
-	$\mathrm{i} \to -\im$. In addition, the kinds of Hankel functions,~\ie,
-	of propagating cylindrical or spherical waves, must be changed.}.
+	assumption of a time dependency $\propto\exp{\im \omega t}$ for all
+	functions of time in $\omega$-spectral domain.
 \end{remark}
 
-Formally, the extension of the concept of Fourier transforms to higher
+Within the course of the present thesis expressions taken from the literature
+are adapted to the $\exp{\im \omega t}$ convention.
+Some of these literature results, \eg, the work of Sommerfeld, originally use
+the alternative $\exp{-\mathrm{i} \omega t}$ time convention.
+The conversion to $\exp{\im \omega t}$ is done by the formal substitution
+$\mathrm{i} \to -\im$.
+In addition, the kinds of Hankel functions,~\ie, of propagating cylindrical or
+spherical waves, need to be changed.
+
+Formally, the extension of \cref{def:fourier_transfrom_temporal_forward}
+and \cref{lemma:fourier_transfrom_temporal_inverse} to higher
 dimensions is straightforward, as the scalars $t$ and $\omega$ simply become
 vectors and their product is replaced by the dot product.
 However, one has to take into account some physical reasoning in order to
 combine the Fourier transform in with respect to time with corresponding spatial
 transforms.
 Namely, the spatial counterpart to
-\cref{def:fourier_transfrom_temporal_forward} must be defined in the particular
-way of
+\cref{def:fourier_transfrom_temporal_forward} has to be defined in the
+particular way of
 \begin{definition}[Fourier transform with respect to space]
 	\label{def:fourier_transfrom_spatial_forward}
 	Let $f: \R^3 \mapsto \C$ be a function of a variable $\pvec{r} \in \R^3$
-	which shall be called \emph{position} and assume $\pvec{k} \in \C^3$.
-	The \emph{Fourier transform with respect to space} is defined as
+	called \emph{position} and assume $\pvec{k} \in \C^3$.
+	Then the \emph{Fourier transform with respect to space} is defined as
 	\begin{equation}\label{eq:fourier_transform_3space_forward}
 		\tilde{f} \left( \pvec{k} \right) = 
-		\left( \fourierTransformSpatial f \right) \left( \pvec{k} \right) = 
-		\iiint\limits_{\R^3} \dd \pvec{r} \,
+		\fourierTransformSpatial \left\{f \left(\pvec{r}\right)\right\} = 
+		\iiint\limits_{\R^3}  
+		f \left( \pvec{r} \right)
 		\exp{\im \pvec{k} \cdot \pvec{r}}
-		f \left( \pvec{r} \right) \, ,
+		\dd \pvec{r}
+		\, , 
 	\end{equation}
 	where $\pvec{k}$ is called \emph{wavevector} and
 	$k = \euclideanNorm{\pvec{k}}$ is called \emph{wavenumber}.
@@ -373,50 +386,58 @@ way of
 The inverse transform to \eqref{eq:fourier_transform_3space_forward} becomes
 \begin{equation}\label{eq:fourier_transform_3space_backward}
 	f \left( \pvec{r} \right) = 
-	\left( \fourierTransformSpatialInverse \tilde{f} \right) \left(\pvec{r}\right) = 
+	\fourierTransformSpatialInverse
+	\left\{\tilde{f}\left(\pvec{k}\right)\right\} = 
 	\frac{1}{\left( 2\pi \right)^3}
-	\iiint\limits_{\R^3} \dd \pvec{k} \,
+	\iiint\limits_{\R^3} 
+	\tilde{f} \left( \pvec{k} \right)
 	\exp{-\im \pvec{k} \cdot \pvec{r}}
-	\tilde{f} \left( \pvec{k} \right) \, .
+	\dd \pvec{k}
+	\, .
 \end{equation}
 Based on \cref{def:fourier_transfrom_temporal_forward} and
 \cref{def:fourier_transfrom_spatial_forward} the combined four-dimensional pair
 of transforms
 \begin{equation}\label{eq:fourier_transform_4d_forward}
 	\tilde{f} \left( \pvec{k}, \omega \right) = 
-	\iiint\limits_{\R^3} \dd \robs
-	\int\limits_{-\infty}^{\infty} \dd t \,
-	\exp{\im \left( \pvec{k} \cdot \robs - \omega t \right)}
+	\iiint\limits_{\R^3}
+	\int\limits_{-\infty}^{\infty} 
 	f \left( \robs, t \right)
+	\exp{\im \left( \pvec{k} \cdot \robs - \omega t \right)}
+	\dd t \,
+	\dd \robs
 \end{equation}
 and
 \begin{equation}\label{eq:fourier_transform_4d_inverse}
 	f \left( \robs, t \right) = 
 	\frac{1}{\left(2\pi\right)^4}
-	\iiint\limits_{\R^3} \dd \pvec{k}
-	\int\limits_{-\infty}^{\infty} \dd \omega \,
-	\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}
+	\iiint\limits_{\R^3} 
+	\int\limits_{-\infty}^{\infty}
 	\tilde{f} \left( \pvec{k}, \omega \right)
+	\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}
+	\dd \omega
+	\dd \pvec{k}
 \end{equation}
 can be constructed.
-Note that the sense of rotation of the kernel phasors is opposing in the
-temporal and the spatial parts.
 
-A physical interpretation of \eqref{eq:fourier_transform_4d_inverse} is,
+Note that in \eqref{eq:fourier_transform_4d_forward} and
+\eqref{eq:fourier_transform_4d_inverse} the sense of rotation of the kernel
+phasors is opposing in the temporal and the spatial parts.
+A physical interpretation of \eqref{eq:fourier_transform_4d_inverse} is
 that an arbitrary field $f \left( \robs, t \right)$ can be decomposed 
-into an infinite number of \emph{plane waves}---expressed by the
+into an infinite number of \emph{plane waves}---expressed by 
 $\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}$ terms---where
 the expansion coefficients are given by \eqref{eq:fourier_transform_4d_forward}.
-Each one of these individual plane waves solves
-the homogeneous scalar wave equation \cite[32]{Sommerfeld1964}
+Each individual plane wave solves the homogeneous scalar wave
+equation \cite[32]{Sommerfeld1964}
 \begin{equation}\label{eq:scalar_wave_equation_physical_domain}
 	\left( \laplace - \frac{1}{c^2} \frac{\partial^2}{\partial t^2} \right)	
 	\phi \left( \pvec{r}, t \right) = 0
 \end{equation}
-in the \enquote{physical} $\left(\pvec{r}, t\right)$-domain, where $c$ ist
+in the \enquote{physical} domain $\left(\pvec{r}, t\right)$, where $c$ is
 the velocity of propagation.
-However, if the same phasor convention of
-\cref{def:fourier_transfrom_temporal_forward} would also be used in
+However, if the phasor convention of
+\cref{def:fourier_transfrom_temporal_forward} would be used in the same sense in
 \cref{def:fourier_transfrom_spatial_forward}, the kernel
 $\exp{-\im \left( \pvec{k} \cdot \robs + \omega t \right)}$
 of the resulting 4D inverse transform satisfies
@@ -427,11 +448,11 @@ under the $\exp{\im \omega t}$ time convention
 can be seen if we assume $\pvec{r} = \uv{x} x$ and $\pvec{k} = \uv{x} k_x$
 with $x, k_x \in \R$ and $k_x > 0$,~\ie, a lossless right-handed medium.
 Then $\exp{-\im \left( \pvec{k} \cdot \robs - \omega t \right)}$ describes
-a plane wave whose wave fronts propagate \emph{forward},~\ie, in positive
-$x$-direction, as time evolves.
-In contrast,
+a plane wave whose wave fronts propagate \emph{forward} as time
+evolves, \ie, in positive $x$-direction.
+By contrast,
 $\exp{-\im \left( \pvec{k} \cdot \robs + \omega t \right)}$
-propagates in \emph{backwards}.
+propagates \emph{backwards}.
 Even though a plane wave is not a physical entity in the sense that it carries
 an infinite amount of energy, it is physically reasonable that it should
 travel forward as time marches on.
@@ -445,11 +466,11 @@ relativity.
 It turns out that opposing choices of phasor conventions in
 \cref{def:fourier_transfrom_temporal_forward} and
 \cref{def:fourier_transfrom_spatial_forward}, respectively, lead to the two
-meaningful sign conventions of the metric tensor\footnote{
-	$\left( + + + - \right)$ for $\exp{-\mathrm{i} \omega t}$
-	and $\left( - - - + \right)$ for $\exp{\im \omega t}$}
+physically meaningful sign conventions of the metric tensor\footnote{
+	These are $\left( + + + - \right)$ for $\exp{-\mathrm{i} \omega t}$
+	and $\left( - - - + \right)$ for $\exp{\im \omega t}$ time convention.}
 describing the structure of the four-dimensional (Minkowski) space-time
-continuum \cite[p624]{Jackson2013}\cite{Kaiser2016}.
+continuum \cite[624]{Jackson2013}\cite{Kaiser2016}.
 
 
 
@@ -462,92 +483,104 @@ continuum \cite[p624]{Jackson2013}\cite{Kaiser2016}.
 \section{Hankel Transform}
 \label{sec:hankel_transform}
 
-Planar Fourier-type expansion integrals play a predominant role in the study
-of wave fields in solution domains with are inhomogeneous only in one
-Cartesian direction.
-Assume this direction to be the one of $\uv{z}$.
-By this choice the expansion plane becomes the plane $z \equiv 0$ of the
+Since the days of Sommerfeld \cite{Sommerfeld1909} planar Fourier-type expansion
+integrals play a predominant role in the study of wave fields in solution
+domains with are inhomogeneous only in one Cartesian direction.
+The present thesis assumes this direction to be the one of $\uv{z}$,
+by which the expansion plane becomes the plane $z \equiv 0$ of the
 Cartesian coordinate system.
 Under these assumptions \eqref{eq:fourier_transform_3space_forward}
 and \eqref{eq:fourier_transform_3space_backward} reduce to the pair
 \begin{equation}\label{eq:fourier_transform_2space_forward}
 	\tilde{f} \left(k_\rho, k_\varphi, z\right) = 
-	\int\limits_{0}^{\infty} \dd \rho \, \rho
-	\int\limits_{0}^{2\pi} \dd \varphi \, 
-	\exp{\im k_\rho \rho \cos \left(k_\varphi - \varphi\right)}
+	\int\limits_{0}^{2\pi}  
+	\int\limits_{0}^{\infty}
 	f \left(\rho, \varphi, z\right)
+	\exp{\im k_\rho \rho \cos \left(k_\varphi - \varphi\right)}
+	\rho \,
+	\dd \rho
+	\dd \varphi
+	\, ,
 \end{equation}
-and
 \begin{equation}\label{eq:fourier_transform_2space_backward}
 	f \left(\rho, \varphi, z\right) = 
 	\frac{1}{\left(2\pi\right)^2}
-	\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
-	\int\limits_{0}^{2\pi} \dd k_\varphi \, 
-	\exp{-\im k_\rho \rho \cos \left(k_\varphi - \varphi\right)}
+	\int\limits_{0}^{2\pi} 
+	\int\limits_{0}^{\infty} 
 	\tilde{f} \left(k_\rho, k_\varphi, z\right)
+	\exp{-\im k_\rho \rho \cos \left(k_\varphi - \varphi\right)}
+	k_\rho \,
+	\dd k_\rho
+	\dd k_\varphi
 	\, ,
 \end{equation}
 where the geometrical meaning of the dot product is incorporated.
-Note that $z = \uv{z} \cdot \pvec{r}$ is unaffected by the integral in
+Note that $z = \uv{z} \cdot \pvec{r}$ is untouched by the integration in
 \eqref{eq:fourier_transform_2space_forward}.
-It is therefore sufficient to consider only $f = f\left(\rho, \varphi\right)$
-and $\tilde{f} \left(k_\rho, k_\varphi\right)$,~\ie, to use planar polar
+It is therefore sufficient to consider $f = f\left(\rho, \varphi\right)$
+and $\tilde{f} \left(k_\rho, k_\varphi\right)$, \ie, to use planar polar
 coordinates.
 
-Assume further that both functions $f$ and $\tilde{f}$ possess---or
-can be coordinate-transformed to obtain---azimuthal symmetry,~\ie, the
-functions do not depend on the coordinate $\varphi$ in \cref{def:cyl_coords}.
-For such functions of azimuthal symmetry the 2D integrals in 
+% For the moment we shall further assume that both functions $f$ and $\tilde{f}$
+% possess---or can be coordinate-transformed to obtain---azimuthal
+% symmetry, \ie, independence of $\varphi$ in \cref{def:cyl_coords}.
 
 Under certain conditions the two-dimensional integrals in
 \eqref{eq:fourier_transform_2space_forward} and 
 \eqref{eq:fourier_transform_2space_backward} can be reduced to integral
-transforms with cylinder function kernels and integration only over one
-variable.
+transforms with cylinder function kernels and integration with respect to only
+one single variable.
 Such transforms are referred to as Hankel transforms or, synonymously,
 Fourier-Bessel transforms in mathematical context.
-As the Hankel transform is essentially a special case of a two-dimensional
-Fourier transform, the specific shape of the former depends on the choice of
-definition of the latter,~\ie, on \cref{def:fourier_transfrom_temporal_forward}.
-
+As the Hankel transform essentially is a special case of 
+two-dimensional Fourier transform, the specific shape of the former depends on
+the choice of definition of the latter, \ie, on
+\cref{def:fourier_transfrom_temporal_forward}.
 The following result gives the Hankel transform as it is obtained on the
 basis of \cref{def:fourier_transfrom_temporal_forward} and
 \cref{def:fourier_transfrom_spatial_forward} as well as a proof for this
 connection\footnote{The proof treats the derivation of the inverse Hankel
-transform. A corresponding approach for the forward transform can be found
-in the book by \textcite[p229]{Davies2002}}.
+transform. A dual approach for the forward transform can be found
+in the textbook on integral transforms by \textcite[p229]{Davies2002}}.
 Details regarding the function spaces on which the Hankel transform pair is
 defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 
-\begin{corollary}[Hankel transform and inverse Hankel transform]
+\begin{corollary}[Hankel transform pair]
 	\label{coll:hankel_transform}
-	The Hankel transform of order $\nu$ of a function $f\left(\rho\right)$ is
+	The Hankel transform of order $\nu > -1/2$ of a function $f\left(\rho\right)$ is
 	given by
 	\begin{equation}\label{eq:hankel_transform}
 		\tilde{f}_\nu \left(k_\rho\right) =
-		\left( \hankelTransform{\nu} f \right) \left(k_\rho\right) = 
+		\hankelTransform{\nu} \left\{f\left(\rho\right)\right\} = 
 		2\pi
-		\int\limits_{0}^{\infty} \dd \rho \, \rho
+		\int\limits_{0}^{\infty} 
+		f\left(\rho\right)
 		\besselj{\nu}\left(k_\rho \rho\right)
-		f\left(\rho\right) \, ,
+		\rho \, 
+		\dd \rho
+		\, ,
 	\end{equation}
 	where $\besselj{\nu}$ is the cylindrical Bessel function of first kind and
 	of order $\nu$.
 	The inverse Hankel transform is given by
 	\begin{equation}\label{eq:hankel_transform_inverse}
 		f\left(\rho\right) =
-		\left( \hankelTransformInverse{\nu}\tilde{f}\right) \left(\rho\right) =
+		\hankelTransformInverse{\nu}
+		\left\{\tilde{f}_\nu \left(k_\rho\right)\right\} = 
 		\frac{1}{2\pi}
-		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+		\int\limits_{0}^{\infty} 
+		\tilde{f}_\nu\left(k_\rho\right)
 		\besselj{\nu}\left(k_\rho \rho\right)
-		\tilde{f}_\nu\left(k_\rho\right) \, .
+		k_\rho \,
+		\dd k_\rho
 	\end{equation}
 \end{corollary}
 \begin{proof}
-	Consider both $f = \left(\rho, \varphi\right)$ and
-	$\tilde{f} \left(k_\rho, k_\varphi\right)$ in planer polar coordinates.
-	With this, both functions are periodic with $2\pi$ in $\varphi$ and
-	$k_\varphi$, respectively.
+	Consider two functions $f,\tilde{f}: \R^2 \mapsto \C$ in planar polar
+	coordinates, \ie, $f = \left(\rho, \varphi\right)$,
+	$\tilde{f} \left(k_\rho, k_\varphi\right)$.
+	With these arguments, both functions are periodic with $2\pi$ in the
+	azimuth angles $\varphi$ and $k_\varphi$.
 	Therefore, they can be expressed by Fourier series expansions
 	\begin{equation}\label{eq:ht_proof_f_fourier_series}
 		f \left(\rho,\varphi\right) =
@@ -1470,7 +1503,7 @@ simplified formulation still amenable to the problem at hand.
 In the present case the bounds of simplification are specified by the following
 assumptions.
 \begin{itemize}
-	\item Only stationary \emph{time-harmonic} fields are considered.
+	\item Stationary \emph{time-harmonic} fields are considered.
 	The frequency $f > 0$ (in $\SI{}{\hertz}$) is treated as a parameter of the
 	problem, time convention is determined by
 	\cref{def:fourier_transfrom_temporal_forward}, where $\omega = 2\pi f$.
@@ -2336,6 +2369,10 @@ transpose of matrix $\mat{A}$.
 
 \section{Image Principle}
 \label{sec:imgage_principle}
+
+\cite[Chapter~XI]{maxwell1873}\footnote{Maxwell's famous textbook
+\cite{maxwell1873} is nowadays in the public domain and can be found at various
+locations online.}
 
 Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
