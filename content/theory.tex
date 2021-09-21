@@ -432,9 +432,9 @@ Each individual plane wave solves the homogeneous scalar wave
 equation \cite[32]{Sommerfeld1964}
 \begin{equation}\label{eq:scalar_wave_equation_physical_domain}
 	\left( \laplace - \frac{1}{c^2} \frac{\partial^2}{\partial t^2} \right)	
-	\phi \left( \pvec{r}, t \right) = 0
+	f \left( \pvec{r}, t \right) = 0
 \end{equation}
-in the \enquote{physical} domain $\left(\pvec{r}, t\right)$, where $c$ is
+in the physical domain $\left(\pvec{r}, t\right)$, where $c$ is
 the velocity of propagation.
 However, if the phasor convention of
 \cref{def:fourier_transfrom_temporal_forward} would be used in the same sense in
@@ -521,10 +521,6 @@ It is therefore sufficient to consider $f = f\left(\rho, \varphi\right)$
 and $\tilde{f} \left(k_\rho, k_\varphi\right)$, \ie, to use planar polar
 coordinates.
 
-% For the moment we shall further assume that both functions $f$ and $\tilde{f}$
-% possess---or can be coordinate-transformed to obtain---azimuthal
-% symmetry, \ie, independence of $\varphi$ in \cref{def:cyl_coords}.
-
 Under certain conditions the two-dimensional integrals in
 \eqref{eq:fourier_transform_2space_forward} and 
 \eqref{eq:fourier_transform_2space_backward} can be reduced to integral
@@ -539,9 +535,9 @@ the choice of definition of the latter, \ie, on
 The following result gives the Hankel transform as it is obtained on the
 basis of \cref{def:fourier_transfrom_temporal_forward} and
 \cref{def:fourier_transfrom_spatial_forward} as well as a proof for this
-connection\footnote{The proof treats the derivation of the inverse Hankel
-transform. A dual approach for the forward transform can be found
-in the textbook on integral transforms by \textcite[p229]{Davies2002}}.
+connection\footnote{A very concise sketch of this proof for the forward Hankel
+transform based on a different definition of Fourier transform is outlined in
+the textbook on integral transforms by \textcite[229]{Davies2002}}.
 Details regarding the function spaces on which the Hankel transform pair is
 defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 
@@ -581,7 +577,8 @@ defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 	$\tilde{f} \left(k_\rho, k_\varphi\right)$.
 	With these arguments, both functions are periodic with $2\pi$ in the
 	azimuth angles $\varphi$ and $k_\varphi$.
-	Therefore, they can be expressed by Fourier series expansions
+	Therefore, $f$ and $\tilde{f}$ can be expressed by azimuthal Fourier series
+	expansions
 	\begin{equation}\label{eq:ht_proof_f_fourier_series}
 		f \left(\rho,\varphi\right) =
 		\sum_{\forall m \in \Z}
@@ -596,93 +593,113 @@ defined can be found in specialized literature \cite{Patra2018,Davies2002}.
 		\exp{\im n k_\varphi}
 		\, ,
 	\end{equation}
-	in these arguments, where the expansion coefficients are determined by
+	with expansion coefficients given by
 	\begin{equation}\label{eq:ht_proof_f_fourier_coeffs}
 		f_m\left(\rho\right) = \frac{1}{2\pi}
-		\int\limits_{0}^{2\pi} \dd \varphi \,
-		\exp{-\im m \varphi}
+		\int\limits_{0}^{2\pi} 
 		f \left(\rho, \varphi\right)
+		\exp{-\im m \varphi} \,
+		\dd \varphi
 	\end{equation}
 	and
 	\begin{equation}\label{eq:ht_proof_f_tilde_fourier_coeffs}
 		\tilde{f}_n \left(k_\rho\right) = \frac{1}{2\pi}
-		\int\limits_{0}^{2\pi} \dd k_\varphi \,
-		\exp{-\im n k_\varphi}
+		\int\limits_{0}^{2\pi} 
 		\tilde{f} \left(k_\rho, k_\varphi\right)
-		\, ,
+		\exp{-\im n k_\varphi} \,
+		\dd k_\varphi
+		\, .
 	\end{equation}
-	respectively.
-	The inverse transform \eqref{eq:hankel_transform_inverse} shall be derived
-	first.
-	To do so, \eqref{eq:fourier_transform_2space_backward} is substituted into
-	\eqref{eq:ht_proof_f_fourier_coeffs} to obtain
+	Substituting \eqref{eq:fourier_transform_2space_backward} into
+	\eqref{eq:ht_proof_f_fourier_coeffs} yields 
 	\begin{equation}\label{eq:ht_proof_triple_integral}
 		f_m \left(\rho\right)  =
 		\frac{1}{\left(2\pi\right)^3}
-		\int\limits_{0}^{2\pi} \dd \varphi
+		\int\limits_{\varphi = 0}^{2\pi} 
 		\exp{-\im m \varphi}
-		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
-		\int\limits_{0}^{2\pi} \dd k_\varphi \, 
+		\int\limits_{k_\rho = 0}^{\infty}
+		k_\rho
+		\int\limits_{k_\varphi = 0}^{2\pi} 
 		\exp{-\im k_\rho \rho \cos \left(k_\varphi - \varphi\right)}
 		\sum_{\forall n \in \Z}
-		\tilde{f}_n \left(k_\rho\right) \exp{\im n k_\varphi}
+		\tilde{f}_n \left(k_\rho\right)
+		\exp{\im n k_\varphi}
+		\dd k_\varphi \,
+		\dd k_\rho \,
+		\dd \varphi
 		\, ,
 	\end{equation}
 	where $\tilde{f}$ is expressed by its Fourier series representation
 	\eqref{eq:ht_proof_f_tilde_fourier_series}.
-	Defining $\alpha \coloneqq k_\varphi - \varphi$ allows to express the
-	two exponentials of $-\im m \varphi$ and $\im n k_\varphi$ as functions
-	of the same variable.
-	The orthogonality relations for trigonometric functions reveal that
-	all terms but the one for $m = n$ in the sum in
+	By a change of variable in one of the angular integrals the two exponentials
+	of $\varphi$ and $k_\varphi$ can be expressed as functions of the same
+	argument and the orthogonality relation of the exponential functions
+	\begin{equation}
+		\int\limits_{k_\varphi = 0}^{2\pi} 
+		\exp{-\im m k_\varphi}
+		\exp{\im n k_\varphi}
+		\dd k_\varphi 
+		=
+		\begin{cases}
+			2\pi & m = n\\
+			0    & \mathrm{else}
+		\end{cases}
+	\end{equation}
+	can be used to percive that all terms but the one for $m = n$ in the sum in 
 	\eqref{eq:ht_proof_triple_integral} vanish.
-	Hence, \eqref{eq:ht_proof_triple_integral} is essentially
+	Hence, \eqref{eq:ht_proof_triple_integral} can be written as
 	\begin{equation}\label{eq:ht_proof_after_orthogonality}
 		f_m \left(\rho\right) = 
 		\frac{1}{\left(2\pi\right)^2}
-		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
-		\int\limits_{0}^{2\pi} \dd \alpha \,
+		\int\limits_{0}^{\infty} 
+		\tilde{f}_m \left(k_\rho\right)
+		k_\rho
+		\,
+		\dd k_\rho
+		\int\limits_{0}^{2\pi}
 		\exp{-\im k_\rho \rho \cos \alpha}
 		\exp{\im m \alpha}
-		\tilde{f}_m \left(k_\rho\right)
-		\, .
+		\,
+		\dd \alpha 
+		\, ,
 	\end{equation}
+	where $\alpha \coloneqq k_\varphi - \varphi$ is defined.
 	The inner integral in \eqref{eq:ht_proof_after_orthogonality} is identified
-	as a form of Bessel's integral \cite[(10.19.2)]{Olver2010} for integer
-	Bessel functions of integer order \cite[314]{Davies2002}.
-	With this \eqref{eq:ht_proof_after_orthogonality} can be written as
+	as a special form of Bessel's integral representation for Bessel functions
+	of integer order
+	\cite[223]{Olver2010}\cite[314]{Davies2002}\cite[222]{temme1996}\cite[163]{Jackson2013}.
+	With this elementary identity \eqref{eq:ht_proof_after_orthogonality} can be
+	finally be written as
 	\begin{equation}
 		f_m \left(\rho\right) =
 		\frac{1}{2\pi}
-		\int\limits_{0}^{\infty} \dd k_\rho \,
-		\besselj{m}\left(k_\rho \rho\right) k_\rho
+		\int\limits_{0}^{\infty}
 		\tilde{f}m \left(k_\rho\right)
+		\besselj{m}\left(k_\rho \rho\right)
+		k_\rho
+		\dd k_\rho 
 		\, ,
 	\end{equation}
 	which is the inverse Hankel transform \eqref{eq:hankel_transform_inverse}.
 	The connection of the forward transform \eqref{eq:hankel_transform}
 	to \eqref{eq:fourier_transform_2space_forward} can be shown in the same
-	manner.
+	manner using an alternative form of Bessel's integral.
 \end{proof}
 
-By inspection of \eqref{eq:ht_proof_after_orthogonality} and 
-\eqref{eq:ht_proof_f_tilde_fourier_coeffs} some vivid insight can be gained
-regarding the role of the order $\nu$ in Hankel transform integrals. 
-Consider the inverse transform \eqref{eq:hankel_transform_inverse} which
-is of particular importance in the context of electromagnetic wave propagation
-in media of planar inhomogeneity.
+By inspection of \eqref{eq:ht_proof_f_tilde_fourier_coeffs} and
+\eqref{eq:ht_proof_after_orthogonality} some vivid insight can be gained
+into the role of the order $\nu$ in Hankel transform integrals. 
 The expansion \eqref{eq:ht_proof_f_tilde_fourier_series} represents a
-spectral domain function $\tilde{f}$ with a \emph{general} dependency on both
+spectral domain function $\tilde{f}$ with a \emph{general} dependency both on
 $k_\rho$ and $k_\varphi$, where the expansion coefficients are given by
 \eqref{eq:ht_proof_f_tilde_fourier_coeffs}.
 By contrast to the infinite number of non-vanishing expansion coefficients
-$\tilde{f}_n$ in $k_\vartheta$ in this general function, the Hankel transform
+$\tilde{f}_n$ in $k_\vartheta$ in this generic function, the Hankel transform
 of order $\nu = 0$ considers only the zeroth coefficient,
 see \eqref{eq:ht_proof_after_orthogonality}.
 Therefore, the zeroth-order inverse Hankel transform is especially suited for
-functions spectral domain function $\tilde{f}$ of
-\emph{azimuthal symmetry} around the cylindrical
-$z$-axis\footnote{Off-centered functions of azimuthal
+spectral domain functions $\tilde{f}$ of \emph{azimuthal symmetry} around the
+cylindrical $z$-axis\footnote{Off-centered functions of azimuthal
 symmetry can be considered by straightforward transformation of variables.}.
 For all spectral domain functions $\tilde{f}$ which vary in $k_\varphi$, the
 inverse Hankel transform with $\nu = 0$ would perform angular averaging, which
@@ -692,25 +709,6 @@ first-order harmonic variation of $\tilde{f}$ in $k_\varphi$.
 The second order transform is amenable to second order harmonic variation in
 $k_\varphi$ and so on.
 
-\fxnote{Check this paragraph}
-This observation of a central mathematical property of the integral transforms
-given by \cref{coll:hankel_transform} directly leads the use case in
-electromagnetic theory.
-In the study of wave fields in media of planar inhomogeneity the spatial domain
-fields are represented by inverse Hankel transforms whose counterparts in the 
-$k_\rho$-spectral-domain are known in analytical form.
-As it turns out, these functions are either azimuthally symmetric,~\ie,
-independent of $k_\varphi$, or depend on $k_\varphi$ via trigonometric
-functions. 
-Here, a prominent feature of the representation of spatial domain fields in
-terms of Hankel transforms becomes clear: the trigonometric variation of the
-spectral function $\tilde{f}$
-can be moved outside the Hankel transform integral, while this is not
-possible in \eqref{eq:fourier_transform_2space_backward}.
-Thus, the two-dimensional integral over $\R^2$ is reduced to a single
-semi-infinite integral.
-This makes the form of \eqref{eq:hankel_transform_inverse} especially appealing
-for the straightforward evaluation by numerical integration.
 
 
 
@@ -730,21 +728,21 @@ for the straightforward evaluation by numerical integration.
 \section{Helmholtz Equation and Green's Function of Free Space}
 \label{sec:helmholtz_eq_and_gf}
 
-Let the following definitions prefix the present section.
+Let the following definitions prefix this section.
 \begin{definition}[Domain]
 	An open, simply connected subset of a finite dimensional vector space or
 	the complex plane $\C$ is
 	called a \emph{domain}.
 \end{definition}
-\begin{definition}[Closure]
-	Let $\Omega$ be a domain.
-	The set $\overline{\Omega}$ consisting of $\Omega$ and all its limit points
-	is called \emph{closure} of $\Omega$.
-\end{definition}
 \begin{definition}[Boundary]
-	Let $\Omega \subset \R^3$ be a domain with closure $\overline{\Omega}$.
-	The set $\partial\Omega \coloneqq \overline{\Omega}\setminus\Omega$
-	is called \emph{boundary} of $\Omega$.
+	Let $\Omega$ be a domain.
+	Then the set $\partial\Omega$ of all limiting points of $\Omega$ is called
+	\emph{boundary} of $\Omega$.
+\end{definition}
+\begin{definition}[Closure]
+	Let $\Omega$ be a domain with boundary $\partial\Omega$.
+	Then the set $\overline{\Omega} = \Omega \cup \partial\Omega$
+	is called \emph{closure} of $\Omega$.
 \end{definition}
 
 The scalar wave equation \eqref{eq:scalar_wave_equation_physical_domain}
@@ -752,68 +750,70 @@ is a \ac{PDE} equation both in space and in time.
 By application of \eqref{eq:fourier_transfrom_temporal_forward} to
 \eqref{eq:scalar_wave_equation_physical_domain} the scalar Helmholtz equation
 \begin{equation}\label{eq:scalar_helmholtz_equation}
-	\left( \laplace + k^2 \right) \phi \left( \robs, \omega \right) = 0
+	\left( \laplace + k^2 \right) f \left( \robs, \omega \right) = 0
 	\qquad \omega = \mathrm{const.}
 \end{equation}
 is obtained, where $k = \omega / c$.
-Note that $\omega$ is no variable but a parameter of the problem.
-Hence, \eqref{eq:scalar_helmholtz_equation} is a \ac{PDE} in space only.
+As $\omega$ is understood as a parameter of the problem
+\eqref{eq:scalar_helmholtz_equation} is a \ac{PDE} in space only.
 Moreover, in the common scheme of classification \cite[38]{Sommerfeld1964},
 the \ac{PDE} changes from hyperbolic to elliptic type by transition from
 \eqref{eq:scalar_wave_equation_physical_domain} to
-\eqref{eq:scalar_helmholtz_equation}\footnote{For this reason the present
+\eqref{eq:scalar_helmholtz_equation}. For this reason the present
 thesis avoids using the term \enquote{wave equation} for
 \eqref{eq:scalar_helmholtz_equation}, although this terminology is frequently
-used in the literature \cite[238]{Sommerfeld1964}\cite{Coifman1993}}.
+used in the literature \cite[238]{Sommerfeld1964}\cite{Coifman1993}.
 
-The \ac{PDE} \eqref{eq:scalar_helmholtz_equation} does not uniquely define
-its solutions.
+The \ac{PDE} \eqref{eq:scalar_helmholtz_equation} on its own does not uniquely
+define its solutions.
 However, it models such central physical phenomena like sonic waves
-and---in its vectorized form---electromagnetic waves including light.
-As there is no randomness observed in such waves,
+and---in its vector form---electromagnetic waves including light.
+As there is no ambiguity observed in such wave fields,
 \eqref{eq:scalar_helmholtz_equation} has to be supplemented by appropriate
-boundary conditions to make a solution unique.
+boundary conditions uniquely define a solution.
 For the case of an unbounded solution domain, the physically appropriate
 boundary condition is given by
 \begin{definition}[Sommerfeld radiation condition]
 	\label{def:sommerfeld_radiation_condition}
-	Let $f: \R^3 \mapsto \C$ be a function with support on a finite domain
+	Let $s: \R^3 \mapsto \C$ be a function with support on a finite domain
 	$\Omega \subset \R^3$ and assume $k \in \R$ with $k > 0$.
-	Then a solution $\phi$ to
+	Then a solution $f$ to
 	\begin{equation}\label{eq:scalar_helmholtz_equation_inhomogeneous}
-		\left( \laplace + k^2 \right) \phi \left( \robs \right) =
-		f \left( \robs \right)
+		\left( \laplace + k^2 \right) f \left( \robs \right) =
+		s \left( \robs \right)
 	\end{equation}
 	is said to obey the \emph{Sommerfeld radiation condition} if it fulfills
-	\cite{Sommerfeld1912}\cite{schot1992}
+	\cite{Sommerfeld1912}\cite[189]{Sommerfeld1964}\cite{schot1992}
 	\begin{equation}\label{eq:sommerfeld_radiation_condition}
 		\lim_{r \to \infty}
 		r \left( \frac{\partial}{\partial r} + \im k \right)
-		\phi \left( r \right) = 0
+		f \left( r \right) = 0
 		\, .
 	\end{equation}
 \end{definition}
 
-The Sommerfeld condition ensures that a solution $\phi$ is a \emph{physical}
+The Sommerfeld condition of radiation ensures that a solution $f$ to
+\eqref{eq:scalar_helmholtz_equation} is a \emph{physical}
 solution as it carries energy \emph{away} from the source region $\Omega$ and is
-asymptotically small for $\lim_{r \to \infty}$.
-Furthermore, it can be shown \cite[p190]{Sommerfeld1964} that such a function
-$\phi$ is the uniquely defined solution to
-\eqref{eq:scalar_helmholtz_equation_inhomogeneous}
-\begin{theorem}[Uniqueness]
-	A solution $\phi$ to \eqref{eq:scalar_helmholtz_equation_inhomogeneous}
+asymptotically small for $r \to \infty$.
+Furthermore, it can be shown \cite[190]{Sommerfeld1964}\cite[33]{Chew1999}
+that such a function $f$ is the uniquely defined solution to
+\eqref{eq:scalar_helmholtz_equation_inhomogeneous}.
+
+\begin{corollary}[Uniqueness]
+	A solution to \eqref{eq:scalar_helmholtz_equation_inhomogeneous}
 	for open boundary conditions which obeys
 	\eqref{eq:sommerfeld_radiation_condition} is unique.
-\end{theorem}
+\end{corollary}
 
-In order to solve \eqref{eq:scalar_helmholtz_equation} for the general
-inhomogeneous case, it is beneficial first to consider the problem of Green's
-function.
-The Green's function is defined with $f$ in
-\eqref{eq:scalar_helmholtz_equation_inhomogeneous} being a source function
+In order to solve \eqref{eq:scalar_helmholtz_equation_inhomogeneous} for a
+general source distribution it is beneficial first to
+consider the problem of \emph{Green's function}.
+The Green's function is defined with $s$ in
+\eqref{eq:scalar_helmholtz_equation_inhomogeneous} being a driving force
 according to
 \begin{definition}[Delta function]\label{def:dirac_delta}
-	Let $\robs$ and $\rsrc$ be two vectors in the Euclidean vector space
+	Let $\robs$ and $\rsrc$ be two vectors in Euclidean space
 	$\F^N$, where $\F \in \left\{\R, \C\right\}$ and
 	$N \in \left\{1, 2, 3\right\}$.
 	Then the $N$-dimensional \emph{delta function}\footnote{The concept is
@@ -826,27 +826,30 @@ according to
 		\item Point source behavior: for arbitrary $\Omega \subset \F^N$ we
 		have
 		\begin{equation}
-			\int\limits_{\Omega} \dd \pvec{r} \,
+			\int\limits_{\Omega} 
 			\diracDelta \left( \robs - \rsrc \right)
+			\dd \pvec{r} 
+			=
 			\begin{cases*}
 				1 & $\rsrc \in \Omega$ \\
-				0 & \text{else} \, .
+				0 & \text{else} 
 			\end{cases*} 
 		\end{equation}
 		\item Sifting functional: for a test function $\phi$ 
 		\cite{Strichartz2003}\cite[35]{Olver2010} we have
 		\begin{equation}\label{eq:delta_filter_property}
-			\int\limits_{\F^N} \dd \pvec{r} \,
-			f \left( \robs \right)
+			\int\limits_{\F^N} 
+			\phi \left( \robs \right)
 			\diracDelta \left(\robs-\rsrc\right) =
 			f \left( \rsrc \right)
+			\dd \pvec{r}
 			\, .
 		\end{equation}
 	\end{enumerate}
 \end{definition}
 
 The Green's function of the Helmholtz equation for the important case of
-constant $k$ is given by the well-known \cite{Jackson2013}
+constant $k$ is given by the well-known \cite[pp.~282]{Jackson2013}
 \begin{corollary}[Free-space Green's function]\label{coll:free_space_gf}
 	Let $\rsrc, \robs \in \R^3$ with $\robs \neq \rsrc$ and assume
 	$k$ to be a constant function of $\robs$ with $\imag{k} \leq 0$.
@@ -856,16 +859,15 @@ constant $k$ is given by the well-known \cite{Jackson2013}
 	Then
 	\begin{equation}\label{eq:scalar_free_space_gf}
 		G_0 \left( \rdiff \right) =
-		\frac{\exp{-\im k \rdiffNorm}}{4\pi \rdiffNorm}
+		\frac{1}{4\pi}
+		\frac{\exp{-\im k \rdiffNorm}}{\rdiffNorm}
 	\end{equation}
 	is the unique solution to \eqref{eq:scalar_helmholtz_equation} for
 	$\diracDelta$-excitation at $\rsrc$.
 \end{corollary}
 
-Clearly, $G_0$ represents an outward propagating spherical scalar wave 
-centered at $\rsrc$.
-Subsequently, the shortcuts $\rdiffSymbol \coloneqq \rdiff$ and
-$\rdiffNormSymbol = \norm{\pvec{R}}$ shall be used for notational convenience.
+In the following the shortcut $\rdiffSymbol \coloneqq \rdiff$,
+$\rdiffNormSymbol = \norm{\pvec{R}}$ is used for notational convenience.
 
 
 
@@ -874,31 +876,30 @@ $\rdiffNormSymbol = \norm{\pvec{R}}$ shall be used for notational convenience.
 
 
 
-\section{Helmholtz Equation for Problems of Azimuthal Symmetry}
+\section{Green's Function in Solution Domains of Azimuthal Symmetry}
 \label{sec:helmholtz_eq_az_symmetry}
 
 In Green's function problems arising in the area of electromagnetic waves
 in plane stratified media the inhomogeneous medium is characterized by
-$k = k\left(z\right)$.
-The sole functional dependency of the wavenumber on the Cartesian and
-cylindrical  $z$-coordinate can be employed to reduce the governing Helmholtz
+a wavenumber $k = k\left(z\right)$.
+The sole functional dependency of $k$ on the Cartesian/cylindrical
+$z$-coordinate can be employed to reduce the governing Helmholtz
 equation \eqref{eq:scalar_free_space_gf} to an \ac{ODE}.
-
 The second circumstance on which this simplification relies is the fact that 
 the driving force in a Green's function problem is \emph{point-like}.
-By transformation of variables this point source can be brought to
-coincidence with the $z$-axis in cylindrical coordinates.
+By a simple variable transform this point source can be brought to
+coincidence with the $z$-axis.
+
 As $k$ depends on $z$ only, symmetry arguments lead to the conclusion that
-the solution $\phi = \phi \left(\rho, z\right)$ does not depend on $\varphi$
-in this arrangement.
+the solution $f = f \left(\rho, z\right)$ does not depend on $\varphi$
+for a source located on the $z$-axis.
 The angle $\varphi$ is commonly referred to as azimuth, hence the prescribed
 problem is of \emph{azimuthal symmetry}.
 
-The homogeneous Helmholtz equation \eqref{eq:scalar_helmholtz_equation} in
-cylindrical coordinates reads
+The homogeneous Helmholtz equation in cylindrical coordinates reads
 \begin{equation}\label{eq:scalar_helmholtz_equation_cyl_coords}
 	\left( \laplaceTrans + \frac{\partial^2}{\partial z^2} + k^2 \right)
-	\phi \left(\rho, z\right) = 0
+	f \left(\rho, z\right) = 0
 	\, ,
 \end{equation}
 where it follows from the above assumptions that the azimuthal derivative in
@@ -915,46 +916,48 @@ the transverse part of the Laplacian operator
 \end{equation}
 vanishes. 
 The desired reduction of \eqref{eq:scalar_helmholtz_equation_cyl_coords} to
-and \ac{ODE} can be achieved by means of
+an \ac{ODE} can be achieved by means of
+
 \begin{corollary}[$k_\rho$ spectral domain]\label{coll:k_rho_domain}
-	Let $\phi: \R^3 \mapsto \C$ be a function of azimuthal symmetry
-	$\phi = \phi \left(\rho, z\right)$.
-	Let further the problem which is obtained by application of
-	\eqref{eq:hankel_transform} to
-	\eqref{eq:scalar_helmholtz_equation_cyl_coords} be referred to as the
-	representation of \eqref{eq:scalar_helmholtz_equation_cyl_coords}
-	in the $k_\rho$ spectral domain.
+	Let $f: \R^3 \mapsto \C$ be a function of azimuthal symmetry, \ie,
+	$f = f \left(\rho, z\right)$.
 	Then we have the formal substitution 
 	\begin{equation}\label{eq:k_rho_domain_laplaceTrans_replacement}
 		\laplaceTrans \to -k_\rho^2
 	\end{equation}
-	in transition of \eqref{eq:scalar_helmholtz_equation_cyl_coords} from the
-	$\rho$ to the $k_\rho$ spectral domain.
+	in the transition from $f \left(\rho, z\right)$ to
+	$\tilde{f} \left(k_\rho, z\right)$ by application of
+	\eqref{eq:hankel_transform} to
+	\eqref{eq:scalar_helmholtz_equation_cyl_coords}.
+	The domain of $\tilde{f}$ is said to be the $k_\rho$ spectral domain.
 \end{corollary}
 \begin{proof}
 	The Hankel transform pair as given by \cref{coll:hankel_transform} does not
-	act on the $z$-dependency of $\phi$.
+	act on the $z$-dependency of $f$.
 	Hence, it is sufficient to consider
-	$\phi = \phi \left(\rho\right)$ which, in terms of an inverse Hankel
+	$f = f \left(\rho\right)$ which, in terms of an inverse Hankel
 	transform, can be expressed as
 	\begin{equation}
-		\phi \left(\rho\right) =
-		\left(\hankelTransformInverse{0} \tilde{\phi} \left(k_\rho\right)\right)
+		f \left(\rho\right) =
+		\hankelTransformInverse{0} \left\{\tilde{f} \left(k_\rho\right)\right\} 
 		\left(\rho\right)
 		\, .
 	\end{equation}
 	With the notation of \eqref{eq:def_laplace_trans} we have
 	\begin{equation}\label{eq:k_rho_domain_proof_01}
 		\laplaceTrans
-		\phi \left(\rho\right) =
+		f \left(\rho\right) =
 		\frac{1}{2\pi}
 		\frac{1}{\rho}
 		\frac{\dd}{\dd \rho}
 		\rho
 		\frac{\dd}{\dd \rho}
-		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
+		\int\limits_{0}^{\infty} 
+		\tilde{f} \left(k_\rho\right)
 		\besselj{0}\left(k_\rho \rho\right)
-		\tilde{\phi} \left(k_\rho\right)
+		k_\rho
+		\,
+		\dd k_\rho
 		\, ,
 	\end{equation}
 	where it is noted that $\besselj{0}\left(k_\rho \rho\right)$ is the only
@@ -977,27 +980,31 @@ and \ac{ODE} can be achieved by means of
 	is determined by straightforward calculation and
 	\begin{equation}\label{eq:k_rho_domain_proof_02}
 		\laplaceTrans
-		\phi \left(\rho\right) =
+		f \left(\rho\right) =
 		\frac{1}{2\pi}
-		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
-		\besselj{0}\left(k_\rho \rho\right)
+		\int\limits_{0}^{\infty} 
 		\left( -k_\rho^2 \right)
-		\tilde{\phi} \left(k_\rho\right) 
+		\tilde{f} \left(k_\rho\right) 
+		\besselj{0}\left(k_\rho \rho\right)
+		k_\rho
+		\, 
+		\dd k_\rho
 	\end{equation}
 	is obtained.
 	Comparison of \eqref{eq:k_rho_domain_proof_01} and
 	\eqref{eq:k_rho_domain_proof_02} reveals that indeed
 	\begin{equation}
 		\laplaceTrans
-		\phi \left(\rho\right)
+		f \left(\rho\right)
 		\to
 		-k_\rho^2 
-		\phi \left(k_\rho\right)
+		f \left(k_\rho\right)
 	\end{equation}
-	corresponds to the transition from the spatial $\rho$ to the spectral
+	corresponds to the transition from the spatial $\rho$ domain to the spectral
 	$k_\rho$ domain.
 \end{proof}
-\begin{remark}[Bessel's equation]
+
+\begin{remark}[Hankel transform and Bessel's equation]
 	An alternative representation of $\laplaceTrans$ is given by
 	\cite[(1.5.15)]{Olver2010}
 	\begin{equation}
@@ -1034,236 +1041,9 @@ for notational convenience, the \ac{PDE}
 \eqref{eq:scalar_helmholtz_equation_cyl_coords} becomes
 \begin{equation}
 	\left( \frac{\dd^2}{\dd z^2} + k_z^2 \right)
-	\phi \left(\rho, z\right) = 0
+	f \left(\rho, z\right) = 0
 \end{equation}
 in the $k_\rho$ spectral domain.
-
-
-
-
-
-
-
-\section{Complex Source Beams}
-\label{sec:cmplx_src_beams}
-
-In view of the assumptions of \cref{coll:free_space_gf} it is clear that
-$R$ is real and non-negative.
-However, according to the metric as specified by \cref{def:metric}, this even
-holds if the requirement $\rsrc, \robs \in \R^3$ is relaxed to
-$\rsrc, \robs \in \C^3$ as the dot product of a complex vector with itself
-is real quantity according to \cref{def:dot_product}.
-Conversely, a mapping $\cmplxlength{\pvec{z}}: \C^3 \mapsto \C$ for a vector
-$\pvec{z} = \rdiff$ with $\rsrc, \robs \in \C^3$ is not a norm according
-to \cref{def:norm},~\ie, such a definition of the distance between the
-points $\robs$ and $\rsrc$ is not a metric.
-
-However, it turns out that the usual observation point $\robs \in \R^3$ 
-in conjunction with a $\diracDelta$-source at \enquote{point} $\rsrc \in \C^3$
-causes a significant change in the behavior of the function
-$G_0 \left(\rdiff\right)$ if the axioms of \cref{def:euclidean_metric} and
-\cref{def:euclidean_norm} are dropped.
-
-As an example, assume $0 < k \in \R$ and
-$R = R_\mathrm{re} + \im R_\mathrm{im}$, where
-$R = R_\mathrm{re}, R_\mathrm{im} \in \R$.
-Substituting these into \eqref{eq:scalar_free_space_gf}, the consideration
-\begin{equation}\label{eq:example_csb}
-	\abs{\frac{\exp{-\im k R}}{R}} = 
-	\abs{ \frac{\exp{-\im k R_\mathrm{re}} \exp{k R_\mathrm{im}}}{R} } = 
-	\frac{\exp{k R_\mathrm{im}}}{\abs{R}}
-\end{equation}
-suggests the complex length $R$ should be defined with $\imag{R} \leq 0$ in
-order to allow large magnitude $R$. Such freedom of choice can be achieved
-with
-\begin{equation}
-	R = \sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
-	\, ,
-\end{equation}
-which could be seen as a straightforward relaxation of the requirement
-$0 \leq R \in \R$ in \cref{def:metric}.
-As the complex square root $\sqrt{z}$ has a branch point at $z = 0$, an
-valid branch cut must be defined.
-It is common to use
-\begin{definition}[Branch cut of the complex square root]
-	\label{def:sqrt_standard_branch_cut}
-	Let $z \in \C$ be arbitrary.
-	The branch cut of $\sqrt{z}$ is defined from $z = 0$ along the real axis
-	to $-\infty$.
-\end{definition}
-
-With \cref{def:sqrt_standard_branch_cut} possible contact with the branch cut
-can be avoided by choosing $R$ such that $\real{R} \geq 0$.
-Furthermore, this choice appears appealing from an intuitive point of view,
-as well as compared to the requirement $R \in \R$ of \cref{def:metric}.
-Therefore, the term complex distance is subsequently used according to
-\begin{definition}[Complex distance]\label{def:cmplx_distance}
-	Let $\robs \in \R^3$ and $\rsrc \in \C^3$ be two vectors.
-	The \emph{complex distance} from $\rsrc$ to $\robs$ is defined by
-	\begin{equation}
-		\cmplxlength{\rdiff} = 
-		\sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
-		\, ,
-	\end{equation}
-	where the square root is evaluated with
-	$\real{\cmplxlength{\rdiff}} \geq 0$.
-\end{definition}
-
-As it turns out, the choice of \cref{def:cmplx_distance} even has a special
-physical meaning:
-with this choice the spherical symmetry of \eqref{eq:scalar_free_space_gf}
-passes over to a directive pattern.
-This pattern is similar to that of a single-sided Gaussian beam
-\cite{hecht2017}, at least for small angles near the beam axis.
-As the term Gaussian beam is more frequently used in another context, this
-wave object $G_0 \left(\robs, \rsrc\right)$ with $\rsrc \in \C^3$ is called
-\ac{CSB} in the following \cite{Hansen2009,Hansen2013}.
-Details of \ac{CSB} behavior can be found in the literature
-\cite{Deschamps1971,Keller1971,Couture1981}.
-
-\fxnote{explain \ac{CSB} in context of \ac{DCIM}}
-
-
-\begin{figure}
-    \newcommand{\sizeFactor}{0.3}
-    \centering
-    \begin{tikzpicture}
-        \pgfplotsset{small}
-        \matrix {
-            \begin{axis}[
-                width=\sizeFactor\textwidth,
-                height=\sizeFactor\textwidth,
-                colormap/jet,
-                xlabel = {$x / \lambda_0$},
-                ylabel = {$z / \lambda_0$},
-                zlabel = {$\real{G_0}$},
-                title={
-					$\real{\rdiffNormSymbol} \geq 0$,
-					$\rsrc = \num{-0.1}\lambda_0 \uv{z}$
-					},
-            ]
-            \addplot3 [
-                surf,
-                mesh/ordering=y varies,
-                ] table[
-                    x = x_by_lambda_0, y = z_by_lambda_0, z = g1_1,
-                ]
-                {thesis_csb_examples.dat};
-            \end{axis}
-            &
-            \begin{axis}[
-                width=\sizeFactor\textwidth,
-                height=\sizeFactor\textwidth,
-                colormap/jet,
-                xlabel = {$x / \lambda_0$},
-                ylabel = {$z / \lambda_0$},
-                zlabel = {$\real{G_0}$},
-                title={
-					$\real{\rdiffNormSymbol} \geq 0$,
-					$\rsrc = \num{-0.5}\lambda_0 \uv{z}$
-					},
-            ]
-            \addplot3 [
-                surf,
-                mesh/ordering=y varies,
-                ] table[
-                    x = x_by_lambda_0, y = z_by_lambda_0, z = g1_2,
-                ]
-                {thesis_csb_examples.dat};
-            \end{axis}
-            &&
-            \begin{axis}[
-                width=\sizeFactor\textwidth,
-                height=\sizeFactor\textwidth,
-                colormap/jet,
-                xlabel = {$x / \lambda_0$},
-                ylabel = {$z / \lambda_0$},
-                zlabel = {$\real{G_0}$},
-                title={
-					$\real{\rdiffNormSymbol} \geq 0$,
-					$\rsrc = \num{1.0}\lambda_0 \uv{z}$
-					},
-            ]
-            \addplot3 [
-                surf,
-                mesh/ordering=y varies,
-                ] table[
-                    x = x_by_lambda_0, y = z_by_lambda_0, z = g1_3,
-                ]
-                {thesis_csb_examples.dat};
-            \end{axis}
-            \\
-            \begin{axis}[
-                width=\sizeFactor\textwidth,
-                height=\sizeFactor\textwidth,
-                colormap/jet,
-                xlabel = {$x / \lambda_0$},
-                ylabel = {$z / \lambda_0$},
-                zlabel = {$\real{G_0}$},
-                title={
-					$\real{\rdiffNormSymbol} \geq 0$,
-					$\rsrc = \num{-0.1}\lambda_0 \uv{z}$
-					},
-            ]
-            \addplot3 [
-                surf,
-                mesh/ordering=y varies,
-                ] table[
-                    x = x_by_lambda_0, y = z_by_lambda_0, z = g2_1,
-                ]
-                {thesis_csb_examples.dat};
-            \end{axis}
-            &
-            \begin{axis}[
-                width=\sizeFactor\textwidth,
-                height=\sizeFactor\textwidth,
-                colormap/jet,
-                xlabel = {$x / \lambda_0$},
-                ylabel = {$z / \lambda_0$},
-                zlabel = {$\real{G_0}$},
-                title={
-					$\real{\rdiffNormSymbol} \geq 0$,
-					$\rsrc = \num{-0.5}\lambda_0 \uv{z}$
-					},
-            ]
-            \addplot3 [
-                surf,
-                mesh/ordering=y varies,
-                ] table[
-                    x = x_by_lambda_0, y = z_by_lambda_0, z = g2_2,
-                ]
-                {thesis_csb_examples.dat};
-            \end{axis}
-            &&
-            \begin{axis}[
-                width=\sizeFactor\textwidth,
-                height=\sizeFactor\textwidth,
-                colormap/jet,
-                xlabel = {$x / \lambda_0$},
-                ylabel = {$z / \lambda_0$},
-                zlabel = {$\real{G_0}$},
-                title={
-					$\real{\rdiffNormSymbol} \geq 0$,
-					$\rsrc = \num{-1.0}\lambda_0 \uv{z}$
-					},
-            ]
-            \addplot3 [
-                surf,
-                mesh/ordering=y varies,
-                ] table[
-                    x = x_by_lambda_0, y = z_by_lambda_0, z = g2_3,
-                ]
-                {thesis_csb_examples.dat};
-            \end{axis}
-            \\
-            };
-    \end{tikzpicture}
-    \caption{Real part of \acp{CSB} for different imaginary offsets and
-	two different definitions of complex length.}
-	\label{fig:thesis_csb_examples}
-\end{figure}
-
-
 
 
 
@@ -1278,17 +1058,21 @@ Details of \ac{CSB} behavior can be found in the literature
 Arnold Sommerfeld's approach towards a mathematical description of dipole
 radiation above flat earth combines the results of the two preceding
 sections.
-In the original consideration of a \ac{VED} over ground \cite{Sommerfeld1909}
-it is clear by intuition, that the radiated field is of azimuthal symmetry.
-The wavenumber $k = k\left(z\right)$ of the governing Helmholtz equation is
-domain-wise constant for $z < 0$ and $z \geq 0$, respectively.
+In his original consideration of a \ac{VED} over (actually \emph{at}) a lossy
+ground \textcite{Sommerfeld1909} makes use of the fact that the radiated field
+is of azimuthal symmetry, where this property is concluded from physical
+reasoning.
+In the Sommerfeld half-space problem the wavenumber $k = k\left(z\right)$ of
+the governing Helmholtz equation is domain-wise constant for $z < 0$ and
+$z \geq 0$, respectively.
+
 By recognition of these two properties, Sommerfeld identifies products of
 Bessel functions of first kind (in radial direction) and plane waves
-(in vertical directions) as the eigenfunctions of the problem.
+(in vertical direction) as the eigenfunctions of the problem.
 The very core of the Sommerfeld formalism is now an expression which represents
 the free-space Green's function \eqref{eq:scalar_free_space_gf} by an infinite
 superposition of these eigenfunctions.
-This \emph{Sommerfeld identity} is given by the central
+This \emph{Sommerfeld identity} is given by the most central
 \cite[eq.~(10)]{Sommerfeld1909}\cite[66]{Chew1999}
 \begin{theorem}[Sommerfeld identity]\label{thm:sommerfeld_identity}
 	Let $\robs, \rsrc \in \R^3$ with $\robs \neq \rsrc$ be two vectors and
@@ -1297,18 +1081,20 @@ This \emph{Sommerfeld identity} is given by the central
 	\begin{equation}\label{eq:sommerfeld_identity_pos_real_axis}
 		\frac{\exp{-\im k \rdiffNormSymbol}}{\rdiffNormSymbol} = 
 		-\im
-		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
-		\besselj{0} \left(k_\rho \rho\right)
+		\int\limits_{0}^{\infty} 
 		\frac{\exp{-\im k_z \abs{z - z^\prime}}}{k_z}
+		\besselj{0} \left(k_\rho \rho\right)
+		k_\rho 
+		\,
+		\dd k_\rho
 		\, ,
 	\end{equation}
 	where\footnote{
 		Sommerfeld originally used to define the vertical propagation constant
 		$k_z$ differently, namely as $k_z = \sqrt{{k_\rho}^2 - k^2}$
 		\cite{Sommerfeld1909,Sommerfeld1964}.
-		A detailed discussion on the impact of this convention \vs
-		\eqref{eq:def_k_z_of_k_rho} can be found in a review paper by
-		\textcite{Mosig2021}.
+		A detailed discussion on this convention \vs \eqref{eq:def_k_z_of_k_rho}
+		can be found in a review paper by \textcite{Mosig2021}.
 		As the form of \eqref{eq:def_k_z_of_k_rho} seems to prevail in
 		more recent literature, this convention is used throughout the present
 		thesis.
@@ -1325,8 +1111,8 @@ This \emph{Sommerfeld identity} is given by the central
 		\, .
 	\end{equation}
 	The integrand of \eqref{eq:sommerfeld_identity_pos_real_axis} is holomorphic
-	at all $k_\rho \in \C$ except at the branch points $\pm k$ of $k_z$ and
-	on the corresponding branch cut(s).
+	at all $k_\rho \in \C$ except at the branch points $\pm k$ of the square 
+	root in \eqref{eq:def_k_z_of_k_rho} and on the corresponding branch cut.
 \end{theorem}
 
 Due to the analytic properties of the integrand in
@@ -1336,46 +1122,28 @@ in \cref{thm:sommerfeld_identity} can readily be resolved by
 	In the $\imag{k} \to 0$ the path of integration in
 	\eqref{eq:sommerfeld_identity_pos_real_axis} can legitimately be deformed
 	into the first quadrant of the complex $k_\rho$-plane to render the integral
-	defined.
+	in \eqref{eq:sommerfeld_identity_pos_real_axis} defined.
 \end{corollary}
 
+The specific path of integration in \eqref{eq:sommerfeld_identity_pos_real_axis}
+as well as possible alternative paths have been extensively studied and in some
+cases are even entitled with established names, \eg,
 \begin{definition}[\acl{SIP}]
 	In \eqref{eq:sommerfeld_identity_pos_real_axis} the path of integration
 	along the non-negative real axis is called \emph{\acf{SIP}}.
 \end{definition}
 
-Clearly, \eqref{eq:sommerfeld_identity_pos_real_axis} is an inverse Hankel
-transform and can be written as
-\begin{equation}
-		\frac{\exp{-\im k \rdiffNormSymbol}}{\rdiffNormSymbol} = 
-		2\pi \,
-		\hankelTransformInverse{0}
-		\left\{ \frac{\exp{-\im k_z \abs{z - z^\prime}}}{\im k_z} \right\} 
-\end{equation}
-using the notation of \cref{coll:hankel_transform}.
-As it turns out, within the context of electromagnetic theory only
-inverse Hankel transforms of orders $\nu \in \left\{0, 1, 2\right\}$
-occur.
-These integrals are---taking into account the enormous impact of the
-concept during the past 112 years---most frequently referred to as
-\emph{Sommerfeld integrals} within the electromagnetics community, which is why
-it is appropriate to introduce a special symbol for them.
-\begin{definition}[Sommerfeld integrals]	
-	Inverse Hankel transforms of orders $\nu \in \left\{0, 1, 2\right\}$
-	are called \emph{Sommerfeld integrals} and denoted by
-	$\sommerfeldIntegral{\nu} \equiv \hankelTransformInverse{\nu}$.
-\end{definition}
-
-Much of Sommerfeld's original considerations
+Much of Sommerfeld's original analytical considerations
 \cite{Sommerfeld1909,Sommerfeld1926} regarding dipole radiation above flat
 lossy earth are not directly based on the positive real axis integration path
 of \eqref{eq:sommerfeld_identity_pos_real_axis} but on an alternative path
 which enables application of a wider set of mathematical tools.
-This flexibility proves especially fruitful if the transformed function
+This flexibility proves especially fruitful if the spectral domain function
 $\tilde{f} \left(k_\rho\right) = \exp{-\im k_z \abs{z - z^\prime}} k_z^{-1}$ of
-\eqref{eq:sommerfeld_identity_pos_real_axis} is replaced by a more general
-function.
-\begin{corollary}[\acf{EIP}]
+\eqref{eq:sommerfeld_identity_pos_real_axis} for the free-space case is replaced
+by a more general function in the case of a Sommerfeld half-space or even a
+multilayered medium.
+\begin{corollary}[\Acf{EIP}]
 	Let $\tilde{f} \left(k_\rho\right)$ be an even (odd) function of $k_\rho$
 	for even (odd) $\nu \in \N$.
 	Then we have
@@ -1397,9 +1165,49 @@ function.
 		\, ,
 	\end{align}
 	where the path of integration in \eqref{eq:sommerfeld_integral_eip} is
-	understood in the way shown in \cref{fig:sip}.
+	understood in the way shown in \cref{fig:si_paths}.
 \end{corollary}
+
+Note that the second kind Hankel function in \eqref{eq:sommerfeld_integral_eip}
+introduces an additional logarithmic branch point at $k_\rho = 0$
+\cite{Olver2010}.
+An appropriate but otherwise arbitrary detour as shown in \cref{fig:si_paths},
+however, ensures to sidestep $\besselh{2}{0} \left(0\right)$ as well as the
+two branch points of $k_z$ for $\imag{k} \to 0$.
 	
+\begin{definition}[\Acf{EIP}]
+	In \eqref{eq:sommerfeld_integral_eip} the integration path along the whole
+	real axis is called \emph{\ac{EIP}}\footnote{
+	The term \acl{SIP} is not used uniformly in the literature.
+	Sometimes the whole real axis path is termed \ac{SIP}, while the
+	non-negative real axis path is called differently.
+	}.
+\end{definition}
+
+The \ac{EIP} has a variety of advantages over the positive real axis path in
+\eqref{eq:sommerfeld_identity_pos_real_axis}.
+Much of the power of Sommerfeld's approach originates in the fact that the
+involved spectral domain Green's functions are holomorphic on $\C$ except at 
+distinct poles and have, as can be shown \cite{Michalski2016b}, at most two
+square root branch points and corresponding branch cuts.
+In the picture of Riemann's sphere \cite[180]{Meyberg2006}, the real
+$-\infty$ and $\infty$ in \eqref{eq:sommerfeld_integral_eip} can be interpreted
+as one single point in $\C \cup \left\{\infty\right\}$.
+Another way to think of this is that, for $\rho > 0$, the real axis path in
+\eqref{eq:sommerfeld_integral_sip} can be closed at infinity in the lower
+complex $k_\rho$ half-plane by virtue of Jordan's lemma, which is applicable
+here as $\besselh{2}{0}$ decay exponentially for large negative imaginary
+arguments.
+Thus, according to Cauchy's theorem and the residue theorem, the result of
+integration along the closes \ac{EIP} is constituted solely by the integration
+around the branch cuts and the residues of the poles.
+This enables the application of various exact and asymptotic techniques,
+analytical ones as well as numerical ones
+\cite{Sommerfeld1964,Chew1999,Michalski1985a,Michalski2016b}.
+The proof of equivalence for \eqref{eq:sommerfeld_integral_sip} and
+\eqref{eq:sommerfeld_integral_eip} is nowadays a classic textbook example
+\cite[203]{Sommerfeld1964}.
+
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
@@ -1408,7 +1216,7 @@ function.
             mark= at position 0.375 with {\arrow{stealth}},
             mark= at position 0.625 with {\arrow{stealth}},
             },
-    ]
+			]
 		\draw [->,>=stealth] (-4.5,0) -- (4.5,0) node[right] {$\real{k_\rho}$};
 		\draw [->,>=stealth] (0,-2) -- (0,2) node[above] {$\imag{k_\rho}$};
         \fill (1,-0.2) circle (1.0pt) node[below right]{$k$};
@@ -1420,50 +1228,397 @@ function.
 	{\acf{SIP} in the complex $k_\rho$-plane. The exact form of the detour
 	is not critical, as long as the branch points $\pm k$ and the singularity
 	of $\besselh{2}{\nu} \left(0\right)$ are obviated.}
-	\label{fig:sip}
+	\label{fig:si_paths}
 \end{figure}
 
-The integration path of \eqref{eq:sommerfeld_integral_eip} is called
-\acf{EIP}\footnote{
-	The term \acl{SIP} is not used uniformly in the literature.
-	Sometimes the whole real axis path is termed \ac{SIP}, while the
-	path in non-negative real axis path is called differently.
-	}
-subsequently.
-The particular course of the \ac{EIP} ensures to sidestep the logarithmic
-branch point singularity of $\besselh{\nu}{2}\left(0\right)$ \cite{Olver2010}
-as well as it allows for $\imag{k} \to 0$.
-
-The \ac{EIP} has a variety of advantages over the positive real axis path in
-\eqref{eq:sommerfeld_integral_real_axis_path}.
-Much of the power of Sommerfeld's approach originates in the fact that the
-involved spectral domain functions $\tilde{f}$ are holomorphic on $\C$ except at 
-distinct poles and, as can be shown \cite{Michalski2016b}, at most two
-branch points and the corresponding branch cuts.
-
-In the picture of Riemann's sphere \cite[180]{Meyberg2006}, the real
-$-\infty$ and $\infty$ in \eqref{eq:sommerfeld_integral_sip} can be interpreted
-as the same point on $\C \cup \left\{\infty\right\}$.
-Another way to think of this is that, for $\rho > 0$, the real axis path in
-\eqref{eq:sommerfeld_integral_sip} can be closed at infinity in the lower
-complex $k_\rho$-half-plane by virtue of Jordan's lemma.
-
-Corresponding to Cauchy's theorem and the residue theorem, the result of
-integration along the closes \ac{EIP} is constituted solely by the integration
-around the branch cuts and the residues of the poles.
-
-This enables the application of various exact and asymptotic techniques,
-analytical ones as well as numerical ones
-\cite{Sommerfeld1964,Chew1999,Michalski1985a,Michalski2016b}.
-
-The proof of equivalence for \eqref{eq:sommerfeld_integral_real_axis_path} and
-\eqref{eq:sommerfeld_integral_sip} is nowadays a classic textbook example
-\cite[203]{Sommerfeld1964}.
-
-\fxnote{Sommerfeld identity for complex $\abs{z-z^\prime}$}
+Clearly, \eqref{eq:sommerfeld_identity_pos_real_axis} is an inverse Hankel
+transform and can be written as
+\begin{equation}
+		\frac{\exp{-\im k \rdiffNormSymbol}}{\rdiffNormSymbol} = 
+		2\pi \,
+		\hankelTransformInverse{0}
+		\left\{ \frac{\exp{-\im k_z \abs{z - z^\prime}}}{\im k_z} \right\} 
+\end{equation}
+using the notation of \cref{coll:hankel_transform}.
+As it turns out, within the context of electromagnetic waves in plane stratified
+media only inverse Hankel transforms of orders $\nu \in \left\{0, 1, 2\right\}$
+occur.
+These integrals are---taking into account the enormous impact of the
+concept during the past 112 years---most frequently referred to as
+\emph{Sommerfeld integrals} within the electromagnetics community, which is why
+it is appropriate to introduce a special symbol for them.
+\begin{definition}[Sommerfeld integrals]	
+	Inverse Hankel transforms of orders $\nu \in \left\{0, 1, 2\right\}$
+	are called \emph{Sommerfeld integrals} and denoted by
+	$\sommerfeldIntegral{\nu} \equiv \hankelTransformInverse{\nu}$.
+\end{definition}
 
 
 
+
+
+
+
+
+
+
+
+\section{Green's Function with Complex Distance}
+\label{sec:greens_function_cmplx_src_pts}
+
+
+
+
+
+
+\subsection{Definition of Complex Distance}
+\label{subsec:def_cmplx_distance}
+
+As the distance between source and observation point in
+\eqref{eq:scalar_free_space_gf} is expressed in terms of a norm
+it is clear that $\rdiffNormSymbol = \rdiffNorm$ is real an non-negative.
+However, according to \cref{def:metric}, this even
+holds if the requirement $\rsrc, \robs \in \R^3$ is relaxed to
+$\rsrc \in \C^3$ as the dot product of a complex vector with itself
+is real and non-negative according to \cref{def:dot_product}.
+Conversely, a mapping $\cmplxlength{\rdiffSymbol}: \C^3 \mapsto \C$ for a vector
+$\rdiffSymbol = \rdiff$ with $\rsrc\in \C^3$ and $\robs \in \R^3$ is not a norm
+according to \cref{def:norm}, \ie, the according definition of the distance
+between points $\robs$ and $\rsrc$ is not a metric.
+
+However, it turns out that the usual observation point $\robs \in \R^3$ 
+in conjunction with a source at \enquote{point} $\rsrc \in \C^3$
+causes a significant change in the behavior of the scalar Green's function
+$G_0 \left(\robs, \rsrc\right)$ if the axioms of real valuedness in
+\cref{def:euclidean_norm} and \cref{def:euclidean_metric} dropped.
+
+As an example, assume $0 < k \in \R$ and
+$R = R_\mathrm{re} + \im R_\mathrm{im}$, where
+$R_\mathrm{re}, R_\mathrm{im} \in \R$.
+Substituting these into \eqref{eq:scalar_free_space_gf}, the consideration
+\begin{equation}\label{eq:example_csb}
+	\abs{\frac{\exp{-\im k R}}{R}} = 
+	\abs{ \frac{\exp{-\im k R_\mathrm{re}} \exp{k R_\mathrm{im}}}{R} } = 
+	\frac{\exp{k R_\mathrm{im}}}{\abs{R}}
+\end{equation}
+suggests the complex length $R$ should be defined with $R_\mathrm{im} \leq 0$ to
+make $G_0$ decay for large $R$.
+
+One could, on the other hand also demand that at least $R_\mathrm{re}$ should be
+non-negative in order to maintain some relation to the intuitive notion of
+distance.
+This choice, however, requires the additional restriction that $R_\mathrm{im}$
+must stay \enquote{small} as $\abs{R} \to \infty$, \ie,
+$lim_{R \to \infty} \abs{R} = R_\mathrm{re}$.
+
+Such freedom of choice can be achieved with a definition of complex distance
+according to
+\begin{equation}\label{eq:cmplx_length_undefined}
+	R = \sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
+	\, .
+\end{equation}
+Note that using the complex conjugate of the second vector overrides the
+axiom $\pvec{z} \cdot \pvec{z} \in \R$ in \cref{def:dot_product} and thus
+may be seen as a straightforward relaxation of the requirement
+$0 \leq R \in \R$ in \cref{def:metric}.
+As the square root $\sqrt{z}$ of a complex number $z \in \C$ has a branch point
+at $z = 0$, a valid branch cut must be defined.
+By definition of a branch cut and by the decision not to cross this cut when
+evaluating $\sqrt{z}$ along a path in the complex plane the square root function
+becomes single-valued.
+Although the choice of a path in $\C$ for the branch cut is essentially
+arbitrary as long as it connects two branch points or a branch point and a
+point at infinity it is common to use 
+\cite[104]{Olver2010}\cite[\S\S2.2.3]{Chew1999}\cite[1066]{vanBladel2007}
+
+\begin{definition}[Fundamental branch cut of $\sqrt{z}$]
+	\label{def:sqrt_standard_branch_cut}
+	Let $z \in \C$ be arbitrary.
+	The branch cut of $\sqrt{z}$ is defined to connect the branch point at
+	$z = 0$ with $-\infty$ along the negative real axis.
+\end{definition}
+
+According to \cref{def:sqrt_standard_branch_cut} contact with the branch cut can
+safely be avoided by both of the discussed definitions of complex distance, \ie,
+choosing the branch in \eqref{eq:cmplx_length_undefined} such that
+$\real{R} \geq 0$ or $\imag{R} \leq 0$.
+It turns out, however, that this choice has tremendous consequences for the
+wave object obtained from implantation of a complex length into the scalar
+Green's function of free space \eqref{eq:scalar_free_space_gf}.
+To illustrate this \cref{fig:thesis_csb_examples} shows a couple of numerical
+examples for a source at $\rsrc = -\im p \lambda_0 \uv{z}$ with a complex
+\enquote{offset} parameter 
+$p \in \left\{\num{0.1}, \num{0.5}, \num{1.0}\right\}$.
+The upper subplots show the behavior of $\real{G_0}$ if
+\eqref{eq:cmplx_length_undefined} is evaluated with $\real{R} \geq 0$,
+the lower series of pictures visualizes the choice $\imag{R} \leq 0$.
+Distortion of the spherical symmetry of \eqref{eq:scalar_free_space_gf}
+is observed for both cases.
+For $\real{R} \geq 0$ the field becomes directive, where the directivity
+becomes more pronounced as $p$ grows.
+This wave object has been extensively studied in the literature
+\cite{Deschamps1971,Keller1971,Couture1981} and is sometimes referred to as
+\ac{CSB} \cite{Hansen2009,Hansen2013} as it resembles a
+Gaussian beam \cite[pp.~626]{hecht2017} near its main axis.
+For $\imag{R} \leq 0$ exponential decay is observed as expected from
+\eqref{eq:example_csb}.
+However, this kind of behavior seems peculiar and does not represent a wave
+field of any physical significance.
+
+Therefore, it is concluded that a meaningful definition of complex length must
+read as follows.
+\begin{definition}[Complex distance]\label{def:cmplx_distance}
+	Let $\robs \in \R^3$ and $\rsrc \in \C^3$ be two vectors where
+	$\imag{\rsrc}$ is \enquote{small}\footnote{In computational practice the
+	requirement for $\rsrc$ to have a \enquote{small} imaginary part mainly
+	addresses numerical problems of verly large floating point numbers.}.
+	The \emph{complex distance} from $\rsrc$ to $\robs$ is defined by
+	\begin{equation}\label{eq:def:cmplx_distance}
+		\cmplxlength{\rdiff} 
+		\coloneqq
+		\sqrt{\left(\rdiff\right) \cdot \overline{\left(\rdiff\right)}}
+		\, ,
+	\end{equation}
+	where the square root is evaluated with
+	$\real{\cmplxlength{\rdiff}} \geq 0$.
+\end{definition}
+
+\begin{figure}
+    \newcommand{\sizeFactor}{0.3}
+    \centering
+    \begin{tikzpicture}
+        \pgfplotsset{small}
+        \matrix {
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\real{\rdiffNormSymbol} \geq 0$,
+					$p = \num{0.1}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g1_1,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\real{\rdiffNormSymbol} \geq 0$,
+					$p = \num{0.5}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g1_2,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            &&
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\real{\rdiffNormSymbol} \geq 0$,
+					$p = \num{1.0}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g1_3,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            \\
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\imag{\rdiffNormSymbol} \leq 0$,
+					$p = \num{0.1}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g2_1,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            &
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\imag{\rdiffNormSymbol} \leq 0$,
+					$p = \num{0.5}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g2_2,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            &&
+            \begin{axis}[
+                width=\sizeFactor\textwidth,
+                height=\sizeFactor\textwidth,
+                colormap/jet,
+                xlabel = {$x / \lambda_0$},
+                ylabel = {$z / \lambda_0$},
+                zlabel = {$\real{G_0}$},
+                title={
+					$\imag{\rdiffNormSymbol} \leq 0$,
+					$p = \num{1.0}$
+					},
+            ]
+            \addplot3 [
+                surf,
+                mesh/ordering=y varies,
+                ] table[
+                    x = x_by_lambda_0, y = z_by_lambda_0, z = g2_3,
+                ]
+                {thesis_csb_examples.dat};
+            \end{axis}
+            \\
+            };
+    \end{tikzpicture}
+    \caption{Scalar Green's function of free space with complex distances
+	for two different choices of the complex square root branch.}
+	\label{fig:thesis_csb_examples}
+\end{figure}
+
+
+
+
+From \cref{def:sqrt_standard_branch_cut} a vivid conclusion regarding the 
+source distribution of the \ac{CSB} can be drawn.
+In the usual formulation using the Euclidean metric as distance
+\eqref{eq:scalar_free_space_gf} solves the homogeneous Helmholtz equation
+\eqref{eq:scalar_helmholtz_equation} everywhere in $\R^3 \setminus \rsrc$.
+With a complex distance according to \cref{def:sqrt_standard_branch_cut}
+and \cref{def:cmplx_distance} $G_0$ does not obey
+\eqref{eq:scalar_helmholtz_equation} for $R$ on the branch cut of 
+the square root in \eqref{eq:def:cmplx_distance}.
+Thus, the sources may lay anywhere on this branch cut \cite{Hansen2013}.
+
+
+
+
+
+
+
+\subsection{Complex Distance within the Discrete Complex Image Method}
+\label{subsec:cmplx_distance_within_dcim}
+
+\cref{subsec:def_cmplx_distance} assumes an arbitrary complex source point
+$\rsrc \in \C^3$.
+Within the \ac{DCIM}, however, only complex source points of the specific
+form
+\begin{equation}\label{eq:cmplx_length_in_dcim_context}
+	R =
+	\sqrt{\rho^2 + z^2}
+	=
+	\sqrt{x^2 + y^2 + z^2}
+	\qquad
+	x,y \in \R 
+	\qquad
+	z \in \C
+\end{equation}
+occur.
+In the \ac{DCIM} literature the choice of branch in
+\eqref{eq:cmplx_length_in_dcim_context} is not handled uniformly
+Even several papers by the very same authors may in one instance state
+\enquote{the branch must be chosen so that exponential functions [\dots\unkern]
+decay for large arguments} \cite{Alparslan2010} while in another publication
+\enquote{the square root branch with positive real part is selected}
+\cite{Michalski2007a}.
+As both publications claim to implement a working computer code it can be
+concluded  that within the \ac{DCIM} the choice is indeed not
+critical---at least as the \enquote{small}-criterion in
+\cref{def:cmplx_distance} can still guarantee numerical stability.
+
+Towards a combination of complex images obtained by the \ac{DCIM} with the
+\ac{FMM} it seems, however, more appropriate to stick to
+\cref{def:cmplx_distance}.
+Apart from the questionable physical meaning of the damped field for 
+$\imag{R} \leq 0$ \cref{def:cmplx_distance} is especially appealing as
+the physics of \acp{CSB} can actually be employed within the \ac{FMM}
+in a way which can significantly reduce the complexity of the algorithm.
+The central operator within this modified \ac{FMM} is referred to as
+Gaussian beam translation operator \cite{Hansen2013,eibert2021}.
+
+The rapid decay field for $\imag{R} \leq 0$ in conjunction to the \ac{FMM}
+apparently has not been studied in the literature so far.
+
+
+
+
+
+
+\subsection{Complex Distance within the Sommerfeld Identity}
+
+The fundamental identity on which the technique of the \ac{DCIM} is built is
+given by \cref{thm:sommerfeld_identity} \cite{Fang1988} where it is tacitly
+assumed that the Sommerfeld identity remains valid if $\abs{z-z^\prime}$ in
+\eqref{eq:sommerfeld_identity_pos_real_axis} is replaced by a complex quantity
+and the distance $R$ is computed according to
+\eqref{eq:cmplx_length_in_dcim_context}.
+Namely, the \ac{DCIM} assumes the integral in
+\begin{equation}\label{eq:sommerfeld_identity_complex_z}
+	\frac{\exp{-\im k \rdiffNormSymbol}}{\rdiffNormSymbol} = 
+	-\im
+	\int\limits_{0}^{\infty} 
+	\frac{\exp{-\im k_z z}}{k_z}
+	\besselj{0} \left(k_\rho \rho\right)
+	k_\rho 
+	\,
+	\dd k_\rho
+	\qquad
+	R = \sqrt{\rho^2 + z^2}
+\end{equation}
+exists for an arbitrary $z \in \C$, $\rho \in \R$ while the identity remains
+valid.
+The apparently does not provide a rigorous proof for this claim.
+
+
+
+
+\fxnote{TODO}
 
 
 
@@ -2641,5 +2796,6 @@ is called \emph{translation operator}.
 
 
 
+\fxnote{specific DCIM-like gaussian beam in z direction}
 
 
