@@ -1236,11 +1236,11 @@ The proof of equivalence for \eqref{eq:sommerfeld_integral_sip} and
 
 Clearly, \eqref{eq:sommerfeld_identity_pos_real_axis} is an inverse Hankel
 transform and can be written as
-\begin{equation}
-		\frac{\exp{-\im k \rdiffNormSymbol}}{\rdiffNormSymbol} = 
-		2\pi \,
-		\hankelTransformInverse{0}
-		\left\{ \frac{\exp{-\im k_z \abs{z - z^\prime}}}{\im k_z} \right\} 
+\begin{equation}\label{eq:sommerfeld_identity_by_inverse_hankel_transform}
+	\frac{1}{4\pi}
+	\frac{\exp{-\im k \rdiffNormSymbol}}{\rdiffNormSymbol} = 
+	\hankelTransformInverse{0}
+	\left\{ \frac{\exp{-\im k_z \abs{z - z^\prime}}}{2 \im k_z} \right\} 
 \end{equation}
 using the notation of \cref{coll:hankel_transform}.
 As it turns out, within the context of electromagnetic waves in plane stratified
@@ -2540,7 +2540,7 @@ A detail which proves rather useful towards a computer implementation of
 		V_v
 		\left(z , z^\prime\right)
 		&=
-		-I_I
+		-I_i
 		\left(z^\prime, z\right)
 		\, .
 	\end{align}
@@ -2684,8 +2684,7 @@ The problem arising from the combination of solving \eqref{eq:VED_E_z_ODE}
 for the excitation specified by \eqref{eq:VED_current_density} defines a Green's
 function.
 As noted in \cref{subsec:E_z_comp_of_VED}, all five non-vanishing components of
-the \ac{VED} field can readily be derived with knowledge of
-$\tilde{E}_z$.
+the \ac{VED} field can be derived with knowledge of $\tilde{E}_z$.
 This holds for the fields in the spectral domain (by differentiation) as well as
 for their counterparts in the spatial domain (Sommerfeld integrals).
 
@@ -2701,10 +2700,10 @@ Therefore, in the \ac{HED} case two \acp{ODE} arise describing the two
 characteristic components.
 The dual cases of \ac{VMD} and \ac{HMD} again follow by duality.
 
-Knowing the fields of \ac{VED} and \ac{HED} is---using the superposition
-and duality principles---sufficient to represent the field of infinitesimal
-dipole of arbitrary direction $\uv{l}$ which may be of electric or magnetic
-nature.
+Knowing the fields of \ac{VED} and \ac{HED} is---due to the principles of
+duality and linear superposition---sufficient to represent the field of
+infinitesimal dipole of arbitrary direction $\uv{l}$ which may be of electric
+or magnetic nature.
 In practical applications, \eg, numerical solvers, it is, however, more
 convenient to assimilate these results into a form which is typically referred
 to as dyadic Green's function.
@@ -2713,10 +2712,12 @@ excitation $\dyadicGF{EJ}$ yields the electric field of the $\uv{l}$-directed
 \ac{HD} via
 \begin{equation}
 	\pvec{E}_\mathrm{HD} \left(\robs\right) = 
-	\iiint\limits_{V} \dd \robs \, 
+	\iiint\limits_{V}
 	\dyadicGF{EJ} \left(\robs, \rsrc\right)
 	\cdot
 	I \uv{l} \diracDelta \left(\rdiff\right)
+	\, 
+	\dd \robs 
 	\qquad \rsrc \in V
 	\, ,
 \end{equation}
@@ -2751,7 +2752,7 @@ a \ac{VED}.
 
 A comprehensive derivation of all four dyadic Green's functions $\dyadicGF{EJ}$,
 $\dyadicGF{EM}$, $\dyadicGF{HJ}$ and $\dyadicGF{HM}$, both in spectral and in
-spatial domain is given in the comprehensive encyclopedia chapter by
+spatial domain is given in the comprehensive encyclopedia contribution by
 \textcite{Michalski2005}.
 In the Cartesian matrix picture we have the reciprocity relations
 \cite{Michalski2005}
@@ -2786,6 +2787,85 @@ transpose of matrix $\mat{A}$.
 \subsection{Generic Scalar Green's Functions}
 \label{subsec:generic_scalar_greens_functions}
 
+Dyadic Green's functions as discussed in \cref{subsec:dyadic_greens_functions}
+might be the most versatile way to consider electromagnetic Green's functions,
+they are certainly not the most elegant way to do so.
+Even in the most general case of an arbitrary oblique dipole it can be shown,
+that in this worst case scenario only six Sommerfeld integrals have to be
+evaluated to obtain the nine components of $\dyadicGF{EJ}$ and $\dyadicGF{HM}$.
+For $\dyadicGF{EM}$ and $\dyadicGF{HJ}$ five Sommerfeld integrals are
+sufficient.
+However, brute-force computation of dyadic Green's functions for $\pvec{E}$
+and $\pvec{H}$ in Cartesian matrix representation hardly makes sense in any
+theoretical or practical application.
+In numerical integral equation methods usually not the Green's functions for
+the fields are used.
+Instead, potential formulations which possess several advantages are considered
+\cite{Michalski1990,Michalski1990a,Michalski1997}.
+In analytical considerations it is also common to utilize symmetry properties.
+As outlined in \cref{sec:five_component_fields} only three Sommerfeld integrals
+are necessary to describe the fields of \ac{VED} and \ac{HED}.
+Another example for successful \enquote{scalarization} of the problem is the
+original work of Sommerfeld \cite{Sommerfeld1909,Sommerfeld1912} which is almost
+entirely built onto scalar considerations.
+
+Nevertheless, there is a certain arbitrariness in the choice which scalar
+quantities to choose in order to approach the problem of Green's functions 
+in half-space or planar multilayered solution environments.
+For example for the \ac{VED} possibilities range from $\varepsilon \tilde{}$
+over the transverse component of $\pvec{H}$ to the vector potential $\pvec{A}$
+\cite{Michalski2016b}.
+Another nowadays somewhat out fashioned quantity which is very similar to the
+vector potential is the so-called Hertz potential Sommerfeld himself used.
+
+As the mathematical differences of all of these essentially equivalent
+approaches shall not play a role for the purpose of the present thesis another
+way to \emph{define} a generic scalar Green's function is employed here.
+The notion of this is to simply supplement the Sommerfeld identity given in
+\cref{thm:sommerfeld_identity} by a reflected contribution as present in 
+\eqref{eq:TLGF_V_i}.
+The so defined spectral Green's function shall reduce to
+\eqref{eq:sommerfeld_identity_pos_real_axis} in the case of zero reflection, 
+\ie, for a single layer of infinite extent or---equivalently---for multiple
+layers of equal material parameters.
+Furthermore, the generic spectral Green's functions shall be expressed
+conveniently by \acp{TLGF}.
+
+In terms of \cref{coll:hankel_transform}, the actual spectral Green's function
+of free space in the Sommerfeld identity is clearly identified in
+\eqref{eq:sommerfeld_identity_by_inverse_hankel_transform}.
+In order to supplement
+$\left(\exp{-\im k_z \abs{z - z^\prime}}\right) / \left(2 \im k_z\right)$
+by a reflected contribution it makes sense to define generic scalar Green's
+functions for the \ac{TM} and \ac{TE} case as
+\begin{definition}[Generic scalar Green's functions]
+	\label{def:generic_scalar_gf}
+	The \emph{generic scalar Green's functions} for the \ac{TM} and \ac{TE}
+	reflection case are defined as 
+	\begin{equation}\label{eq:def_generic_sgf_tm}
+		\genericSgfTM
+		\left(z, z^\prime\right)
+		\coloneqq	
+		\frac{1}{\im \omega \varepsilon_n}
+		I_v^\tm
+		\left(z, z^\prime\right)
+	\end{equation}
+	and
+	\begin{equation}\label{eq:def_generic_sgf_te}
+		\genericSgfTE
+		\left(z, z^\prime\right)
+		\coloneqq	
+		\frac{1}{\im \omega \mu_n}
+		V_i^\te
+		\left(z, z^\prime\right)
+		\, ,
+	\end{equation}
+	respectively, where $n$ identifies the layer of $z^\prime$.
+\end{definition}
+
+The functions of \cref{def:generic_scalar_gf} turn out to be much more 
+handy for numerical experimentation than other spectral Green's function,
+\eg, single components of dyadic Green's functions.
 
 
 
@@ -2796,18 +2876,17 @@ transpose of matrix $\mat{A}$.
 \section{Image Principle}
 \label{sec:imgage_principle}
 
-\cite[Chapter~XI]{maxwell1873}\footnote{Maxwell's famous textbook
-\cite{maxwell1873} is nowadays in the public domain and can be found at various
-locations online.}
-
-Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
-
-
-
-
-
-
-
+An exact image principle with images at real locations is available
+for half space environments with \ac{PEC} and \ac{PMC} ground
+\cite[243]{Sommerfeld1964}\cite[pp.~94]{Jin2015}.
+For the case of a dielectric and possibly lossy ground half-space no such 
+simple and elegant method is known.
+It can, however, be shown that the arising Sommerfeld integrals may be 
+interpreted in terms of image current \emph{densities} in complex space $\C^3$
+\cite[250]{Sommerfeld1964}\cite[Chapter~7]{Lindell2000}.
+By contrast to such distributed complex-space currents the \ac{DCIM} aims to 
+express the reflected contribution in Sommerfeld integrals by a small number
+of \emph{discrete}, \ie, point like, image sources in $\C^3$.
 
 
 
@@ -2817,6 +2896,10 @@ Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
 \chapter{Fast Multipole Method for the Helmholtz Equation}
 \label{ch:fmm}
+
+The purpose of this chapter is to comprehend the main idea of the \ac{FMM}
+and to state a formulation which makes clear where possible problems towards an
+integration of complex images might lie.
 
 
 
