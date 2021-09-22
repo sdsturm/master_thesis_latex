@@ -1593,11 +1593,11 @@ apparently has not been studied in the literature so far.
 \subsection{Complex Distance within the Sommerfeld Identity}
 
 The fundamental identity on which the technique of the \ac{DCIM} is built is
-given by \cref{thm:sommerfeld_identity} \cite{Fang1988} where it is tacitly
+given by \cref{thm:sommerfeld_identity} where it is tacitly
 assumed that the Sommerfeld identity remains valid if $\abs{z-z^\prime}$ in
 \eqref{eq:sommerfeld_identity_pos_real_axis} is replaced by a complex quantity
 and the distance $R$ is computed according to
-\eqref{eq:cmplx_length_in_dcim_context}.
+\eqref{eq:cmplx_length_in_dcim_context} \cite{Fang1988}.
 Namely, the \ac{DCIM} assumes the integral in
 \begin{equation}\label{eq:sommerfeld_identity_complex_z}
 	\frac{\exp{-\im k \rdiffNormSymbol}}{\rdiffNormSymbol} = 
@@ -1615,11 +1615,108 @@ exists for an arbitrary $z \in \C$, $\rho \in \R$ while the identity remains
 valid.
 The apparently does not provide a rigorous proof for this claim.
 
+Obviously, the only part of the integrand in
+\eqref{eq:sommerfeld_identity_complex_z} that changes in the transition
+$\abs{z} \to z \in \C$ is the $\exp{-\im k_z z}$.
+As the main subject of interest within the present thesis are fields in the
+vacuum/air part of a Sommerfeld half-space $k \in \R$ and $k > 0$ can be
+assumed for the wavenumber in \eqref{eq:def_k_z_of_k_rho}.
+In this case $k_z$ can be written as
+\begin{equation}\label{eq:k_z_case_distinction}
+	k_z =
+	\begin{cases}
+		\sqrt{k^2 - k_\rho^2}
+		\qquad
+		&k \geq k_\rho
+		\\
+		\im
+		\sqrt{k_\rho^2 - k^2}
+		&k < k_\rho
+	\end{cases}
+\end{equation}
+for the \ac{SIP}, \ie, for integration along the positive real $k_\rho$-axis.
+For both cases in \eqref{eq:k_z_case_distinction} the square root is real and 
+non-negative.
+Towards an analysis of convergence of the integral in
+\eqref{eq:sommerfeld_identity_complex_z} it therefore makes sense to consider
+two sub-intervals individually.
 
+For illustration, assume $z = z_\Re + \im z_\Im$ with $z_\Re, z_\Im \in \R$ and
+consider
+\begin{equation}\label{eq:sommerfeld_identity_complex_z_abs_sub_1}
+	\left\vert
+	-\im
+	\int\limits_{0}^{k} 
+	\frac{\exp{-\im k_z z_\Re} \exp{k_z z_\Im}}{k_z}
+	\besselj{0} \left(k_\rho \rho\right)
+	k_\rho 
+	\,
+	\dd k_\rho
+	\right\vert
+	<
+	\int\limits_{0}^{a} 
+	\frac{\exp{k_z z_\Im}}{k_z}
+	\left\vert
+	\besselj{0} \left(k_\rho \rho\right)
+	\right\vert
+	k_\rho 
+	\,
+	\dd k_\rho
+	\, ,
+\end{equation}
+where the right-hand side is obtained by taking absolute value inside the
+integral\footnote{The absolute value function is readily omitted for all factors
+known to be real and non-negative.}.
+One could argue that if the integral in
+\eqref{eq:sommerfeld_identity_complex_z} converges for all $z \in \C$ for which
+the integrand is absolutely integrable.
+On the first sub-interval $k_\rho \in \left[0, k\right]$ considered in
+\eqref{eq:sommerfeld_identity_complex_z_abs_sub_1} it is observed that 
+the right-hand side integral of the inequality in principle exists
+for finite $z_\Im > 0$.
+Thus, the Sommerfeld identity integral for complex $z$ is unproblematic within
+$k_\rho \in \left[0, k\right]$.
 
+For the semi-infinite tail integral
+\begin{equation}\label{eq:sommerfeld_identity_complex_z_abs_sub_2}
+	\left\vert
+	-\im
+	\int\limits_{k}^{\infty} 
+	\frac{
+		\exp{z_\Re\sqrt{k_\rho^2 - k^2}}
+		\exp{\im z_\Im \sqrt{k_\rho^2 - k^2}}
+		}{\sqrt{k_\rho^2 - k^2}}
+	\besselj{0} \left(k_\rho \rho\right)
+	k_\rho 
+	\,
+	\dd k_\rho
+	\right\vert
+	<
+	\int\limits_{k}^{\infty} 
+	\frac{\exp{z_\Re \abs{k_z}}}{\abs{k_z}}
+	\left\vert
+	\besselj{0} \left(k_\rho \rho\right)
+	\right\vert
+	k_\rho 
+	\,
+	\dd k_\rho
+\end{equation}
+the situation, however, is more severe as the right-hand side integral in
+\eqref{eq:sommerfeld_identity_complex_z_abs_sub_2} certainly does not converge
+for $z_\Re > 0$ as in this case the growth of $\exp{z_\Re \abs{k_z}}$ cannot be
+compensated by $1 / \abs{k_z}$ in the $k_\rho \to \infty$.
 
-\fxnote{TODO}
-
+With regard to the \ac{DCIM} it is noticed, that the parameter $z \in \C$
+is only an internal quantity which is never used outside the \ac{DCIM} routine
+in a standard implementation.
+Also, of course, the integral \eqref{eq:sommerfeld_identity_complex_z} is not
+actually evaluated but the closed form solution is used.
+Towards possible use of complex images obtained by \ac{DCIM} within other
+methods, however, $z \in \C$ may be used as an actual coordinate.
+Obviously, convergence of \eqref{eq:sommerfeld_identity_complex_z_abs_sub_2} is
+especially required if these other methods are built on the Sommerfeld identity.
+Thus, in such a case the \ac{DCIM} and the internal function fitting algorithm
+must be implemented in such a way that $\real{z} \leq 0$ can be guaranteed.
 
 
 
