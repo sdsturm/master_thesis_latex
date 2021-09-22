@@ -22,26 +22,28 @@ with the Sommerfeld problem's solution domain---are pointed out.
 \section{Notation}
 
 Let the following notes regarding notation prepended this chapter.
-\begin{description}
-	\item[Complex numbers] Real and complex numbers are marked in the
+\begin{enumerate}
+	\item Real and complex numbers are marked in the
 	respective context if necessary.
 	For an arbitrary complex number $z \in C$ the complex 
 	conjugate is denoted by $\complexConjugate{z}$ and the absolute value of
 	$z$ is written as $\abs{z} = \sqrt{z \complexConjugate{z}}$.
-	\item[Physical vectors] Vectors in $\R^3$ with a physical meaning are
+	The symbol $\im \coloneqq \sqrt{-1}$ is used as imaginary unit.
+	\item Vectors in $\R^3$ with a physical meaning are
 	denoted in bold and italic serif font, \eg, the position vector $\pvec{r}$.
 	Source points are marked by a prime.
 	Unit vectors are marked by a hat, \eg, $\uv{u}$.
-	\item[Linear algebra] Entities with reference to linear algebra, \ie,
+	\item Entities with reference to linear algebra, \ie,
 	matrices and vectors are denoted in bold, italic and sans-serif font.
 	Matrices, \eg, $\mat{A}$, are distinguished from column vectors, \eg,
 	$\vec{v}$, by the use of upper and lower case symbols, respectively.
 	In general, vectors are assumed to be column vectors, row vectors are
 	indicated by explicit transposition, \eg, $\transpose{\vec{v}}$.
-	\item[Special functions] The notation of special functions and related
+	\item The notation of special functions and related
 	symbols is in accordance to the NIST Handbook of Mathematical Functions
 	\cite{Olver2010}.
-\end{description}
+	\item 
+\end{enumerate}
 
 Otherwise, if not explicitly labeled, the notation in the present thesis
 follows the textbook by \textcite{vanBladel2007}.
@@ -730,8 +732,7 @@ $k_\varphi$ and so on.
 
 Let the following definitions prefix this section.
 \begin{definition}[Domain]
-	An open, simply connected subset of a finite dimensional vector space or
-	the complex plane $\C$ is
+	An open, simply connected subset of a finite dimensional vector space is
 	called a \emph{domain}.
 \end{definition}
 \begin{definition}[Boundary]
@@ -1151,21 +1152,27 @@ multilayered medium.
 		\sommerfeldIntegral{\nu} \left\{\tilde{f} \left( k_\rho \right) \right\}
 		&=
 		\frac{1}{2\pi}
-		\int\limits_{0}^{\infty} \dd k_\rho \, k_\rho
-		\besselj{0} \left(k_\rho \rho\right)
+		\int\limits_{0}^{\infty}
 		\tilde{f} \left(k_\rho\right) 
+		\besselj{0} \left(k_\rho \rho\right)
+		k_\rho 
+		\,
+		\dd k_\rho
 		\label{eq:sommerfeld_integral_sip}
 		\\
 		&\equiv
 		\frac{1}{4\pi}
-		\int\limits_{-\infty}^{\infty} \dd k_\rho \, k_\rho
-		\besselh{2}{\nu} \left(k_\rho \rho\right)
+		\int\limits_{-\infty}^{\infty}
 		\tilde{f} \left(k_\rho\right)
+		\besselh{2}{\nu} \left(k_\rho \rho\right)
+		k_\rho
+		\,
+		\dd k_\rho
 		\label{eq:sommerfeld_integral_eip}
 		\, ,
 	\end{align}
 	where the path of integration in \eqref{eq:sommerfeld_integral_eip} is
-	understood in the way shown in \cref{fig:si_paths}.
+	understood as shown in \cref{fig:si_paths}.
 \end{corollary}
 
 Note that the second kind Hankel function in \eqref{eq:sommerfeld_integral_eip}
@@ -1175,16 +1182,11 @@ An appropriate but otherwise arbitrary detour as shown in \cref{fig:si_paths},
 however, ensures to sidestep $\besselh{2}{0} \left(0\right)$ as well as the
 two branch points of $k_z$ for $\imag{k} \to 0$.
 	
-\begin{definition}[\Acf{EIP}]
-	In \eqref{eq:sommerfeld_integral_eip} the integration path along the whole
-	real axis is called \emph{\ac{EIP}}\footnote{
-	The term \acl{SIP} is not used uniformly in the literature.
-	Sometimes the whole real axis path is termed \ac{SIP}, while the
-	non-negative real axis path is called differently.
-	}.
-\end{definition}
-
-The \ac{EIP} has a variety of advantages over the positive real axis path in
+The \ac{EIP}\footnote{The term \acf{SIP} is not used uniformly in the
+literature.
+Sometimes the whole real axis path shown in \cref{fig:si_paths} is termed
+\ac{SIP}, while the non-negative real axis path is called differently.}
+has a variety of advantages over the positive real axis path in
 \eqref{eq:sommerfeld_identity_pos_real_axis}.
 Much of the power of Sommerfeld's approach originates in the fact that the
 involved spectral domain Green's functions are holomorphic on $\C$ except at 
@@ -1192,7 +1194,7 @@ distinct poles and have, as can be shown \cite{Michalski2016b}, at most two
 square root branch points and corresponding branch cuts.
 In the picture of Riemann's sphere \cite[180]{Meyberg2006}, the real
 $-\infty$ and $\infty$ in \eqref{eq:sommerfeld_integral_eip} can be interpreted
-as one single point in $\C \cup \left\{\infty\right\}$.
+as the very same point in $\C \cup \left\{\infty\right\}$.
 Another way to think of this is that, for $\rho > 0$, the real axis path in
 \eqref{eq:sommerfeld_integral_sip} can be closed at infinity in the lower
 complex $k_\rho$ half-plane by virtue of Jordan's lemma, which is applicable
@@ -1224,10 +1226,11 @@ The proof of equivalence for \eqref{eq:sommerfeld_integral_sip} and
         \draw [red,thick,postaction={decorate}] (-4,0) -- (-2,0) -- (-2,-0.2) --
 				(0.2,-0.2) -- (0.2,0.2) -- (2,0.2) -- (2,0) --node[above]{SIP} (4,0);
 	\end{tikzpicture}
-	\caption[\acl{SIP} in the complex $k_\rho$-plane]
-	{\acf{SIP} in the complex $k_\rho$-plane. The exact form of the detour
-	is not critical, as long as the branch points $\pm k$ and the singularity
-	of $\besselh{2}{\nu} \left(0\right)$ are obviated.}
+	\caption[\Acf{EIP}]
+	{\Acf{EIP} in the complex $k_\rho$-plane.
+	The exact form of the detour is not critical as long as the branch points
+	$\pm k$ and the singularity of $\besselh{2}{\nu} \left(0\right)$ are
+	obviated.}
 	\label{fig:si_paths}
 \end{figure}
 
@@ -1293,23 +1296,23 @@ $G_0 \left(\robs, \rsrc\right)$ if the axioms of real valuedness in
 \cref{def:euclidean_norm} and \cref{def:euclidean_metric} dropped.
 
 As an example, assume $0 < k \in \R$ and
-$R = R_\mathrm{re} + \im R_\mathrm{im}$, where
-$R_\mathrm{re}, R_\mathrm{im} \in \R$.
+$R = R_\Re + \im R_\Im$, where
+$R_\Re, R_\Im \in \R$.
 Substituting these into \eqref{eq:scalar_free_space_gf}, the consideration
 \begin{equation}\label{eq:example_csb}
 	\abs{\frac{\exp{-\im k R}}{R}} = 
-	\abs{ \frac{\exp{-\im k R_\mathrm{re}} \exp{k R_\mathrm{im}}}{R} } = 
-	\frac{\exp{k R_\mathrm{im}}}{\abs{R}}
+	\abs{ \frac{\exp{-\im k R_\Re} \exp{k R_\Im}}{R} } = 
+	\frac{\exp{k R_\Im}}{\abs{R}}
 \end{equation}
-suggests the complex length $R$ should be defined with $R_\mathrm{im} \leq 0$ to
+suggests the complex length $R$ should be defined with $R_\Im \leq 0$ to
 make $G_0$ decay for large $R$.
 
-One could, on the other hand also demand that at least $R_\mathrm{re}$ should be
+One could, on the other hand also demand that at least $R_\Re$ should be
 non-negative in order to maintain some relation to the intuitive notion of
 distance.
-This choice, however, requires the additional restriction that $R_\mathrm{im}$
+This choice, however, requires the additional restriction that $R_\Im$
 must stay \enquote{small} as $\abs{R} \to \infty$, \ie,
-$lim_{R \to \infty} \abs{R} = R_\mathrm{re}$.
+$lim_{R \to \infty} \abs{R} = R_\Re$.
 
 Such freedom of choice can be achieved with a definition of complex distance
 according to
@@ -1718,6 +1721,17 @@ especially required if these other methods are built on the Sommerfeld identity.
 Thus, in such a case the \ac{DCIM} and the internal function fitting algorithm
 must be implemented in such a way that $\real{z} \leq 0$ can be guaranteed.
 
+\fxnote{TODO}
+% The above convergence analysis does not yet prove the equivalence in
+% \eqref{eq:sommerfeld_identity_complex_z} for $z \in \C$.
+% In the standard form \eqref{eq:sommerfeld_identity_pos_real_axis} the term
+% $\exp{-\im k \abs{z}}$ describes plane waves in $\uv{z}$-direction.
+% These plane waves propagate \emph{away} from the vertical level $z = 0$, in
+% which the  into
+% both directions, \ie, for $z > 0$ we have upward propagation whereas for $z < 0$
+% the plane waves propagate downwards.
+% Furthermore 
+
 
 
 
@@ -1737,33 +1751,34 @@ must be implemented in such a way that $\real{z} \leq 0$ can be guaranteed.
 \section{Fundamental equations}
 \label{sec:em_fundamental_equations}
 
-The theory of classical electrodynamics, expressed axiomatically by Maxwell's
-equations, constitute an accepted and well-proven framework for thy analysis of
-macroscopic\footnote{An electromagnetic problem is considered \emph{macroscopic}
-if it can be justly assumed that the electromagnetic sources---charges and
-currents---are described by \emph{continous} functions of space.}
-electromagnetic phenomena.
+Maxwell's equations---as the central axioms of classical
+electrodynamics---constitute a universally accepted and well-proven theory
+of macroscopic\footnote{An electromagnetic problem is considered
+\emph{macroscopic} if the description of electromagnetic sources---namely
+charge and current \emph{densities}---by \emph{continuous} functions of
+space is a justifiable assumption.} electromagnetic phenomena.
 The subsequent section aims to demonstrate one possible way to derive the
-representation of electromagnetic wave fields in inhomogeneous media for in the
-important special case of a solution domain whose media parameters vary only in
+representation of electromagnetic wave fields in inhomogeneous media for the
+important special case of solution domains whose media parameters vary only in
 one Cartesian direction.
 This direction is defined to be the one of $\uv{z}$.
 
-As usual, at the very beginning there are Maxwell's equations.
-Out of their manifold manifestations it is advisable to choose the most
-simplified formulation still amenable to the problem at hand.
+In order to treat certain specific electromagnetic field problems it is usually
+advisable to choose a formulation of Maxwell's theory which is simplified as
+much as possible yet still describes the problem accurately enough within the
+aimed purpose.
 In the present case the bounds of simplification are specified by the following
 assumptions.
 \begin{itemize}
 	\item Stationary \emph{time-harmonic} fields are considered.
 	The frequency $f > 0$ (in $\SI{}{\hertz}$) is treated as a parameter of the
-	problem, time convention is determined by
+	problem, the use of the $\exp{-\im \omega t}$ time convention is dictated by
 	\cref{def:fourier_transfrom_temporal_forward}, where $\omega = 2\pi f$.
 	\item All media are assumed to be \emph{linear} and \emph{isotropic}.
-	Their electromagnetic properties are therefore fully described by two scalar
+	Therefore, their electromagnetic properties are fully described by two scalar
 	fields $\epsr, \mur \in \C$.
-	The material parameters depend on space in the particular way
-	$\epsr = \epsr\left(z\right)$ and $\mur = \mur\left(z\right)$.
+	The material parameters depend on position in the particular way
+	$\epsr = \epsr\left(z\right), \mur = \mur\left(z\right)$.
 	\item Hypothetical magnetic (equivalent) sources $\pvec{M}$ and
 	$\varrho_\mathrm{m}$ are introduced to mathematically complement the
 	physical sources $\pvec{J}$ and $\varrho$.
@@ -1789,19 +1804,12 @@ The vector and scalar fields in \eqref{eq:mwe_fd} are functions
 $\R^3 \mapsto \C^3$ and $\R^3 \mapsto \C$, respectively.
 
 The dimensionless quantity $\epsr \in \C$ is called relative permittivity 
-and can be composed as \cite[43]{Jin2015}
+and can be composed of a dimensionless real part $\epsr^\prime$ and electric
+conductivity $\sigma$ (measured in Siemens) as \cite[43]{Jin2015}
 \begin{equation}
-	\epsr = \epsr^\prime - \im \frac{\sigma}{\omega \varepsilon_0} \,,
+	\epsr = \epsr^\prime - \im \frac{\sigma}{\omega \varepsilon_0}
+	\, . 
 \end{equation}
-where $\epsr^\prime$ describes the dielectric properties of a lossless medium
-and the imaginary part is a quantifies the losses due to the electrical
-conductivity $\sigma$ (measured in Siemens).
-
-In order to uniquely define an electromagnetic field problem and its solution,
-Maxwell's equations \eqref{eq:mwe_fd} have to be supplemented by appropriate
-boundary conditions.
-In a homogeneous domain these follow from the Sommerfeld condition of radiation
-as given by \cref{def:sommerfeld_radiation_condition}.
 
 At an interface separating two spatial domains $\Omega_1, \Omega_2 \subset \R^3$
 with different, but domain-wise constant material parameters the canonical
@@ -1822,12 +1830,12 @@ continuity conditions
 \end{subequations}
 can be derived \cite[p20]{Jackson2013}, where the omitted arguments
 $\robs_{1,2} \in \Omega_{1,2}$ of the fields are understood in the
-$\robs_{1,2} \to \partial \Omega$ with the common boundary
-$\partial \Omega = \partial \Omega_1 = \partial \Omega_2$ and the unit normal
-vector $\uv{n}$ on $\partial \Omega$.
-The surface (indicated by the subscript $\mathrm{s}$) current and charge
+$\robs_{1,2} \to \partial \Omega$ with a common boundary
+$\partial \Omega = \partial \Omega_1 = \partial \Omega_2$ in which the 
+surface (indicated by the subscript $\mathrm{s}$) current and charge
 densities on the right-hand sides of \eqref{eq:mwe_continuity_at_interface}
-reside, if existent, on $\partial\Omega$.
+reside (if existent).
+The unit normal vector on $\partial \Omega$ is denoted by $\uv{n}$.
 
 The arguably most prominent feature of Maxwell's equations is the possibility
 of wave solutions.
@@ -1856,15 +1864,22 @@ The quantity
 \begin{equation}\label{eq:wavenumber}
 	k = \omega^2 \sqrt{\varepsilon \mu}
 \end{equation}
-is called \emph{wavenumber}.
+in all three equations is called \emph{wavenumber} while $\lambda = 2\pi / k$
+is the wavelength.
 
-Consider now an open domain problem,~\ie, $\Omega = \R^3$, where $\Omega$ may
-be compound of multiple disjoint subdomains
-$\Omega_1, \Omega_2, \dots, \Omega_N$ with domain-wise constant $\epsr$ and
-$\mur$.
-In order to be unique and physical, a solution to \eqref{eq:curlcurl_E},
-\eqref{eq:curlcurl_H} or \eqref{eq:vector_helmholtz_equation} must fulfill
-the radiation condition for large $\robs \in \Omega$.
+In order to uniquely define an electromagnetic field problem and its solution,
+Maxwell's equations \eqref{eq:mwe_fd} have to be supplemented by appropriate
+boundary conditions.
+In a homogeneous domain these follow from the Sommerfeld condition of radiation
+as given by \cref{def:sommerfeld_radiation_condition}.
+
+Formally the Sommerfeld half-space problem consists of an open solution domain
+$\Omega = \R^3$, in which the ground may be composed of disjoint but adjacent
+subdomains $\Omega_1, \Omega_2, \dots, \Omega_N$ in whom $\epsr$ and $\mur$
+are domain-wise constant.
+In order to be unique and physical, a solution to \eqref{eq:curlcurl_E} or
+\eqref{eq:curlcurl_H} must fulfill the radiation condition for observation
+points $r \infty$.
 To ensure this, $k$ must have $\imag{k} \leq 0$ in all sub-domains $\Omega_n$
 which contain points $\robs$ with $r \to \infty$.
 Therefore, we restrict allowed values of $\epsr$ and $\mur$ to lie in
@@ -1877,13 +1892,6 @@ $\rdiffNorm \to \infty$ for $\epsr, \mur \in \Omega_{\epsr,\mur}$.
 Hence, the radiation is fulfilled for open boundary conditions with
 $\epsr, \mur \in \Omega_{\epsr,\mur}$.
 
-For real $k$ it makes sense to define the \emph{wavelength} as
-$\lambda = 2\pi / k$.
-The wavelength will be used later to define relative distances which makes
-the presentation of results independent of frequency.
-Vacuum values. \eg, $\lambda_0 = 2\pi / k_0 = c / f$,
-where $c$ is the vacuum speed of light, are indicated by the subscript zero.
-
 
 
 
@@ -1895,17 +1903,19 @@ where $c$ is the vacuum speed of light, are indicated by the subscript zero.
 \section{Duality principle}
 \label{sec:duality_principle}
 
-The derivation of \eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} is analogous.
-This is due to a principle which \textcite[\S12-1]{Feynman2011} felicitously
-summarized by stating that \enquote{the same equations have the same solutions}.
+The derivation of \eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} follows the
+very same procedure.
+This is due to a principle which Richard Feynman felicitously summarized by
+stating that \enquote{the same equations have the same solutions}
+\cite[\S12-1]{Feynman2011}.
 
 This so-called duality principle makes use of the fact that the symmetry of the
 complemented Maxwell's equations \eqref{eq:mwe_fd} in only broken by
 opposing signs in \eqref{eq:mwe_fd_faraday} and \eqref{eq:mwe_fd_ampere}.
 Taking this into account, one can establish as set of duality replacement rules.
-This set is not unique as, in fact, any set of rules which preserves the form
-of \eqref{eq:mwe_fd} is admissible.
-While different possibilities can be found can be found in the literature
+This set is not unique as, in fact, any set of rules which preserves Maxwell's
+equations \eqref{eq:mwe_fd} is admissible.
+While different possibilities can be found in the literature
 \cite{Jin2015,Harrington2001,Chew1999}, the present thesis uses
 \begin{definition}[Duality substitution rules for electrodynamic quantities]
 	The \emph{duality substitution rules for electromagnetic quantities} in
@@ -1945,28 +1955,46 @@ While different possibilities can be found can be found in the literature
 \subsection{Generic \acs{TM} and \acs{TE} Fields}
 \label{subsec:generic_TM_and_TE_fields}
 
-In media of one-dimensional inhomogeneity,\ie, $\epsr = \epsr\left(z\right)$ and
-$\mur = \mur\left(z\right)$ the study of wave fields governed by
-\eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} can be reduced to the solution
-of two \acp{ODE}.
-These equations describe a so-called \emph{characteristic component} of an
-electromagnetic filed with only five non-vanishing components.
-Since either $\pvec{E}$ or $\pvec{H}$ have no $\uv{z}$ component, these
-\emph{modes} are termed \ac{TE} and \ac{TM}, respectively.
+For $\epsr = \epsr\left(z\right)$ and $\mur = \mur\left(z\right)$ the study of
+wave fields governed by \eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} can be
+reduced to the solution of two \acp{ODE}.
+While, in principle, the idea behind this is similar to the approach shown in
+\cref{sec:helmholtz_eq_az_symmetry} for the scalar case, some preliminary
+statements have to be made to transfer this method electromagnetic vector
+fields.
 
-% The following derivation of a generic \ac{TM} field and its continuity
-% conditions at a change of $\epsr$ or $\mur$ in $z$ is essentially the solution
-% to an example problem in the textbook by \textcite[140]{Chew1999}.
+It can be shown that, under the present assumptions, the individual vector
+components of solutions to \eqref{eq:curlcurl_E} and \eqref{eq:curlcurl_H} are
+not independent, but these solutions can rather be decomposed into two types
+of fields each of which has only five non-vanishing components.
+These fields are termed after the one of the fields $\pvec{E}$ and $\pvec{H}$
+which has no component in $\uv{z}$-direction, \ie, which is either \acf{TM} or
+\acf{TE}.
+The components of these five-component fields are not independent either.
+In fact, four of them can be readily obtained knowing solely the solution for
+the remaining components if this very component is a so-called
+\emph{characteristic} component of the respective \ac{TM} of \ac{TE} field.
+The choice of a characteristic component for a five-component field is not
+unique for $\epsr = \epsr\left(z\right)$ and $\mur = \mur\left(z\right)$.
+If, \eg, a \ac{TM} field is considered, both $\pvec{E} \cdot \uv{z}$ and
+$\pvec{H} \times \uv{z}$ will serve the purpose.
 
-Consider the $E_z = \uv{z} \cdot \pvec{E}$ as the characteristic component
-of a generic \ac{TM} field
+In the following $\pvec{E} \cdot \uv{z} = E_z$ is considered as characteristic
+component of a generic \ac{TM} field\footnote{The shown derivation is
+essentially the solution to an example problem from the textbook by
+\textcite[140]{Chew1999}.}.
+Based on this, central properties of the Green's function for a \ac{VED} are
+discussed, and its governing equation is derived using the Hankel transform
+approach from \cref{sec:helmholtz_eq_az_symmetry}.
+
+Consider a generic \ac{TM} field
 \begin{equation}\label{eq:generic_TM_field_components}
 	\pvec{H} = \uv{x}H_x + \uv{y}H_y 
 	\qquad
 	\pvec{E} = \uv{x}E_x + \uv{y}E_y \uv{z}E_z
 	\, .
 \end{equation}
-Obviously, the component $E_z$ is contained in \eqref{eq:curlcurl_E}.
+Obviously, the component $E_z$ is part of \eqref{eq:curlcurl_E}.
 Its governing equation
 \begin{equation}\label{eq:TM_characteristic_component_PDE_step_01}
 	-\frac{\partial^2}{\partial x^2} E_z
@@ -1977,7 +2005,7 @@ Its governing equation
 	= 0
 \end{equation}
 is straightforwardly obtained by extracting the $z$-component of
-\eqref{eq:curlcurl_E} and using $\mur = \mur\left(z\right)$.
+\eqref{eq:curlcurl_E} and by employment of $\mur = \mur\left(z\right)$.
 With Schwarz's theorem \eqref{eq:TM_characteristic_component_PDE_step_01} can
 be written as
 \begin{equation}\label{eq:TM_E_z_PDE_first_step}
@@ -1994,8 +2022,8 @@ be written as
 	0
 	\, ,
 \end{equation}
-where again the notation \eqref{eq:def_laplace_trans} is used to express the
-transverse part of the Laplacian operator.
+where again the notation introduced in \eqref{eq:def_laplace_trans} is used to
+express the transverse part of the Laplacian operator.
 From Gauss's law \eqref{eq:mwe_fd_gauss} for the homogeneous case $\varrho = 0$
 we have
 \begin{equation}\label{eq:TM_E_z_PDE_second_step}
@@ -2008,8 +2036,8 @@ we have
 	\varepsilon E_z
 	\, .
 \end{equation}
-Combining \eqref{eq:TM_E_z_PDE_first_step} \eqref{eq:TM_E_z_PDE_second_step}
-we have
+Using \eqref{eq:TM_E_z_PDE_first_step} in \eqref{eq:TM_E_z_PDE_second_step}
+the governing equation
 \begin{equation}\label{eq:TM_characteristic_component_PDE}
 	\left(
 		\laplaceTrans 
@@ -2023,13 +2051,8 @@ we have
 	\right)
 	\varepsilon E_z = 0
 \end{equation}
-for the characteristic component $\varepsilon E_z$ of the \ac{TM}
-field\footnote{Alternatively to $\varepsilon E_z$ the transverse component
-$H_\mathrm{t}$ could also be used as characteristic component
-\cite[46]{Chew1999}.}.
-The dual of a \ac{TM} field is \ac{TE}.
-The spectral domain representation of its characteristic quantity $\mu H_z$
-follows readily by duality and reads
+for the characteristic component $\varepsilon E_z$ of the \ac{TM} is obtained.
+As a \ac{TE} field is dual to the \ac{TM} case, the governing equation
 \begin{equation}\label{eq:TE_characteristic_component_PDE}
 	\left(
 		\laplaceTrans 
@@ -2042,41 +2065,42 @@ follows readily by duality and reads
 		k^2
 	\right)
 	\mu H_z = 0
-	\, .
 \end{equation}
+for its characteristic quantity $\mu H_z$ follows effortlessly. 
 
-So far the \ac{TM} characteristic of \eqref{eq:generic_TM_field_components} has
-not yet been employed.
-The missing $H_z$ component comes into play as this very property allows
-to obtain the remaining five field components from a known solution for $E_z$
-by differentiation \cite[\S\S2.3.3]{Chew1999}.
-
-
-
+So far the \ac{TM} characteristic of the fields assumed in
+\eqref{eq:generic_TM_field_components} has not yet been employed.
+The missing $H_z$ component comes into play as it allows to obtain the
+remaining five field components by plain differentiation once the solution for
+$E_z$ is known \cite[\S\S2.3.3]{Chew1999}.
 
 
 
 
-\subsection{Plane Stratified Media and Continuity Conditions at Interfaces}
+
+
+
+\subsection{Planar Stratified Media and Continuity Conditions}
 \label{subsec:layered_media_and_continuity_conditions}
 
-So far, neither \eqref{eq:TM_characteristic_component_PDE} nor
-\eqref{eq:VED_E_z_ODE} impose any restrictions on \emph{how} exactly $\epsr$
-and $\mur$ depend on $z$ other than existence of the involved derivatives.
-Henceforth, it is assumed that the material parameters are domain-wise
-constant.
-The individual domains embrace adjacent intervals in $z$ which may be of finite,
-semi-infinite or infinite extent, where the latter is equivalent to the
-homogeneous space case.
-In accordance to history and the nomenclature in literature the domains are
-termed \emph{layers}.
-At the upper (lower) boundaries of the top (bottom) layer boundary conditions 
-need to be imposed if these boundaries are at finite $z$.
-Important within the scope of the present thesis are mainly the Dirichlet-like
+So far, no restrictions on \emph{how} exactly $\epsr$ and $\mur$ depend on $z$
+have been made other than the existence of the derivatives in
+\eqref{eq:TM_characteristic_component_PDE} and
+\eqref{eq:TE_characteristic_component_PDE} is tacitly assumed.
+Henceforth, it is assumed that the material parameters are constant within
+consecutive intervals of $z$.
+These so defined subdomains can be of finite, semi-infinite or infinite extent,
+where the latter two cases model the Sommerfeld problem and free space,
+respectively.
+In accordance to history and common nomenclature in literature the sub-domains
+are termed \emph{layers}.
+At the upper (lower) boundaries of the top (bottom) layer non-open boundary
+conditions  need to be imposed if these boundaries are at finite $z$.
+Relevant within the scope of the present thesis are mainly the Dirichlet-like
 boundary conditions of \ac{PEC} and \ac{PMC} type, which are defined by
 vanishing transversal components of $\pvec{E}$ and $\pvec{H}$ on the boundary,
 respectively.
-The geometrical setup of the solution domain as well as the indexing scheme is
+The described solution domain as well as the chosen indexing scheme is
 visualized in \cref{fig:multilayered_medium_spec}.
 Within this convention the Sommerfeld problem corresponds to a solution domain
 with $N=2$, one single interface at $z_1 = 0$ and open outer boundary
@@ -2129,17 +2153,16 @@ conditions.
     \label{fig:multilayered_medium_spec}
 \end{figure}
 
-According to \cref{fig:multilayered_medium_spec} discontinuities of $\epsr$ and
+According to \cref{fig:multilayered_medium_spec}, discontinuities of $\epsr$ and
 $\mur$ may occur at the interface coordinates $z_i$.
 Hence, continuity conditions for the characteristic components of \ac{TM} and
 \ac{TE} fields need to be derived at these interfaces.
-A heuristic way to obtain these continuity conditions is to deduce them directly
+A heuristic way to obtain such conditions is to deduce them directly
 from \eqref{eq:TM_characteristic_component_PDE} and
-\eqref{eq:TE_characteristic_component_PDE} by the requirement that the
-involved derivatives shall exist \cite[47]{Chew1999}.
+\eqref{eq:TE_characteristic_component_PDE} by requiring existence of all 
+involved derivatives \cite[47]{Chew1999}.
 Another approach may employ \eqref{eq:mwe_continuity_at_interface}.
-Anyhow, the continuity conditions for $\varepsilon E_z$ at the boundary
-$z_i$ read
+Both approaches lead to the continuity conditions
 \begin{subequations}\label{eq:TM_continuity}
 	\begin{equation}\label{eq:TM_continuity_1}
 		\varepsilon_i E_{z} \left(z^{-}\right) =
@@ -2157,7 +2180,8 @@ $z_i$ read
 		\,,
 	\end{equation}
 \end{subequations}
-where $z^{\pm} \to z_i$ from both sides.
+for  $\varepsilon E_z$ at a boundary $z_i$, where $z^{\pm} \to z_i$ from both
+sides.
 Once more the duality principle can be employed to obtain the corresponding
 conditions 
 \begin{subequations}\label{eq:TE_continuity}
@@ -2177,7 +2201,7 @@ conditions
 		\,,
 	\end{equation}
 \end{subequations}
-for $H_z$.
+for $\mu H_z$.
 
 
 
@@ -2186,14 +2210,14 @@ for $H_z$.
 
 
 
-\subsection{Characteristic Component of the \ac{VED} Field}
+\subsection{Characteristic Field Component for a Vertical Electric Dipole}
 \label{subsec:E_z_comp_of_VED}
 
-With \eqref{eq:TM_characteristic_component_PDE} in mind consider now 
+With \eqref{eq:TM_characteristic_component_PDE} in mind, consider now 
 a \ac{VED},~\ie, an infinitesimal $\uv{z}$-directed current element.
 As $\varepsilon = \varepsilon\left(z\right)$ and $\mu = \mu\left(z\right)$,
 one can, without loss of generality, lay the \ac{VED} onto the Cartesian
-and cylindrical $z$-axis, \ie,
+and cylindrical $z$-axis with which the current density formally reads
 \begin{equation}\label{eq:VED_current_density}
 	\pvec{J} \left(\pvec{r}\right) =
 	I \uv{z}
@@ -2202,16 +2226,15 @@ and cylindrical $z$-axis, \ie,
 	\diracDelta\left(z - z^\prime\right)
 	\, .
 \end{equation}
-As the driving current density has no transverse component it is a justifiable
+As the excitation $\pvec{J}$ has no transverse component, it is a justifiable
 assumption that the \ac{VED} field is of azimuthal symmetry.
-By the nature of \eqref{eq:mwe_fd_ampere} we can further deduce that $\pvec{H}$
-has no vertical component.
+By the nature of \eqref{eq:mwe_fd_ampere} it can further be deduced that
+$\pvec{H}$ has no vertical component.
 With these two arguments the \ac{VED} field is known to be \ac{TM} and to depend
 on position in the particular way
 $\pvec{F} = \pvec{F} \left(\rho, z\right)$,
 $\pvec{F} \in \left\{\pvec{E}, \pvec{H}\right\}$.
-
-These characteristics allow to apply the Hankel transform
+These characteristics allow for application of the Hankel transform
 \eqref{eq:hankel_transform} to \eqref{eq:TM_characteristic_component_PDE}.
 Then, with \cref{coll:k_rho_domain}, the \ac{PDE}
 \eqref{eq:TM_characteristic_component_PDE} reduces to the \ac{ODE}
@@ -2231,6 +2254,22 @@ Then, with \cref{coll:k_rho_domain}, the \ac{PDE}
 \end{equation}
 in the $k_\rho$ spectral domain, where again the Pythagorean relation
 \eqref{eq:def_k_z_of_k_rho} is used for notational convenience.
+The Green's function of \eqref{eq:VED_E_z_ODE} defined by
+\begin{equation}\label{eq:VED_E_z_ODE_greens_function_def}
+	\left(
+		\varepsilon \left(z\right)
+		\frac{\dd}{\dd z}
+		\frac{1}{\varepsilon \left(z\right)}
+		\frac{\dd}{\dd z}
+		+
+		k_z^2 \left(z\right)
+	\right)
+	\tilde{G}^\mathrm{EJ}_{zz} \left(z, z^\prime\right)
+	=
+	-\diracDelta \left( z - z^\prime \right)
+\end{equation}
+is then the spectral domain representation of the characteristic component of
+the \ac{VED} field.
 
 The spectral-domain solution $\tilde{E}_z$ again obeys Maxwell's equations.
 Therefore, spectral domain equations for the remaining field components can be
@@ -2246,47 +2285,51 @@ transformation,~\ie, by means of Sommerfeld integrals.
 \subsection{Equivalent Transmission Line Network Method}
 \label{subsec:network_method}
 
-Coming back to Richard Feynman's famous quote (see
-\cref{sec:duality_principle}), inspection of \eqref{eq:VED_E_z_ODE} reminds of
-a rather similar equation arising in another area well-known to electrical
-engineers: transmission line theory.
 
-% Because of this familiarity, it has become a well-established procedure to
-% re-use known results of transmission line theory in the solution process of
-% electromagnetic field problem in half-space or planar multilayered solution
-% domains.
-% This approach is referred to as equivalent transmission line network method or
-% just network method in the literature.
-% For the special case of multilayered media with domain-wise constant material
-% parameters the \acp{TLGF} are known analytically for an arbitrary number of
-% layers and outer boundary conditions which might be open, \ac{PEC}, \ac{PMC}
-% or of impedance-type \cite[Section~2.4]{Felsen1994}\cite{Michalski1990,
-% Eibert1997,Michalski2005,Michalski2016b}.
 
-% Just as in planar layered media, \ac{TE} and \ac{TM} modes can be distinguished
-% on transmission lines.
+
+\subsubsection{Notion of the Method}
+
+The Green's function of \eqref{eq:VED_E_z_ODE} for the solution domain shown
+in \cref{fig:multilayered_medium_spec} can be found by various
+procedures \cite{Sommerfeld1964,Chew1999}.
+However, from an electrical engineer's perspective it is especially appealing to
+not actually \emph{solve} the problem at all but to use familiar results from 
+another well-understood area of electrical engineering:
+transmission line theory.
+It is again the duality principle which makes this possible---and
+Feynman's quote (see \cref{sec:duality_principle}) is proved helpful one more
+time.
+As it turns out, not only the Green's function for \eqref{eq:VED_E_z_ODE} but
+actually \emph{all} possible Green's functions arising in the study of
+wave propagation in planar multilayered media can be expressed in terms of the
+Green's function for voltage and current on an equivalent transmission line
+network whose governing \acp{ODE} are dual to those of the field problem in its
+$k_\rho$-domain representation \cite{Felsen1994,Michalski2005,Michalski2016b}.
 
 The homogeneous transmission line equations for a $z$-directed line with
-propagation \enquote{constant} $k_z$ are given by
+wavenumber $k_z$ are given by
 \cite{Felsen1994,Michalski2016b}
 \begin{subequations}\label{eq:tl_ode_system}
 	\begin{align}
 		\frac{\dd}{\dd z}
 		V^\tx
-		&=
-		-\im
+		+
+		\im
 		k_z
 		Z^\tx
 		I^\tx
+		&= 0
 		\label{eq:tl_ode_system_dV}
 		\\
 		\frac{\dd}{\dd z}
 		I^\tx
-		&=
-		-\im
+		+
+		\im
 		k_z
 		Y^\tx
 		V^\tx
+		&= 0
 		\label{eq:tl_ode_system_dI}
 		\, ,
 	\end{align}
@@ -2299,7 +2342,7 @@ Within the framework of multilayered media the transmission line
 characteristics in the $i$-th layer are determined by \cite{Michalski2016b}
 \begin{equation}
 	k_{zi} = \sqrt{{k_i}^2 - {k_\rho}^2}
-	\,
+	\, ,
 \end{equation}
 \begin{equation}
 	Z_i^\tm = \frac{k_{zi}}{\omega \varepsilon_i}
@@ -2310,19 +2353,60 @@ and
 	\, .
 \end{equation}
 
-From \eqref{eq:tl_ode_system} the second order \acp{ODE}
-\begin{equation}\label{eq:tl_2nd_order_ode_isrc}
-	\left(
+For the system \eqref{eq:tl_ode_system} Green's functions can be defined in
+two ways \cite{Michalski2016b}, namely by excitation with a unit-strength
+current source,
+\begin{subequations}\label{eq:tl_ode_system_current_gf}
+	\begin{align}
 		\frac{\dd}{\dd z}
-		\frac{1}{\im k_z Z^\tx}
-		\frac{\dd}{\dd z} +
-		\frac{k_z^2}{\im k_z Z^\tx}
-	\right)
-	V^\tx
-	=
-	0
-\end{equation}
-and
+		V_i^\tx
+		+
+		\im
+		k_z
+		Z^\tx
+		I_i^\tx
+		&= 0
+		\\
+		\frac{\dd}{\dd z}
+		I_i^\tx
+		+
+		\im
+		k_z
+		Y^\tx
+		V_i^\tx
+		&= 
+		\diracDelta\left(z - z^\prime\right)
+		\, ,
+	\end{align}
+\end{subequations}
+and for the voltage driven case
+\begin{subequations}\label{eq:tl_ode_system_voltage_gf}
+	\begin{align}
+		\frac{\dd}{\dd z}
+		V_v^\tx
+		+
+		\im
+		k_z
+		Z^\tx
+		I_v^\tx
+		&=
+		\diracDelta\left(z - z^\prime\right)
+		\\
+		\frac{\dd}{\dd z}
+		I_v^\tx
+		+
+		\im
+		k_z
+		Y^\tx
+		V_v^\tx
+		&= 
+		0
+		\, .
+	\end{align}
+\end{subequations}
+
+From \eqref{eq:tl_ode_system_current_gf} and \eqref{eq:tl_ode_system_voltage_gf}
+the two second-order \acp{ODE}
 \begin{equation}\label{eq:tl_2nd_order_ode_vsrc}
 	\left(
 		\frac{\dd}{\dd z}
@@ -2330,29 +2414,35 @@ and
 		\frac{\dd}{\dd z} +
 		\frac{k_z^2}{\im k_z Y^\tx}
 	\right)
-	I^\tx
+	I_v^\tx
 	=
-	0
+	-\diracDelta \left(z - z^\prime\right)
 \end{equation}
-can be derived.
-Regarding the Green's functions of \eqref{eq:tl_2nd_order_ode_isrc} and
-\eqref{eq:tl_2nd_order_ode_vsrc} four cases can be distinguished.
-\begin{itemize}
-	\item voltage due to unit-strength $\diracDelta$-like current source $V_i$
-	\item current due to unit-strength $\diracDelta$-like current source $I_i$
-	\item voltage due to unit-strength $\diracDelta$-like voltage source $V_v$
-	\item current due to unit-strength $\diracDelta$-like voltage source $I_v$
-\end{itemize}
-These \ac{TLGF} are known analytically for the geometry shown in
-\cref{fig:multilayered_medium_spec}.
-The literature provides more or less ready to use expressions for the \acp{TLGF}
-for special cases as well as for a general multilayered medium 
-\cite{Michalski1990,Hsu1993,Ho1994,Eibert1997,Michalski2005}.
+and
+\begin{equation}\label{eq:tl_2nd_order_ode_isrc}
+	\left(
+		\frac{\dd}{\dd z}
+		\frac{1}{\im k_z Z^\tx}
+		\frac{\dd}{\dd z} +
+		\frac{k_z^2}{\im k_z Z^\tx}
+	\right)
+	V_i^\tx
+	=
+	-\diracDelta \left(z - z^\prime\right)
+\end{equation}
+can be derived which define the Green's functions for both transmission line
+quantities in case of $\diracDelta$-excitation by the respective opposing
+source type.
+The remaining Green's functions $V_v^\tx$ and $I_i^\tx$ can be obtained via
+\eqref{eq:tl_ode_system} once $I_v^\tx$ and $V_i^\tx$ are known.
+Noting that \eqref{eq:tl_2nd_order_ode_isrc} and
+\eqref{eq:tl_2nd_order_ode_vsrc}
+are duals it is even sufficient to only solve either for $I_v^\tx$ or $V_i^\tx$
+as the respective other case can be obtained by a simple interchange of
+impedance and admittance.
+The complete set of substitution rules for the \acp{TLGF} is given by
+\cref{tab:tlgf_duality}.
 
-As the coupled \acp{ODE} \eqref{eq:tl_ode_system_dV} and
-\eqref{eq:tl_ode_system_dI} are dual
-equations, the set of duality rules for the \acp{TLGF} can be formulated as
-given by \cref{tab:tlgf_duality}.
 \begin{table}[hbt]
 	\centering
 	\begin{tabular}{cc}
@@ -2367,16 +2457,114 @@ given by \cref{tab:tlgf_duality}.
 	\label{tab:tlgf_duality}
 \end{table}
 
+As various literature sources
+\cite{Michalski1990,Hsu1993,Ho1994,Eibert1997,Michalski2005}
+provide more or less ready to use expressions for the \acp{TLGF}---for special
+cases as well as for a general multilayered medium---these results are not
+re-considered here in detail.
+For the purposes of illustration it is sufficient to give the \acs{TLGF} for
+the special case of the classical Sommerfeld problem, \ie, two half-spaces
+with open boundary conditions and a single interface at $z = 0$.
+In the scheme of \cref{fig:multilayered_medium_spec} the upper (air) half-space
+is identified by index $1$.
+In this case the fundamental \ac{TLGF} can be chosen to be \cite{Michalski2016b}
+\begin{equation}\label{eq:TLGF_V_i}
+	V_i^\tx \left(z, z^\prime\right)
+	=
+	\frac{Z_1^\tx}{2}
+	\left(
+		\exp{-\im k_1 \abs{z - z^\prime}}
+		+
+		\overleftarrow{\Gamma}_1^\tx
+		\exp{-\im k_1 \left(z - z^\prime\right)}
+	\right)
+	\, ,
+\end{equation}
+where
+\begin{equation}
+	\overleftarrow{\Gamma}_1^\tx
+	=
+	\frac{Z_0^\tx - Z_1^\tx}{Z_0^\tx + Z_1^\tx}
+\end{equation}
+is the voltage reflection coefficient looking in negative $z$-direction at the
+interface of the two half-spaces.
+Note that \eqref{eq:TLGF_V_i} is continuous yet not differentiable in
+$z = z^\prime$.
+Therefore,
+\begin{equation}\label{eq:TLGF_I_I}
+	I_i^\tx \left(z, z^\prime\right)
+	=
+	\frac{1}{2}
+	\left(
+		\pm
+		\exp{-\im k_1 \abs{z - z^\prime}}
+		+
+		\overleftarrow{\Gamma}_1^\tx
+		\exp{-\im k_1 \left(z - z^\prime\right)}
+	\right)
+	\, ,
+\end{equation}
+which follows through \eqref{eq:tl_ode_system_dV}, is undefined at the source
+coordinate.
+With \eqref{eq:TLGF_V_i} and \eqref{eq:TLGF_I_I} known, the \acp{TLGF} for the
+voltage-excited case follow by duality.
 
+Note that the first exponential term in \eqref{eq:TLGF_V_i} is just the
+numerator of the spectral Green's function of free space as it occurs in the
+Sommerfeld identity \eqref{eq:sommerfeld_identity_pos_real_axis}.
+As it is now known that all layered media spectral Green's functions can be
+expressed in terms of \acp{TLGF}, it is clear that the generalization
+as compared to the case of free-space comes from the \emph{reflected}
+contributions, \ie, for the half-space case, from the second summand involving
+$\overleftarrow{\Gamma}$ in \eqref{eq:TLGF_V_i}.
+This means, however, that the \emph{direct term}, \ie, the first exponential
+can always be integrated in closed form using \cref{thm:sommerfeld_identity}.
 
-
-
-
-
+A detail which proves rather useful towards a computer implementation of
+\acp{TLGF} that these voltages and currents obey the reciprocity relations
+\cite{Michalski2005}
+\begin{subequations}\label{eq:tlgf_reciprocity}
+	\begin{align}
+		V_i
+		\left(z , z^\prime\right)
+		&=
+		V_i
+		\left(z^\prime, z\right)
+		\\
+		I_v
+		\left(z, z^\prime\right)
+		&=
+		I_v
+		\left(z^\prime, z\right)
+		\\
+		V_v
+		\left(z , z^\prime\right)
+		&=
+		-I_I
+		\left(z^\prime, z\right)
+		\, .
+	\end{align}
+\end{subequations}
 
 To illustrate the behavior of voltage and current on the equivalent
 \ac{TM} transmission line of a Sommerfeld half-space an example is shown in
-\cref{fig:tlgf_example}.
+\cref{fig:tlgf_example}\footnote{Note that the \acp{TLGF} as given by the
+simplified expressions \eqref{eq:TLGF_V_i} and \eqref{eq:TLGF_I_I} are not
+applicable for $z < 0$. Instead of these simplified forms the computer
+implementation with which \cref{fig:tlgf_example} is computed uses a much more
+general formulation \cite{Michalski2005}.}.
+One clearly observes that the \ac{TLGF} obtained by differentiation, in this
+case $I_i$, is discontinuous at $z = z^\prime$ due to the absolute value
+in the differentiated function.
+The computed impedance $Z = V / I$ is observed to match the characteristic
+line impedance for $z > z^\prime$, which is an indicator for the sanity of
+the implementation.
+A possibly unexpected observation is that the computed impedance is
+\emph{negative} in the lower half-space.
+This is a consequence of the case distinction for the direct term in
+\eqref{eq:TLGF_I_I} between forward and backward traveling waves.
+Thus, the impedance for $z < z^\prime$ appears negative but, however,
+has the expected absolute value.
 
 \begin{figure}
    \begin{tikzpicture}
@@ -2445,56 +2633,42 @@ To illustrate the behavior of voltage and current on the equivalent
 
 
 
+\subsubsection{Application to the \acs{VED} Spectral Green's Function}
 
+The equivalent transmission line network method as prescribed above can now be
+readily employed in the solution of \eqref{eq:VED_E_z_ODE_greens_function_def}.
+Comparison of \eqref{eq:VED_E_z_ODE_greens_function_def} with
+\eqref{eq:tl_2nd_order_ode_vsrc}
+for the \ac{TM} case reveals the duality of these two equations.
+It is thus obtained that
+\begin{subequations}\label{eq:VED_E_z_spectral_gf_in_TLGFs}
+	\begin{equation}
+		\tilde{G}^\mathrm{EJ}_{zz} \left(z, z^\prime\right)
+		=
+		\frac{V_i^\tm}{\im \omega}
+	\end{equation}
+	as well as
+	\begin{equation}
+		\frac{1}{\varepsilon}
+		\frac{\dd}{\dd z}
+		\tilde{G}^\mathrm{EJ}_{zz} \left(z, z^\prime\right)
+		=
+		-
+		\frac{V^\tm}{\im \omega}
+		\, .
+	\end{equation}
+\end{subequations}
+With \eqref{eq:VED_E_z_spectral_gf_in_TLGFs} the Green's function of
+\eqref{eq:VED_E_z_ODE} is represented by the current on an equivalent
+transmission line with \ac{TM} characteristics.
 
-
-
-
-
-
-% So ergibt der Vergleich von \eqref{eq:TE_ODE_GF} mit
-% \eqref{eq:tl_2nd_order_ode_isrc} im TE-Fall
-% \begin{equation}\label{eq:G_tilde_TE_tl_quantities}
-% 	\tilde{G}^\te \equiv \frac{1}{\im \omega} V^{\isrc,\te} \,
-% \end{equation}
-% der Vergleich von \eqref{eq:TM_ODE_GF} mit \eqref{eq:tl_2nd_order_ode_vsrc}
-% im TM-Fall liefert
-% \begin{equation}\label{eq:G_tilde_TM_tl_quantities}
-% 	\tilde{G}^\tm \equiv \frac{1}{\im \omega} I^{\vsrc,\tm} \, .
-% \end{equation}
-
-% Aus der Leitungstheorie \cite{Pozar2011} sind wesentliche Aspekte der
-% Wellenausbreitung von Spannung und Stromstärke auf Leitungen, die durch
-% \eqref{eq:tl_ode_system_dI} und \eqref{eq:tl_ode_system_dV} beschrieben werden,
-% bekannt.
-% So sind beispielsweise Spannung und Strom außerhalb von Quellregionen---im
-% vorliegenden Kontext also für $z \neq z^\prime$---stetig.
-% Ein Vergleich von \eqref{eq:G_tilde_TE_tl_quantities} und
-% \eqref{eq:G_tilde_TM_tl_quantities} mit \eqref{eq:B_continuity} und
-% \eqref{eq:D_continuity} legt daher offen, dass die Lösung über die
-% Netzwerk-Methode bereits eine der an die Stetigkeit der charakteristischen
-% Feldkomponenten erfüllt.
-% Dass auch die Bedingungen \eqref{eq:H_z_tilde_second_continuity_condition} und
-% \eqref{eq:E_z_tilde_second_continuity_condition} automatisch erfüllt ist, lässt
-% sich durch Einsetzten der Lösung für $V^{\isrc,\te}$ in
-% \eqref{eq:tl_first_order_odes_i_source_homo} und jener für $I^{\vsrc,\tm}$ in
-% \eqref{eq:tl_first_order_odes_v_source_homo} erkennen.
-% Man erhält dadurch
-% \begin{equation}
-% 	\frac{1}{\mu} \frac{\dd}{\dd z} \tilde{G}^\te \equiv - I^{\isrc,\te}
-% \end{equation}
-% sowie
-% \begin{equation}
-% 	\frac{1}{\varepsilon} \frac{\dd}{\dd z} \tilde{G}^\tm \equiv - V^{\vsrc,\tm} \,,
-% \end{equation}
-% für $z \neq z^\prime$ sind also \eqref{eq:H_z_tilde_second_continuity_condition}
-% und \eqref{eq:E_z_tilde_second_continuity_condition} ebenfalls befriedigt.
-
-% Damit sind die Greenschen Funktionen der charakteristischen Komponenten
-% $\tilde{H}_z$ und $\tilde{E}_z$ von TE bzw.
-% TM-Feldern im $k_\rho$-Spektralbereich auf die in \cref{app:tl_greens_functions}
-% zusammengefassten bekannten Greenschen Funktionen für Spannung und Stromstärke
-% Übertragungsleitungen zurückgeführt.
+It can be shown \cite[pp.~249]{Jin2015} that the field of a \ac{HED} 
+possesses both \ac{TM} and \ac{TE} contributions.
+Hence, for a \ac{HED} field two characteristic components and, respectively,
+two \acp{TLGF} need to be known.
+In the transmission line picture this can be interpreted vividly in the way
+that the \ac{VED} only excites the \ac{TM} line, while a \ac{HED} excites
+both lines simultaneously.
 
 
 
