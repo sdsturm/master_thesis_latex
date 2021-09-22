@@ -9,6 +9,38 @@
 
 \section{Numerical Integration of Sommerfeld Integrals}
 
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width = 0.7\textwidth,
+            height = 0.4\textwidth,
+            axis lines=middle,
+            axis line style = {->,>=stealth},
+            xmin = -1,
+            xmax = 20,
+            ymin = -3,
+            ymax = 3,
+            xtick = {0,6,10,...,18},
+            xticklabels = {$0$, $a$, $\xi_0$, $\xi_1$, $\xi_2$},
+            ymajorticks = false,
+            xlabel = {$\real{k_\rho}$},
+            x label style={anchor=west},
+            y label style={anchor=south},
+            ylabel = {$\imag{k_\rho}$},
+            ]
+            \addplot [very thick, domain=0:1,samples=50]({3*(1+cos(deg(pi*(1-x))))},{sin(deg(pi*(1-x)))}); 
+            \addplot[very thick, domain=6:19] {0};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Real axis integration path as used for numerical integration.
+    The point $a$ is chosen such that the real part of all integrand
+    singularities is smaller than $a$.
+    The (possibly oscillatory) tail integral is then well-behaved.}
+    \label{fig:sip_numerical_integration}
+\end{figure}
+
 \section{Discrete Complex Image Method}
 
 \subsection{Fitting Algorithm}
@@ -293,13 +325,62 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
         at each point $\left(\rho,z\right)$.}
     \end{subfigure}
 
-    \caption[Numerical evaluation of the Sommerfeld identity integral]
+    \caption[Numerical evaluation of the Sommerfeld identity]
     {Numerical evaluation of the Sommerfeld identity with the source at
     the origin for $10^{-1} \leq a / \lambda_0 \leq 10^{3}$ where
     $a \in \left\{ \rho, z \right\}$.}
     \label{fig:somm_id_ref_time}
 \end{figure}
 
+
+
+
+
+
+\begin{figure}
+    \newcommand{\widthFactor}{0.47}
+    \newcommand{\heightFactor}{0.35}
+    \centering
+    \begin{tikzpicture}
+        \pgfplotsset{small}
+        \matrix {
+            \begin{loglogaxis}[
+                width=\widthFactor\textwidth,
+                height=\heightFactor\textwidth,
+                xlabel = {$\rho / \lambda_0$},
+                ylabel = {$\abs{G^\mathrm{EJ}_{zz}}$},
+                enlargelimits = false,
+                grid = major,
+                ]
+                \addplot[color = blue] table [] {thesis_surface_E_z_of_rho.dat};
+            \end{loglogaxis}
+            &
+            \begin{loglogaxis}[
+                width=\widthFactor\textwidth,
+                height=\heightFactor\textwidth,
+                xlabel = {Frequency in $\si{\hertz}$},
+                ylabel = {$\abs{G^\mathrm{EJ}_{zz}}$},
+                enlargelimits = false,
+                grid = major,
+                ]
+                \addplot[color = blue] table [] {thesis_surface_E_z_of_f.dat};
+            \end{loglogaxis}
+            \\
+            };
+        \end{tikzpicture}
+        \caption[]{Vertical component $E_z = G^\mathrm{EJ}_{zz}$ of the surface
+        ($\robs \cdot \uv{z} = 0$) field of a \ac{VED} at
+        $\rsrc = \SI{1}{\metre} \times \uv{z}$ for the dry ground example
+        half-space.
+        (See also \textcite{Michalski2016b} for this example.)}
+        \label{fig:surface_E_z_of_rho_and_f_axial_transmission}
+\end{figure}
+        % Here, these results are obtained as one component of the dyadic Green's
+        % function $\dyadicGF{EJ}$. As the shown curves match the ones given in a
+        % paper by \textcite{Michalski2016b} which uses a specialized Sommerfeld
+        % integral for the surface field at the half-space interface the
+        % implementation of $\dyadicGF{EJ}$ is verified (at least for this very
+        % component).
 
 
 
