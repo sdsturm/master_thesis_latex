@@ -6,94 +6,155 @@
 
 
 
-\section{Background}
+\section{Historical Background}
 
-The references at the end of this document thematically are all part of an area
-which could be enveloped as \emph{electromagnetic theory and practical field
-computation.}
+The references at the end of this document thematically are all part of a
+thematic area which could be enveloped by
+\emph{electromagnetic theory and practical field computation.}
 The overall contribution of some of these publications to the area might be
-marginal.
-Some might be beneficial in solving certain problems at hand.
-Some might be seminal \cite{Sommerfeld1909}.
-One---without any doubt---\emph{is} epochal
-\cite{maxwell1865}\footnote{Maxwell's original work \cite{maxwell1865} is
-nowadays in the public domain and can be found at various
-locations online.}.
+considered marginal.
+Some might be helpful towards an understanding or the actual solution of certain 
+electromagnetic field problems \cite{Michalski2016b}.
+Few are seminal \cite{Sommerfeld1909}.
+One---without doubt---\emph{is} epochal
+\cite{maxwell1873}\footnote{Maxwell's famous monograph \cite{maxwell1873} as
+well as his original 1865 paper are nowadays under public domain license
+and can be found at various locations online.}.
 
-Although it is very unlikely these days that anybody will actually consider the
-original set of twenty equations published by the great man himself in 1865
-\cite{maxwell1865} when using the term \enquote{Maxwell's equations} ---
-it was to the Scottish mathematician and physicist to first bring together the
-pieces of insight gained by other major names during the early 19th century and
-to supplement the fragments to a theory of utmost elegance and predictive power.
+Although it is very unlikely these days that anybody will ever actually consider
+the original set of twenty equations published by the great man himself in 1865
+\cite{maxwell1865} when using the term
+\enquote{Maxwell's equations}---it was to the Scottish mathematician and
+physicist to first bring together the pieces of insight gained by other major
+names during the early 19th century and to supplement the fragments to a theory
+of utmost elegance and predictive power.
 
-In defiance of the elegance and relative simplicity of electromagnetic theory
-the field problem can only be solved analytically for a finite set of the most
-simple and highly symmetrical problems.
-Even some of those problems have forced past generations to apply and in some
-cases even develop sophisticated mathematical formalisms \cite{Felsen1994}.
-In modern times, however, the advances in powerful computers enables the use of  
-numerical methods to solve the field problem for more real-world scenarios in
-principle up to the accuracy of machine precision.
-Some of these methods were even known for a long time, but had to await
-practical applicability until major computational power was available.
+In defiance of the elegance and apparent simplicity of Maxwell's \emph{theory
+of electricity and magnetism}, it turns out that the electromagnetic field
+problem can only be solved analytically for a small set of canonical problems.
+Even most of those highly idealized problems have motivated past generations to
+apply or---in some cases---to develop at first sophisticated mathematical
+formalisms \cite{Sommerfeld1964,Felsen1994}.
+In modern times, however, advances in powerful digital computers enable the use
+of numerical methods to solve the field problem for more real-world scenarios.
+Some of those methods are able to achieve an accuracy down to machine precision,
+at least in principle.
+Although important numerical methods have been postulated and prescribed many
+decades ago these techniques had to await practical applicability until
+noteworthy computational power became available \cite{Harrington1993}.
 
-A particularly pleasant circumstance, however, is that many of the ancestral
-analytical efforts have by no means become obsolete --- they rather can be used
-beneficially in powerful numerical methods.
-The example which is subject to this thesis is the use of fundamental solutions
-\textemdash so-called Green's functions \textemdash within the framework
-provided by the \ac{MoM} \cite{Harrington1993}.
-
-The particular problem motivating this thesis is to find a combination of
-different numerical methods which all employ analytical results in a very
-distinguished way. Namely, the Green's function of the so-called half-space
-problem shall be used in conjunction with the \ac{FMM} in order to accelerate
-the numerical solution of field problems formulated in terms of integral
-equations.
-
-
+A particularly pleasant circumstance, however, is that many ancestral
+analytical efforts have by no means become obsolete in the advent of
+\ac{CE}.
+In fact, some of these methods were the central motivation in the development of 
+the most powerful numerical techniques.
+The example which is subject to this thesis is the use of fundamental
+solutions---so-called Green's functions---in integral equation technique within
+the framework of the \ac{MoM} \cite{Harrington1993}.
 
 
 
 
 
 
-\section{Sommerfeld Half-Space Problem and Multilayered Media}
 
-An outstanding both for the prosperous use of analytical techniques and for the
-gainful use of so obtained results in numerical techniques is the Green's 
-function of the half-space problem and closely related multilayered media.
 
-The first goes back to the seminal publications of Arnold Sommerfeld in the
-early days of radio and antennas \cite{Sommerfeld1909}.
-He first considered a vertically oriented \ac{HD}, residing at the interface
-formed by semi-unbounded free-space and the surface of the earth.
-The latter is assumed to be flat and to possess lossy dielectric material
-properties.
-With his work Sommerfeld mathematically verified the assumed existence of
-a special kind of surface wave \cite{Zenneck1907} and examined how the separate
-constituents of the total wave field correspond to purely mathematical
-attributes of the underlying formalism.
-This, in conjunction to the first-place development of this very formalism is
-the cause why Sommerfeld's 1909 paper is rewarded as pioneering down to the
-present day \cite{Michalski2015, Michalski2016b, Mosig2021}.
-Sommerfeld later elaborated more on the topic
-\cite{Sommerfeld1926,Sommerfeld1964}, \eg, generalizing it to the \ac{HED}
-case and to a situation where the dipole is located above the interface
-At least in the 1926 paper \cite{Sommerfeld1926} a small but controversially
-discussed sign error from the original paper \cite{Wait1998} was fixed.
+\section{The Sommerfeld Half-Space Problem and Multilayered Media}
 
-Sommerfeld's formalism was later generalized to arbitrary solution domains
-compound by several plane layers \cite{Felsen1994, Michalski1990},
-possibly even ones with anisotropic material parameters and \ac{PEC}, \ac{PMC}
-as well as impedance boundary conditions \cite{Hsu1993, Michalski2005}.
+An outstanding example both for the use of advanced analytical techniques in
+electromagnetic theory and for utilization of so obtained results in numerical
+techniques is the Green's function of the Sommerfeld half-space problem.
 
-\fxnote{Sommerfeld originally \cite{Sommerfeld1909} solved for the vector
-potential of the \ac{VED} (\enquote{Hertz potential})}
+The rigorous mathematical treatment of the problem of dipole radiation over
+plane lossy dielectric ground has its roots in a seminal publication by
+Arnold Sommerfeld in the early days of antennas and wave propagation
+\cite{Sommerfeld1909}.
+Later, the central equation on which Sommerfeld's approach is built
+\cite[eq.~(9),~p.~683]{Sommerfeld1909} became known as Sommerfeld
+identity.
+It expands a spherical scalar wave into a continuous spectrum of products
+of cylindrical waves (in radial direction) with propagating and evanescent
+plane waves (in vertical direction).
+Another way to think about the Sommerfeld identity is to interpret it
+as a two-dimensional Fourier transform with respect to the radial coordinate.
+This view is sometimes---after a paper by Hermann Weyl \cite{Weyl1919}---called
+Weyl identity \cite[65]{Chew1999}.
+However, as the half-space Green's function problem is of azimuthal symmetry,
+the two Fourier integrals are not independent.
+Hence, the integral transform can be simplified to the so-called Hankel
+transform representation---which involves only integration with respect to a
+single variable.
+It turns out that what mathematicians call inverse Hankel transform is
+precisely the kind of integral transform used by Sommerfeld.
+In recognition of Sommerfeld's work, inverse Hankel transforms are, thus,
+almost exclusively referred to as Sommerfeld integrals within the
+context of electromagnetic theory \cite{Mosig2021}.
 
-\cite{Weyl1919}
+Using his identity, Sommerfeld first considered a vertically oriented
+\ac{HD}, \ie, an infinitesimally small vertical current element, which resides
+at the interface separating an upper half-space filled with air from the lower
+ground half-space of lossy dielectric properties\footnote{
+This setup is frequently referred to as \ac{VED} nowadays, while a \ac{HD}
+oriented in parallel to the interface is called \ac{HED}.
+}.
+He mathematically verified the existence of a special kind of surface
+wave which was postulated earlier by \textcite{Zenneck1907} and examined how the
+separate constituents of the total wave field correspond to mathematical
+properties of the spectral integrand in the underlying formalism.
+Namely, this spectral domain function has two branch points and respective
+branch cuts as well a pole in case of the \ac{VED}.
+Apart from these features, the integrand is holomorphic on
+the complex plane onto which the spectral integration variable can be
+analytically continued.
+Noting this enables application of major results from complex analysis such as
+Cauchy's theorem, Jordan's lemma and the residue theorem.
+Furthermore, a broad set o asymptotic methods for Sommerfeld integrals has been
+developed or adapted to this use case \cite[\S2.5]{Chew1999}.
 
+By virtuous application of these tools, Sommerfeld identified the branch points
+corresponding to the wavenumbers of air and ground as the driving force behind
+radiating wave constituents (\enquote{Raumwellen}) while to the contribution
+of the later so-called Sommerfeld pole \cite{Michalski2016b} manifests itself
+in Zenneck's surface wave.
+Due to the applicability of such a broad set of mathematical tools, Sommerfeld
+regarded the subject as especially appealing for educational purposes and
+granted it significant space in his later famous monograph
+\cite{Sommerfeld1964}.
+Later, he elaborated more on the subject \cite{Sommerfeld1926},
+generalizing the formalism to the \ac{HED} case and to a situation where the
+dipole may be located \emph{above} and not \emph{at} the interface.
+This also slightly simplifies the mathematical discussion.
+An essentially minor but nevertheless controversially discussed
+\cite{Wait1998,Michalski2016b} sign error in the original paper was fixed at
+least with the 1926 publication \cite{Sommerfeld1926} which carries the same
+title as the one from 1909.
+
+Later, Sommerfeld's formalism was extended by others to ground half-spaces
+consisting of more than one layer \cite{Felsen1994,Wait1998} as well as to
+solution domains with Dirichlet or Impedance boundary condition on one or both
+sides \cite{Michalski1990}.
+The latter case enabled the use of the method in the analysis of printed
+antennas and planar microwave circuits \cite{Hsu1993,Ho1994}.
+Further applications of Sommerfeld integrals can be found in the study of ground
+penetrating radar \cite{cross2015} and even in plasmonics \cite{nevels2014}.
+
+While Sommerfeld originally worked with a potential formulation which is rarely
+used nowadays, Green's functions for all field components of
+arbitrarily oriented dipoles have been derived in the following decades 
+\cite{Michalski2005}.
+As these dyadic Green's functions exhibit strong singularities both in 
+spectral and spatial domain, it has become common to use potential formulations
+in most numerical techniques based on integral equations.
+These are less singular, yet exhibit some certain arbitrariness in formulation 
+as the used vector and scalar potentials are not unique
+\cite{Michalski1990,Michalski1990a,Eibert1997,Michalski1997}.
+
+In the broad variety of practical applications certainly lies the reason why
+Sommerfeld's century-old and originally purely analytical considerations not
+only are rewarded as pioneering but still are subject of active research to
+this day.
+This seems rather astonishing for a subject whose origins have become a textbook
+subject yet decades ago \cite{Michalski2015, Michalski2016b, Mosig2021,koh2021}.
 
 
 
@@ -104,55 +165,222 @@ potential of the \ac{VED} (\enquote{Hertz potential})}
 
 \section{Numerical Evaluation of Sommerfeld Integrals}
 
-General (no PDF):
-\cite{mosig1982}
-
-Path deformation
-\cite{Michalski1985a}
-
-Tails, \ac{PE}
-\cite{Michalski1998}
-\cite{Mosig2012}
-\cite{mosig2013}
-\cite{Michalski2016a}
-\cite{Golubovic2012}
-
-Head DE rules
-\cite{golubovicniciforovic2011}
-
-Head detour semi-elliptical
-\cite{GayBalmaz1997}
-
-Head detour roof-top
-\cite{Michalski2015a}
-
-MPM
-\cite{MengtaoYuan2006a}
-
-
-\ac{SIP}, \ac{EIP} only for $\rho$ up to a few hundred wavelenghts \cite[14]{Michalski2016b}
-Reason: not the tail \ac{PE} but rapid oscillations in head
+From a fundamentalist physicist's point of view the problem of dipole radiation
+over ground or in plane stratified media is exhaustively studied by writing
+down the solution in terms of Sommerfeld integrals.
+However, a multitude of contributions continuous to be published to this very
+day which addresses the problem \emph{how} to actually evaluate these integrals.
+Closed form solutions are not known to exist for virtually any case of practical
+interest.
+Methods which proved useful in the numerical evaluation of Sommerfeld integrals
+in computational practice can roughly be classified to belong to one of the 
+approaches sketched in the following subsections.
 
 
 
 
 
+\subsection{Numerical Integration}
+Numerical integration to date is considered as the most rigorous way to evaluate
+Sommerfeld integrals, yet in most cases it is also the computationally most
+expensive way to do so.
+In principle, all tools from complex analysis which may be used in
+analytical considerations can also be implemented in numerical algorithms.
+Especially Cauchy's theorem proofs valuable here, as the original
+\ac{SIP} can be readily continued analytically onto the complex plane.
 
-\section{Image Principle}
+The most straightforward numerical integration scheme might be built directly
+onto the \ac{SIP}, \ie, integrate along the non-negative real axis of the
+spectral integration variable.
+As it turns out, the integrand may exhibit singularities near the 
+real axis for certain geometries, whose real parts, however are known to lie
+inside a finite-width strip parallel to the imaginary axis.
+Therefore, the semi-infinite \ac{SIP} is commonly split up into a finite
+sub-interval starting at zero and containing all singularities and a
+semi-infinite \emph{tail} region in which the integrand function is well-behaved
+but possibly oscillatory and slowly converging
+\cite{mosig1982,Michalski1998,Michalski2016a}.
+For this latter region the term \emph{Sommerfeld tail} is indeed established in
+the literature.
 
-The principle to replace conducting bodies by \emph{image charges} to enforce
-the boundary condition on the body's surface is long known in electrostatics.
-In fact such considerations can be traced back right to Maxwell himself
-\cite[Chapter~XI]{maxwell1873}\footnote{Maxwell's famous textbook
-\cite{maxwell1873} is nowadays in the public domain and can be found at various
-locations online.}.
+\subsubsection{Finite Sub-Interval}
 
-Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
+To deal with the singularities in this finite sub-interval of the
+semi-infinite \ac{SIP}, mainly two major approaches are studied in the
+literature.
+\begin{itemize}
+	\item In case only the quadrants of the complex plane in which the integrand
+	singularities lie are known, the real axis path can be detoured into a 
+	quadrant free of singularities. The suitable quadrant depends on the
+	chosen time convention, yet it is known that the integrand function is
+	well-behaved if the detour path is chosen appropriately.
+	This technique essentially employs a corollary to Cauchy's theorem which
+	stated that the result of a path integral is independent of a specific path
+	as long as the path does not \enquote{capture} any singularities during the
+	process of detour.
+	In numerical practice, the specific choice of detour path is not critical
+	either.
+	Common choices are a rooftop contour \cite{Michalski2015a} or an
+	elliptical \cite{GayBalmaz1997} path.
+	The choice of quadrature rule on the detour path is not critical either, yet
+	it is observed that the use of an adaptive rule providing error estimates
+	is advisable \cite{Michalski2016a}.
+	\item If branch points (straightforward) and poles (potentially expensive
+	in the multilayer case) can be localized in the complex plane the
+	integration path can be split up into further sub-intervals in between the
+	singularities.
+	The sub-interval integrals are then integrated along the real axis using 
+	quadrature methods with allow the integration of function with endpoint
+	singularities.
+	Suitable quadrature rules are the Gauss-Jacobi quadrature \cite{press2007}
+	and especially the  $\tanh$-$\sinh$ \ac{DE} rule
+	\cite{takahasi1973,golubovicniciforovic2011,Michalski2016a}.
+\end{itemize}
 
-\cite{Lindell1984}
-\cite{Lindell1984a}
-\cite{Lindell1984b}
-\cite{Lindell2000}
+
+
+
+
+
+\subsubsection{Sommerfeld Tail}
+
+The semi-infinite Sommerfeld tail is typically considered much more challenging
+as the finite sub-intervals containing singularities.
+This comes from the fact that the integrand function is modulated by
+oscillations of a first-kind Bessel function in the case of close vertical
+proximity of the source point and the location at which the Green's function
+is observed.
+Furthermore, the frequency of these oscillations rises with increasing lateral 
+distance between source and observation point.
+In case of zero lateral offset the oscillations vanish and the integrand
+is dominated by exponential decal for large values of the integration variable.
+The latter case is, however, rarely in the focus of interest which is why
+it has been said that \enquote{evaluating Sommerfeld integrals used to be a
+standard nightmare for many electromagnetic engineers due to the singular,
+oscillating and divergent behavior of their integrands} \cite{jimenez1996}.
+
+
+In fact, it is observed that naive application of standard quadrature rules to
+Sommerfeld tails may either fail entirely or is at least prohibitively
+expensive.
+Thus, several methods have been developed to accelerate convergence of this 
+integration.
+The most extensively studied methods can be summarized under the term 
+\ac{PE} methods \cite{Michalski1998}.
+The notion of all of these techniques is to split up the semi-infinte integral
+into finite-length sub-interval integrals and to evaluate these using standard
+low-order quadrature rules.
+Then a suitable series extrapolation algorithm \cite{brezinski2013} is applied
+to the so-obtained sequence of values.
+Regarding extrapolation methods, two main categories can be distinguished.
+The first category uses numerical reminder estimates obtained directly from
+the sequence of partial integral values.
+The second approach utilizes analytically known asymptotic properties of the 
+integrand function.
+
+\Ac{PE} algorithms for Sommerfeld integral tails have been extensively studied
+over the last almost four decades
+\cite{Michalski1998,Mosig2012,mosig2013,Michalski2016a,Golubovic2012},
+by which two schemes have turned out most appropriate in the evaluation of
+integrals arising in Green's functions in plane stratified media\footnote{Note
+that the cited publication almost exclusively consider Green's functions
+for potentials. It is demonstrated, however, at least through the results given in
+\cref{ch:numerical_results} of the present thesis that these methods are also
+applicable to Green's functions for the fields.}.
+\begin{description}
+	\item[Levin-Sidi \ac{PE} scheme] This scheme uses numerical reminder
+	estimates and requires no information about the asymptotic behavior of the 
+	integrand function.
+	The name comes from the used extrapolation method, namely the generalized 
+	Levin transformation \cite{Levin1972}, where several variants of this 
+	method exist \cite{Michalski2016a}.
+	\item[Mosig-Michalski \ac{PE} scheme] Here two parameters are involved to
+	estimate the exponential decay of the integrand and the power of the
+	occurrence of the integration variable in the integrand's denominator,
+	respectively.
+	These parameters have to be obtained by analytical asymptotic analysis of 
+	the integrand function.
+	This \ac{PE} scheme is termed after the variant of the weighted-averages
+	method by Mosig and Michalski \cite{mosig1983,Michalski1998,Michalski2016a}.
+\end{description}
+
+Yet another proposal of an extrapolation method is the \ac{MPM}.
+The idea here is to apply a straightforward function fitting routine to the
+spectral integrand of a Sommerfeld integral.
+The fitting is done by a series of elementary exponential functions which can
+be integrated in closed for, hence the Sommerfeld tail is approximated by a
+sum of so-obtained terms directly in the spatial domain \cite{MengtaoYuan2006a}.
+This method has, however, not found widespread application as the results
+deteriorate for larger lateral distances between source and observation point.
+For near range approximation, in turn, the method has been successfully been
+tested, also in the course of the present thesis, where its computational
+performance is superior to the more sophisticated \ac{PE} methods described in
+the above discussion.
+
+
+
+
+\subsubsection{Limitations of \acs{SIP} integration}
+
+Although numerical integration algorithms incorporating \ac{PE} schemes provide
+an effective yet accurate methodology for the evaluation of Sommerfeld integrals
+the \ac{SIP}-approach still has downsides.
+The problem lies, again, in the rapid oscillations of the integrand function
+for large lateral observation distances.
+With \ac{PE}, it is now not the tail which renders \ac{SIP} expensive but the
+high-frequently modulation in the finite sub-integral containing
+the integrand singularities.
+For large lateral observation distances, exceeding a couple of hundreds of
+wavelengths, the requirement for extremely narrow sampling arises in
+the adaptive quadrature applied to this part of the integral.
+Therefore, for large lateral distances numerical integration along the \ac{SIP} 
+becomes again prohibitive, even if most effective \ac{PE} schemes are used
+\cite[14]{Michalski2016b}.
+
+
+
+
+
+
+\subsubsection{Path Deformation}
+
+As discussed in the preceding point, numerical integration along the \ac{SIP}
+suffers from fundamental problems or at least from difficulties unresolved to
+date.
+For large lateral observation distances one can, however, resort to other
+integration paths, whose common property is \emph{massive} path deformation.
+Compared to those methods the discussed path detour aiming avoid singularities
+near or on the \ac{SIP} is just a mere detail.
+In contrast to this, methods tailored towards large lateral observation
+distances usually follow a different notion.
+The aim of such methods is to make the full power of complex analysis available
+by deforming the path of integration in a way that it either wraps around
+certain appropriately defined branch cuts \cite{Michalski2016a} or even becomes
+the \ac{SDP} \cite{Michalski1987,TieJunCui1999,wu2008,hochman2010}.
+Combinations might also be possible \cite{Michalski1985a}.
+
+Even though an infinite number of possibilities exists to define such methods,
+they always aim to perform numerical integration along paths on which the
+integrand decays rapidly.
+This approach, however, also suffers from weaknesses.
+First, such methods generally not applicable for zero lateral observation
+distance and, hence, cannot provide a general purpose algorithm on their own
+\cite{Michalski2016a}.
+Furthermore, all the referenced methods depend on the geometry of the 
+solution domain.
+For example the \ac{SDP} is only known analytically for the case of two
+semi-infinte half spaces \cite[\S2.5.2]{Chew1999}.
+The same applies for the locations of poles in the complex plane.
+The only cases in which the location of these poles is known is again
+the Sommerfeld case, and even here this only holds for a ground half-space of
+either dielectric \emph{or} magnetic properties \cite{Michalski2016b}.
+In the case of general multilayered media the locations of poles have to be
+determined by numerical searching algorithms \cite{rodriguez-berral2004}
+which can, again, be expensive.
+
+In contrast to the case of near and medium lateral observation distances,
+no clear consent can be observed in the literature regarding the question of
+which numerical integration technique is best for large lateral distances.
 
 
 
@@ -160,7 +388,137 @@ Scalar GF over PEC/PMC. \cite[p. 250]{Sommerfeld1964}
 
 
 
-\section{Integral Equation Techniques and the Method of Moments}
+
+
+
+\section{Complex Image Principle}
+
+The notion of enforcing boundary conditions in electrostatic problems
+involving conducting bodies by replacement of the bodies by certain
+\emph{image charges} is known for a long time \cite[pp.~69]{Jackson2013}.
+In fact, the idea can be traced back all the way through the history of
+classical electrodynamics right to Maxwell himself
+\cite[Chapter~XI]{maxwell1873}.
+This so-called image principle is also available in an exact form for the
+case of time-harmonic currents radiating above a \ac{PEC} half-space
+\cite[243]{Sommerfeld1964}\cite[pp.~94]{Jin2015}.
+For the case of dielectric or finite-loss ground, however, no such simple and
+elegant principle is available.
+Clearly inspired by the \ac{PEC} image principle, several attempts have been
+made to establish a similar concept for the dielectric case.
+
+Noteworthy is, once again, \textcite[250]{Sommerfeld1964}, who used a single
+symmetric real image source plus an \enquote{imaginary continuous converging
+ray} to obtain an approximate representation of the ground-reflected
+contribution in the half-space Green's function of the \ac{VED} Hertz potential.
+
+In the 1980s, Lindell and Alanen developed the \ac{EIT} 
+\cite{Lindell1984,Lindell1984a,Lindell1984b}, both for \ac{VED} and \ac{HED}.
+The method claims just what its name suggests.
+The idea is, in principle, similar to Sommerfeld's imaginary ray in the sense
+that the \ac{EIT} also assumes a continuous image current flowing in complex
+space.
+Thus, the \ac{EIT} is no means to evaluate Sommerfeld integrals in closed
+form---like the \ac{PEC} image principle allows to---but essentially
+replaces one integral by another, where it is claimed that the complex-space
+current shows better convergence.
+Although the \ac{EIT} might provide some theoretical insights, the concept
+has not found widespread use in the field of half-space and multilayered medium 
+Green's functions, not even after it was published in textbook form
+\cite{Lindell2000}.
+
+By contrast to the \emph{continuous} image constructions of Sommerfeld and the
+\ac{EIT} the \ac{DCIM} aims to represent the reflected contribution to
+multilayered media Green's functions solely by means a small set
+of \emph{discrete}, \ie, point-like image source points.
+Similar to the continuous methods, these points are assumed to reside 
+at complex spatial positions.
+Technically, the \ac{DCIM} approximates the spectral integrand of a Sommerfeld
+integral by a series of exponential functions.
+Each term of this series can then be integrated in closed form---where it is
+tacitly assumed that the Sommerfeld identity remains valid for complex spatial
+coordinates.
+
+A paper by \textcite{Fang1988} is typically considered to be the first
+publication towards the \ac{DCIM}.
+This original method, however, suffered from several issues regarding the
+geometrical range of validity and the reliability of the used function fitting
+algorithm.
+As a solution to the range problem it was proposed to use the actual \ac{DCIM}
+only up to a certain lateral observation distance and to resort to
+the contributions of the pole residues for larger distances.
+This approach became known as the \enquote{relay race} method.
+As it turned out in the following \cite{Chow1991,Yang1991,Yang1992,Aksun1992},
+the accuracy of the \ac{DCIM} is significantly in creased if the poles
+(termed \acp{SWP} in the following) as well as the so-called quasistatic terms
+for large values of the integration variable are extracted from the spectral
+integrand prior to application of the \ac{DCIM}.
+A first major breakthrough was achieved with the introduction of the so-called
+two-level algorithm and by the replacement of the original fitting algorithm
+by the \ac{GPOF} \cite{Dural1995,Aksun1995,Aksun1996,Hua1989,Sarkar1995}.
+The two-level approximation liberated the method of the need to extract 
+quasistatic terms as the second sampling level is claimed to account for
+the integral tail appropriately \cite{IrsadiAksun2003,Aksun2005}.
+However, the two-level \ac{DCIM} still suffered from a range of validity
+limited to just a few wavelengths.
+This limitation restricted application of the \ac{DCIM} to electrically small
+structures.
+
+In the 2000s, a renaissance of research interest in the \ac{DCIM} can be 
+observed \cite{Aksun2009}.
+A major breakthrough in terms of lateral range of validity was achieved
+by introduction of several variants of a three-level sampling scheme
+\cite{Michalski2007a}.
+The claim is that the splitting of the part of the sampling path in the
+two-level algorithm which is used to sample the region containing the
+integrand's singularities into two parts allows to properly capture the effect
+of one of the branch points.
+A paper by \textcite{Alparslan2010} finally refines the three-level scheme and
+eventually aims to prove the central assumption on which the whole concept of
+the \ac{DCIM} is built: all wave constituents in multilayered media Green's
+functions can be represented by linear superposition of spherical
+waves\footnote{
+	Within this context it is not mentioned that the scalar Green's function of 
+	free space looses its spherical symmetry if evaluated for source points in 
+	complex space.
+}.
+With the three-level algorithm the range of lateral validity is extended 
+up to several hundreds of wavelengths, as demonstrated by the paper.
+
+Apart from the long-term issues with concerning the range of validity of the 
+approximation, the \ac{DCIM} historically struggled with another major
+sketchiness regarding the reliability of the method.
+It took until 2011 \cite{Karabulut2011,Karabulut2011b} till serious attempts
+were made to give an error criterion for the Green's function in the
+spatial domain.
+With that, one more of the long-time issues of the \ac{DCIM} seems to be
+resolved.
+
+Another critical point within the \ac{DCIM} is the selection of the model order,
+\ie, of the number of exponential function by which to approximate the
+integrand of a Sommerfeld integral.
+Traditionally, this was done directly within the \ac{GPOF} method, most
+frequently based on the rate of decrease of the singular values obtained by
+the singular value decomposition of a special matrix.
+There is, however, no formal proof that this methodology justifiable from a
+mathematical point of view.
+A paper by \textcite{Karabulut2011a} can be considered as a first step
+towards that direction.
+
+Finally, a paper by \textcite{Chen2011} shall not remain unmentioned.
+Here, the \ac{DCIM} sampling path is chosen as the \ac{SDP}, both for the case
+of a medium shielded on one side and for the half-space case.
+As the idea is essentially the same as for the corresponding numerical
+integration methods, this version of the \ac{DCIM} is especially well-suited
+for far-field computations.
+
+
+
+
+
+
+
+\section{Fast Integral Equation Techniques}
 
 \cite{Harrington1993}
 
@@ -170,8 +528,6 @@ discretized by subdomain basis functions, \eg, the popular \ac{RWG} functions
 
 Direct solver: $N^3$
 Iterative solver: $N^2$
-
-\section{Fast Multipole Method}
 
 \subsection{Motivation}
 
@@ -360,3 +716,17 @@ computed using the \ac{FMM} \cite{Geng1999, Geng2000}.
 \cite{Eibert2018a}
 \cite{Eibert2019}
 \cite[Chapter~8.13.2]{parini2020}
+
+
+\section{Scope of this Thesis}
+\label{sec:scope_of_this_thesis}
+
+The particular problem motivating this thesis is to find a combination of
+different numerical methods which are all based on analytical results.
+These are, namely, the Green's function of the so-called Sommerfeld half-space
+problem and a fast algorithm which is state of the art in large-scale \ac{MoM}
+solvers, the \ac{FMM}.
+To this end a generalized version of the classical image source principle is
+examined towards its compatibility with the \ac{FMM}.
+For reference computation of the improper integrals used to represent the
+half-space Green's functions sophisticated numerical algorithms are implemented.
