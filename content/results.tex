@@ -377,6 +377,9 @@ implementation which can be assumed to be solid.
 	\label{tab:numerical_examples_half_spaces}
 \end{table}
 
+
+\section{Numerical Integration}
+
 As the Sommerfeld identity is the most central result within the study of
 multilayered media Green's functions, it makes sense to demand from a numerical
 integration algorithm that it should be able to evaluate this integral very
@@ -515,17 +518,18 @@ discussion.
         (See also \textcite{Michalski2016b} for this example.)}
         \label{fig:surface_E_z_of_rho_and_f_axial_transmission}
 \end{figure}
-        % Here, these results are obtained as one component of the dyadic Green's
-        % function $\dyadicGF{EJ}$. As the shown curves match the ones given in a
-        % paper by \textcite{Michalski2016b} which uses a specialized Sommerfeld
-        % integral for the surface field at the half-space interface the
-        % implementation of $\dyadicGF{EJ}$ is verified (at least for this very
-        % component).
 
-
-
-
-
+\cref{fig:thesis_generic_sgf_dry_ground} is more suitable to show the
+versatility of the own implementation.
+Considered are the generic scalar Green's functions, both for the \ac{TM} and
+the \ac{TE} case, as specified by \cref{def:generic_scalar_gf}.
+On the left-hand side the absolute value of the respective case is visualized,
+while on the right-hand side the direct term is extracted and the real part
+of the isolated reflected contribution to the Green's function is shown.
+Both from the absolute value consideration of the complete Green's function, and
+from the reflection-only consideration, significant differences between
+can be observed which originate from the different reflection coefficients
+in the respective \acp{TLGF}.
 
 \begin{figure}
     \newcommand{\sizeFactor}{0.47}
@@ -652,8 +656,14 @@ discussion.
 
 
 
-
-
+\cref{fig:thesis_generic_sgf_seawater} visualizes exactly the same quantities
+as \cref{fig:thesis_generic_sgf_dry_ground} but this time for the case of
+highly conductive seawater.
+It is observed that the field cannot significantly penetrate the ground
+in this case.
+Furthermore, the wave patterns have become very similar in this high-loss case,
+which is exactly what is expected as the ground medium approaches the \ac{PEC}
+case.
 
 
 \begin{figure}
@@ -781,7 +791,11 @@ discussion.
 
 
 
-
+\cref{fig:dgf_G_EJ_full} eventually visualizes all nine components of
+$\dyadicGF{EJ}$ for a source at $\rsrc = \lambda_0 \uv{z}$ over dry ground
+in the $y = 0$ cut plane.
+It is observed that those components that are theoretically expected to vanish
+really do vanish in the numerical solution.
 
 
 
@@ -1000,11 +1014,18 @@ discussion.
         {Dyadic Green's function $\dyad{G}^\mathrm{EJ}$ in the
         $y = 0$ cut plane for a source at $\rsrc = \lambda_0 \uv{z}$ over dry
         ground.}
+        \label{fig:dgf_G_EJ_full}
 \end{figure}
 
 
 \section{Discrete Complex Image Method}
 
+Regarding the \ac{DCIM} implementation, \cref{fig:thesis_gpof_synth_signal}
+at first verifies the implementation of the \ac{GPOF} method.
+Note that only the first half of the synthetic test signal is actually
+fed into the algorithm.
+Therefore \cref{fig:thesis_gpof_synth_signal} proves both the sanity of the
+implementation and a certain predictive power of the method.
 
 \begin{figure}
     \newcommand{\heightFactor}{0.3}
@@ -1066,7 +1087,11 @@ discussion.
     \label{fig:thesis_gpof_synth_signal}
 \end{figure}
 
-
+\cref{fig:dcim_dry_ground} shows a \ac{DCIM} example for the generic scalar
+Green's functions.
+The relative error is computed against a solution by numerical integration.
+From the plot it observed that a proper implementation of three-level \ac{DCIM}
+indeed can yield results of reasonable accuracy.
 
 \begin{figure}
     \centering
@@ -1174,6 +1199,9 @@ discussion.
 
 
 \section{Fast Multipole Method}
+
+Finally, \cref{fig:thesis_fmm_standard_accuracy} proves also the \ac{FMM}
+implementation valid.
 
 \begin{figure}
     \centering
