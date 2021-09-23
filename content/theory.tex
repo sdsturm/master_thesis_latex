@@ -1,4 +1,5 @@
 \part{Theoretical Considerations}
+\label{part:theory}
 
 
 
@@ -22,7 +23,7 @@ with the Sommerfeld problem's solution domain---are pointed out.
 \section{Notation}
 
 Let the following notes regarding notation prepended this chapter.
-\begin{enumerate}
+\begin{itemize}
 	\item Real and complex numbers are marked in the
 	respective context if necessary.
 	For an arbitrary complex number $z \in C$ the complex 
@@ -42,8 +43,7 @@ Let the following notes regarding notation prepended this chapter.
 	\item The notation of special functions and related
 	symbols is in accordance to the NIST Handbook of Mathematical Functions
 	\cite{Olver2010}.
-	\item 
-\end{enumerate}
+\end{itemize}
 
 Otherwise, if not explicitly labeled, the notation in the present thesis
 follows the textbook by \textcite{vanBladel2007}.
@@ -1721,17 +1721,15 @@ especially required if these other methods are built on the Sommerfeld identity.
 Thus, in such a case the \ac{DCIM} and the internal function fitting algorithm
 must be implemented in such a way that $\real{z} \leq 0$ can be guaranteed.
 
-\fxnote{TODO}
-% The above convergence analysis does not yet prove the equivalence in
-% \eqref{eq:sommerfeld_identity_complex_z} for $z \in \C$.
-% In the standard form \eqref{eq:sommerfeld_identity_pos_real_axis} the term
-% $\exp{-\im k \abs{z}}$ describes plane waves in $\uv{z}$-direction.
-% These plane waves propagate \emph{away} from the vertical level $z = 0$, in
-% which the  into
-% both directions, \ie, for $z > 0$ we have upward propagation whereas for $z < 0$
-% the plane waves propagate downwards.
-% Furthermore 
-
+The above convergence analysis does not yet prove the equivalence in
+\eqref{eq:sommerfeld_identity_complex_z} for $z \in \C$.
+In the standard form \eqref{eq:sommerfeld_identity_pos_real_axis} the term
+$\exp{-\im k \abs{z}}$ describes plane waves in $\uv{z}$-direction.
+These plane waves propagate \emph{away} from the vertical level $z = 0$, in
+into both directions, \ie, for $z > 0$ we have upward propagation whereas
+for $z < 0$ the plane waves propagate downwards.
+This behavior is lost if the $\abs{z}$ is replaced by an arbitrary $z \in C$.
+It remains to show, how this bold step affects the Sommerfeld identity.
 
 
 
@@ -2080,7 +2078,7 @@ $E_z$ is known \cite[\S\S2.3.3]{Chew1999}.
 
 
 
-\subsection{Planar Stratified Media and Continuity Conditions}
+\subsection{Continuity Conditions in Planar Stratified Media}
 \label{subsec:layered_media_and_continuity_conditions}
 
 So far, no restrictions on \emph{how} exactly $\epsr$ and $\mur$ depend on $z$
@@ -2264,7 +2262,8 @@ The Green's function of \eqref{eq:VED_E_z_ODE} defined by
 		+
 		k_z^2 \left(z\right)
 	\right)
-	\tilde{G}^\mathrm{EJ}_{zz} \left(z, z^\prime\right)
+	\tilde{G}_\mathrm{VED}
+	% \tilde{G}^\mathrm{EJ}_{zz} \left(z, z^\prime\right)
 	=
 	-\diracDelta \left( z - z^\prime \right)
 \end{equation}
@@ -2643,7 +2642,8 @@ for the \ac{TM} case reveals the duality of these two equations.
 It is thus obtained that
 \begin{subequations}\label{eq:VED_E_z_spectral_gf_in_TLGFs}
 	\begin{equation}
-		\tilde{G}^\mathrm{EJ}_{zz} \left(z, z^\prime\right)
+		\tilde{G}_\mathrm{VED}
+		% \tilde{G}^\mathrm{EJ}_{zz} \left(z, z^\prime\right)
 		=
 		\frac{V_i^\tm}{\im \omega}
 	\end{equation}
@@ -2651,7 +2651,8 @@ It is thus obtained that
 	\begin{equation}
 		\frac{1}{\varepsilon}
 		\frac{\dd}{\dd z}
-		\tilde{G}^\mathrm{EJ}_{zz} \left(z, z^\prime\right)
+		\tilde{G}_\mathrm{VED}
+		% \tilde{G}^\mathrm{EJ}_{zz} \left(z, z^\prime\right)
 		=
 		-
 		\frac{V^\tm}{\im \omega}
@@ -2873,57 +2874,28 @@ handy for numerical experimentation than other spectral Green's function,
 
 
 
-\section{Image Principle}
-\label{sec:imgage_principle}
-
-An exact image principle with images at real locations is available
-for half space environments with \ac{PEC} and \ac{PMC} ground
-\cite[243]{Sommerfeld1964}\cite[pp.~94]{Jin2015}.
-For the case of a dielectric and possibly lossy ground half-space no such 
-simple and elegant method is known.
-It can, however, be shown that the arising Sommerfeld integrals may be 
-interpreted in terms of image current \emph{densities} in complex space $\C^3$
-\cite[250]{Sommerfeld1964}\cite[Chapter~7]{Lindell2000}.
-By contrast to such distributed complex-space currents the \ac{DCIM} aims to 
-express the reflected contribution in Sommerfeld integrals by a small number
-of \emph{discrete}, \ie, point like, image sources in $\C^3$.
-
-
-
-
 
 
 
 \chapter{Fast Multipole Method for the Helmholtz Equation}
 \label{ch:fmm}
 
-The purpose of this chapter is to comprehend the main idea of the \ac{FMM}
-and to state a formulation which makes clear where possible problems towards an
-integration of complex images might lie.
-
-
-
-
-
-
-\section{Conventional Free-Space Approach}
-
 The crucial idea of the \ac{FMM} is to write $\rdiff$ as a sum
 \begin{equation}\label{eq:fmm_rdiff_parts}
 	\rdiff =
 	\left( \robs - \fmmObsGroupCenter              \right) +
 	\left( \fmmObsGroupCenter - \fmmSrcGroupCenter \right) -
-	\left( \rsrc - \fmmSrcGroupCenter              \right) \, ,
+	\left( \rsrc - \fmmSrcGroupCenter              \right)
 \end{equation}
 of three vectors, where $\fmmSrcGroupCenter$ and $\fmmObsGroupCenter$ are the
 centers of localized groups of source and observation points, respectively.
-Based on \eqref{eq:fmm_rdiff_parts} the shorthand notations 
+For notational convenience, the shorthand notations 
 $\fmmDiffGroupCenters \coloneqq \fmmObsGroupCenter - \fmmSrcGroupCenter$
 and 
 $\pvec{d} \coloneqq \left( \robs - \fmmObsGroupCenter \right) - \left( \rsrc - \fmmSrcGroupCenter \right)$
 are introduced.
-The Green's function of the Helmholtz equation is then \emph{factorized} into
-three terms which represent
+With \eqref{eq:fmm_rdiff_parts}, the Green's function of the Helmholtz equation
+can be \emph{factorized} into three terms which represent
 \begin{enumerate}
 	\item the \emph{aggregation} of a localized source distribution to the
 	reference point $\fmmSrcGroupCenter$, 
@@ -2940,19 +2912,19 @@ of the Helmholtz equation \eqref{eq:scalar_free_space_gf} is based on two
 elementary identities which, in the literature \cite{Rokhlin1993,Coifman1993},
 are usually assumed to be given or are derived from more general formulas from
 handbooks on mathematical functions \cite{Abramowitz2014,Abramowitz2014}.
-The aim of the subsequent section is to approach these identities from
-the perspective of electrodynamics to emphasize the underlying idea and to
+The aim of this section is to approach these identities from
+an electromagnetic perspective to emphasize the underlying idea and to
 illustrate why the methods carries the term multipole in its name.
 
 As it is well-known, the Green's function of the Helmholtz equation
 \eqref{eq:scalar_helmholtz_equation} is given by
-\eqref{eq:scalar_helmholtz_equation}.
+\eqref{eq:scalar_free_space_gf}.
 Clearly, $G_0\left(\robs, \rsrc\right)$ is a function of $r$ only for
 $\rsrc = 0$ and its expression in spherical coordinates according to
 \cref{def:sph_coords} is most trivial.
-The expansion of $G_0\left(\robs, \rsrc\right)$ in terms of solutions of
-\eqref{eq:scalar_helmholtz_equation} in spherical coordinates for the
-off-centered case $\rsrc \neq 0$ is a classical result in electromagnetic
+The expansion of $G_0\left(\robs, \rsrc\right)$ in terms of fundamental
+solutions of \eqref{eq:scalar_helmholtz_equation} in spherical coordinates for
+the off-centered case $\rsrc \neq 0$ is a classical result in electromagnetic
 theory.
 For $r > r^\prime$ this so-called \emph{multiple-expansion} is given by
 \cite[492]{Jackson2013}
@@ -2982,10 +2954,10 @@ $\robs$.
 For such a configuration the series over $l$ in
 \eqref{eq:multipole_expansion_jackson} converges quickly and accurate
 approximations can be obtained with relatively few terms.
-In the electrostatic counterpart of \eqref{eq:multipole_expansion_jackson},~\ie,
+In the electrostatic version of \eqref{eq:multipole_expansion_jackson},~\ie,
 the multipole expansion for the Poisson equation
-(\eqref{eq:scalar_helmholtz_equation} for $k \to 0$) the series terms correspond
-to the individual fields of a monopole, dipole, quadrupole,
+(obtained form \eqref{eq:scalar_helmholtz_equation} for $k \to 0$) the series
+terms correspond to the individual fields of a monopole, dipole, quadrupole,
 and so forth, hence this kind of expansion is called multipole expansion.
 
 Towards the form of \eqref{eq:multipole_expansion_jackson} which is used within
@@ -3057,8 +3029,9 @@ identity, as by only flipping the sign of $\rsrc$ we obtain
 
 The second major identity towards \ac{FMM} expands the product 
 $\sphbesselj{l} \left( k d \right) \legendrepl{l} \left( \uv{X} \cdot \uv{d} \right)$
-into an integral of weighted propagating plane waves. For compact notation, it
-is useful to introduce
+in \eqref{eq:fmm_std_gegenbauer} into an integral of weighted propagating plane
+waves.
+For compact notation, it is useful to introduce
 \begin{definition}[Ewald spheren integration]\label{def:ewald_sphere}
 	Let $\unitSphereSymbol$ denote the unit sphere in $\R^3$. Then
 	integrals of the form
@@ -3137,9 +3110,3 @@ where the quantity
 	\, ,
 \end{equation}
 is called \emph{translation operator}.
-
-
-
-\fxnote{specific DCIM-like gaussian beam in z direction}
-
-

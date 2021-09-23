@@ -7,6 +7,7 @@
 
 
 \section{Historical Background}
+\label{sec:history}
 
 The references at the end of this document thematically are all part of a
 thematic area which could be enveloped by
@@ -424,8 +425,7 @@ replaces one integral by another, where it is claimed that the complex-space
 current shows better convergence.
 Although the \ac{EIT} might provide some theoretical insights, the concept
 has not found widespread use in the field of half-space and multilayered medium 
-Green's functions, not even after it was published in textbook form
-\cite{Lindell2000}.
+Green's functions.
 
 By contrast to the \emph{continuous} image constructions of Sommerfeld and the
 \ac{EIT} the \ac{DCIM} aims to represent the reflected contribution to
@@ -519,112 +519,150 @@ for far-field computations.
 
 
 \section{Fast Integral Equation Techniques}
+\label{sec:integral_equation_techniques}
 
-\cite{Harrington1993}
 
-Integral equations arising from boundary value problems in \ac{CE} can be
-discretized by subdomain basis functions, \eg, the popular \ac{RWG} functions
-\cite{Rao1982}.
 
-Direct solver: $N^3$
-Iterative solver: $N^2$
+\subsection{Method of Moments}
 
-\subsection{Motivation}
+As indicated in \cref{sec:history}, some important analytical results can
+directly be utilized by numerical solution procedures.
+This holds especially for Green's function of open-domain problems, in which
+case the appropriate framework is provided by the \ac{MoM}
+\cite{Harrington1993}.
+Within this very generic concept, integral equations arising from boundary value
+problems in \ac{CE} can be discretized by subdomain basis functions, \eg, by
+the popular \ac{RWG} functions \cite{Rao1982}.
+The global character of the Green's function renders the so-called impedance
+matrix, \ie the discretized representation of the linear operator under
+consideration, to be fully populated.
+This is a characteristic by which integral equations techniques significantly
+differ from methods based on differential equations, \eg, the \ac{FEM}
+\cite{Jin2014}.
+In the latter, the system matrix is sparse up to a band around the main diagonal
+depending on implantation.
+This sparsity is due to the differential operator which only connects nearby
+discretization domains.
+In contrast, in integral equation techniques, the Green's function connects 
+every single basis every with every testing function (which may be the very
+same functions in Galerkin's approach \cite{Harrington1993}), hence the 
+system matrix is dense.
 
-Due to the global nature of the involved Green's functions the discretization
-of \ac{MoM}-based discretization of integral equations lead to a dense \ac{LSE}.
-These systems are most commonly solved using iterative solvers in which the
-system matrix is applied to a several, recursively generated, excitation
-vectors until the solution has converged to the desired accuracy.
-Popular examples for iterative solvers are multiple versions of the \ac{CG}
-or the \ac{GMRES} \cite{Strang2010}.
+It is well known that the computational complexity of the solution of an
+$N \times N$ \ac{LSE} is $\landau{N^3}$ for direct solvers,
+\eg, Gaussian elimination or $LU$ factorization, while iterative solvers
+reduce the cost to $\landau{N^2}$ \cite{Strang2010}.
+As \ac{MoM} modeling of many real-world problems in \ac{CE} lead to large $N$
+it is clear, that iterative solvers, \eg, one of the variants of the \ac{CG}
+method or the \ac{GMRES} \cite{Strang2010}, are the way to go.
+It turns out, however, that for very large problems even $\landau{N^2}$
+can be prohibitive.
+For this reason a variety of fast algorithms have been developed to reduce the
+cost further.
+A summary of major approaches can be found in the textbook by
+\textcite[Chapter~11]{Jin2015}.
 
-If now, in a Galerkin-type \ac{MoM} scheme, $N$ denotes the number of expansion
-and testing functions, each single matrix-vector multiplication exhibits a
-complexity of $\landau{N^2}$ in terms of operations as well as in terms of
-memory. Since this becomes prohibitive for large $N$ as occurring in
-field computations of many real-world problems, an extensive set of fast
-algorithms has been developed which all aim to accelerate matrix-vector
-multiplication \cite[chapter 11]{Jin2015}.
 
-One such fast method is the \ac{FMM} and, as an extension of the latter, the
-\ac{MLFMA}. In principle these algorithms are capable to reduce the complexity
-to $\landau{N^{3/2}}$ and even $\landau{N \log N}$, respectively.
-As opposed to some other fast algorithms, the \ac{FMM} is problem
-specific. 
-Nevertheless, 2D \cite{Rokhlin1990} and 3D \cite{Rokhlin1993, Coifman1993}
+
+
+
+
+
+\subsection{Fast Multipole Method in Free Space}
+
+One way to reduce the cost of the \ac{MoM} solution process is the \ac{FMM}
+and its extension, the \ac{MLFMM}.
+These algorithms are capable of reducing the complexity to $\landau{N^{3/2}}$
+and even $\landau{N \log N}$, respectively.
+
+As opposed to some other fast algorithms, the \ac{FMM} is problem specific. 
+However, 2D \cite{Rokhlin1990} and 3D \cite{Rokhlin1993, Coifman1993}
 versions of the \ac{FMM} have been developed for the major equation in
 full-wave \ac{CE}, the Helmholtz equation.
-Today the use of the \ac{MLFMA} is state of the art in the treatment of
-large-scale problems with integral equation techniques\footnote{Interestingly,
-in the early days of the \ac{FMM} even its creators assumed that it would not be
-beneficial to improve the method to a $\landau{N \log N}$ algorithm by
-applying the scheme recursively several times. The reason is they assumed
-\enquote{problems of practicable size} to be not larger than
-$N \le \num{1000000}$ \cite{Rokhlin1993}.}
+Nowadays, the \ac{MLFMM} is state of the art in the treatment of
+large-scale problems with integral equation techniques\footnote{
+	Interestingly, in the early days of the \ac{FMM} even its creators assumed
+	that it would not be beneficial to improve the method to a
+	$\landau{N \log N}$ algorithm by applying the scheme recursively several
+	times. Actually, they assumed \enquote{problems of practicable size} to be
+	not larger than $N \le \num{1000000}$ \cite{Rokhlin1993}.
+}.
 The involved algorithms, data structures and the choice of important
 parameters have been extensively studied and  are well-documented
 \cite{Chew2001}.
 
-\subsection{Principle}
+
+
+
+
+
+\subsubsection{Principle}
 
 The starting point in the development of the \ac{FMM} is the Green's function
 of free space.
 The core idea, interpreted in terms of electrodynamics, is as follows.
 In order to solve the field problem for a general distribution of $N$ sources
-of radiation --- we may assume $N$ \acp{HD} radiating into free space ---
-one has to evaluate the corresponding Green's function $N^2$ times.
-This is due to the interaction of every \ac{HD} with every other one.
-If now the \acp{HD} are not distributed equally in space but somewhat are
+of radiation---for simplicity \acp{HD} radiating into free space shall be
+assumed---one has to evaluate the corresponding Green's function $N^2$ times.
+This describes the mutual interaction of the dipoles.
+If the \acp{HD} are not distributed equally in space but are somewhat 
 \emph{clustered} the idea of a multipole expansion 
-\cite[9.7]{Jackson2013} \cite[7.10]{vanBladel2007} comes into place.
-The claim is that in a cluster of \acp{HD} each individual \ac{HD} will not
-\enquote{see} every single \ac{HD} in a cluster of \acp{HD} which is far away.
-Instead, it will be sufficient to consider only bigger entities, namely the
+\cite{Jackson2013,vanBladel2007} comes into play.
+The claim of the multipole expansions and, thus, of the \ac{FMM} is that in a
+cluster of \acp{HD} each individual dipole will not \enquote{see} every
+single \ac{HD} in a second far away cluster of \acp{HD}.
+Instead, it will be sufficient to consider only larger entities, namely the
 whole clusters, in terms of far interaction while the near interactions
 between individual \acp{HD} need to be considered only within the clusters.
 Concisely formulated the \ac{FMM} consists of the following three steps. 
 \begin{enumerate}
-	\item The effects of all individual \acp{HD} within a cluster of sources
-	are \emph{aggregated} to a common center within the respective group. 
-	\item The aggregated effect is \emph{translated} to the common reference
+	\item The action of all individual \acp{HD} within a cluster of sources
+	is \emph{aggregated} to a common center within the respective group. 
+	\item The aggregated action is \emph{translated} to the common reference
 	point of a far-away group of, likewise clustered, observing \acp{HD}.
 	\item Within the group of observing \acp{HD} the translated quantity is
 	redistributed or \emph{disaggregated} to all individual receiving \acp{HD}.
 \end{enumerate}
-
-These steps somewhat correspond to a factorization of the Green's function
-into a product of three factors.
+These steps correspond to a factorization of the Green's function
+into a product of three functions depending on three vectors in such a way
+that the sum of the three vectors is the vector connecting source and 
+observation point.
 
 The same principle sketched here for point-like sources can easily be extended
-to arbitrary basis and testing functions within the \ac{MoM} by invoking
-the linearity of Maxwell's equations and the superposition principle.
+to arbitrary basis and testing functions within the \ac{MoM} the linearity of
+Maxwell's equations and the superposition principle.
 
 Since the described approach only works for far-interactions of properly
-clustered groups of \acp{HD} or --- more general --- subdomain basis functions 
-of local support, all the possible near-interactions need to be treated
-separately.
-This can be done applying the conventional \ac{MoM} approach to compute all
-nearby interactions.
-The effect here is, that the \ac{FMM} removes all entries in the system matrix
-which would not be centered around its diagonal within the standard \ac{MoM}.
-The result is a sparse and banded matrix, similar to those resulting from
-techniques based on differential equations, such as the \ac{FEM} or certain
-forms of \acp{FDM}.
-This resulting sparse matrix is then much easier to treat than the corresponding
-full \ac{MoM} matrix. At the same time the obtained algorithm benefits from the
-reduced number of unknowns as compared to differential equation techniques.
+clustered groups of locally supported subdomain basis functions, all 
+near-interactions need to be treated separately by a conventional
+\ac{MoM} procedure.
+This \ac{MoM} part, however, differs from the standard case in the way, that
+the impedance matrix is now banded just like the system matrix of a \ac{FEM}
+or finite differences model.
 
-\subsection{Extension to Source Points in Complex Space}
+A further benefit of the \ac{FMM} is, that the matrix never needs to be stored
+with all its elements.
+Thus, while reducing the computational complexity to the discussed orders,
+the \ac{FMM} is able to reduce memory complexity even further.
 
-The use of complex vectors \cite[Chapter 1]{Lindell2000} is omnipresent within
+
+
+
+
+
+
+\subsubsection{Extension to Source Points in Complex Space}
+
+The use of complex vectors \cite[Chapter~1]{Lindell2000} is omnipresent within
 the study of time-harmonic electromagnetic fields.
-However, vectors in $\C^3$ are usually \emph{electromagnetic} quantities like
-vector potentials and the fields themselves.
+However, vectors in $\C^3$ are usually only \emph{electromagnetic} quantities
+like vector potentials and the fields themselves.
 In contrast, (arbitrary) complex spatial coordinates are rather uncommon so
-far\footnote{Counterexamples are found, \eg, within the context of Lorentz
-transforms between moving frames of reference, where angles of rotation may be
-imaginary \cite[Chapter~11]{Jackson2013}.}.
+far\footnote{
+	Counterexamples are found, \eg, within the context of Lorentz
+	transforms between moving frames of reference, where angles of rotation may
+	be imaginary \cite[Chapter~11]{Jackson2013}.
+	}.
 An example use case in which the concept of complex space plays a prominent role
 is given in a paper by \textcite{Hansen2009}, where a new perspective on the
 classical Huygens principle based on complex source locations is presented. 
@@ -632,34 +670,38 @@ classical Huygens principle based on complex source locations is presented.
 It is well-known that if the Green's function of the scalar Helmholtz equation
 for the free-space case describes a spherical wave for the usual case where
 the distance between source and observation point is a real number.
-This pattern changes if this distance is complex.
+This pattern, however, changes if this \emph{distance} becomes complex
+\cite{Deschamps1971,Keller1971,Couture1981}.
 In this case the magnitude of the wave field becomes dependent on direction.
-This kind of wave field is commonly called Gaussian beam or \ac{CSB}.
-Albeit the concept of \emph{complex space} is somewhat abstract
-\cite[Chapter~1]{Lindell2000}, an intuitive and commonly employed definition of
-\emph{complex length} is, that such a quantity should have a positive real part
-\cite{Hansen2009, Hansen2013}.
+This kind of wave field is sometimes \ac{CSB} as it is similar to the
+Gaussian beam \cite[pp.~626]{hecht2017} at angles near its main axis.
+Albeit the concept of \emph{complex space} is somewhat abstract, an intuitive
+definition of \emph{complex length} would be, that such a quantity shall have
+positive real part \cite{Hansen2009, Hansen2013}.
 
-Concerning the combination of the \ac{FMM} with sources situated in complex
-space, it appears obvious that this kind of application was not what the
-creators originally had in mind.
-The popular review paper by \textcite{Coifman1993}, for example, does not make
-any indications towards this direction.
+The two major identities on which the \ac{FMM} is built in principle allow
+complex variables \cite{Olver2010}.
+As the reflected contribution in multilayered media Green's functions can
+be expressed by point-like image sources situated in complex space,
+a combination of the \ac{FMM} with complex image sources appears to be an
+obvious step towards the acceleration of \ac{MoM} models of planar multilayered
+media.
+
+However, this is not what the method was originally designed for.
 Interestingly enough, in the mathematically rigorous treatment of the 3D
-\ac{FMM} for the Helmholtz equation \cite{Rokhlin1993}, the essential
-Theorem~2.2 is formulated in terms of complex spatial coordinates and even
-complex angles.
-However, these assumptions are dropped as early in the following as in
-Theorem~2.3, whose requirements assume real spatial quantities and leave only
-the wavenumber in the complex domain.
-The same assumptions underlie the mathematically oriented publication Concerning
+\ac{FMM} for the Helmholtz equation by \textcite{Rokhlin1993}, the essential
+Theorem~2.2 is formulated in terms of complex spatial coordinates and angles.
+Careful reading reveals, this assumption is dropped in the following
+treatment in Theorem~2.3, whose requirements assume real spatial quantities
+and leave only the wavenumber in the complex domain.
+The same assumptions underlie the mathematically oriented publication concerning
 the 2D \ac{FMM} \cite{Rokhlin1990}.
-
-From these observations it appears obvious, that the \ac{FMM} development
-made no efforts towards an applicability to sources (or observation points)
-situated in whatever form of complex space.
-Actually in most cases of application even the wavenumber is simply the one of
-free space and is therefore real quantity.
+Hence, the original mathematical apparatus behind the \ac{FMM} makes no
+statement if the method is applicable to complex source points.
+The fact that the two basic identities are in principle suitable for that
+purpose does not correspond to any proposition towards that direction, because
+in the way from those elementary identities towards the \ac{FMM} algorithm
+the convergence properties of the involved series and integral are utilized.
 
 Nevertheless, a combination of the concept of \acp{CSB} with the \ac{FMM} can
 provide benefits.
@@ -668,65 +710,111 @@ Employing some earlier results \cite{Hansen2009}, it was shown by
 \emph{imaginary shift} applied to the basis functions in a \ac{FMM} setup
 results in a modified \ac{FMM} translation operator which shows a significantly
 directive pattern.
-This so-called Gaussian translation operator allows to neglect some plane wave
-directions involved in the expansion throughout the translation step
-and therefore renders the resulting algorithm computationally more effective
-than a \ac{FMM} using the standard translation operator.
-
-It should be noted that the requirements in the derivation of the Gaussian
-translation operator and also the corresponding proof 
-\cite[Appendix]{Hansen2013} do not assume general source points located in
-complex space defined in a sense that all three spatial coordinates might
-be arbitrary complex numbers.
-The imaginary part of the source position vector is instead selected by a given
-intention regarding the sharpness of the resulting \ac{CSB}.
+This so-called Gaussian translation operator allows to neglect a significant
+portion of the plane wave directions on which the numerical quadrature is built.
+Therefore, the Gaussian beam translation operator can accelerate the 
+translation step---provided the imaginary displacement is chosen carefully.
+It must, however, be noted that the requirements in the derivation of the
+Gaussian translation operator and also in the corresponding proof 
+\cite[Appendix]{Hansen2013} do not assume \emph{general} source points in
+complex space in a sense that all three spatial coordinates may be arbitrary
+complex numbers.
+The imaginary part of the source position vector is instead selected with a
+certain intention regarding the sharpness of the resulting \ac{CSB}.
 Consequently, the parameter controlling the imaginary shift of source points
 is labeled \emph{beam parameter} by the author.
+The concept of the Gaussian beam translation operator has meanwhile been
+extended to the multilevel scheme \cite{Borries2014} and is mature enough
+to be applied in practical numerical codes \cite{eibert2021}.
 
-\fxnote{\cite{Borries2014}}
-\fxnote{\cite{eibert2021}}
-
-In the course of the literature research for this thesis no thoroughly and 
-mathematically rigorous treatment was found concerning the combination
+In the course of the literature research for the present thesis no thoroughly
+and  mathematically rigorous treatment was found concerning the combination
 of the \ac{FMM} principle with actual complex source points located at
 \emph{arbitrary} \enquote{positions} in a complex version of Euclidean space.
 
-However, there are records of some attempts to do so using a standard \ac{FMM}
-implementation and without the aim of extending the underlying theorems and
-proofs \cite{Rokhlin1993}.
-A rather heuristic discussion of this topic is given in a paper by
-\textcite{Geng2001}.
-It is empirically shown that the use of complex source points drastically
-deteriorates the convergence of the central addition theorem on which the
-\ac{FMM} is based.
-The number of terms in the corresponding series expansion is closely
-related to the number of quadrature points required to numerically integrate
-the plane-wave expansion --- the second main identity within the
-\ac{FMM}.
-For this reason the authors did not pursue the approach of using complex images
-further and instead directed their attention to approximate forms of the
-Green's function using a single real image source for all far interaction
-computed using the \ac{FMM} \cite{Geng1999, Geng2000}.
+A rather heuristic discussion of the problems with integration of complex
+images into the \ac{FMM} is given in a paper by \textcite{Geng2001}.
+It is claimed that the conventional \ac{FMM} remains valid for complex source 
+points yet the required multiple order increases dramatically such that the
+algorithm becomes prohibitively expensive.
+However, the discussion lacks of a precise definition of complex length,
+complex unit vectors, precise definition of the dot product and so forth.
+Therefore, the given arguments cannot be followed in detail.
+At least the claim that the complex-valued Legendre polynomial (p.742) is
+strictly bound cannot be judged without being clear about the mentioned
+definitions \cite[pp.~375]{Olver2010}.
 
-\subsection{Adaption to Half-Space Green's Functions}
 
-\cite{Geng2000}
-\cite{Liu2002}
-\cite{Eibert2018}
-\cite{Eibert2018a}
-\cite{Eibert2019}
-\cite[Chapter~8.13.2]{parini2020}
+
+
+
+
+
+\subsubsection{Existing Approaches of Half-Space FMM Adaptions}
+
+As far as found out by the literature research for the present thesis, no
+rigorous consideration of a \ac{FMM} with complex sources exits to date.
+The main approach pursued instead is to use a single or a few
+images in real space, where it is tried to adjust the corresponding
+reflection coefficients in an optimized way.
+
+Initial efforts in this field are documented by Geng and collegues
+\cite{Geng1999,Geng2000,Geng2001}.
+Here, the \ac{DCIM} is used to account for the \ac{MoM} treatment of near
+interactions, while an approximate far field form of the half-space Green's
+function is used for the actual \ac{FMM} far-interactions.
+Based on this work, an improved version is proposed by \textcite{Liu2002},
+where a higher order approximation of the reflection coefficient is used.
+Another application heading in this direction is the antenna field transform
+method described in the textbook by \textcite[Section~8.13.2]{parini2020}.
+Example results of a working implementation of this and related methods can be
+found in specialized papers on antenna field transforms
+\cite{Eibert2018,Eibert2018a,Eibert2019}.
+
+
+
+
 
 
 \section{Scope of this Thesis}
 \label{sec:scope_of_this_thesis}
 
-The particular problem motivating this thesis is to find a combination of
-different numerical methods which are all based on analytical results.
-These are, namely, the Green's function of the so-called Sommerfeld half-space
-problem and a fast algorithm which is state of the art in large-scale \ac{MoM}
-solvers, the \ac{FMM}.
-To this end a generalized version of the classical image source principle is
-examined towards its compatibility with the \ac{FMM}.
-For reference computation of the improper integrals used to represent the
-half-space Green's functions sophisticated numerical algorithms are implemented.
+The aim of the present thesis is to lay the foundations for further research
+concerning the development of improved \ac{FMM} algorithms for the Sommerfeld
+half-space problem and possibly even for more general multilayered solution
+environments.
+Within this scope, the main aspects of interest are identified as
+\begin{enumerate}
+	\item the precise properties of the Sommerfeld integral formalism and
+	possible restrictions regarding complex spatial coordinates,
+	\item the concept of \acp{CSB} and their relation to Sommerfeld integrals,
+	\item the \ac{DCIM}, and finally 
+	\item the \ac{FMM} itself.
+\end{enumerate}
+
+\cref{part:theory} aims to give a clear, ground-up and unified treatment of
+all those individual components.
+To this end, \cref{ch:math_preliminaries} gives clear definitions of the most
+important terms used throughout the following and demonstrates the connection
+of Fourier transforms, Hankel transforms and the choice of time convention.
+This chapter is regarded necessary as there co-exists a broad variety of
+different conventions and assumptions in the literature.
+For the sake of simplicity, \cref{ch:scalar_case} first develops central
+techniques and considerations for the scalar case.
+These results are then readily utilized in \cref{ch:em_case}, where
+the vector case of electromagnetic fields is considered.
+\cref{ch:fmm} introduces the \ac{FMM} in a hopefully illustrative manner, which
+aims to take in an intermediate position between the mathematically rigorous
+treatment of \textcite{Rokhlin1993} and the popular prescription paper by
+\textcite{Coifman1993}.
+
+\cref{part:implementation_and_results} is dedicated to the computer codes 
+implemented within the course of this thesis.
+The discussion is subdivided into \cref{ch:computer_implementation} which
+briefly describes the architecture and important aspects of the codes, and
+\cref{ch:numerical_results} where some numerical results are presented which
+can be generated by the implemented C++ library.
+
+In order to maintain clarity, both parts of the thesis draw their own
+conclusions, the first one from mathematical, the second one from practical
+considerations.

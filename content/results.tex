@@ -1,4 +1,5 @@
 \part{Implementation and Numerical Results}
+\label{part:implementation_and_results}
 
 
 
@@ -8,14 +9,51 @@
 \chapter{Computer Implementation}
 \label{ch:computer_implementation}
 
-\section{Numerical Computation of Sommerfeld Integrals}
+A large part of the present thesis is spent on computer implementation of
+all major components needed towards an examination of discrete complex images
+within the \ac{FMM}.
+This chapter shall give an impression of the faced difficulties as well as
+on insights gained in this process.
+
+All codes are written in the C++ programming language, a choice which is made
+for the following reasons.
+
+It turns out that a unified and concerted implementation of all the
+required bits, \eg, basic data types, \acp{TLGF}, reliable numerical
+integration routines, various spectral and spatial Green's functions,
+\ac{DCIM}, \ac{FMM}, and so forth, leads to a rather large code base.
+Therefore, an ecosystem is needed which is suitable to maintain such a
+project.
+This requirement is fulfilled for C++ as advanced build and versioning systems
+are available.
+
+The second crucial point is the requirement for an extensive unit test
+framework.
+This is found to be essential for the implementation of algorithms most of
+which are rather involved.
+In order to achieve successful interaction of all the pieces, each of the
+individual bricks must be thoroughly tested for all possible situations.
+This especially proves true in the implementation of \ac{GPOF} and
+\ac{DCIM}, which are essentially estimation algorithms exhibiting some inherent
+unreliability.
+Through extensive testing, implementations of these methods have been developed
+which may not fail in more than $\SI{0.1}{\percent}$ of
+the considered some ten-thousand parametrized test cases.
+
+The third major reason for the choice of a compiled language lies in the very
+nature of \ac{PE} methods which play a central role in the computation
+of highly accurate reference solutions.
+These are essentially iterative procedures which call a multitude of
+small internal functions many times.
+Here, a compiled language plays out its strengths as compared to interpreted
+programming languages as the cost for repeated function look-up can be avoided
+by using inline functions.
 
 
 
 
 
-\subsection{Numerical Integration}
-
+\section{Numerical Integration of Sommerfeld Integrals}
 
 \begin{figure}
     \centering
@@ -48,34 +86,111 @@
     \label{fig:sip_numerical_integration}
 \end{figure}
 
+For high-accuracy reference computation of Sommerfeld integrals numerical
+integration along the \ac{SIP} is implemented.
+The theoretical backgrounds of the used methods can be fund in two comprehensive 
+review papers \cite{Michalski1998,Michalski2016a}.
+
+The implemented procedure is fully automated and thoroughly tested for the
+complete dyadic Green's functions as well as for the generic scalar Green's
+functions as specified by \cref{def:generic_scalar_gf}.
+The routine employs the specific scheme illustrated in
+\cref{fig:sip_numerical_integration}.
+The breakpoint $a$ is chosen such that it is $\num{1.2}$ times the real part
+of the singularity with the largest real part.
+This choice is found to render the integrand well-behaved for $k_\rho > a$.
+The $\xi_i$ are the breakpoints of the \ac{PE} algorithm.
+
+The finite integral over the detour path connecting the origin with the
+breakpoint $a$ is integrated along a semi-elliptical path parametrized by
+\begin{equation}
+    \gamma \left(t\right)
+    =
+    \frac{a}{2}
+    \left(1 + \cos \phi\right)
+    +
+    \im w \sin \phi
+    \qquad
+    \phi \left(t\right)
+    =
+    \pi \left(1 - t\right)
+    \qquad
+    0 \leq t \leq 1
+    \, ,
+\end{equation}
+where it is empirically found that
+\begin{equation}
+    w = 
+    \begin{cases}
+        \frac{1}{\rho}  & \rho > 0 \\
+        \frac{a}{2}     & \mathrm{else}
+    \end{cases}
+\end{equation}
+is a good choice for the depth of the detour into the first quadrant of the 
+complex $k_\rho$ plane.
+
+The tail integral is evaluated by the \ac{PE} algorithms prescribed in detail
+in a paper by \textcite{Michalski2016a}.
+The sub-interval breakpoints $\xi_i$ in \cref{fig:sip_numerical_integration} 
+are chosen to coincide with the zeros of the kernel-Bessel function of the
+Sommerfeld to integrate.
+This method is referred to as \enquote{modified Sidi partition}
+\cite{Michalski2016a}.
+In order for this partitioning scheme to be applicable, $a$ must be selected
+to coincide with a zero of $\besselj{\nu}\left(k_\rho \rho\right)$.
+The implemented root search algorithm uses tabulated values
+\cite[p.~409]{Abramowitz2014} for the first $\num{20}$ zeros and resorts to
+McMahon's \cite[p.~236]{Olver2010} expansion for larger zeros.
+
+Both major \ac{PE} algorithms prescribed in the paper by
+\textcite{Michalski2016a}, \ie, Levin-Sidi \ac{PE} with numerical remainder
+estimates, and Mosig-Michalski \ac{PE} with analytical estimates
+are implemented.
+The one to be used by the automated procedure depends on weather the calling
+parent routine provides the analytical parameters or not.
+The meaning of those is explained in the paper \cite[eq.~(70)]{Michalski2016a}.
+In practice, it is found, however, that the Levin-Sidi implantation can very 
+well compete with the Mosig-Michalski version.
+
+On a more detailed level it turns out, that a reliable computer implementation
+of the discussed algorithms needs to treat various pitfalls explicitly.
+For example in the Levin-Sidi \ac{PE} method none of the partial integrals is
+allowed to be close to zero, as the algorithm divides by these results.
+On the other side, some known analytical properties can be readily utilized,
+\eg, the that $\besselj{\nu} \left(0\right)$ vanishes for all $\nu \neq 0$.
+
+
+
+
+
+
 \section{Discrete Complex Image Method}
 
-\subsection{Fitting Algorithm}
+For the \ac{DCIM} four different versions have been implemented: the
+long-known two-level algorithm \cite{Aksun1996} and the three different
+three-level variants outlined in the paper by \cite{Alparslan2010}.
+Though extensive testing, version 2 of the three-level algorithm is found to
+be most suitable for the case of half-space Green's functions.
 
-\cite{Hua1989}
-\cite{Sarkar1995}
-\cite{mohammadi-ghazi2016}
-\cite{vandenberg2008, spgl1site}
+As internal function fitting algorithm different possible implementations
+of the \ac{GPOF} method \cite{Hua1989,Sarkar1995} were tested, where the
+version for noisy data and with automated order selection was found superior.
+Regarding automated order selection also one own approach was pursued.
+The idea is to replace the original ordinary least squares solver in the final
+step of the \ac{GPOF} method by a sparse least squares solver to reduce the 
+number of obtained complex image terms as much as possible.
+For this purpose the SPGL1 solver \cite{vandenberg2008, spgl1site}, for which a
+C++ implementation is readily available from an earlier project, was considered.
+This approach, however, is not found to be superior to the standard way of
+order selection based on the ratio of singular values.
+
+
+
+
+
+
 
 \section{Fast Multipole Method}
-
-\subsection{Geometrical Definition}
-
-The following considerations concerning the \ac{FMM} use the geometrical
-assumptions elucidated by \cref{fig:fmm_geometry}.
-
-
-
-Within the scope of the present thesis the grouping scheme is chosen
-according to \cref{fig:fmm_geometry},~\ie, all groups are cubes with side
-length $w$.
-Towards an inclusion of a ground half-space at $z < 0$ the whole grouping
-configuration is aligned with $z = 0$ as shown.
-
-
-
-This notation is in accordance to the popular prescription of the \ac{FMM}
-algorithm by \textcite{Coifman1993}.
 
 \begin{figure}
 	\centering
@@ -124,12 +239,21 @@ algorithm by \textcite{Coifman1993}.
 	\label{fig:fmm_geometry}
 \end{figure}
 
-Within this thesis the goal is not to develop a fully-featured \ac{FMM}
-implementation, \eg, for the use in an electromagnetic solver.
+The implementation of a \ac{FMM} test code is based on the geometry shown in 
+\cref{fig:fmm_geometry}.
+All groups are cubes with side length $w$.
+Towards an inclusion of a ground half-space at $z < 0$ the whole grouping
+configuration is aligned with $z = 0$ as shown.
+This notation is in accordance to the popular prescription of the \ac{FMM}
+algorithm by \textcite{Coifman1993}.
+
+Within the scope of the present thesis the goal is not to develop a
+fully-featured \ac{FMM} implementation, \eg, for the use in an electromagnetic
+solver.
 It is rather desired to have a simple but flexible test code to examine
 different possibilities to adapt the \ac{FMM} to the half-space Green's
 function.
-With this key requirement in mind an experimental version of the \ac{FMM}
+With this goal in mind an experimental version of the \ac{FMM}
 is implemented which is restricted in the following aspects.
 \begin{itemize}
 	\item Only the scalar case is considered.
@@ -157,12 +281,6 @@ multiindex $\fmmMultiIndex \in \Z^3$ defined as
 where the floor function is defined to operate component-wise on the vector
 $\pvec{r}$ given in Cartesian coordinates.
 
-The centers of certain source and observation groups are denoted by 
-$\fmmGroupCenter{\fmmMultiIndex^\prime}$ and 
-$\fmmGroupCenter{\fmmMultiIndex}$, respectively.
-The connection between two group centers is denoted by
-$\fmmDiffGroupCenters{\fmmMultiIndex}{\fmmMultiIndex^\prime} \coloneqq \fmmGroupCenter{\fmmMultiIndex} - \fmmGroupCenter{\fmmMultiIndex^\prime}$.
-
 Within each group the source or observation points belonging to this group
 are consecutively numbered by an index $\alpha \in \N$.
 Globally, all points are identified by a unique index $n \in \N$.
@@ -180,7 +298,7 @@ Due to this freedom it turns out to be advantageous to establish two separate
 correspondences as the one given by \cref{tab:fmm_grouping}: one for source
 points and one for observation points.
 
-\begin{table}[hbt]
+\begin{table}[]
 	\centering
 	\begin{tabular}{ccc}
 		\toprule%
@@ -204,10 +322,11 @@ points and one for observation points.
 	\caption[\acs{FMM} grouping scheme]
 	{\acs{FMM} grouping scheme. The setup in this example has three groups
 	containing three, four, and another three points, respectively.}
-
 	\label{tab:fmm_grouping}
-
 \end{table}
+
+
+
 
 
 
@@ -219,9 +338,11 @@ points and one for observation points.
 \chapter{Numerical Results}
 \label{ch:numerical_results}
 
+In this chapter a couple of example numerical results are presented which
+prove the successful numerical implementation of the several components
+announces in \cref{sec:scope_of_this_thesis}.
 All results are computed using \texttt{double} precision floating point numbers.
-
-Throughout this chapter relative errors are computed according to
+The relative error measure used in most of the results is specified by
 \begin{definition}[Relative error]
     Let $x_\mathrm{r} \neq 0$ be a reference value.
     Then the \emph{relative error} of a result $x_\mathrm{n}$ with respect to
@@ -233,7 +354,13 @@ Throughout this chapter relative errors are computed according to
     \end{equation}
 \end{definition}
 
-
+Out of the infinite set of possible test cases, the two given by
+\cref{tab:numerical_examples_half_spaces} are considered as they
+represent physically meaningful cases of practical relevance.
+Note that these two specific cases are also considered in a comprehensive
+review paper by \textcite{Michalski2016b}.
+Therefore, the numerical results can also be cross-checked against another
+implementation which can be assumed to be solid.
 \begin{table}[hbt]
 	\centering
 	\begin{tabular}{ccc}
@@ -244,26 +371,26 @@ Throughout this chapter relative errors are computed according to
 		Seawater   & $\num{81}$ & $\SI{4.0}{\siemens\per\metre}$ \\
 		\bottomrule
 	\end{tabular}
-
 	\caption[Example half-space environments]
 	{Example half-space environments used for numerical examples.
     Both environments are considered at $f = \SI{10}{\mega\hertz}$.}
 	\label{tab:numerical_examples_half_spaces}
 \end{table}
 
-
-\section{Numerical Integration of Sommerfeld Integrals}
-
-\cite{Michalski2016a}
-
-Asymptotic behavior \cite{Michalski1998}
-\begin{equation}
-    \tilde{g}\left(\xi\right)
-    \propto \frac{\exp{-\zeta \xi}}{\xi^\alpha}
-    \left(C + \mathcal{O}\left(\xi^{-1}\right)\right)
-\end{equation}
-
-For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
+As the Sommerfeld identity is the most central result within the study of
+multilayered media Green's functions, it makes sense to demand from a numerical
+integration algorithm that it should be able to evaluate this integral very
+accurately.
+Furthermore, the Sommerfeld identity is in fact the only case where an
+analytical reference solution is available in terms of a closed-form formula.
+Figure \cref{fig:somm_id_ref_time:sub1} shows the respective results for a large
+range of observation locations.
+The upper bound of the relative error or $\SI{-134.42}{\decibel}$ indeed
+proves the sanity of the implantation.
+\cref{fig:somm_id_ref_time:sub2}, however, reveals that the performance
+deteriorates for large $\rho$, which is the well-known issue of any
+\ac{SIP}-based numerical integration algorithm.
+The reasons for this are already discussed in \cref{ch:introduction}.
 
 \begin{figure}
     \centering
@@ -342,7 +469,13 @@ For Sommerfeld identity: $\xi = \abs{z}$, $\alpha = 1/2$
 
 
 
-
+The nest example shown in \cref{fig:surface_E_z_of_rho_and_f_axial_transmission}
+actually recreates two Figures from the paper by \textcite{Michalski2016b}
+for the vertical component $E_z$ of a \ac{VED} field right at the interface
+of a Sommerfeld half-space for the dry-ground case.
+The curves for the field component both as a function of $\rho$ as well as of
+$f$ exactly match the literature result and therefore need no further
+discussion.
 
 \begin{figure}
     \newcommand{\widthFactor}{0.47}

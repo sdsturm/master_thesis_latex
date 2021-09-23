@@ -1,4 +1,38 @@
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 
-\fxnote{The abstract should be about one page long.}
+Arnold Sommerfeld's integral representation of the Green's functions of
+half-space and planar multilayered solution environments still---although more 
+than a century of age---is the prevalent formalism in this field of research.
+As no closed form solutions of these Sommerfeld integrals exist for any
+problem of practical interest, an extensive set of analytical and numerical
+methods is the product of long-term research.
+Using those tools, a trade-off has to be made between reliable accuracy and
+computational efficiency.
+A highly effective yet not absolutely reliable method is the \ac{DCIM}
+which utilizes the Sommerfeld identity together with a series of complex spatial
+distances in order to approximate Sommerfeld integrals in closed form.
+The terms of this series are interpreted as complex images.
+
+The so-obtained Green's functions can be used in integral equation
+techniques within the framework of the \ac{MoM}.
+As \ac{MoM} solutions may be of prohibitive computational cost for electrically
+large problems, the \ac{FMM} is a well-established tool to reduce the cost
+in \ac{MoM}-based formulations which use the Green's function of free space.
+
+This thesis presents a unified and comprehensive treatment of the preliminaries
+that are expected to be needed in further research towards the development
+of improved or extended \ac{FMM}-like algorithms for acceleration of 
+\ac{MoM}-based formulation which instead contain the Green's function of
+half-space or eventually even the multilayered solution environments.
+The central mathematical tools are examined with regard to their compatibility
+with image sources situated in complex space.
+All required components are implemented and thoroughly numerically verified
+against known analytical solutions or using the fundamental electromagnetic
+principles of reciprocity and duality.
+The core of this software library is formed by a set of routines for the
+computation of highly accurate reference solutions by
+advanced extrapolation-accelerated numerical integration techniques.
+For illustration, a comprehensive set of example numerical results is presented.
+
+\acresetall
