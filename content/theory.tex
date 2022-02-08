@@ -1198,10 +1198,10 @@ as the very same point in $\C \cup \left\{\infty\right\}$.
 Another way to think of this is that, for $\rho > 0$, the real axis path in
 \eqref{eq:sommerfeld_integral_sip} can be closed at infinity in the lower
 complex $k_\rho$ half-plane by virtue of Jordan's lemma, which is applicable
-here as $\besselh{2}{0}$ decay exponentially for large negative imaginary
+here as $\besselh{2}{0}$ decays exponentially for large negative imaginary
 arguments.
 Thus, according to Cauchy's theorem and the residue theorem, the result of
-integration along the closes \ac{EIP} is constituted solely by the integration
+integration along the closed \ac{EIP} is constituted solely by the integration
 around the branch cuts and the residues of the poles.
 This enables the application of various exact and asymptotic techniques,
 analytical ones as well as numerical ones
@@ -1293,7 +1293,7 @@ However, it turns out that the usual observation point $\robs \in \R^3$
 in conjunction with a source at \enquote{point} $\rsrc \in \C^3$
 causes a significant change in the behavior of the scalar Green's function
 $G_0 \left(\robs, \rsrc\right)$ if the axioms of real valuedness in
-\cref{def:euclidean_norm} and \cref{def:euclidean_metric} dropped.
+\cref{def:euclidean_norm} and \cref{def:euclidean_metric} are dropped.
 
 As an example, assume $0 < k \in \R$ and
 $R = R_\Re + \im R_\Im$, where
@@ -1616,13 +1616,13 @@ Namely, the \ac{DCIM} assumes the integral in
 \end{equation}
 exists for an arbitrary $z \in \C$, $\rho \in \R$ while the identity remains
 valid.
-The apparently does not provide a rigorous proof for this claim.
+This apparently does not provide a rigorous proof for this claim.
 
 Obviously, the only part of the integrand in
 \eqref{eq:sommerfeld_identity_complex_z} that changes in the transition
 $\abs{z} \to z \in \C$ is the $\exp{-\im k_z z}$.
 As the main subject of interest within the present thesis are fields in the
-vacuum/air part of a Sommerfeld half-space $k \in \R$ and $k > 0$ can be
+vacuum/air part of a Sommerfeld half-space, $k \in \R$ and $k > 0$ can be
 assumed for the wavenumber in \eqref{eq:def_k_z_of_k_rho}.
 In this case $k_z$ can be written as
 \begin{equation}\label{eq:k_z_case_distinction}
@@ -1709,7 +1709,7 @@ the situation, however, is more severe as the right-hand side integral in
 for $z_\Re > 0$ as in this case the growth of $\exp{z_\Re \abs{k_z}}$ cannot be
 compensated by $1 / \abs{k_z}$ in the $k_\rho \to \infty$.
 
-With regard to the \ac{DCIM} it is noticed, that the parameter $z \in \C$
+With regard to the \ac{DCIM} it is noticed that the parameter $z \in \C$
 is only an internal quantity which is never used outside the \ac{DCIM} routine
 in a standard implementation.
 Also, of course, the integral \eqref{eq:sommerfeld_identity_complex_z} is not

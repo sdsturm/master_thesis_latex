@@ -169,10 +169,12 @@ subject yet decades ago \cite{Michalski2015, Michalski2016b, Mosig2021,koh2021}.
 From a fundamentalist physicist's point of view the problem of dipole radiation
 over ground or in plane stratified media is exhaustively studied by writing
 down the solution in terms of Sommerfeld integrals.
-However, a multitude of contributions continuous to be published to this very
+However, a multitude of contributions continues to be published to this very
 day which addresses the problem \emph{how} to actually evaluate these integrals.
 Closed form solutions are not known to exist for virtually any case of practical
 interest.
+% A Method which proved particularly useful in the numerical evaluation of
+% Sommerfeld integrals is prescribed in the following.
 Methods which proved useful in the numerical evaluation of Sommerfeld integrals
 in computational practice can roughly be classified to belong to one of the 
 approaches sketched in the following subsections.
@@ -181,7 +183,7 @@ approaches sketched in the following subsections.
 
 
 
-\subsection{Numerical Integration}
+\subsection{Numerical Integration Along the Real Axis}
 Numerical integration to date is considered as the most rigorous way to evaluate
 Sommerfeld integrals, yet in most cases it is also the computationally most
 expensive way to do so.
@@ -392,7 +394,7 @@ which numerical integration technique is best for large lateral distances.
 
 
 
-\section{Complex Image Principle}
+\subsection{Complex Image Principle}
 
 The notion of enforcing boundary conditions in electrostatic problems
 involving conducting bodies by replacement of the bodies by certain
@@ -531,16 +533,16 @@ This holds especially for Green's function of open-domain problems, in which
 case the appropriate framework is provided by the \ac{MoM}
 \cite{Harrington1993}.
 Within this very generic concept, integral equations arising from boundary value
-problems in \ac{CE} can be discretized by subdomain basis functions, \eg, by
+problems in \ac{CE} can be discretized by subdomain basis functions,~\eg,~by
 the popular \ac{RWG} functions \cite{Rao1982}.
 The global character of the Green's function renders the so-called impedance
-matrix, \ie the discretized representation of the linear operator under
+matrix,~\ie,~the discretized representation of the linear operator under
 consideration, to be fully populated.
 This is a characteristic by which integral equations techniques significantly
-differ from methods based on differential equations, \eg, the \ac{FEM}
+differ from methods based on differential equations,~\eg,~the \ac{FEM}
 \cite{Jin2014}.
 In the latter, the system matrix is sparse up to a band around the main diagonal
-depending on implantation.
+depending on implementation.
 This sparsity is due to the differential operator which only connects nearby
 discretization domains.
 In contrast, in integral equation techniques, the Green's function connects 
@@ -549,15 +551,15 @@ same functions in Galerkin's approach \cite{Harrington1993}), hence the
 system matrix is dense.
 
 It is well known that the computational complexity of the solution of an
-$N \times N$ \ac{LSE} is $\landau{N^3}$ for direct solvers,
-\eg, Gaussian elimination or $LU$ factorization, while iterative solvers
-reduce the cost to $\landau{N^2}$ \cite{Strang2010}.
-As \ac{MoM} modeling of many real-world problems in \ac{CE} lead to large $N$
-it is clear, that iterative solvers, \eg, one of the variants of the \ac{CG}
-method or the \ac{GMRES} \cite{Strang2010}, are the way to go.
+$N \times N$ \ac{LSE} is $\landau{N^3}$ for direct
+solvers,~\eg,~Gaussian elimination or $LU$ factorization, while iterative
+solvers reduce the cost to $\landau{N^2}$ \cite{Strang2010}.
+As \ac{MoM} modeling of many real-world problems in \ac{CE} leads to large $N$,
+it is clear that iterative solvers,~\eg,~one of the variants of the \ac{CG}
+or the \ac{GMRES} \cite{Strang2010}, are the way to go.
 It turns out, however, that for very large problems even $\landau{N^2}$
 can be prohibitive.
-For this reason a variety of fast algorithms have been developed to reduce the
+For this reason, a variety of fast algorithms have been developed to reduce the
 cost further.
 A summary of major approaches can be found in the textbook by
 \textcite[Chapter~11]{Jin2015}.
@@ -676,7 +678,7 @@ In this case the magnitude of the wave field becomes dependent on direction.
 This kind of wave field is sometimes \ac{CSB} as it is similar to the
 Gaussian beam \cite[pp.~626]{hecht2017} at angles near its main axis.
 Albeit the concept of \emph{complex space} is somewhat abstract, an intuitive
-definition of \emph{complex length} would be, that such a quantity shall have
+definition of \emph{complex length} would be that such a quantity shall have
 positive real part \cite{Hansen2009, Hansen2013}.
 
 The two major identities on which the \ac{FMM} is built in principle allow
@@ -706,7 +708,7 @@ the convergence properties of the involved series and integral are utilized.
 Nevertheless, a combination of the concept of \acp{CSB} with the \ac{FMM} can
 provide benefits.
 Employing some earlier results \cite{Hansen2009}, it was shown by
-\textcite{Hansen2013}, that the introduction of a well-defined
+\textcite{Hansen2013} that the introduction of a well-defined
 \emph{imaginary shift} applied to the basis functions in a \ac{FMM} setup
 results in a modified \ac{FMM} translation operator which shows a significantly
 directive pattern.
@@ -735,9 +737,9 @@ of the \ac{FMM} principle with actual complex source points located at
 A rather heuristic discussion of the problems with integration of complex
 images into the \ac{FMM} is given in a paper by \textcite{Geng2001}.
 It is claimed that the conventional \ac{FMM} remains valid for complex source 
-points yet the required multiple order increases dramatically such that the
+points yet the required multipole order increases dramatically such that the
 algorithm becomes prohibitively expensive.
-However, the discussion lacks of a precise definition of complex length,
+However, the discussion lacks a precise definition of complex length,
 complex unit vectors, precise definition of the dot product and so forth.
 Therefore, the given arguments cannot be followed in detail.
 At least the claim that the complex-valued Legendre polynomial (p.742) is

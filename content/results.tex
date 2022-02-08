@@ -132,8 +132,8 @@ complex $k_\rho$ plane.
 The tail integral is evaluated by the \ac{PE} algorithms prescribed in detail
 in a paper by \textcite{Michalski2016a}.
 The sub-interval breakpoints $\xi_i$ in \cref{fig:sip_numerical_integration} 
-are chosen to coincide with the zeros of the kernel-Bessel function of the
-Sommerfeld to integrate.
+are chosen to coincide with the zeros of the Bessel function constituting the
+kernel of the Sommerfeld integral to evaluate.
 This method is referred to as \enquote{modified Sidi partition}
 \cite{Michalski2016a}.
 In order for this partitioning scheme to be applicable, $a$ must be selected
@@ -152,7 +152,7 @@ The meaning of those is explained in the paper \cite[eq.~(70)]{Michalski2016a}.
 In practice, it is found, however, that the Levin-Sidi implantation can very 
 well compete with the Mosig-Michalski version.
 
-On a more detailed level it turns out, that a reliable computer implementation
+On a more detailed level it turns out that a reliable computer implementation
 of the discussed algorithms needs to treat various pitfalls explicitly.
 For example in the Levin-Sidi \ac{PE} method none of the partial integrals is
 allowed to be close to zero, as the algorithm divides by these results.
@@ -340,7 +340,7 @@ points and one for observation points.
 
 In this chapter a couple of example numerical results are presented which
 prove the successful numerical implementation of the several components
-announces in \cref{sec:scope_of_this_thesis}.
+announced in \cref{sec:scope_of_this_thesis}.
 All results are computed using \texttt{double} precision floating point numbers.
 The relative error measure used in most of the results is specified by
 \begin{definition}[Relative error]
@@ -386,14 +386,14 @@ integration algorithm that it should be able to evaluate this integral very
 accurately.
 Furthermore, the Sommerfeld identity is in fact the only case where an
 analytical reference solution is available in terms of a closed-form formula.
-Figure \cref{fig:somm_id_ref_time:sub1} shows the respective results for a large
+\cref{fig:somm_id_ref_time:sub1} shows the respective results for a large
 range of observation locations.
 The upper bound of the relative error or $\SI{-134.42}{\decibel}$ indeed
-proves the sanity of the implantation.
+proves the sanity of the implementation.
 \cref{fig:somm_id_ref_time:sub2}, however, reveals that the performance
 deteriorates for large $\rho$, which is the well-known issue of any
 \ac{SIP}-based numerical integration algorithm.
-The reasons for this are already discussed in \cref{ch:introduction}.
+The reasons for this have already been discussed in \cref{ch:introduction}.
 
 \begin{figure}
     \centering
@@ -473,7 +473,7 @@ The reasons for this are already discussed in \cref{ch:introduction}.
 
 
 The nest example shown in \cref{fig:surface_E_z_of_rho_and_f_axial_transmission}
-actually recreates two Figures from the paper by \textcite{Michalski2016b}
+actually recreates two figures from the paper by \textcite{Michalski2016b}
 for the vertical component $E_z$ of a \ac{VED} field right at the interface
 of a Sommerfeld half-space for the dry-ground case.
 The curves for the field component both as a function of $\rho$ as well as of
@@ -1090,8 +1090,8 @@ implementation and a certain predictive power of the method.
 \cref{fig:dcim_dry_ground} shows a \ac{DCIM} example for the generic scalar
 Green's functions.
 The relative error is computed against a solution by numerical integration.
-From the plot it observed that a proper implementation of three-level \ac{DCIM}
-indeed can yield results of reasonable accuracy.
+From the plot it is observed that a proper implementation of three-level
+\ac{DCIM} indeed can yield results of reasonable accuracy.
 
 \begin{figure}
     \centering
@@ -1230,7 +1230,7 @@ implementation valid.
     \caption[Accuracy of standard \ac{FMM} implementation with real sources]
     {Accuracy of standard \ac{FMM} implementation with real sources.
     The cubical boxes are of side length $w = \lambda_0$.
-    A total $\num{3600}$ observation points are distributed in the Cartesian
+    A total of $\num{3600}$ observation points are distributed in the Cartesian
     $z = 0$ plane.
     The total $\num{500}$ source points are contained within a single group 
     centered at $w/2 \left(\uv{x} + \uv{y} + \uv{z}\right) + 20 w\uv{z}$.}
